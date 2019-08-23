@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.bicitours.persistence;
-
+ 
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import java.util.logging.Logger;
 import java.util.List;

@@ -8,7 +8,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 
 
-
+ 
 /**
  *Clase que representa un blog en la persistencia y permite su serialización
  * 
