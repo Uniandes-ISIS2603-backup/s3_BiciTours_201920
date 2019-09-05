@@ -20,13 +20,13 @@ import javax.persistence.TypedQuery;
  * 
  */
 @Stateless
-public class EventoPersistance {
+public class EventoPersistence {
     
     @PersistenceContext(unitName = "bicitoursPU")
     
     protected EntityManager em;
     
-    private static final Logger LOGGER= Logger.getLogger(EventoPersistance.class.getName());
+    private static final Logger LOGGER= Logger.getLogger(EventoPersistence.class.getName());
     
     public EventoEntity create(EventoEntity pEvento)
     {

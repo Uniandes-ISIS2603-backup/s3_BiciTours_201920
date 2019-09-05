@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.bicitours.test.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
-import co.edu.uniandes.csw.bicitours.persistence.EventoPersistance;
+import co.edu.uniandes.csw.bicitours.persistence.EventoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -33,7 +33,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class EventoPersistanceTest {
     
     @Inject
-    private EventoPersistance ep;
+    private EventoPersistence ep;
     
     @PersistenceContext
     private EntityManager em;
@@ -48,7 +48,7 @@ public class EventoPersistanceTest {
     {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(EventoEntity.class.getPackage())
-                .addPackage(EventoPersistance.class.getPackage())
+                .addPackage(EventoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
