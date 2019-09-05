@@ -12,10 +12,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -26,9 +28,9 @@ public class SeguroPersistence {
     
      private static final Logger LOGGER = Logger.getLogger(SeguroPersistence.class.getName());
 
-    @PersistenceContext(unitName = "SeguroStorePU")
+    @PersistenceContext(unitName = "bicitoursPU")
     protected EntityManager e;
-
+   
     /**
      * Método para persisitir la entidad en la base de datos.
      *
@@ -54,9 +56,6 @@ public class SeguroPersistence {
         Query q = e.createQuery("select u from SeguroEntity u");
         return q.getResultList();
     }
-   @PersistenceContext(unitName = "bicitoursPU")  
-    protected EntityManager em;
-    
     
 
     /**

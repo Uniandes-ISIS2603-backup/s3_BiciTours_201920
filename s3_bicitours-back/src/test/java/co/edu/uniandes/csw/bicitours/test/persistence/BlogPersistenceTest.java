@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.bicitours.test.persistence;
+
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.persistence.BlogPersistence;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -22,35 +23,37 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
- 
+
 /**
  * Pruebas de persistencia de Blogs
- * 
+ *
  * @author Oscar Julian Castañeda G.
  */
 @RunWith(Arquillian.class)
 public class BlogPersistenceTest {
+
     @Inject
     private BlogPersistence bp;
     @PersistenceContext
     private EntityManager em;
-    @Inject 
+    @Inject
     UserTransaction utx;
     private List<BlogEntity> data = new ArrayList<BlogEntity>();
+
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
      */
     @Deployment
-    public static JavaArchive createDeployment()
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addClass(BlogEntity.class)
                 .addClass(BlogPersistence.class)
-                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
-                .addAsManifestResource("META-INF/beans.xml","beans.xml");
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
+
     /**
      * Configuración inicial de la prueba.
      */
@@ -71,6 +74,7 @@ public class BlogPersistenceTest {
             }
         }
     }
+
     /**
      * Limpia las tablas que están implicadas en la prueba.
      */
@@ -90,22 +94,25 @@ public class BlogPersistenceTest {
             data.add(entity);
         }
     }
-     /**
+
+    /**
      * Prueba para crear un Blog.
      */
     @Test
-    public void createTestBlog()
-    {
-        PodamFactory factory= new PodamFactoryImpl();
-        BlogEntity newEntity= factory.manufacturePojo(BlogEntity.class);
-        BlogEntity result=bp.create(newEntity);
+    public void createTestBlog() {
+        PodamFactory factory = new PodamFactoryImpl();
+        BlogEntity newEntity = factory.manufacturePojo(BlogEntity.class);
+        BlogEntity result = bp.create(newEntity);
         Assert.assertNotNull(result);
         BlogEntity entity = em.find(BlogEntity.class, result.getId());
-        Assert.assertEquals(newEntity.getTexto(),entity.getTexto());
-        Assert.assertEquals(newEntity.getRutaImagen(),entity.getRutaImagen());
-        Assert.assertEquals(newEntity.getRutaVideo(),entity.getRutaVideo());
-        Assert.assertEquals(newEntity.getCalificacionPromedio(),entity.getCalificacionPromedio());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getTexto(), entity.getTexto());
+        Assert.assertEquals(newEntity.getRutaImagen(), entity.getRutaImagen());
+        Assert.assertEquals(newEntity.getRutaVideo(), entity.getRutaVideo());
+        Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(newEntity.getTitulo(), entity.getTitulo());
     }
+
     /**
      * Prueba para consultar la lista de Blogs.
      */
@@ -132,10 +139,11 @@ public class BlogPersistenceTest {
         BlogEntity entity = data.get(0);
         BlogEntity newEntity = bp.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(newEntity.getTexto(),entity.getTexto());
-        Assert.assertEquals(newEntity.getRutaImagen(),entity.getRutaImagen());
-        Assert.assertEquals(newEntity.getRutaVideo(),entity.getRutaVideo());
-        Assert.assertEquals(newEntity.getCalificacionPromedio(),entity.getCalificacionPromedio());
+        Assert.assertEquals(newEntity.getTexto(), entity.getTexto());
+        Assert.assertEquals(newEntity.getRutaImagen(), entity.getRutaImagen());
+        Assert.assertEquals(newEntity.getRutaVideo(), entity.getRutaVideo());
+        Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(newEntity.getTitulo(), entity.getTitulo());
     }
 
     /**
@@ -164,10 +172,11 @@ public class BlogPersistenceTest {
 
         BlogEntity resp = em.find(BlogEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getTexto(),resp.getTexto());
-        Assert.assertEquals(newEntity.getRutaImagen(),resp.getRutaImagen());
-        Assert.assertEquals(newEntity.getRutaVideo(),resp.getRutaVideo());
-        Assert.assertEquals(newEntity.getCalificacionPromedio(),resp.getCalificacionPromedio());
+        Assert.assertEquals(newEntity.getTexto(), resp.getTexto());
+        Assert.assertEquals(newEntity.getRutaImagen(), resp.getRutaImagen());
+        Assert.assertEquals(newEntity.getRutaVideo(), resp.getRutaVideo());
+        Assert.assertEquals(newEntity.getCalificacionPromedio(), resp.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(newEntity.getTitulo(), resp.getTitulo());
     }
 
 }

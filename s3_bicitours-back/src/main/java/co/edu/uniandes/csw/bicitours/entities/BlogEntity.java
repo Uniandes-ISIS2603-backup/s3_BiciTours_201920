@@ -4,27 +4,33 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.bicitours.entities;
+
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 
-
- 
 /**
- *Clase que representa un blog en la persistencia y permite su serialización
- * 
- * @author Oscar Julian Castañeda G. 
+ * Clase que representa un blog en la persistencia y permite su serialización
+ *
+ * @author Oscar Julian Castañeda G.
  */
-@Entity 
-public class BlogEntity  extends BaseEntity implements Serializable{    
+@Entity
+public class BlogEntity extends BaseEntity implements Serializable {
+
+    @OneToOne
+    private BlogEntity anterior;
+    @OneToOne
+    private BlogEntity siguiente;
     private String texto;
     private String rutaImagen;
     private String rutaVideo;
     private double calificacionPromedio;
-    public BlogEntity()
-    {
-        
+    private String titulo;
+
+    public BlogEntity() {
+
     }
-            
+
     /**
      * @return the texto
      */
@@ -80,5 +86,19 @@ public class BlogEntity  extends BaseEntity implements Serializable{
     public void setCalificacionPromedio(double calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
-   
+
+    /**
+     * @return the titulo
+     */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    /**
+     * @param titulo the titulo to set
+     */
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
 }
