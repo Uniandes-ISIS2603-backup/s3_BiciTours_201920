@@ -25,15 +25,15 @@ public class BlogLogic {
         /**
      * Guardar un nuevo libro
      *
-     * @param blogEntity La entidad de tipo blog del nuevo blog a persistir.
+     * @param blog La entidad de tipo blog del nuevo blog a persistir.
      * @return La entidad luego de persistirla
      * @throws BusinessLogicException Si el titulo es inválido o el contenido es invalido.
      */
     public BlogEntity createBlog(BlogEntity blog) throws BusinessLogicException {
-        if ((blog.getRutaImagen() == null || blog.getRutaImagen() == "") && (blog.getRutaVideo() == null || blog.getRutaVideo() == "") && (blog.getTexto() == null || blog.getTexto() == "")) {
+        if ((blog.getRutaImagen() == null || blog.getRutaImagen().equals("")) && (blog.getRutaVideo() == null || blog.getRutaVideo().equals("")) && (blog.getTexto() == null || blog.getTexto().equals(""))) {
             throw new BusinessLogicException("El blog debe tener contenido");
         }
-        else if(blog.getTitulo()==null||blog.getTitulo()=="")
+        else if(blog.getTitulo()==null||blog.getTitulo().equals(""))
         {
             throw new BusinessLogicException("El blog debe tener titulo"); 
         }
