@@ -9,9 +9,6 @@ import co.edu.uniandes.csw.bicitours.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamStrategyValue;
@@ -22,8 +19,14 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class TourEntity extends BaseEntity implements Serializable {
-
+//
     private static final long serialVersionUID = 1L;
+    
+    public enum Dificultad{
+    ALTA,
+    MEDIA,
+    BAJA
+    };
     
     private String nombre;
 
@@ -31,7 +34,7 @@ public class TourEntity extends BaseEntity implements Serializable {
 
     private String descripcion;
 
-    private String dificultad;
+    private Dificultad dificultad;
 
     @Temporal(TemporalType.DATE)
     @PodamStrategyValue(DateStrategy.class)
@@ -72,11 +75,11 @@ public class TourEntity extends BaseEntity implements Serializable {
         return this.descripcion;
     }
 
-    public void setDificultad(String dif) {
+    public void setDificultad(Dificultad dif) {
         this.dificultad = dif;
     }
 
-    public String getDificultad() {
+    public Dificultad getDificultad() {
         return this.dificultad;
     }
 
