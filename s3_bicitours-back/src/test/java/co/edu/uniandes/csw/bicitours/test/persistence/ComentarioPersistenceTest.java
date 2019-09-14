@@ -34,7 +34,7 @@ public class ComentarioPersistenceTest {
     @Inject
     private ComentarioPersistence cp;
     
-     @PersistenceContext
+    @PersistenceContext
     private EntityManager em;
      
     @Inject
