@@ -11,6 +11,8 @@ import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.BlogPersistence;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -117,23 +119,74 @@ public class BlogLogicTest {
         Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(), 0.001);
     }
 
-    @Test (expected = BusinessLogicException.class)
-    public void createBlogContenidoNull() throws BusinessLogicException {
-        BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
-        blog.setTexto(null);
-        blog.setRutaVideo(null);
-        blog.setRutaImagen(null);
-        BlogEntity result = blogLogic.createBlog(blog);
-    }
 
-    @Test (expected = BusinessLogicException.class)
-    public void createBlogContenidoVacio() throws BusinessLogicException {
+@Test (expected = BusinessLogicException.class)
+public void createBlogSinContenido() throws BusinessLogicException
+{
         BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
-        blog.setTexto("");
-        blog.setRutaVideo("");
-        blog.setRutaImagen("");
-        BlogEntity result = blogLogic.createBlog(blog);
-    }
+        try
+        {
+            blog.setTexto(null);
+            blog.setRutaVideo(null);
+            blog.setRutaImagen(null);
+            BlogEntity result = blogLogic.createBlog(blog);
+        } catch (BusinessLogicException ex) {
+            try
+            {
+                blog.setTexto(null);
+                blog.setRutaVideo(null);
+                blog.setRutaImagen("");
+                BlogEntity result = blogLogic.createBlog(blog);
+            } catch (BusinessLogicException ex1) {
+                try
+                {
+                    blog.setTexto(null);
+                    blog.setRutaVideo("");
+                    blog.setRutaImagen(null);
+                    BlogEntity result = blogLogic.createBlog(blog);
+                } catch (BusinessLogicException ex2) {
+                    try
+                    {
+                        blog.setTexto(null);
+                        blog.setRutaVideo("");
+                        blog.setRutaImagen("");
+                        BlogEntity result = blogLogic.createBlog(blog);
+                    } catch (BusinessLogicException ex3) {
+                        try
+                        {
+                            blog.setTexto("");
+                            blog.setRutaVideo(null);
+                            blog.setRutaImagen(null);
+                            BlogEntity result = blogLogic.createBlog(blog);
+                        } catch (BusinessLogicException ex4) {
+                            try
+                            {
+                                blog.setTexto("");
+                                blog.setRutaVideo(null);
+                                blog.setRutaImagen("");
+                                BlogEntity result = blogLogic.createBlog(blog);
+                            } catch (BusinessLogicException ex5) {
+                                try
+                                {
+                                    blog.setTexto("");
+                                    blog.setRutaVideo("");
+                                    blog.setRutaImagen(null);
+                                    BlogEntity result = blogLogic.createBlog(blog);
+                                } catch (BusinessLogicException ex6) {
+                                        blog.setTexto("");
+                                        blog.setRutaVideo("");
+                                        blog.setRutaImagen("");
+                                        BlogEntity result = blogLogic.createBlog(blog);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+}
+
     @Test (expected = BusinessLogicException.class)
     public void createBlogTituloNull() throws BusinessLogicException
     {
