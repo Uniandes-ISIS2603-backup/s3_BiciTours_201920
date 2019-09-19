@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.bicitours.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  * Clase que representa un blog en la persistencia y permite su serialización
@@ -17,8 +18,10 @@ import javax.persistence.OneToOne;
 @Entity
 public class BlogEntity extends BaseEntity implements Serializable {
 
+    @PodamExclude
     @OneToOne
     private BlogEntity anterior;
+    @PodamExclude
     @OneToOne
     private BlogEntity siguiente;
     private String texto;
@@ -99,6 +102,34 @@ public class BlogEntity extends BaseEntity implements Serializable {
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    /**
+     * @return the anterior
+     */
+    public BlogEntity getAnterior() {
+        return anterior;
+    }
+
+    /**
+     * @param anterior the anterior to set
+     */
+    public void setAnterior(BlogEntity anterior) {
+        this.anterior = anterior;
+    }
+
+    /**
+     * @return the siguiente
+     */
+    public BlogEntity getSiguiente() {
+        return siguiente;
+    }
+
+    /**
+     * @param siguiente the siguiente to set
+     */
+    public void setSiguiente(BlogEntity siguiente) {
+        this.siguiente = siguiente;
     }
 
 }

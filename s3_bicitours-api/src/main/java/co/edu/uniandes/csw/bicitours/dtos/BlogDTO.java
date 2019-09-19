@@ -9,7 +9,7 @@ import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 
 /**
  *
- * @author Estudiante
+ * @author Oscar Julian Castañeda G.
  */
 public class BlogDTO {
 
