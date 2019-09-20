@@ -17,8 +17,10 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     
     //Nombre del usuario
     private String nombre;
-    //Código del usuario
+    //Código/Contrañesa/Password del usuario
     private String codigo;
+    //Correo del usuario
+    private String correo;
     //Estado de paz y salvo del usuario
     private boolean pago;
     //Clasificación como cliente o administrador
@@ -97,5 +99,19 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
      */
     public void setDeuda(Integer deuda) {
         this.deuda = deuda;
+    }
+
+    /**
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 }

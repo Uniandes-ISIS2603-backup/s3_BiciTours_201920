@@ -30,9 +30,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class UsuarioPersistenceTest {
-     @Inject
+    @Inject
     private UsuarioPersistence up; //instancia de persistencia que crea el contenedor
-     @PersistenceContext
+    @PersistenceContext
     private EntityManager em; //entityManager para no utilizar nuestros métodos y validar desde la persistencia
     private List<UsuarioEntity> data = new ArrayList<UsuarioEntity>();//Lista para almacenamiento de usuarios aleatorios
     @Inject 
