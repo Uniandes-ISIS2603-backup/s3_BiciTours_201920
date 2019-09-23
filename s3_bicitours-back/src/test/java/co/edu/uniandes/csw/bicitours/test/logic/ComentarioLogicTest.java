@@ -97,6 +97,8 @@ public class ComentarioLogicTest {
             ComentarioEntity comentario = factory.manufacturePojo(ComentarioEntity.class);
             comentario.setCalificacion(2);
             comentario.setTexto("Hola");
+            //comentario.setHead(null);
+            //comentario.setRespuestas(null);
             //comentario.setAutor(usuarioData.get(0));
 
             em.persist(comentario);

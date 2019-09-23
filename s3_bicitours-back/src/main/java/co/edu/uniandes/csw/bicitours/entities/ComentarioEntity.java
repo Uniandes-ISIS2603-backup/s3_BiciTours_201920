@@ -6,7 +6,13 @@
 package co.edu.uniandes.csw.bicitours.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -19,6 +25,16 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     private String texto;
     
     private Integer calificacion;
+    
+    //@PodamExclude
+    //@OneToMany(mappedBy = "head", cascade = CascadeType.PERSIST)
+    //private List<ComentarioEntity> respuestas = new ArrayList<ComentarioEntity>();
+    
+    //@ManyToOne
+    //private ComentarioEntity head;
+    
+    //@ManyToOne
+    //private UsuarioEntity autor;
     
     public ComentarioEntity()
     {
@@ -51,6 +67,46 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
-    
-    
+
+    /**
+     * @return the respuestas
+     */
+    //public List<ComentarioEntity> getRespuestas() {
+    //    return respuestas;
+    //}
+
+    /**
+     * @param respuestas the respuestas to set
+     */
+    //public void setRespuestas(List<ComentarioEntity> respuestas) {
+    //    this.respuestas = respuestas;
+    //}
+
+    /**
+     * @return the head
+     */
+    //public ComentarioEntity getHead() {
+    //    return head;
+    //}
+
+    /**
+     * @param head the head to set
+     */
+    //public void setHead(ComentarioEntity head) {
+    //    this.head = head;
+    //}
+
+    /**
+     * @return the autor
+     */
+    //public UsuarioEntity getAutor() {
+    //    return autor;
+    //}
+
+    /**
+     * @param autor the autor to set
+     */
+    //public void setAutor(UsuarioEntity autor) {
+    //    this.autor = autor;
+    //}
 }
