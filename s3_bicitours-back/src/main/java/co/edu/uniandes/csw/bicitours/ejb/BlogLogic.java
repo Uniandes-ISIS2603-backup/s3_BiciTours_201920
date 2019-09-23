@@ -30,7 +30,7 @@ public class BlogLogic {
      * @throws BusinessLogicException Si el titulo es inválido o el contenido es invalido.
      */
     public BlogEntity createBlog(BlogEntity blog) throws BusinessLogicException {
-        if ((blog.getRutaImagen() == null || blog.getRutaImagen().equals("")) && (blog.getRutaVideo() == null || blog.getRutaVideo().equals("")) && (blog.getTexto() == null || blog.getTexto().equals(""))) {
+        if ((blog.getRutaImagen() == null && blog.getRutaVideo() == null && blog.getTexto() == null) || (blog.getRutaImagen().equals("") && blog.getRutaVideo().equals("") && blog.getTexto().equals(""))) {
             throw new BusinessLogicException("El blog debe tener contenido");
         }
         else if(blog.getTitulo()==null||blog.getTitulo().equals(""))
@@ -73,9 +73,9 @@ public class BlogLogic {
      * Eliminar un blog por ID
      *
      * @param blogsId El ID del blog a eliminar
-     * @throws BusinessLogicException si el libro tiene autores asociados
+
      */
-    public void deleteBlog(Long blogsId) throws BusinessLogicException {
+    public void deleteBlog(Long blogsId) {
         persistence.delete(blogsId);
     }
 }

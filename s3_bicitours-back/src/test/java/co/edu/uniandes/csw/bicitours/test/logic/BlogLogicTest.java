@@ -120,73 +120,25 @@ public class BlogLogicTest {
     }
 
 
-@Test (expected = BusinessLogicException.class)
-public void createBlogSinContenido() throws BusinessLogicException
-{
+    @Test (expected = BusinessLogicException.class)
+    public void createBlogContenidoNull() throws BusinessLogicException
+    {
         BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
-        try
-        {
-            blog.setTexto(null);
-            blog.setRutaVideo(null);
-            blog.setRutaImagen(null);
-            BlogEntity result = blogLogic.createBlog(blog);
-        } catch (BusinessLogicException ex) {
-            try
-            {
-                blog.setTexto(null);
-                blog.setRutaVideo(null);
-                blog.setRutaImagen("");
-                BlogEntity result = blogLogic.createBlog(blog);
-            } catch (BusinessLogicException ex1) {
-                try
-                {
-                    blog.setTexto(null);
-                    blog.setRutaVideo("");
-                    blog.setRutaImagen(null);
-                    BlogEntity result = blogLogic.createBlog(blog);
-                } catch (BusinessLogicException ex2) {
-                    try
-                    {
-                        blog.setTexto(null);
-                        blog.setRutaVideo("");
-                        blog.setRutaImagen("");
-                        BlogEntity result = blogLogic.createBlog(blog);
-                    } catch (BusinessLogicException ex3) {
-                        try
-                        {
-                            blog.setTexto("");
-                            blog.setRutaVideo(null);
-                            blog.setRutaImagen(null);
-                            BlogEntity result = blogLogic.createBlog(blog);
-                        } catch (BusinessLogicException ex4) {
-                            try
-                            {
-                                blog.setTexto("");
-                                blog.setRutaVideo(null);
-                                blog.setRutaImagen("");
-                                BlogEntity result = blogLogic.createBlog(blog);
-                            } catch (BusinessLogicException ex5) {
-                                try
-                                {
-                                    blog.setTexto("");
-                                    blog.setRutaVideo("");
-                                    blog.setRutaImagen(null);
-                                    BlogEntity result = blogLogic.createBlog(blog);
-                                } catch (BusinessLogicException ex6) {
-                                        blog.setTexto("");
-                                        blog.setRutaVideo("");
-                                        blog.setRutaImagen("");
-                                        BlogEntity result = blogLogic.createBlog(blog);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        blog.setTexto(null);
+        blog.setRutaImagen(null);
+        blog.setRutaVideo(null);
+        BlogEntity result = blogLogic.createBlog(blog);  
+    }
 
-}
-
+    @Test (expected = BusinessLogicException.class)
+    public void createBlogContenidoVacio() throws BusinessLogicException
+    {
+        BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
+        blog.setTexto("");
+        blog.setRutaImagen("");
+        blog.setRutaVideo("");
+        BlogEntity result = blogLogic.createBlog(blog);  
+    }
     @Test (expected = BusinessLogicException.class)
     public void createBlogTituloNull() throws BusinessLogicException
     {
@@ -255,11 +207,9 @@ public void createBlogSinContenido() throws BusinessLogicException
 
     /**
      * Prueba para eliminar un Blog.
-     *
-     * @throws co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException
      */
     @Test
-    public void deleteBlogTest() throws BusinessLogicException {
+    public void deleteBlogTest()  {
         BlogEntity entity = data.get(0);
         blogLogic.deleteBlog(entity.getId());
         BlogEntity deleted = em.find(BlogEntity.class, entity.getId());
