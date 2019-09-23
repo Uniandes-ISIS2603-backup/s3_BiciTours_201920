@@ -30,8 +30,13 @@ public class BlogLogic {
      * @throws BusinessLogicException Si el titulo es inválido o el contenido es invalido.
      */
     public BlogEntity createBlog(BlogEntity blog) throws BusinessLogicException {
-        if ((blog.getRutaImagen() == null && blog.getRutaVideo() == null && blog.getTexto() == null) || (blog.getRutaImagen().equals("") && blog.getRutaVideo().equals("") && blog.getTexto().equals(""))) {
-            throw new BusinessLogicException("El blog debe tener contenido");
+        if (blog.getRutaImagen() == null && blog.getRutaVideo() == null && blog.getTexto() == null ) 
+        {
+            throw new BusinessLogicException("El blog no puede tener contenido nulo");
+        }
+        else if(blog.getRutaImagen().equals("") && blog.getRutaVideo().equals("") && blog.getTexto().equals(""))
+        {
+            throw new BusinessLogicException("El blog no puede tener contenido vacio");
         }
         else if(blog.getTitulo()==null||blog.getTitulo().equals(""))
         {

@@ -28,7 +28,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Oscar Julian Castañeda G.
  */
-@Path("books")
+@Path("blogs")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -46,7 +46,16 @@ public class BlogResource {
         List<BlogDetailDTO> listaBlogs = listEntity2DetailDTO(blogLogic.getBlogs());
         return listaBlogs;
     }
-
+    @GET
+    @Path("{blogsId: \\d+}")
+    public BlogDTO getBlog(@PathParam("blogsId") Long blogsId) {
+        BlogEntity blogEntity = blogLogic.getBlog(blogsId);
+        if (blogEntity == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+        }
+        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(blogEntity);
+        return blogDetailDTO;
+    }
     @PUT
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO updateBlog(@PathParam("blogsId") Long blogsId, BlogDetailDTO blog) throws BusinessLogicException {
