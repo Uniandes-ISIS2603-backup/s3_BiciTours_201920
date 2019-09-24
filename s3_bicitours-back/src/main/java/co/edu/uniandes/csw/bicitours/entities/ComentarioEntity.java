@@ -36,6 +36,10 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     //@ManyToOne
     //private UsuarioEntity autor;
     
+    @PodamExclude
+    @ManyToOne
+    private BlogEntity blog;
+    
     public ComentarioEntity()
     {
         
@@ -66,6 +70,20 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
      */
     public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
+    }
+
+    /**
+     * @return the blog
+     */
+    public BlogEntity getBlog() {
+        return blog;
+    }
+
+    /**
+     * @param blog the blog to set
+     */
+    public void setBlog(BlogEntity blog) {
+        this.blog = blog;
     }
 
     /**

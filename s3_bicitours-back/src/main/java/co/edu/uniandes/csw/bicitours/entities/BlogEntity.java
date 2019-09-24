@@ -30,6 +30,15 @@ public class BlogEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToOne
     private BlogEntity siguiente;
+    @PodamExclude
+    @OneToMany(
+        mappedBy = "blog",
+    	cascade = CascadeType.PERSIST,
+    	fetch = FetchType.EAGER,
+    	orphanRemoval = true
+    )
+    private List<ComentarioEntity> comentarios;
+    
     private String texto;
     private String rutaImagen;
     private String rutaVideo;
@@ -136,6 +145,20 @@ public class BlogEntity extends BaseEntity implements Serializable {
      */
     public void setSiguiente(BlogEntity siguiente) {
         this.siguiente = siguiente;
+    }
+
+    /**
+     * @return the comentarios
+     */
+    public List<ComentarioEntity> getComentarios() {
+        return comentarios;
+    }
+
+    /**
+     * @param comentarios the comentarios to set
+     */
+    public void setComentarios(List<ComentarioEntity> comentarios) {
+        this.comentarios = comentarios;
     }
 
 }
