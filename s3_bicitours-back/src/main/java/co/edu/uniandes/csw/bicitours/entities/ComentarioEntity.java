@@ -26,19 +26,25 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     
     private Integer calificacion;
     
+    @PodamExclude
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<ComentarioEntity> respuestas = new ArrayList<ComentarioEntity>();
+    
+    /*@ManyToOne
+    private ComentarioEntity head;
+    */
+    
     //@PodamExclude
-    //@OneToMany(mappedBy = "head", cascade = CascadeType.PERSIST)
-    //private List<ComentarioEntity> respuestas = new ArrayList<ComentarioEntity>();
-    
     //@ManyToOne
-    //private ComentarioEntity head;
-    
-    //@ManyToOne
-    //private UsuarioEntity autor;
+    //private UsuarioEntity usuario;
     
     @PodamExclude
     @ManyToOne
     private BlogEntity blog;
+    
+    @PodamExclude
+    @ManyToOne
+    private TourEntity tour;
     
     public ComentarioEntity()
     {
@@ -73,6 +79,20 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     }
 
     /**
+     * @return the respuestas
+     */
+    public List<ComentarioEntity> getRespuestas() {
+        return respuestas;
+    }
+
+    /**
+     * @param respuestas the respuestas to set
+     */
+    public void setRespuestas(List<ComentarioEntity> respuestas) {
+        this.respuestas = respuestas;
+    }
+    
+    /**
      * @return the blog
      */
     public BlogEntity getBlog() {
@@ -87,44 +107,32 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     }
 
     /**
-     * @return the respuestas
+     * @return the usuario
      */
-    //public List<ComentarioEntity> getRespuestas() {
-    //    return respuestas;
+    //public UsuarioEntity getUsuario() {
+    //    return usuario;
     //}
 
     /**
-     * @param respuestas the respuestas to set
+     * @param usuario the usuario to set
      */
-    //public void setRespuestas(List<ComentarioEntity> respuestas) {
-    //    this.respuestas = respuestas;
+    //public void setUsuario(UsuarioEntity usuario) {
+    //    this.usuario = usuario;
     //}
+    
+    /**
+     * @return the tour
+     */
+    public TourEntity getTour() {
+        return tour;
+    }
 
     /**
-     * @return the head
+     * @param tour the tour to set
      */
-    //public ComentarioEntity getHead() {
-    //    return head;
-    //}
-
-    /**
-     * @param head the head to set
-     */
-    //public void setHead(ComentarioEntity head) {
-    //    this.head = head;
-    //}
-
-    /**
-     * @return the autor
-     */
-    //public UsuarioEntity getAutor() {
-    //    return autor;
-    //}
-
-    /**
-     * @param autor the autor to set
-     */
-    //public void setAutor(UsuarioEntity autor) {
-    //    this.autor = autor;
-    //}
+    public void setTour(TourEntity tour) {
+        this.tour = tour;
+    }
+    
+    
 }

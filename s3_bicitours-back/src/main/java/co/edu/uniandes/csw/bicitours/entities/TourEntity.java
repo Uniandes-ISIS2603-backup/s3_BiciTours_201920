@@ -7,10 +7,16 @@ package co.edu.uniandes.csw.bicitours.entities;
 
 import co.edu.uniandes.csw.bicitours.podam.DateStrategy;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -45,6 +51,10 @@ public class TourEntity extends BaseEntity implements Serializable {
     private int costo;
     
     private boolean terminado;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "Tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<ComentarioEntity> comentariosTour = new ArrayList<ComentarioEntity>();
     
     public TourEntity()
     {
@@ -113,16 +123,29 @@ public class TourEntity extends BaseEntity implements Serializable {
         return this.costo;
     }
     
+    /**
+     * @return the terminado
+     */
+    public boolean getTerminado() {
+        return terminado;
+    }
+    
     public void setTerminado(boolean ter)
     {
     terminado = ter;
     }
-    
-    public boolean getTerminado()
-    {
-    return terminado;
-    }
-    
 
-    
+    /**
+     * @return the comentariosTour
+     */
+    public List<ComentarioEntity> getComentariosTour() {
+        return comentariosTour;
+    }
+
+    /**
+     * @param comentariosTour the comentariosTour to set
+     */
+    public void setComentariosTour(List<ComentarioEntity> comentariosTour) {
+        this.comentariosTour = comentariosTour;
+    }
 }

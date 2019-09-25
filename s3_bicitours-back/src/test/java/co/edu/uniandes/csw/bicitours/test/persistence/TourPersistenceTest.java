@@ -51,8 +51,8 @@ public class TourPersistenceTest {
     public static JavaArchive createDeployment()
     {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(TourEntity.class)
-                .addClass(TourPersistence.class)
+                .addPackage(TourEntity.class.getPackage())
+                .addPackage(TourPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
