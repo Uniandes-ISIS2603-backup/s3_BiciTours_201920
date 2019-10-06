@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @author Estudiante
+ * @author Oscar Julian Castañeda G.
  */
 @Stateless
 public class ComentariosBlogLogic {

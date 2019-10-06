@@ -43,4 +43,8 @@ public class UsuarioLogic {
         usuario=persistencia.create(usuario); //Creación de usuario en la persistencia
         return usuario;
     }
+        public UsuarioEntity getUsuario(Long usuariosId) {
+        UsuarioEntity usuarioEntity = persistencia.find(usuariosId);
+        return usuarioEntity;
+    }
 }

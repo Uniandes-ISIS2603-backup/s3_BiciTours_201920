@@ -30,7 +30,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Estudiante
+ * @author Oscar Julian Castañeda G.
  */
 @RunWith(Arquillian.class)
 public class ComentariosBlogLogicTest {
@@ -125,13 +125,14 @@ public class ComentariosBlogLogicTest {
         ComentarioEntity comentarioEntity = comentariosData.get(0);
         ComentarioEntity response = comentariosBlogLogic.getComentario(entity.getId(), comentarioEntity.getId());
 
+        Assert.assertNotNull(response);
         Assert.assertEquals(comentarioEntity.getId(), response.getId());
         Assert.assertEquals(comentarioEntity.getCalificacion(), response.getCalificacion());
         Assert.assertEquals(comentarioEntity.getTexto(), response.getTexto());
     }
 
     @Test(expected = BusinessLogicException.class)
-    public void getBookNoAsociadoTest() throws BusinessLogicException {
+    public void getComentarioNoAsociadoTest() throws BusinessLogicException {
         BlogEntity entity = data.get(0);
         ComentarioEntity comentarioEntity = comentariosData.get(1);
         comentariosBlogLogic.getComentario(entity.getId(), comentarioEntity.getId());
@@ -152,6 +153,6 @@ public class ComentariosBlogLogicTest {
     @Test
     public void removeComentarioTest(){
         comentariosBlogLogic.removeComentario(comentariosData.get(0).getId(), data.get(0).getId());
-        Assert.assertEquals(comentariosBlogLogic.getComentarios(data.get(0).getId()).size(),0);
+        Assert.assertEquals(0, comentariosBlogLogic.getComentarios(data.get(0).getId()).size());
     }
 }

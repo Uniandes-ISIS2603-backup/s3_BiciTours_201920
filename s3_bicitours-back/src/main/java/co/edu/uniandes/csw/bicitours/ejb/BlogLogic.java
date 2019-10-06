@@ -23,7 +23,7 @@ public class BlogLogic {
     private BlogPersistence persistence;
 
         /**
-     * Guardar un nuevo libro
+     * Guardar un nuevo blog
      *
      * @param blog La entidad de tipo blog del nuevo blog a persistir.
      * @return La entidad luego de persistirla
