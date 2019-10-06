@@ -53,9 +53,11 @@ public class TourEntity extends BaseEntity implements Serializable {
     private boolean terminado;
     
     @PodamExclude
-    @OneToMany(mappedBy = "Tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ComentarioEntity> comentariosTour = new ArrayList<ComentarioEntity>();
-    
+    @PodamExclude
+    @OneToMany(mappedBy = "tour")
+    private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
     public TourEntity()
     {
     }
@@ -147,5 +149,19 @@ public class TourEntity extends BaseEntity implements Serializable {
      */
     public void setComentariosTour(List<ComentarioEntity> comentariosTour) {
         this.comentariosTour = comentariosTour;
+    }
+
+    /**
+     * @return the blogs
+     */
+    public List<BlogEntity> getBlogs() {
+        return blogs;
+    }
+
+    /**
+     * @param blogs the blogs to set
+     */
+    public void setBlogs(List<BlogEntity> blogs) {
+        this.blogs = blogs;
     }
 }

@@ -6,7 +6,12 @@
 package co.edu.uniandes.csw.bicitours.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -27,7 +32,12 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private boolean esAdmin;
     //Deuda total del usuario
     private Integer deuda;
-
+    @PodamExclude
+    @OneToMany(mappedBy = "creador")
+    private List<BlogEntity> misBlogs = new ArrayList<BlogEntity>();
+    @PodamExclude
+    @ManyToMany
+    private List<BlogEntity> favoritos;
     public UsuarioEntity() {
         
     }
@@ -113,5 +123,33 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
      */
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    /**
+     * @return the misBlogs
+     */
+    public List<BlogEntity> getMisBlogs() {
+        return misBlogs;
+    }
+
+    /**
+     * @param misBlogs the misBlogs to set
+     */
+    public void setMisBlogs(List<BlogEntity> misBlogs) {
+        this.misBlogs = misBlogs;
+    }
+
+    /**
+     * @return the favoritos
+     */
+    public List<BlogEntity> getFavoritos() {
+        return favoritos;
+    }
+
+    /**
+     * @param favoritos the favoritos to set
+     */
+    public void setFavoritos(List<BlogEntity> favoritos) {
+        this.favoritos = favoritos;
     }
 }
