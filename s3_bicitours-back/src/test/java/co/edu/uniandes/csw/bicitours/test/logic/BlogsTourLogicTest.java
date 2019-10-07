@@ -5,12 +5,12 @@
  */
 package co.edu.uniandes.csw.bicitours.test.logic;
 
-import co.edu.uniandes.csw.bicitours.ejb.BlogsCreadorLogic;
-import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
+import co.edu.uniandes.csw.bicitours.ejb.BlogsTourLogic;
+import co.edu.uniandes.csw.bicitours.ejb.TourLogic;
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
-import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
+import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.bicitours.persistence.UsuarioPersistence;
+import co.edu.uniandes.csw.bicitours.persistence.TourPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -33,14 +33,13 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Oscar Julian Castañeda G.
  */
 @RunWith(Arquillian.class)
-public class BlogsCreadorLogicTest {
-    
+public class BlogsTourLogicTest {
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private UsuarioLogic usuarioLogic;
+    private TourLogic tourLogic;
     @Inject
-    private BlogsCreadorLogic blogsCreadorLogic;
+    private BlogsTourLogic blogsTourLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -48,16 +47,16 @@ public class BlogsCreadorLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<UsuarioEntity> data = new ArrayList<UsuarioEntity>();
+    private List<TourEntity> data = new ArrayList<TourEntity>();
 
     private List<BlogEntity> blogsData = new ArrayList();
 
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(UsuarioEntity.class.getPackage())
-                .addPackage(UsuarioLogic.class.getPackage())
-                .addPackage(UsuarioPersistence.class.getPackage())
+                .addPackage(TourEntity.class.getPackage())
+                .addPackage(TourLogic.class.getPackage())
+                .addPackage(TourPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -81,7 +80,7 @@ public class BlogsCreadorLogicTest {
 
     private void clearData() {
         em.createQuery("delete from BlogEntity").executeUpdate();
-        em.createQuery("delete from UsuarioEntity").executeUpdate();
+        em.createQuery("delete from TourEntity").executeUpdate();
     }
 
     private void insertData() {
@@ -91,20 +90,20 @@ public class BlogsCreadorLogicTest {
             blogsData.add(blogs);
         }
         for (int i = 0; i < 3; i++) {
-            UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
+            TourEntity entity = factory.manufacturePojo(TourEntity.class);
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-               blogsData.get(i).setCreador(entity);
+               blogsData.get(i).setTour(entity);
             }
         }
     }
 
     @Test
     public void addBlogsTest() {
-        UsuarioEntity entity = data.get(0);
+        TourEntity entity = data.get(0);
         BlogEntity blogEntity = blogsData.get(1);
-        BlogEntity response = blogsCreadorLogic.addBlog(blogEntity.getId(), entity.getId());
+        BlogEntity response = blogsTourLogic.addBlog(blogEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(blogEntity.getId(), response.getId());
@@ -117,16 +116,16 @@ public class BlogsCreadorLogicTest {
 
     @Test
     public void getBlogsTest() {
-        List<BlogEntity> list = blogsCreadorLogic.getBlogs(data.get(0).getId());
+        List<BlogEntity> list = blogsTourLogic.getBlogs(data.get(0).getId());
 
         Assert.assertEquals(1, list.size());
     }
 
     @Test
     public void getBlogTest() throws BusinessLogicException {
-        UsuarioEntity entity = data.get(0);
+        TourEntity entity = data.get(0);
         BlogEntity blogEntity = blogsData.get(0);
-        BlogEntity response = blogsCreadorLogic.getBlog(entity.getId(), blogEntity.getId());
+        BlogEntity response = blogsTourLogic.getBlog(entity.getId(), blogEntity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(blogEntity.getId(), response.getId());
@@ -139,45 +138,45 @@ public class BlogsCreadorLogicTest {
 
     @Test(expected = BusinessLogicException.class)
     public void getBlogNoAsociadoTest() throws BusinessLogicException {
-        UsuarioEntity entity = data.get(0);
+        TourEntity entity = data.get(0);
         BlogEntity blogEntity = blogsData.get(1);
-        blogsCreadorLogic.getBlog(entity.getId(), blogEntity.getId());
+        blogsTourLogic.getBlog(entity.getId(), blogEntity.getId());
     }
 
     @Test
     public void replaceBlogsTest() {
-        UsuarioEntity entity = data.get(0);
+        TourEntity entity = data.get(0);
         List<BlogEntity> list = blogsData.subList(1, 3);
-        blogsCreadorLogic.replaceBlogs(entity.getId(), list);
+        blogsTourLogic.replaceBlogs(entity.getId(), list);
 
-        entity = usuarioLogic.getUsuario(entity.getId());
-        Assert.assertFalse(entity.getMisBlogs().contains(blogsData.get(0)));
-        Assert.assertTrue(entity.getMisBlogs().contains(blogsData.get(1)));
-        Assert.assertTrue(entity.getMisBlogs().contains(blogsData.get(2)));
+        entity = tourLogic.getTour(entity.getId());
+        Assert.assertFalse(entity.getBlogs().contains(blogsData.get(0)));
+        Assert.assertTrue(entity.getBlogs().contains(blogsData.get(1)));
+        Assert.assertTrue(entity.getBlogs().contains(blogsData.get(2)));
     }
-    @Test
+        @Test
     public void removeBlogTest() throws BusinessLogicException{
-        blogsCreadorLogic.removeBlog(data.get(0).getId(), blogsData.get(0).getId());
-        Assert.assertEquals(0,blogsCreadorLogic.getBlogs(blogsData.get(0).getId()).size());
+        blogsTourLogic.removeBlog(data.get(0).getId(),blogsData.get(0).getId());
+        Assert.assertEquals(0,blogsTourLogic.getBlogs(blogsData.get(0).getId()).size());
     }
     @Test(expected = BusinessLogicException.class)
     public void removeBlogNoAsociadoTest() throws BusinessLogicException{
-        blogsCreadorLogic.removeBlog(blogsData.get(0).getId(), data.get(1).getId());
+        blogsTourLogic.removeBlog(blogsData.get(0).getId(), data.get(1).getId());
     }
     @Test
-    public void removeCreadorTest() {
-        blogsCreadorLogic.removeCreador(blogsData.get(0).getId());
-        Assert.assertNull(blogsCreadorLogic.getCreador(blogsData.get(0).getId()));
-    }
-    @Test
-    public void getCreadorTest() {
-        UsuarioEntity creador = blogsCreadorLogic.getCreador(blogsData.get(0).getId());
+    public void getTourTest() {
+        TourEntity tour = blogsTourLogic.getTour(blogsData.get(0).getId());
 
-        Assert.assertEquals(data.get(0), creador);
+        Assert.assertEquals(data.get(0), tour);
     }
-        @Test
-        public void replaceCreadorTest() {
-        blogsCreadorLogic.replaceCreador(blogsData.get(0).getId(),data.get(1).getId());
-        Assert.assertEquals(blogsCreadorLogic.getCreador(blogsData.get(0).getId()), data.get(1));
-    }   
+    @Test
+        public void removeTourTest() {
+        blogsTourLogic.removeTour(blogsData.get(0).getId());
+        Assert.assertNull(blogsTourLogic.getTour(blogsData.get(0).getId()));
+    }
+    @Test
+        public void replaceTourTest() {
+        blogsTourLogic.replaceTour(blogsData.get(0).getId(),data.get(1).getId());
+        Assert.assertEquals(blogsTourLogic.getTour(blogsData.get(0).getId()), data.get(1));
+    }        
 }

@@ -123,7 +123,7 @@ public class ComentariosBlogLogicTest {
     public void getComentarioTest() throws BusinessLogicException {
         BlogEntity entity = data.get(0);
         ComentarioEntity comentarioEntity = comentariosData.get(0);
-        ComentarioEntity response = comentariosBlogLogic.getComentario(entity.getId(), comentarioEntity.getId());
+        ComentarioEntity response = comentariosBlogLogic.getComentario(comentarioEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(comentarioEntity.getId(), response.getId());
@@ -151,8 +151,28 @@ public class ComentariosBlogLogicTest {
     }
     
     @Test
-    public void removeComentarioTest(){
+    public void removeComentarioTest() throws BusinessLogicException{
         comentariosBlogLogic.removeComentario(comentariosData.get(0).getId(), data.get(0).getId());
         Assert.assertEquals(0, comentariosBlogLogic.getComentarios(data.get(0).getId()).size());
     }
+    @Test(expected = BusinessLogicException.class)
+    public void removeComentarioNoAsociadoTest() throws BusinessLogicException{
+        comentariosBlogLogic.removeComentario(comentariosData.get(0).getId(), data.get(1).getId());
+    }
+    @Test
+    public void getBlogTest() {
+        BlogEntity blog = comentariosBlogLogic.getBlog(comentariosData.get(0).getId());
+
+        Assert.assertEquals(data.get(0), blog);
+    }
+    @Test
+        public void removeBlogTest() {
+        comentariosBlogLogic.removeBlog(comentariosData.get(0).getId());
+        Assert.assertNull(comentariosBlogLogic.getBlog(comentariosData.get(0).getId()));
+    }
+    @Test
+        public void replaceBlogTest() {
+        comentariosBlogLogic.replaceBlog(comentariosData.get(0).getId(),data.get(1).getId());
+        Assert.assertEquals(comentariosBlogLogic.getBlog(comentariosData.get(0).getId()), data.get(1));
+    }        
 }

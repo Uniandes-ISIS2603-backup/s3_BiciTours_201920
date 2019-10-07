@@ -37,7 +37,7 @@ public class ComentariosBlogLogic {
         return blogPersistence.find(blogsId).getComentarios();
     }
 
-    public ComentarioEntity getComentario(Long blogsId, Long comentariosId) throws BusinessLogicException {
+    public ComentarioEntity getComentario(Long comentariosId, Long blogsId) throws BusinessLogicException {
         List<ComentarioEntity> comentarios = blogPersistence.find(blogsId).getComentarios();
         ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
         if(comentarios.contains(comentarioEntity))
@@ -60,9 +60,19 @@ public class ComentariosBlogLogic {
         return comentarios;
     }
 
-    public void removeComentario(Long comentariosId, Long blogsId) {
-        ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        blogEntity.getComentarios().remove(comentarioEntity);
+    public void removeComentario(Long comentariosId, Long blogsId) throws BusinessLogicException {
+        comentarioPersistence.delete(getComentario(comentariosId,blogsId).getId());
     }
+        public BlogEntity getBlog(Long blogsId) {
+        BlogEntity blogEntity = comentarioPersistence.find(blogsId).getBlog();
+        return blogEntity;
+    }
+        public void replaceBlog(Long comentariosId, Long blogsId) {
+        ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
+        comentarioEntity.setBlog(blogPersistence.find(blogsId));
+    }
+    public void removeBlog(Long comentariosId) {
+        ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
+        comentarioEntity.setBlog(null);
+    } 
 }

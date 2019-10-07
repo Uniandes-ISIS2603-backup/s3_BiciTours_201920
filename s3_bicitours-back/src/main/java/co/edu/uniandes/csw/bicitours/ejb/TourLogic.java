@@ -72,5 +72,8 @@ public class TourLogic {
         return tour;
         
     }
-    
+        public TourEntity getTour(Long toursId) {
+        TourEntity tourEntity = tp.find(toursId);
+        return tourEntity;
+    }
 }

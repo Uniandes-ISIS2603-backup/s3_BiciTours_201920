@@ -59,10 +59,26 @@ public class BlogsCreadorLogic {
         }
         return blogs;
     }
+        public void removeBlog(Long usuariosId, Long blogsId) throws BusinessLogicException{
+        blogPersistence.delete(getBlog(usuariosId,blogsId).getId());
+    }
 
-    public void removeBlog(Long blogsId, Long usuariosId) {
+    public UsuarioEntity getCreador(Long blogsId) {
+        UsuarioEntity usuarioEntity = blogPersistence.find(blogsId).getCreador();
+        return usuarioEntity;
+    }
+    
+    public void replaceCreador(Long blogsId, Long usuariosId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
-        UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
+        UsuarioEntity usuarioEntity = usuarioPersistence.find(blogEntity.getCreador().getId());
         usuarioEntity.getMisBlogs().remove(blogEntity);
+        blogEntity.setCreador(usuarioPersistence.find(usuariosId));
+        
+    }
+    public void removeCreador(Long blogsId) {
+        BlogEntity blogEntity = blogPersistence.find(blogsId);
+        UsuarioEntity usuarioEntity = usuarioPersistence.find(blogEntity.getCreador().getId());
+        usuarioEntity.getMisBlogs().remove(blogEntity);
+        blogEntity.setCreador(null);
     }
 }
