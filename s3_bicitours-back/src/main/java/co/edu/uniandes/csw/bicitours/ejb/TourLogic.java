@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.TourPersistence;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -72,8 +73,39 @@ public class TourLogic {
         return tour;
         
     }
-        public TourEntity getTour(Long toursId) {
+    
+    /**
+     * Busca un tour con el id dado
+     * @param toursId, id del tour
+     * @return una entidad tour si esta existe en la base de datos, en caso contrario null
+     */
+    public TourEntity getTour(Long toursId) {
         TourEntity tourEntity = tp.find(toursId);
         return tourEntity;
+    }
+    
+    /**
+     * Busca todos los tours en la base de datos
+     * @return una lista de todas las entidades tour existentes
+     */
+    public List<TourEntity> getTours() {
+        return tp.findAll();
+    }
+    
+    /**
+     * Actualiza un tour dado por parámetro
+     * @param tourEntity, entidad tour que se quiere actualizar
+     * @return la entidad tour actualizada
+     */
+    public TourEntity updateTour(TourEntity tourEntity) {
+        return tp.update(tourEntity);
+    }
+    
+    /**
+     * Borra un tour con el id dado por parámetro
+     * @param toursId, id del tour
+     */
+    public void deleteTour(Long toursId) {
+        tp.delete(toursId);
     }
 }

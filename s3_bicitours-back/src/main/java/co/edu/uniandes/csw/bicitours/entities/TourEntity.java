@@ -59,6 +59,12 @@ public class TourEntity extends BaseEntity implements Serializable {
     @PodamExclude
     @OneToMany(mappedBy = "tour")
     private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "tour")
+    private List<FotoEntity> fotos = new ArrayList<FotoEntity>();
+
+    
     public TourEntity()
     {
     }
@@ -165,4 +171,13 @@ public class TourEntity extends BaseEntity implements Serializable {
     public void setBlogs(List<BlogEntity> blogs) {
         this.blogs = blogs;
     }
+    
+        public void setFotos(List<FotoEntity> fotos) {
+        this.fotos = fotos;
+    }
+
+    public List<FotoEntity> getFotos() {
+        return fotos;
+    }
+    
 }

@@ -191,9 +191,5 @@ public class TourLogicTest{
         tourPrueba.setCosto(random);
         tourLogic.createTour(tourPrueba);        
     }
-    
-    
-            
-       
-    
+  
 }
