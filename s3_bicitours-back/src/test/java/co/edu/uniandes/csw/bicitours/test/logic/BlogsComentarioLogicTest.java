@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.bicitours.test.logic;
 
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
-import co.edu.uniandes.csw.bicitours.ejb.BlogComentarioLogic;
+import co.edu.uniandes.csw.bicitours.ejb.BlogsComentarioLogic;
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
@@ -33,14 +33,14 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Oscar Julian Castañeda G.
  */
 @RunWith(Arquillian.class)
-public class ComentariosBlogLogicTest {
+public class BlogsComentarioLogicTest {
 
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private BlogLogic blogLogic;
     @Inject
-    private BlogComentarioLogic comentariosBlogLogic;
+    private BlogsComentarioLogic comentariosBlogLogic;
 
     @PersistenceContext
     private EntityManager em;
