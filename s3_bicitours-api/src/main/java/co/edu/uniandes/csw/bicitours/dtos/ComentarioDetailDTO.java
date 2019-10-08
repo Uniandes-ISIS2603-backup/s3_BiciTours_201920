@@ -15,7 +15,7 @@ import java.util.List;
  * @author JuanRueda
  */
 public class ComentarioDetailDTO extends ComentarioDTO implements Serializable{
-    // relación  cero o muchos reviews 
+    
     private List<ComentarioDTO> respuestas;
 
     public ComentarioDetailDTO() {
@@ -25,14 +25,14 @@ public class ComentarioDetailDTO extends ComentarioDTO implements Serializable{
     public ComentarioDetailDTO(ComentarioEntity comentario) 
     {
         super(comentario);
-        //if (comentario.getRespuestas() != null) 
-        //{
-        //    respuestas = new ArrayList<>();
-        //    for (ComentarioEntity respuesta : comentario.getRespuestas()) 
-        //    {
-        //        respuestas.add(new ComentarioDTO(respuesta));
-        //    }
-        //}
+        if (comentario.getRespuestas() != null) 
+        {
+            respuestas = new ArrayList<>();
+            for (ComentarioEntity respuesta : comentario.getRespuestas()) 
+            {
+                respuestas.add(new ComentarioDTO(respuesta));
+            }
+        }
     }
 
     @Override
@@ -46,7 +46,7 @@ public class ComentarioDetailDTO extends ComentarioDTO implements Serializable{
             {
                 respuestasEntity.add(dtoComentario.toEntity());
             }
-            //comentario.setRespuestas(respuestasEntity);
+            comentario.setRespuestas(respuestasEntity);
         }
         return comentario;
     }

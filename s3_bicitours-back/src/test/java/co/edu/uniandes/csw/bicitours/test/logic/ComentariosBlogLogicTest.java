@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.bicitours.test.logic;
 
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
-import co.edu.uniandes.csw.bicitours.ejb.ComentariosBlogLogic;
+import co.edu.uniandes.csw.bicitours.ejb.BlogComentarioLogic;
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
@@ -40,7 +40,7 @@ public class ComentariosBlogLogicTest {
     @Inject
     private BlogLogic blogLogic;
     @Inject
-    private ComentariosBlogLogic comentariosBlogLogic;
+    private BlogComentarioLogic comentariosBlogLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -158,21 +158,5 @@ public class ComentariosBlogLogicTest {
     @Test(expected = BusinessLogicException.class)
     public void removeComentarioNoAsociadoTest() throws BusinessLogicException{
         comentariosBlogLogic.removeComentario(comentariosData.get(0).getId(), data.get(1).getId());
-    }
-    @Test
-    public void getBlogTest() {
-        BlogEntity blog = comentariosBlogLogic.getBlog(comentariosData.get(0).getId());
-
-        Assert.assertEquals(data.get(0), blog);
-    }
-    @Test
-        public void removeBlogTest() {
-        comentariosBlogLogic.removeBlog(comentariosData.get(0).getId());
-        Assert.assertNull(comentariosBlogLogic.getBlog(comentariosData.get(0).getId()));
-    }
-    @Test
-        public void replaceBlogTest() {
-        comentariosBlogLogic.replaceBlog(comentariosData.get(0).getId(),data.get(1).getId());
-        Assert.assertEquals(comentariosBlogLogic.getBlog(comentariosData.get(0).getId()), data.get(1));
-    }        
+    }      
 }

@@ -19,7 +19,7 @@ import javax.inject.Inject;
  * @author Oscar Julian Castañeda G.
  */
 @Stateless
-public class ComentariosBlogLogic {
+public class BlogComentarioLogic {
     @Inject
     private BlogPersistence blogPersistence;
 
@@ -63,16 +63,4 @@ public class ComentariosBlogLogic {
     public void removeComentario(Long comentariosId, Long blogsId) throws BusinessLogicException {
         comentarioPersistence.delete(getComentario(comentariosId,blogsId).getId());
     }
-        public BlogEntity getBlog(Long blogsId) {
-        BlogEntity blogEntity = comentarioPersistence.find(blogsId).getBlog();
-        return blogEntity;
-    }
-        public void replaceBlog(Long comentariosId, Long blogsId) {
-        ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
-        comentarioEntity.setBlog(blogPersistence.find(blogsId));
-    }
-    public void removeBlog(Long comentariosId) {
-        ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
-        comentarioEntity.setBlog(null);
-    } 
 }

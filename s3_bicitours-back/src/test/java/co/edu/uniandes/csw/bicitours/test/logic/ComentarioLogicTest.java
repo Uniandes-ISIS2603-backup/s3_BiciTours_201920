@@ -99,15 +99,15 @@ public class ComentarioLogicTest {
             comentario.setTexto("Hola");
             //comentario.setHead(null);
             //comentario.setRespuestas(null);
-            //comentario.setAutor(usuarioData.get(0));
+            //comentario.setUsuario(usuarioData.get(0));
 
             em.persist(comentario);
             data.add(comentario);
         }
-        //UsuarioEntity autor = factory.manufacturePojo(UsuarioEntity.class);
+        //UsuarioEntity usuario = factory.manufacturePojo(UsuarioEntity.class);
         //em.persist(author);
-        //autor.getComentarios().add(data.get(1));
-        //data.get(1).setAutor(autor);
+        //usuario.getComentarios().add(data.get(1));
+        //data.get(1).setUsuario(usuario);
     }
     
     @Test
