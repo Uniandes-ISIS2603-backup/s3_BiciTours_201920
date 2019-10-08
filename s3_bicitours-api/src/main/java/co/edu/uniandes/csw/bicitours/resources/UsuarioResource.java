@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.bicitours.resources;
 
 import co.edu.uniandes.csw.bicitours.dtos.UsuarioDTO;
+import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,12 +24,14 @@ import javax.ws.rs.Produces;
 @Consumes("application/json")
 @RequestScoped
 public class UsuarioResource {
+    @Inject
+    UsuarioLogic usuarioLogic;  //El objeto asociado con esta variable sea asignado por el contenedor
     
     private final static Logger LOGGER = Logger.getLogger(UsuarioResource.class.getName());
     
     @POST
     public UsuarioDTO crearCuenta (UsuarioDTO usuario){
-        return null;
+        return usuario;
         
     }
 }

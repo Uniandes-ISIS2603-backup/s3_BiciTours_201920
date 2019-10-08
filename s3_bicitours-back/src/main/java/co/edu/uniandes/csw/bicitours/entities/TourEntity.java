@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -64,6 +65,9 @@ public class TourEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "tour")
     private List<FotoEntity> fotos = new ArrayList<FotoEntity>();
 
+    @PodamExclude
+    @ManyToMany
+    private List<TourEntity> usuarios;
     
     public TourEntity()
     {
@@ -178,6 +182,20 @@ public class TourEntity extends BaseEntity implements Serializable {
 
     public List<FotoEntity> getFotos() {
         return fotos;
+    }
+
+    /**
+     * @return the usuarios
+     */
+    public List<TourEntity> getUsuarios() {
+        return usuarios;
+    }
+
+    /**
+     * @param usuarios the usuarios to set
+     */
+    public void setUsuarios(List<TourEntity> usuarios) {
+        this.usuarios = usuarios;
     }
     
 }

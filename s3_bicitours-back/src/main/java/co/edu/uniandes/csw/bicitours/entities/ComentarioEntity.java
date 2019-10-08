@@ -34,9 +34,9 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     private ComentarioEntity head;
     */
     
-    //@PodamExclude
-    //@ManyToOne
-    //private UsuarioEntity usuario;
+    @PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
     
     @PodamExclude
     @ManyToOne
@@ -109,16 +109,16 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     /**
      * @return the usuario
      */
-    //public UsuarioEntity getUsuario() {
-    //    return usuario;
-    //}
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
 
     /**
      * @param usuario the usuario to set
      */
-    //public void setUsuario(UsuarioEntity usuario) {
-    //    this.usuario = usuario;
-    //}
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
     
     /**
      * @return the tour

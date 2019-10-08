@@ -6,9 +6,10 @@
 package co.edu.uniandes.csw.bicitours.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -32,59 +33,98 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private boolean esAdmin;
     //Deuda total del usuario
     private Integer deuda;
+
+    //Relaciones entre clases:
+    //Relación de autoría con comentario
+    @PodamExclude
+    @OneToMany(mappedBy = "usuario")
+    private List<ComentarioEntity> comentarios; 
+    //Relación de toures visitados con usuario
+    
+    @PodamExclude
+    @ManyToMany
+    private List<TourEntity> visitados;
+    
+    //Relación de posesión con seguro
+    //@PodamExclude
+    //@OneToMany(
+    //    mappedBy = "usuario",
+    //	cascade = CascadeType.PERSIST,
+    //	fetch = FetchType.EAGER,
+    //    orphanRemoval = true)
+    //private List<SeguroEntity> seguros; 
+    
+    //Relación de autoría con blog
     @PodamExclude
     @OneToMany(mappedBy = "creador")
-    private List<BlogEntity> misBlogs = new ArrayList<BlogEntity>();
+    private List<BlogEntity> misBlogs;
+    //Relación de favoritos con blog
     @PodamExclude
-    @ManyToMany(mappedBy = "usuarios")
+    @ManyToMany
     private List<BlogEntity> favoritos;
+    
     public UsuarioEntity() {
         
     }
+
     /**
-     * @return Nombre del usuario
+     * @return the nombre
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre Nuevo nombre del usuario
+     * @param nombre the nombre to set
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * @return Código del usuario
+     * @return the codigo
      */
     public String getCodigo() {
         return codigo;
     }
 
     /**
-     * @param codigo Nuevo código del usuario
+     * @param codigo the codigo to set
      */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
 
     /**
-     * @return Booleano que determina si el usuario a realizado o no el pago
+     * @return the correo
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * @param correo the correo to set
+     */
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    /**
+     * @return the pago
      */
     public boolean isPago() {
         return pago;
     }
 
     /**
-     * @param pago Booleano para definir si el usuario a realizado o no el pago
+     * @param pago the pago to set
      */
     public void setPago(boolean pago) {
         this.pago = pago;
     }
 
     /**
-     * @return Booleano que determina el tipo de usuario (cliente o administrador)
+     * @return the esAdmin
      */
     public boolean isEsAdmin() {
         return esAdmin;
@@ -112,18 +152,60 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     }
 
     /**
-     * @return the correo
+     * @return the comentarios
      */
-    public String getCorreo() {
-        return correo;
+    public List<ComentarioEntity> getComentarios() {
+        return comentarios;
     }
 
     /**
-     * @param correo the correo to set
+     * @param comentarios the comentarios to set
      */
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setComentarios(List<ComentarioEntity> comentarios) {
+        this.comentarios = comentarios;
     }
+    
+    /**
+     * @param comentario the comentario to add
+     */
+    public void addComentario(ComentarioEntity comentario) {
+        this.comentarios.add(comentario);
+    }
+
+    /**
+     * @param comentarios the comentarios to set
+     */
+    public void deleteComentario(ComentarioEntity comentario) {
+        this.comentarios.remove(comentario);
+    }
+    
+    /**
+     * @return the visitados
+     */
+    public List<TourEntity> getVisitados() {
+        return visitados;
+    }
+
+    /**
+     * @param visitados the visitados to set
+     */
+    public void setVisitados(List<TourEntity> visitados) {
+        this.visitados = visitados;
+    }
+
+//    /**
+//     * @return the seguros
+//     */
+//    public List<SeguroEntity> getSeguros() {
+//        return seguros;
+//    }
+//
+//    /**
+//     * @param seguros the seguros to set
+//     */
+//    public void setSeguros(List<SeguroEntity> seguros) {
+//        this.seguros = seguros;
+//    }
 
     /**
      * @return the misBlogs
@@ -152,4 +234,5 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     public void setFavoritos(List<BlogEntity> favoritos) {
         this.favoritos = favoritos;
     }
+    
 }
