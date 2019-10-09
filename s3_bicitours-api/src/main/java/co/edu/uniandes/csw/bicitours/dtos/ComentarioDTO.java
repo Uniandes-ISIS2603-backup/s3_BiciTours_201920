@@ -17,9 +17,9 @@ public class ComentarioDTO implements Serializable
     private Long id;
     private String texto;
     private Integer calificacion;
-    //private UsuarioDTO usuario;
+    private UsuarioDTO usuario;
     private BlogDTO blog;
-    //private TourDTO tour;
+    private TourDTO tour;
     
     public ComentarioDTO()
     {
@@ -32,14 +32,14 @@ public class ComentarioDTO implements Serializable
             this.id = comentario.getId();
             this.texto = comentario.getTexto();
             this.calificacion = comentario.getCalificacion();
-            //if (comentario.getUsuario() != null) 
-            //{
-            //    this.usuario = new UsuarioDTO(comentario.getUsuario());
-            //}
-            //else 
-            //{
-                //this.usuario = null;
-            //}
+            if (comentario.getUsuario() != null) 
+            {
+                //this.usuario = new UsuarioDTO(comentario.getUsuario());
+            }
+            else 
+            {
+                this.usuario = null;
+            }
             if (comentario.getBlog() != null) 
             {
                 this.blog = new BlogDTO(comentario.getBlog());
@@ -48,14 +48,14 @@ public class ComentarioDTO implements Serializable
             {
                 this.blog = null;
             }
-            //if (comentario.getTour() != null) 
-            //{
-            //    this.tour = new TourDTO(comentario.getTour());
-            //}
-            //else 
-            //{
-                //this.tour = null;
-            //}
+            if (comentario.getTour() != null) 
+            {
+                this.tour = new TourDTO(comentario.getTour());
+            }
+            else 
+            {
+                this.tour = null;
+            }
         }
     }
     

@@ -29,22 +29,12 @@ public class ComentarioTourLogic {
      * @param tourId Identificador de la instancia de tour
      * @return Instancia de TourEntity que fue asociada a comentario
      */
-    public TourEntity setTour(Long comentarioId, Long tourId) {
+    public ComentarioEntity replaceTour(Long comentarioId, Long tourId) {
         TourEntity entidadU = persistenciaT.find(tourId);
         ComentarioEntity entidadC = persistenciaC.find(comentarioId);
         entidadC.setTour(entidadU);
-        return persistenciaT.find(tourId);
-    }
-
-    /**
-     * Obtiene una instancia de TourEntity asociada a una instancia de comentario
-     *
-     * @param comentarioId Identificador de la instancia de comentario
-     * @return La entidad del Autor asociada al libro
-     */
-    public TourEntity getTour(Long comentarioId) {
-        TourEntity tour = persistenciaC.find(comentarioId).getTour();
-        return tour;
+        persistenciaC.update(entidadC);
+        return entidadC;
     }
 
     /**
@@ -55,5 +45,6 @@ public class ComentarioTourLogic {
     public void removeTour(Long comentarioId) {
         ComentarioEntity entidadC = persistenciaC.find(comentarioId);
         entidadC.setTour(null);
+        persistenciaC.update(entidadC);
     }
 }

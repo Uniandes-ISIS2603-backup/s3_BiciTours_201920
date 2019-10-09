@@ -29,22 +29,12 @@ public class ComentarioBlogLogic {
      * @param blogId Identificador de la instancia de blog
      * @return Instancia de BlogEntity que fue asociada a comentario
      */
-    public BlogEntity setBlog(Long comentarioId, Long blogId) {
+    public ComentarioEntity replaceBlog(Long comentarioId, Long blogId) {
         BlogEntity entidadU = persistenciaB.find(blogId);
         ComentarioEntity entidadC = persistenciaC.find(comentarioId);
         entidadC.setBlog(entidadU);
-        return persistenciaB.find(blogId);
-    }
-
-    /**
-     * Obtiene una instancia de BlogEntity asociada a una instancia de comentario
-     *
-     * @param comentarioId Identificador de la instancia de comentario
-     * @return La entidad del Autor asociada al libro
-     */
-    public BlogEntity getBlog(Long comentarioId) {
-        BlogEntity blog = persistenciaC.find(comentarioId).getBlog();
-        return blog;
+        persistenciaC.update(entidadC);
+        return entidadC;
     }
 
     /**
@@ -55,5 +45,6 @@ public class ComentarioBlogLogic {
     public void removeBlog(Long comentarioId) {
         ComentarioEntity entidadC = persistenciaC.find(comentarioId);
         entidadC.setBlog(null);
+        persistenciaC.update(entidadC);
     }
 }

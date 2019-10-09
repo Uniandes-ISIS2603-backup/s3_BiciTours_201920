@@ -73,7 +73,7 @@ public class ComentarioLogic {
         ComentarioEntity comentario = persistence.find(comentarioId);
         if (comentario == null) 
         {
-            LOGGER.log(Level.SEVERE, "El libro con el id = {0} no existe", comentarioId);
+            LOGGER.log(Level.SEVERE, "El comentario con el id = {0} no existe", comentarioId);
         }
         return comentario;
     }
@@ -113,7 +113,7 @@ public class ComentarioLogic {
         return comentario;
     }
 
-    public void deleteComentario(Long comentarioId, Long usuarioId) throws BusinessLogicException 
+    public void deleteComentario(Long comentarioId) throws BusinessLogicException 
     {
         //Regla solo el autor puede borrarlo? O se manejará en front
         //ComentarioEntity comentario = persistence.find(comentarioId);
