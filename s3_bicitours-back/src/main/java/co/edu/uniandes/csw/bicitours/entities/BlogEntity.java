@@ -51,7 +51,7 @@ public class BlogEntity extends BaseEntity implements Serializable {
     private String texto;
     private String rutaImagen;
     private String rutaVideo;
-    private double calificacionPromedio;
+    private Double calificacionPromedio;
     private String titulo;
 
     public BlogEntity() {
@@ -103,14 +103,14 @@ public class BlogEntity extends BaseEntity implements Serializable {
     /**
      * @return the calificacionPromedio
      */
-    public double getCalificacionPromedio() {
+    public Double getCalificacionPromedio() {
         return calificacionPromedio;
     }
 
     /**
      * @param calificacionPromedio the calificacionPromedio to set
      */
-    public void setCalificacionPromedio(double calificacionPromedio) {
+    public void setCalificacionPromedio(Double calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
 

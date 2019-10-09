@@ -6,20 +6,21 @@
 package co.edu.uniandes.csw.bicitours.dtos;
 
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author Oscar Julian Castañeda G.
  */
-public class BlogDTO {
+public class BlogDTO implements Serializable{
 
     private BlogDTO anterior;
     private BlogDTO siguiente;
-    private long id;
+    private Long id;
     private String texto;
     private String rutaImagen;
     private String rutaVideo;
-    private double calificacionPromedio;
+    private Double calificacionPromedio;
     private String titulo;
     private TourDTO tour;
     private UsuarioDTO creador;
@@ -109,14 +110,14 @@ public class BlogDTO {
     /**
      * @return the id
      */
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -165,14 +166,14 @@ public class BlogDTO {
     /**
      * @return the calificacionPromedio
      */
-    public double getCalificacionPromedio() {
+    public Double getCalificacionPromedio() {
         return calificacionPromedio;
     }
 
     /**
      * @param calificacionPromedio the calificacionPromedio to set
      */
-    public void setCalificacionPromedio(double calificacionPromedio) {
+    public void setCalificacionPromedio(Double calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
 

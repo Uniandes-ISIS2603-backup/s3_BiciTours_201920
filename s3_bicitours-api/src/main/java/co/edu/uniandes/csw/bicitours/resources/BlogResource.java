@@ -48,7 +48,7 @@ public class BlogResource {
     }
     @GET
     @Path("{blogsId: \\d+}")
-    public BlogDTO getBlog(@PathParam("blogsId") Long blogsId) {
+    public BlogDetailDTO getBlog(@PathParam("blogsId") Long blogsId) {
         BlogEntity blogEntity = blogLogic.getBlog(blogsId);
         if (blogEntity == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);

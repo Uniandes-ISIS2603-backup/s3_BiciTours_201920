@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.bicitours.dtos;
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  *
  * @author Oscar Julian Castañeda G.
  */
-public class BlogDetailDTO extends BlogDTO{
+public class BlogDetailDTO extends BlogDTO implements Serializable{
     
     private List<UsuarioDTO> usuarios;
     private List<ComentarioDTO> comentarios;
