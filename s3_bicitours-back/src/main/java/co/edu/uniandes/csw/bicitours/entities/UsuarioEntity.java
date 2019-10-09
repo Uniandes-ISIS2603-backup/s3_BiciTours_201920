@@ -60,7 +60,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private List<BlogEntity> misBlogs;
     //Relación de favoritos con blog
     @PodamExclude
-    @ManyToMany
+    @ManyToMany(mappedBy = "usuarios")
     private List<BlogEntity> favoritos;
     
     public UsuarioEntity() {

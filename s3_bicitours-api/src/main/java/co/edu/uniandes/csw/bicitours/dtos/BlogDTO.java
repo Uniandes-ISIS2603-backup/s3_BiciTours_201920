@@ -21,6 +21,8 @@ public class BlogDTO {
     private String rutaVideo;
     private double calificacionPromedio;
     private String titulo;
+    private TourDTO tour;
+    private UsuarioDTO creador;
     public BlogDTO() {
     }
     public BlogDTO(BlogEntity blogEntity) {
@@ -41,6 +43,16 @@ public class BlogDTO {
         } else {
             this.siguiente = null;
         }
+        if (blogEntity.getCreador() != null) {
+//            this.creador = new UsuarioDTO(blogEntity.getCreador());
+        } else {
+            this.creador = null;
+        }
+        if (blogEntity.getTour() != null) {
+            this.tour = new TourDTO(blogEntity.getTour());
+        } else {
+            this.tour = null;
+        }        
     }
     }
         public BlogEntity toEntity() {
@@ -56,6 +68,12 @@ public class BlogDTO {
         }
         if (this.getSiguiente() != null) {
             blogEntity.setSiguiente(this.getSiguiente().toEntity());
+        }
+        if (this.getCreador() != null) {
+//            blogEntity.seCreador(this.getCreador().toEntity());
+        }
+        if (this.getTour() != null) {
+            blogEntity.setTour(this.getTour().toEntity());
         }
         return blogEntity;
     }
@@ -170,5 +188,33 @@ public class BlogDTO {
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    /**
+     * @return the tour
+     */
+    public TourDTO getTour() {
+        return tour;
+    }
+
+    /**
+     * @param tour the tour to set
+     */
+    public void setTour(TourDTO tour) {
+        this.tour = tour;
+    }
+
+    /**
+     * @return the creador
+     */
+    public UsuarioDTO getCreador() {
+        return creador;
+    }
+
+    /**
+     * @param creador the creador to set
+     */
+    public void setCreador(UsuarioDTO creador) {
+        this.creador = creador;
     }
 }
