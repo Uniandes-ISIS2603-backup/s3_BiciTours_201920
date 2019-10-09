@@ -8,6 +8,8 @@ package co.edu.uniandes.csw.bicitours.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -18,7 +20,9 @@ public class SeguroEntity extends BaseEntity implements Serializable {
     private String tipo ;
     private String caracteristicas;
     private String condiciones;
-
+@PodamExclude
+    @ManyToOne
+    private UsuarioEntity usuario;
     /**
      * @return the tipo
      */
@@ -60,4 +64,18 @@ public class SeguroEntity extends BaseEntity implements Serializable {
     public void setCondiciones(String condiciones) {
         this.condiciones = condiciones;
     }
+
+    /**
+     * @return the usuario */
+     
+    public UsuarioEntity getUsuario() {
+        return usuario;
+    }
+
+    
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
+    }
+    
+    
 }

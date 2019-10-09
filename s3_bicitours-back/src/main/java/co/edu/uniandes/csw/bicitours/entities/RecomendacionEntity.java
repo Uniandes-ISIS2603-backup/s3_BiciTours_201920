@@ -7,6 +7,8 @@ package co.edu.uniandes.csw.bicitours.entities;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
@@ -16,7 +18,9 @@ import javax.persistence.Entity;
 public class RecomendacionEntity extends BaseEntity implements Serializable {
     private String tipoBici ;
     private String indumentaria;
-
+@PodamExclude
+    @ManyToOne
+    private TourEntity tour;
     /**
      * @return the tipoBici
      */
@@ -43,6 +47,20 @@ public class RecomendacionEntity extends BaseEntity implements Serializable {
      */
     public void setIndumentaria(String indumentaria) {
         this.indumentaria = indumentaria;
+    }
+
+    /**
+     * @return the tour
+     */
+    public TourEntity getTour() {
+        return tour;
+    }
+
+    /**
+     * @param tour the tour to set
+     */
+    public void setTour(TourEntity tour) {
+        this.tour = tour;
     }
     
 }

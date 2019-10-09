@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 /**
  *
- * @seguro Maria Clara Noguera Echeverri
+ * @author Maria Clara Noguera Echeverri
  */
 @Stateless
 public class SeguroLogic {

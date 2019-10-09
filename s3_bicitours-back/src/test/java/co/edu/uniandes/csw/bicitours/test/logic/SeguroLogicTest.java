@@ -31,7 +31,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @seguro Maria Clara Noguera Echeverri
+ * @author Maria Clara Noguera Echeverri
  */
 @RunWith(Arquillian.class)
 public class SeguroLogicTest {
@@ -51,9 +51,9 @@ public class SeguroLogicTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addClass(SeguroEntity.class)
-                .addClass(SeguroLogic.class)
-                .addClass(SeguroPersistence.class)
+                .addPackage(SeguroEntity.class.getPackage())
+                .addPackage(SeguroLogic.class.getPackage())
+                .addPackage(SeguroPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
