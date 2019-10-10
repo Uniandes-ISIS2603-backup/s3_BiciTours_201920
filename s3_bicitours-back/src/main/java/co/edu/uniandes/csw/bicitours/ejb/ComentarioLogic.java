@@ -78,37 +78,45 @@ public class ComentarioLogic {
         return comentario;
     }
 
-    public ComentarioEntity updateComentario(ComentarioEntity comentario) throws BusinessLogicException 
+    public ComentarioEntity updateComentario(Long comentarioId, ComentarioEntity comentario) throws BusinessLogicException 
     {
-        if (comentario != null)
+        ComentarioEntity actual = persistence.find(comentarioId);
+        if (actual != null)
         {
-            if(comentario.getCalificacion() != null && comentario.getTexto() != null)
+            if (comentario != null)
             {
-                if(comentario.getCalificacion() == 0 && comentario.getTexto().equals(""))
+                if(comentario.getCalificacion() != null && comentario.getTexto() != null)
                 {
-                    throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
+                    if(comentario.getCalificacion() == 0 && comentario.getTexto().equals(""))
+                    {
+                        throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
+                    }
+                    else
+                    {
+                        if (comentario.getCalificacion()!= 0 && (comentario.getCalificacion() < 1 || comentario.getCalificacion() > 5))
+                        {
+                            throw new BusinessLogicException("La calificación tiene que estar entre 1 y 5.");
+                        }
+                        if (!comentario.getTexto().equals("") && comentario.getTexto().length() > 250)
+                        {
+                            throw new BusinessLogicException("El mensaje no puede superar los 250 caracteres.");
+                        }
+                        comentario = persistence.update(comentario);
+                    }
                 }
                 else
                 {
-                    if (comentario.getCalificacion()!= 0 && (comentario.getCalificacion() < 1 || comentario.getCalificacion() > 5))
-                    {
-                        throw new BusinessLogicException("La calificación tiene que estar entre 1 y 5.");
-                    }
-                    if (!comentario.getTexto().equals("") && comentario.getTexto().length() > 250)
-                    {
-                        throw new BusinessLogicException("El mensaje no puede superar los 250 caracteres.");
-                    }
-                    comentario = persistence.update(comentario);
+                    throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
                 }
             }
             else
             {
-                throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
+                throw new BusinessLogicException("El comentario no puede ser nulo");
             }
         }
         else
         {
-            throw new BusinessLogicException("El comentario no puede ser nulo");
+            throw new BusinessLogicException("El comentario a actualizar no existe");
         }
         return comentario;
     }

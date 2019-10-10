@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.bicitours.test.logic;
 
 import co.edu.uniandes.csw.bicitours.ejb.ComentarioLogic;
 import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
+import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.ComentarioPersistence;
 import java.util.ArrayList;
@@ -47,7 +48,7 @@ public class ComentarioLogicTest {
     
     private List<ComentarioEntity> data = new ArrayList();
 
-    //private List<UsuarioEntity> usuarioData = new ArrayList();
+    private List<UsuarioEntity> usuarioData = new ArrayList();
     
     @Deployment
     public static JavaArchive createDeployment()
@@ -85,7 +86,7 @@ public class ComentarioLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from ComentarioEntity").executeUpdate();
-        //em.createQuery("delete from UsuarioEntity").executeUpdate();
+        em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
 
     /**
@@ -99,15 +100,15 @@ public class ComentarioLogicTest {
             comentario.setTexto("Hola");
             //comentario.setHead(null);
             //comentario.setRespuestas(null);
-            //comentario.setUsuario(usuarioData.get(0));
+            comentario.setUsuario(usuarioData.get(0));
 
             em.persist(comentario);
             data.add(comentario);
         }
-        //UsuarioEntity usuario = factory.manufacturePojo(UsuarioEntity.class);
-        //em.persist(author);
-        //usuario.getComentarios().add(data.get(1));
-        //data.get(1).setUsuario(usuario);
+        UsuarioEntity usuario = factory.manufacturePojo(UsuarioEntity.class);
+        em.persist(usuario);
+        usuario.getComentarios().add(data.get(1));
+        data.get(1).setUsuario(usuario);
     }
     
     @Test
@@ -176,20 +177,20 @@ public class ComentarioLogicTest {
         logica.createComentario(comentario);
     }
     
-    //@Test
-    //public void getComentariosTest() {
-    //    List<ComentarioEntity> list = logica.getComentarios();
-    //    Assert.assertEquals(data.size(), list.size());
-    //    for (ComentarioEntity comentario : list) {
-    //        boolean found = false;
-    //        for (ComentarioEntity prueba : data) {
-    //            if (comentario.getId().equals(prueba.getId())) {
-    //                found = true;
-    //            }
-    //        }
-    //        Assert.assertTrue(found);
-    //    }
-    //}
+    @Test
+    public void getComentariosTest() {
+        List<ComentarioEntity> list = logica.getComentarios();
+        Assert.assertEquals(data.size(), list.size());
+        for (ComentarioEntity comentario : list) {
+            boolean found = false;
+            for (ComentarioEntity prueba : data) {
+                if (comentario.getId().equals(prueba.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
     
     //@Test
     //public void getComentarioTest() {

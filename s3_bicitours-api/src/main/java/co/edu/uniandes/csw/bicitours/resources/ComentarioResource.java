@@ -80,7 +80,7 @@ public class ComentarioResource
         {
             throw new WebApplicationException("El recurso /Comentarios/" + comentarioId + " no existe.", 404);
         }
-        ComentarioDetailDTO detailDTO = new ComentarioDetailDTO(logica.updateComentario(comentarios.toEntity()));
+        ComentarioDetailDTO detailDTO = new ComentarioDetailDTO(logica.updateComentario(comentarioId, comentarios.toEntity()));
         return detailDTO;
     }
 
