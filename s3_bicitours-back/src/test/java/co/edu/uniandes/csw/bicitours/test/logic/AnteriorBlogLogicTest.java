@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.bicitours.test.logic;
 
-import co.edu.uniandes.csw.bicitours.ejb.AnteriorSiguienteBlogLogic;
+import co.edu.uniandes.csw.bicitours.ejb.AnteriorBlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.persistence.BlogPersistence;
@@ -28,17 +28,16 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Estudiante
+ * @author Oscar Julian Castañeda G.
  */
 @RunWith(Arquillian.class)
-public class AnteriorSiguienteBlogLogicTest {
+public class AnteriorBlogLogicTest {
         
     private PodamFactory factory = new PodamFactoryImpl();
 
+
     @Inject
-    private BlogLogic blogLogic;
-    @Inject
-    private AnteriorSiguienteBlogLogic AnteriorSiguienteBlogLogic;
+    private AnteriorBlogLogic anteriorBlogLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -90,34 +89,18 @@ public class AnteriorSiguienteBlogLogicTest {
     }
     @Test
     public void removeAnteriorTest() {
-        AnteriorSiguienteBlogLogic.removeAnterior(data.get(1).getId());
-        Assert.assertNull(AnteriorSiguienteBlogLogic.getAnterior(data.get(1).getId()));
+        anteriorBlogLogic.removeAnterior(data.get(1).getId());
+        Assert.assertNull(anteriorBlogLogic.getAnterior(data.get(1).getId()));
     }
     @Test
     public void getAnteriorTest() {
-        BlogEntity anterior = AnteriorSiguienteBlogLogic.getAnterior(data.get(1).getId());
+        BlogEntity anterior = anteriorBlogLogic.getAnterior(data.get(1).getId());
 
         Assert.assertEquals(data.get(0), anterior);
     }
         @Test
         public void replaceAnteriorTest() {
-        AnteriorSiguienteBlogLogic.replaceAnterior(data.get(1).getId(),data.get(3).getId());
-        Assert.assertEquals(AnteriorSiguienteBlogLogic.getAnterior(data.get(1).getId()), data.get(3));
+        anteriorBlogLogic.replaceAnterior(data.get(1).getId(),data.get(3).getId());
+        Assert.assertEquals(anteriorBlogLogic.getAnterior(data.get(1).getId()), data.get(3));
     }
-    @Test
-    public void removeSiguienteTest() {
-            AnteriorSiguienteBlogLogic.removeSiguiente(data.get(1).getId());
-        Assert.assertNull(AnteriorSiguienteBlogLogic.getSiguiente(data.get(1).getId()));
-    }
-    @Test
-    public void getSiguienteTest() {
-        BlogEntity siguiente = AnteriorSiguienteBlogLogic.getSiguiente(data.get(1).getId());
-
-        Assert.assertEquals(data.get(2), siguiente);
-    }
-        @Test
-        public void replaceSiguienteTest() {
-        AnteriorSiguienteBlogLogic.replaceSiguiente(data.get(1).getId(),data.get(3).getId());
-        Assert.assertEquals(AnteriorSiguienteBlogLogic.getSiguiente(data.get(1).getId()), data.get(3));
-    }        
 }

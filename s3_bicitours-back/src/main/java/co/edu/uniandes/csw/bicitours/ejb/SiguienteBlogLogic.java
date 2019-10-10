@@ -15,7 +15,7 @@ import javax.inject.Inject;
  * @author Oscar Julian Castañeda G.
  */
 @Stateless
-public class AnteriorSiguienteBlogLogic {
+public class SiguienteBlogLogic {
     @Inject
     private BlogPersistence blogPersistence;
 
@@ -24,27 +24,15 @@ public class AnteriorSiguienteBlogLogic {
         return blogEntity;
     }
     
-    public void replaceSiguiente(Long blogsId, Long blogsSiguienteId) {
+    public BlogEntity replaceSiguiente(Long blogsId, Long blogsSiguienteId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         blogEntity.setSiguiente(blogPersistence.find(blogsSiguienteId));
+        return blogPersistence.find(blogsSiguienteId);
         
     }
     public void removeSiguiente(Long blogsId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         blogEntity.setSiguiente(null);
     }
-    public BlogEntity getAnterior(Long blogsId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId).getAnterior();
-        return blogEntity;
-    }
-    
-    public void replaceAnterior(Long blogsId, Long blogsAnteriorId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        blogEntity.setAnterior(blogPersistence.find(blogsAnteriorId));
-        
-    }
-    public void removeAnterior(Long blogsId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        blogEntity.setAnterior(null);
-    }
+
 }

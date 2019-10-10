@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.bicitours.test.logic;
 
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
-import co.edu.uniandes.csw.bicitours.ejb.BlogsComentarioLogic;
+import co.edu.uniandes.csw.bicitours.ejb.BlogComentariosLogic;
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
@@ -40,7 +40,7 @@ public class BlogsComentarioLogicTest {
     @Inject
     private BlogLogic blogLogic;
     @Inject
-    private BlogsComentarioLogic comentariosBlogLogic;
+    private BlogComentariosLogic blogComentariosLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -104,7 +104,7 @@ public class BlogsComentarioLogicTest {
     public void addComentariosTest() {
         BlogEntity entity = data.get(0);
         ComentarioEntity comentarioEntity = comentariosData.get(1);
-        ComentarioEntity response = comentariosBlogLogic.addComentario(comentarioEntity.getId(), entity.getId());
+        ComentarioEntity response = blogComentariosLogic.addComentario(comentarioEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(comentarioEntity.getId(), response.getId());
@@ -114,7 +114,7 @@ public class BlogsComentarioLogicTest {
 
     @Test
     public void getComentariosTest() {
-        List<ComentarioEntity> list = comentariosBlogLogic.getComentarios(data.get(0).getId());
+        List<ComentarioEntity> list = blogComentariosLogic.getComentarios(data.get(0).getId());
 
         Assert.assertEquals(1, list.size());
     }
@@ -123,7 +123,7 @@ public class BlogsComentarioLogicTest {
     public void getComentarioTest() throws BusinessLogicException {
         BlogEntity entity = data.get(0);
         ComentarioEntity comentarioEntity = comentariosData.get(0);
-        ComentarioEntity response = comentariosBlogLogic.getComentario(comentarioEntity.getId(), entity.getId());
+        ComentarioEntity response = blogComentariosLogic.getComentario(comentarioEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(comentarioEntity.getId(), response.getId());
@@ -135,14 +135,14 @@ public class BlogsComentarioLogicTest {
     public void getComentarioNoAsociadoTest() throws BusinessLogicException {
         BlogEntity entity = data.get(0);
         ComentarioEntity comentarioEntity = comentariosData.get(1);
-        comentariosBlogLogic.getComentario(entity.getId(), comentarioEntity.getId());
+        blogComentariosLogic.getComentario(entity.getId(), comentarioEntity.getId());
     }
 
     @Test
     public void replaceComentariosTest() {
         BlogEntity entity = data.get(0);
         List<ComentarioEntity> list = comentariosData.subList(1, 3);
-        comentariosBlogLogic.replaceComentarios(entity.getId(), list);
+        blogComentariosLogic.replaceComentarios(entity.getId(), list);
 
         entity = blogLogic.getBlog(entity.getId());
         Assert.assertFalse(entity.getComentarios().contains(comentariosData.get(0)));
@@ -152,11 +152,11 @@ public class BlogsComentarioLogicTest {
     
     @Test
     public void removeComentarioTest() throws BusinessLogicException{
-        comentariosBlogLogic.removeComentario(comentariosData.get(0).getId(), data.get(0).getId());
-        Assert.assertEquals(0, comentariosBlogLogic.getComentarios(data.get(0).getId()).size());
+        blogComentariosLogic.removeComentario(comentariosData.get(0).getId(), data.get(0).getId());
+        Assert.assertEquals(0, blogComentariosLogic.getComentarios(data.get(0).getId()).size());
     }
     @Test(expected = BusinessLogicException.class)
     public void removeComentarioNoAsociadoTest() throws BusinessLogicException{
-        comentariosBlogLogic.removeComentario(comentariosData.get(0).getId(), data.get(1).getId());
+        blogComentariosLogic.removeComentario(comentariosData.get(0).getId(), data.get(1).getId());
     }      
 }
