@@ -19,12 +19,12 @@ import javax.inject.Inject;
  * @author Oscar Julian Castañeda G.
  */
 @Stateless
-public class BlogsTourLogic {
+public class TourBlogsLogic {
     @Inject
     private BlogPersistence blogPersistence;
 
     @Inject
-    private TourPersistence tourPersistence;
+    private TourPersistence tourPersistence;    
 
     public BlogEntity addBlog(Long blogsId, Long toursId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
@@ -61,22 +61,5 @@ public class BlogsTourLogic {
     }
     public void removeBlog(Long ToursId, Long blogsId) throws BusinessLogicException{
         blogPersistence.delete(getBlog(ToursId,blogsId).getId());
-    }
-
-    public TourEntity getTour(Long blogsId) {
-        TourEntity tourEntity = blogPersistence.find(blogsId).getTour();
-        return tourEntity;
-    }
-        public void replaceTour(Long blogsId, Long toursId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        TourEntity tourEntity = tourPersistence.find(blogEntity.getTour().getId());
-        tourEntity.getBlogs().remove(blogEntity);
-        blogEntity.setTour(tourPersistence.find(toursId));
-    }
-    public void removeTour(Long blogsId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        TourEntity tourEntity = tourPersistence.find(blogEntity.getTour().getId());
-        tourEntity.getBlogs().remove(blogEntity);
-        blogEntity.setTour(null);
     }    
 }

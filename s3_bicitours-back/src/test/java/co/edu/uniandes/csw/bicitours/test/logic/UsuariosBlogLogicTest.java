@@ -6,8 +6,9 @@
 package co.edu.uniandes.csw.bicitours.test.logic;
 
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
-import co.edu.uniandes.csw.bicitours.ejb.FavoritosUsuariosLogic;
+import co.edu.uniandes.csw.bicitours.ejb.FavoritosBlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
+import co.edu.uniandes.csw.bicitours.ejb.UsuariosBlogLogic;
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
@@ -34,16 +35,14 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Oscar Julian Castañeda G.
  */
 @RunWith(Arquillian.class)
-public class FavoritosUsuariosLogicTest {
+public class UsuariosBlogLogicTest {
         
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
-    private UsuarioLogic usuarioLogic;
-    @Inject
     private BlogLogic blogLogic;
     @Inject
-    private FavoritosUsuariosLogic favoritosUsuariosLogic;
+    private UsuariosBlogLogic usuariosBlogLogic;
 
     @PersistenceContext
     private EntityManager em;
@@ -104,76 +103,11 @@ public class FavoritosUsuariosLogicTest {
         blogsData.get(0).getUsuarios().add(data.get(0));
         data.get(0).getFavoritos().add(blogsData.get(0));
     }
-
-    @Test
-    public void addFavoritoTest() {
-        UsuarioEntity entity = data.get(0);
-        BlogEntity blogEntity = blogsData.get(1);
-        BlogEntity response = favoritosUsuariosLogic.addFavorito(blogEntity.getId(), entity.getId());
-
-        Assert.assertNotNull(response);
-        Assert.assertEquals(blogEntity.getId(), response.getId());
-        Assert.assertEquals(blogEntity.getTexto(), response.getTexto());
-        Assert.assertEquals(blogEntity.getRutaImagen(), response.getRutaImagen());
-        Assert.assertEquals(blogEntity.getRutaVideo(), response.getRutaVideo());
-        Assert.assertEquals(blogEntity.getTitulo(), response.getTitulo());
-        Assert.assertEquals(blogEntity.getCalificacionPromedio(), response.getCalificacionPromedio(), 0.001);
-    }
-
-    @Test
-    public void getFavoritosTest() {
-        List<BlogEntity> list = favoritosUsuariosLogic.getFavoritos(data.get(0).getId());
-
-        Assert.assertEquals(1, list.size());
-    }
-
-    @Test
-    public void getFavoritoTest() throws BusinessLogicException {
-        UsuarioEntity entity = data.get(0);
-        BlogEntity blogEntity = blogsData.get(0);
-        BlogEntity response = favoritosUsuariosLogic.getFavorito(entity.getId(), blogEntity.getId());
-
-        Assert.assertNotNull(response);
-        Assert.assertEquals(blogEntity.getId(), response.getId());
-        Assert.assertEquals(blogEntity.getTexto(), response.getTexto());
-        Assert.assertEquals(blogEntity.getRutaImagen(), response.getRutaImagen());
-        Assert.assertEquals(blogEntity.getRutaVideo(), response.getRutaVideo());
-        Assert.assertEquals(blogEntity.getTitulo(), response.getTitulo());
-        Assert.assertEquals(blogEntity.getCalificacionPromedio(), response.getCalificacionPromedio(), 0.001);
-    }
-
-    @Test(expected = BusinessLogicException.class)
-    public void getFavoritoNoAsociadoTest() throws BusinessLogicException {
-        UsuarioEntity entity = data.get(0);
-        BlogEntity blogEntity = blogsData.get(1);
-        favoritosUsuariosLogic.getFavorito(entity.getId(), blogEntity.getId());
-    }
-
-    @Test
-    public void replaceFavoritosTest() {
-        UsuarioEntity entity = data.get(0);
-        List<BlogEntity> list = blogsData.subList(1, 3);
-        favoritosUsuariosLogic.replaceFavoritos(entity.getId(), list);
-
-        entity = usuarioLogic.getUsuario(entity.getId());
-        Assert.assertFalse(entity.getFavoritos().contains(blogsData.get(0)));
-        Assert.assertTrue(entity.getFavoritos().contains(blogsData.get(1)));
-        Assert.assertTrue(entity.getFavoritos().contains(blogsData.get(2)));
-    }
-    @Test
-    public void removeFavoritoTest() throws BusinessLogicException{
-        favoritosUsuariosLogic.removeFavorito(data.get(0).getId(), blogsData.get(0).getId());
-        Assert.assertEquals(0,favoritosUsuariosLogic.getFavoritos(blogsData.get(0).getId()).size());
-    }
-    @Test(expected = BusinessLogicException.class)
-    public void removeFavoritoNoAsociadoTest() throws BusinessLogicException{
-        favoritosUsuariosLogic.removeFavorito(blogsData.get(0).getId(), data.get(1).getId());
-    }
     @Test
     public void addUsuarioTest() {
         UsuarioEntity entity = data.get(1);
         BlogEntity blogEntity = blogsData.get(0);
-        UsuarioEntity response = favoritosUsuariosLogic.addUsuario(entity.getId(), blogEntity.getId());
+        UsuarioEntity response = usuariosBlogLogic.addUsuario(entity.getId(), blogEntity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(entity.getId(), response.getId());
@@ -186,7 +120,7 @@ public class FavoritosUsuariosLogicTest {
 
     @Test
     public void getUsuariosTest() {
-        List<UsuarioEntity> list = favoritosUsuariosLogic.getUsuarios(blogsData.get(0).getId());
+        List<UsuarioEntity> list = usuariosBlogLogic.getUsuarios(blogsData.get(0).getId());
 
         Assert.assertEquals(1, list.size());
     }
@@ -195,7 +129,7 @@ public class FavoritosUsuariosLogicTest {
     public void getusuarioTest() throws BusinessLogicException {
         UsuarioEntity entity = data.get(0);
         BlogEntity blogEntity = blogsData.get(0);
-        UsuarioEntity response = favoritosUsuariosLogic.getUsuario(blogEntity.getId(), entity.getId());
+        UsuarioEntity response = usuariosBlogLogic.getUsuario(blogEntity.getId(), entity.getId());
 
         Assert.assertNotNull(response);
         Assert.assertEquals(entity.getId(), response.getId());
@@ -210,27 +144,16 @@ public class FavoritosUsuariosLogicTest {
     public void getUsuarioNoAsociadoTest() throws BusinessLogicException {
         UsuarioEntity entity = data.get(1);
         BlogEntity blogEntity = blogsData.get(0);
-        favoritosUsuariosLogic.getUsuario(entity.getId(), blogEntity.getId());
+        usuariosBlogLogic.getUsuario(entity.getId(), blogEntity.getId());
     }
 
-    /**@Test
-    public void replaceUsuariosTest() {
-        BlogEntity entity = blogsData.get(0);
-        List<UsuarioEntity> list = data.subList(1, 3);
-        favoritosUsuariosLogic.replaceUsuarios(entity.getId(), list);
-
-        entity = blogLogic.getBlog(entity.getId());
-        Assert.assertFalse(entity.getUsuarios().contains(data.get(0)));
-        Assert.assertTrue(entity.getUsuarios().contains(data.get(1)));
-        Assert.assertTrue(entity.getUsuarios().contains(data.get(2)));
-    }*/
-    /**@Test
+    @Test
     public void removeUsuarioTest() throws BusinessLogicException{
-        favoritosUsuariosLogic.removeUsuario(blogsData.get(0).getId(),data.get(0).getId());
-        Assert.assertEquals(0,favoritosUsuariosLogic.getUsuarios(data.get(0).getId()).size());
-    }*/
+        usuariosBlogLogic.removeUsuario(blogsData.get(0).getId(),data.get(0).getId());
+        Assert.assertEquals(0,usuariosBlogLogic.getUsuarios(data.get(0).getId()).size());
+    }
     @Test(expected = BusinessLogicException.class)
     public void removeUsuarioNoAsociadoTest() throws BusinessLogicException{
-        favoritosUsuariosLogic.removeFavorito(data.get(0).getId(), blogsData.get(1).getId());
-    }    
+        usuariosBlogLogic.removeUsuario(data.get(0).getId(), blogsData.get(1).getId());
+    }       
 }

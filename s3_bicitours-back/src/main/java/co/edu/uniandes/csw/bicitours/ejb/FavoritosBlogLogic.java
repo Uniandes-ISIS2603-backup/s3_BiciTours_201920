@@ -20,7 +20,7 @@ import javax.inject.Inject;
  * @author Oscar Julian Castañeda G.
  */
 @Stateless
-public class FavoritosUsuariosLogic {
+public class FavoritosBlogLogic {
     @Inject
     private BlogPersistence blogPersistence;
 
@@ -64,41 +64,5 @@ public class FavoritosUsuariosLogic {
         public void removeFavorito(Long usuariosId, Long blogsId) throws BusinessLogicException{
         blogPersistence.delete(getFavorito(usuariosId,blogsId).getId());
     }
-        public UsuarioEntity addUsuario(Long usuariosId, Long blogsId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
-        usuarioEntity.getFavoritos().add(blogEntity);
-        return usuarioEntity;
-    }
 
-    public List<UsuarioEntity> getUsuarios(Long blogsId) {
-        return blogPersistence.find(blogsId).getUsuarios();
-    }
-
-    public UsuarioEntity getUsuario(Long blogsId, Long usuariosId) throws BusinessLogicException {
-        List<UsuarioEntity> usuarios = blogPersistence.find(blogsId).getUsuarios();
-        UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
-        if(usuarios.contains(usuarioEntity))
-        {
-            return usuarioEntity;
-        }
-        throw new BusinessLogicException("El usuario no está asociado al blog");
-    }
-
-    public List<UsuarioEntity> replaceUsuarios(Long blogsId, List<UsuarioEntity> usuarios) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        blogEntity.setUsuarios(new ArrayList<UsuarioEntity>());
-        List<UsuarioEntity> usuariosList = usuarioPersistence.findAll();
-        for (UsuarioEntity usuario : usuariosList) {
-            if (usuarios.contains(usuario)) {
-                usuario.getFavoritos().add(blogEntity);
-            } else if (!usuario.getFavoritos().isEmpty() && usuario.getFavoritos().contains(blogEntity)) {
-                usuario.getFavoritos().remove(blogEntity);
-        }
-        }
-        return usuarios;
-    }
-        public void removeUsuario(Long blogsId, Long usuariosId) throws BusinessLogicException{
-        usuarioPersistence.delete(getUsuario(usuariosId,blogsId).getId());
-    }
 }

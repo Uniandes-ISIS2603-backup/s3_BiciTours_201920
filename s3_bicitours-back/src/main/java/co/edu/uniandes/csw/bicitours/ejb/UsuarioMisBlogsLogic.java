@@ -19,13 +19,13 @@ import javax.inject.Inject;
  * @author Oscar Julian Castañeda G.
  */
 @Stateless
-public class BlogsCreadorLogic {
+public class UsuarioMisBlogsLogic {
     @Inject
     private BlogPersistence blogPersistence;
 
     @Inject
     private UsuarioPersistence usuarioPersistence;
-
+    
     public BlogEntity addBlog(Long blogsId, Long usuariosId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
@@ -61,24 +61,5 @@ public class BlogsCreadorLogic {
     }
         public void removeBlog(Long usuariosId, Long blogsId) throws BusinessLogicException{
         blogPersistence.delete(getBlog(usuariosId,blogsId).getId());
-    }
-
-    public UsuarioEntity getCreador(Long blogsId) {
-        UsuarioEntity usuarioEntity = blogPersistence.find(blogsId).getCreador();
-        return usuarioEntity;
-    }
-    
-    public void replaceCreador(Long blogsId, Long usuariosId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        UsuarioEntity usuarioEntity = usuarioPersistence.find(blogEntity.getCreador().getId());
-        usuarioEntity.getMisBlogs().remove(blogEntity);
-        blogEntity.setCreador(usuarioPersistence.find(usuariosId));
-        
-    }
-    public void removeCreador(Long blogsId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId);
-        UsuarioEntity usuarioEntity = usuarioPersistence.find(blogEntity.getCreador().getId());
-        usuarioEntity.getMisBlogs().remove(blogEntity);
-        blogEntity.setCreador(null);
     }
 }
