@@ -27,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Maria Clara Noguera Echeverri
  */
-@Path("Seguros")
+@Path("seguros")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped

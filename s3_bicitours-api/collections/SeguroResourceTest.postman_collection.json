@@ -1,0 +1,45 @@
+{
+	"info": {
+		"_postman_id": "701c49e6-0c25-4918-ba24-37dcab2082b3",
+		"name": "SeguroResourceTest",
+		"description": "Seguro Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/seguros",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f49661b6-1db1-4d52-889d-eb63d0a0ef6c",
+						"exec": [
+							"",
+							"tests[\"no genera error en el get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/seguros",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"seguros"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
