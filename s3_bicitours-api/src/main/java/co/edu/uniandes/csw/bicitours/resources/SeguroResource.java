@@ -5,14 +5,8 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
-
-import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
-import co.edu.uniandes.csw.bicitours.dtos.SeguroDTO;
 import co.edu.uniandes.csw.bicitours.dtos.SeguroDTO;
 import co.edu.uniandes.csw.bicitours.ejb.SeguroLogic;
-import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
-import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
-import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
 import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -31,7 +25,7 @@ import javax.ws.rs.WebApplicationException;
 
 /**
  *
- * @seguro Estudiante
+ * @author Maria Clara Noguera Echeverri
  */
 @Path("cSeguros")
 @Produces("application/json")
