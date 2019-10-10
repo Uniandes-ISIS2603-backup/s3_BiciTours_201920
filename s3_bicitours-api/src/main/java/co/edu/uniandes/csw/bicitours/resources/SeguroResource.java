@@ -27,7 +27,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Maria Clara Noguera Echeverri
  */
-@Path("cSeguros")
+@Path("Seguros")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -50,7 +50,7 @@ public class SeguroResource {
         List<SeguroDTO> listaSeguros = listEntity2DetailDTO(logica.getSeguros());
         return listaSeguros;
     }
- @GET
+    @GET
     @Path("{seguroId: \\d+}")
     public SeguroDTO getSeguro(@PathParam("seguroId") Long seguroId) 
     {
