@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.bicitours.dtos;
 
+import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import java.io.Serializable;
 
 /**
@@ -13,11 +14,47 @@ import java.io.Serializable;
  */
 public class UsuarioDTO implements Serializable{
 
+    //Atributos de DTO 
+    private Long id;
     private String nombre;
     private String correo;
     private String codigo;
+    private boolean esAdmin;
+    private boolean pago;
     
-    public UsuarioDTO(){}
+    public UsuarioDTO(UsuarioEntity usuarioEntity){
+        if (usuarioEntity != null) {
+            this.id = usuarioEntity.getId();
+            this.nombre = usuarioEntity.getNombre();
+            this.esAdmin=false;
+        }
+    }
+    /**
+     * @return the pago
+     */
+    public boolean isPago() {
+        return pago;
+    }
+
+    /**
+     * @param pago the pago to set
+     */
+    public void setPago(boolean pago) {
+        this.pago = pago;
+    }
+    /**
+     * @return the esAdmin
+     */
+    public boolean isEsAdmin() {
+        return esAdmin;
+    }
+
+    /**
+     * @param esAdmin the esAdmin to set
+     */
+    public void setEsAdmin(boolean esAdmin) {
+        this.esAdmin = esAdmin;
+    }
     /**
      * @return the nombre
      */
@@ -58,5 +95,19 @@ public class UsuarioDTO implements Serializable{
      */
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(Long id) {
+        this.id = id;
     }
 }

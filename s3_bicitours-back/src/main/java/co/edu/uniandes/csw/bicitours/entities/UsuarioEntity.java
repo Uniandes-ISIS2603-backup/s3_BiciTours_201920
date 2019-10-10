@@ -20,7 +20,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class UsuarioEntity extends BaseEntity implements Serializable{
-    //hola este es un comentario
+
     //Nombre del usuario
     private String nombre;
     //Código/Contrañesa/Password del usuario
