@@ -19,7 +19,7 @@ import javax.inject.Inject;
  * @author Oscar Julian Castañeda G.
  */
 @Stateless
-public class BlogsComentarioLogic {
+public class BlogComentariosLogic {
     @Inject
     private BlogPersistence blogPersistence;
 
