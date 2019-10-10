@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.bicitours.dtos;
 
 import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
+import java.io.Serializable;
 
 
 
@@ -15,7 +16,7 @@ import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
  *
  * @author Maria Clara Noguera Echeverri
  */
-public class SeguroDTO {
+public class SeguroDTO implements Serializable{
     private Long id;
     private String tipo ; 
     private String caracteristicas;
