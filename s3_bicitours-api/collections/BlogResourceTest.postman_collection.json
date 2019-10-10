@@ -1,0 +1,540 @@
+{
+	"info": {
+		"_postman_id": "124886d5-f456-4abe-a618-178012a89010",
+		"name": "BlogResourceTest",
+		"description": "Blog Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear un blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8268852d-a2b8-44ed-b29d-f6fa994e3b21",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id_c\",data.id);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un blog con contenido nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0d4a1b0-1fc9-4c44-9ba6-8a219f7c95c8",
+						"exec": [
+							"tests[\"El blog no puede tener contenido nulo\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El blog no puede tener contenido nulo\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": null,\r\n        \"rutaVideo\": null,\r\n        \"texto\": null,\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un blog con contenido vacio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b6ba1584-8bb6-4f0c-af9c-93c19acf742f",
+						"exec": [
+							"tests[\"El blog no puede tener contenido vacio\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El blog no puede tener contenido vacio\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"\",\r\n        \"rutaVideo\": \"\",\r\n        \"texto\": \"\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un blog con titulo vacio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "36a90cc0-b980-4fb3-ac40-04ea4552d0c1",
+						"exec": [
+							"tests[\"El blog debe tener titulo\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El blog debe tener titulo\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear un blog con titulo nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7972d830-0f3d-46ca-aa00-b51ef857e3dd",
+						"exec": [
+							"tests[\"El blog debe tener titulo\"] = responseCode.code === 412;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El blog debe tener titulo\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": null,\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualiza un blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc587c65-6763-4b3d-ac66-42264e8fdb33",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualiza un blog nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e0d4a1b0-1fc9-4c44-9ba6-8a219f7c95c8",
+						"exec": [
+							"tests[\"No actualiza con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/4 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"id\": 4,\r\n        \"calificacionPromedio\": 87.0,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/4",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "75b8fa87-a643-4276-88c2-011c885f334c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los blogs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "213ce7a0-d58a-4d79-8ddb-f00d8a46a5e6",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"books count\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un blog nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "75b8fa87-a643-4276-88c2-011c885f334c",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/4 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/4",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borra un blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3bdb1edd-bb4f-4f75-a4f7-e584c26c70c8",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar un blog nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fc7a3d0c-0360-428f-a6ae-a62a4ab4a783",
+						"exec": [
+							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/3 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/3",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
