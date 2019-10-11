@@ -31,6 +31,9 @@ public class UsuarioDTO implements Serializable{
             this.id = usuarioEntity.getId();
             this.nombre = usuarioEntity.getNombre();
             this.esAdmin=false;
+            this.correo=usuarioEntity.getCorreo();
+            this.codigo=usuarioEntity.getCodigo();
+            this.pago=false;
         }
     }
     
@@ -43,6 +46,11 @@ public class UsuarioDTO implements Serializable{
         UsuarioEntity usuarioEntity = new UsuarioEntity();
         usuarioEntity.setId(this.getId());
         usuarioEntity.setNombre(this.getNombre());
+        usuarioEntity.setCorreo(this.getCorreo());
+        usuarioEntity.setCodigo(this.getCodigo());
+        usuarioEntity.setEsAdmin(this.isEsAdmin());
+        usuarioEntity.setPago(this.isPago());
+        //usuarioEntity.setDeuda(this.getDeuda());
         return usuarioEntity;
     }
     

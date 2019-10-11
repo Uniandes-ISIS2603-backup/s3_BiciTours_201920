@@ -80,14 +80,14 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
                 visitados.add(new TourDTO(tourActual));
             }
         }
-//        if (usuarioEntity.getSeguros() != null)
-//        {
-//            seguros = new ArrayList<>();
-//            for(SeguroEntity seguroActual : usuarioEntity.getSeguros())
-//            {
-//                seguros.add(new SeguroDTO(seguroActual))
-//            }
-//        }
+        if (usuarioEntity.getSeguros() != null)
+        {
+            seguros = new ArrayList<>();
+            for(SeguroEntity seguroActual : usuarioEntity.getSeguros())
+            {
+                seguros.add(new SeguroDTO(seguroActual));
+            }
+        }
     }
 
     /**
@@ -132,15 +132,15 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
             }
             usuarioEntity.setVisitados(visitadosEntity);
         }
-//        if (usuarioEntity.getSeguros() != null)
-//        {
-//            List<SeguroEntity> segurosEntity = new ArrayList<>();
-//            for(SeguroDTO seguroDTOActual : getSeguros())
-//            {
-//                segurosEntity.add(seguroDTOActual.toEntity());
-//            }
-//            usuarioEntity.setSeguros(segurosEntity);
-//        }
+        if (usuarioEntity.getSeguros() != null)
+        {
+            List<SeguroEntity> segurosEntity = new ArrayList<>();
+            for(SeguroDTO seguroDTOActual : getSeguros())
+            {
+                segurosEntity.add(seguroDTOActual.toEntity());
+            }
+            usuarioEntity.setSeguros(segurosEntity);
+        }
 
         return usuarioEntity;
     }
