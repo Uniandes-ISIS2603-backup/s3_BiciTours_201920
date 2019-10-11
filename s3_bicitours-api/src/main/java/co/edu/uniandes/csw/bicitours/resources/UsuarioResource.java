@@ -10,6 +10,8 @@ import co.edu.uniandes.csw.bicitours.dtos.UsuarioDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -76,6 +78,36 @@ public class UsuarioResource {
             throw new WebApplicationException("El recurso /usuario/" + usuarioId + " no existe.", 404);
         }
         return new UsuarioDetailDTO(usuario);
+    }
+    /**
+     * Convierte una lista de entidades a DTO.
+     * Este método convierte una lista de objetos UsuarioEntity a una lista de
+     * objetos UsuarioDetailDTO (json)
+     * @param entityList corresponde a la lista de editoriales de tipo Entity
+     * que vamos a convertir a DTO.
+     * @return la lista de editoriales en forma DTO (json)
+     */
+    private List<UsuarioDetailDTO> listEntity2DetailDTO(List<UsuarioEntity> entityList) {
+        List<UsuarioDetailDTO> list = new ArrayList<>();
+        for (UsuarioEntity entity : entityList) {
+            list.add(new UsuarioDetailDTO(entity));
+        }
+        return list;
+    }
+    
+    /**
+     * Retorna todos los usuarios.
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra la editorial.
+     */
+    @GET
+    public List<UsuarioDetailDTO> getUsuarios(){
+        List<UsuarioEntity> usuarios= usuarioLogic.getUsuarios();
+        if(usuarios == null)
+        {
+            throw new WebApplicationException("El recurso /usuario/ esta vacío.", 404);
+        }
+        return listEntity2DetailDTO(usuarios);
     }
     
     /**
