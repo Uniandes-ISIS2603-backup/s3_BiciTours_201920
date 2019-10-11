@@ -148,6 +148,6 @@ public class EventoDTO implements Serializable{
         this.tour = tour;
     }
     
-    
+    //
     
 }
