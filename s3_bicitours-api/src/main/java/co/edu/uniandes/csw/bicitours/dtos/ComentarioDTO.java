@@ -34,7 +34,7 @@ public class ComentarioDTO implements Serializable
             this.calificacion = comentario.getCalificacion();
             if (comentario.getUsuario() != null) 
             {
-                //this.usuario = new UsuarioDTO(comentario.getUsuario());
+                this.usuario = new UsuarioDTO(comentario.getUsuario());
             }
             else 
             {
