@@ -5,11 +5,8 @@
  */
 package co.edu.uniandes.csw.bicitours.dtos;
 
-<<<<<<< HEAD
 import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
-=======
 import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
->>>>>>> 8fccd090fa23db4aa29e68ab6ff3cb898a138895
 import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import java.io.Serializable;
@@ -101,7 +98,7 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             fotosE.add(nueva);
         }
         tour.setFotos(fotosE);
-<<<<<<< HEAD
+
         
         if (eventos != null) {
             List<EventoEntity> eventosEntity = new ArrayList<>();
@@ -111,7 +108,7 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             tour.setEventosTour(eventosEntity);
         }
         
-=======
+
         List<BlogEntity> blogsE = new ArrayList<BlogEntity>();
         for(BlogDTO f : blogs)
         {
@@ -119,7 +116,7 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             blogsE.add(nueva);
         }
         tour.setBlogs(blogsE);        
->>>>>>> 8fccd090fa23db4aa29e68ab6ff3cb898a138895
+
         return tour;
         
     }
