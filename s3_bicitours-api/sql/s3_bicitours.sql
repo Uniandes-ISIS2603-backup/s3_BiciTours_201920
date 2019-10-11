@@ -1,5 +1,8 @@
 delete from BlogEntity;
 delete from UsuarioEntity; 
+delete from SeguroEntity;
+delete from ComentarioEntity;
+delete from TourEntity;
 
 insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (0, 'Kill', 'Me', 'Now', 'Please', 79);
 insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (1, 'Free', 'Hong', 'Kong', 'Please', 69);
