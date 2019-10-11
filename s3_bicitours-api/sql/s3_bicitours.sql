@@ -4,15 +4,19 @@ delete from SeguroEntity;
 delete from ComentarioEntity;
 delete from TourEntity;
 
-insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (0, 'Kill', 'Me', 'Now', 'Please', 79);
-insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (1, 'Free', 'Hong', 'Kong', 'Please', 69);
-insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (2, 'What', 'A', 'Fucking', 'Nigg', 59);
-insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (6, 'Guaid', 'Pipo', 'Japi', 'Clap', 49);
+insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (0, 'D:\', 'G:\', 'A', 'E', 10);
+insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (1, 'D:\', 'G:\', 'B', 'F', 11);
+insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (2, 'C:\', 'F:\', 'C', 'G', 12);
+insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (6, 'C:\', 'F:\', 'D', 'H', 16);
+
+insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(0, 'tour', 'Neiva', 'Traer bici', 3, 3, 0);
+insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(1, 'tours', 'Neivas', 'Traer bicis', 4, 4, 0);
 
 update BlogEntity set siguiente_id = 1 where id = 0;
-update BlogEntity set siguiente_id = 2 where id = 1;
 update BlogEntity set anterior_id = 2 where id = 6;
-update BlogEntity set anterior_id = 6 where id = 0;
+
+update BlogEntity set tour_id = 0 where id = 1;
+update BlogEntity set tour_id = 0 where id = 2;
 
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (0,'Seguro contra robo de bicicletas','El robo de debe reportar 24 horas despues de sucedido para hacer valido el seguro', 'Antirobo');
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (1,'Seguro para fallecimiento','Se hace efectivo si es cliente fallece en un accidente durante el tour', 'Seguro de vida');

@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Oscar Julian Castañeda G.
  */
+@Path("usuarios/{usuariosId: \\d+}/misBlogs")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UsuarioMisBlogsResource {

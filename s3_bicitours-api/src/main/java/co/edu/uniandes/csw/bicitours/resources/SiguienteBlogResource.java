@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
+import co.edu.uniandes.csw.bicitours.dtos.BlogDTO;
 import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.SiguienteBlogLogic;
@@ -22,6 +23,7 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author Oscar Julian Castañeda G.
  */
+@Path("blogs/{blogsId: \\d+}/siguiente")
 public class SiguienteBlogResource {
     @Inject
     private SiguienteBlogLogic siguienteBlogLogic;
@@ -30,7 +32,7 @@ public class SiguienteBlogResource {
     private BlogLogic blogLogic;
 
     @GET
-    public BlogDetailDTO getAnterior(@PathParam("blogsId") Long blogsId) {
+    public BlogDetailDTO getSiguiente(@PathParam("blogsId") Long blogsId) {
         BlogEntity blogEntity = siguienteBlogLogic.getSiguiente(blogsId);
         if (blogEntity == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + "/blog no existe.", 404);
@@ -40,17 +42,19 @@ public class SiguienteBlogResource {
     }
 
     @PUT
-    @Path("{blogsId: \\d+}")
-    public BlogDetailDTO replaceAnterior(@PathParam("blogsId") Long blogsId, @PathParam("blogsId2") Long blogsId2) {
-        if (blogLogic.getBlog(blogsId2) == null) {
+    public BlogDetailDTO replaceSiguiente(@PathParam("blogsId") Long blogsId, BlogDTO blog) {
+        if (blogLogic.getBlog(blogsId) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
-        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(siguienteBlogLogic.replaceSiguiente(blogsId, blogsId2));
+        if (blogLogic.getBlog(blog.getId()) == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blog.getId() + " no existe.", 404);
+        }
+        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(siguienteBlogLogic.replaceSiguiente(blogsId, blog.getId()));
         return blogDetailDTO;
     }
 
     @DELETE
-    public void removeAnterior(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
+    public void removeSiguiente(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         siguienteBlogLogic.removeSiguiente(blogsId);
     }
 }

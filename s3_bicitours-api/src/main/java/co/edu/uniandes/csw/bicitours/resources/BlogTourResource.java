@@ -5,8 +5,11 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
+import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
+import co.edu.uniandes.csw.bicitours.dtos.TourDTO;
 import co.edu.uniandes.csw.bicitours.dtos.TourDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.BlogCreadorLogic;
+import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.BlogTourLogic;
 import co.edu.uniandes.csw.bicitours.ejb.TourLogic;
 import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
@@ -27,6 +30,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Oscar Julian Castañeda G.
  */
+@Path("blogs/{blogsId: \\d+}/tours")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogTourResource {
@@ -35,6 +39,9 @@ public class BlogTourResource {
 
     @Inject
     private TourLogic tourLogic;
+    
+    @Inject
+    private BlogLogic blogLogic;
 
     @GET
     public TourDetailDTO getTour(@PathParam("blogsId") Long blogsId) {
@@ -47,17 +54,18 @@ public class BlogTourResource {
     }
 
     @PUT
-    @Path("{toursId: \\d+}")
-    public TourDetailDTO replaceCreador(@PathParam("blogsId") Long blogsId, @PathParam("toursId") Long toursId) {
-        if (tourLogic.getTour(toursId) == null) {
-            throw new WebApplicationException("El recurso /tours/" + toursId + " no existe.", 404);
+    public BlogDetailDTO replaceTour(@PathParam("blogsId") Long blogsId, TourDTO tour) {
+        if (blogLogic.getBlog(blogsId) == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
-        TourDetailDTO tourDetailDTO = new TourDetailDTO(blogTourLogic.replaceTour(blogsId, toursId));
-        return tourDetailDTO;
+        if (tourLogic.getTour(tour.getId()) == null) {
+            throw new WebApplicationException("El recurso /tours/" + tour.getId() + " no existe.", 404);
+        }
+        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(blogTourLogic.replaceTour(blogsId, tour.getId()));
+        return blogDetailDTO;
     }
-
     @DELETE
-    public void removeCreador(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
+    public void removeTour(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         blogTourLogic.removeTour(blogsId);
     }
 }

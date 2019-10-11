@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "418ebefe-6a2f-4013-aea1-3a22e56ee072",
+		"name": "SiguienteBlogResourceTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get siguiente blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "df14f24a-5fd4-47d7-9d27-60797ebde508",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"no genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/0/siguiente",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"0",
+						"siguiente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Replace siguiente blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4d610e01-d81f-45df-8adb-9f331077f320",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"calificacionPromedio\": 12.0,\r\n        \"id\": 2,\r\n        \"rutaImagen\": \"Cdasdasd:\\\\\",\r\n        \"rutaVideo\": \"Fadsdasdas:\\\\\",\r\n        \"texto\": \"Cdasdas\",\r\n        \"titulo\": \"Gdasdsada\",\r\n        \"tour\": {\r\n            \"costo\": 3,\r\n            \"descripcion\": \"Traer bici\",\r\n            \"duracion\": 3,\r\n            \"id\": 0,\r\n            \"lugar\": \"Neiva\",\r\n            \"nombre\": \"tour\",\r\n            \"terminado\": false\r\n        },\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/0/siguiente",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"0",
+						"siguiente"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar siguiente blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "89c65209-b409-426d-b7b1-766db2eb769e",
+						"exec": [
+							"tests[\"no genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/0/siguiente",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"0",
+						"siguiente"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

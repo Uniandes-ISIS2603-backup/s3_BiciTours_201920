@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.csw.bicitours.dtos;
 
+import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +20,7 @@ import java.util.LinkedList;
 public class TourDetailDTO extends TourDTO implements Serializable{
     
     private LinkedList<FotoDTO> fotos;
+    private List<BlogDTO> blogs;
     
     /////////
     ///Aquí solo hay sets y gets
@@ -61,6 +65,12 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             FotoDTO nueva = new FotoDTO(f);
             fotos.add(nueva);
         }
+        blogs = new ArrayList<BlogDTO>();
+        for(BlogEntity f : tour.getBlogs())
+        {
+            BlogDTO nueva = new BlogDTO(f);
+            blogs.add(nueva);
+        }
         }
     }
     
@@ -76,9 +86,29 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             fotosE.add(nueva);
         }
         tour.setFotos(fotosE);
-        
+        List<BlogEntity> blogsE = new ArrayList<BlogEntity>();
+        for(BlogDTO f : blogs)
+        {
+            BlogEntity nueva = f.toEntity();
+            blogsE.add(nueva);
+        }
+        tour.setBlogs(blogsE);        
         return tour;
         
+    }
+
+    /**
+     * @return the blogs
+     */
+    public List<BlogDTO> getBlogs() {
+        return blogs;
+    }
+
+    /**
+     * @param blogs the blogs to set
+     */
+    public void setBlogs(List<BlogDTO> blogs) {
+        this.blogs = blogs;
     }
     
     
