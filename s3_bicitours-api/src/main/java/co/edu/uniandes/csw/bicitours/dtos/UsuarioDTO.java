@@ -22,6 +22,10 @@ public class UsuarioDTO implements Serializable{
     private boolean esAdmin;
     private boolean pago;
     
+    public UsuarioDTO(){
+        
+    }
+    
     public UsuarioDTO(UsuarioEntity usuarioEntity){
         if (usuarioEntity != null) {
             this.id = usuarioEntity.getId();
@@ -29,6 +33,19 @@ public class UsuarioDTO implements Serializable{
             this.esAdmin=false;
         }
     }
+    
+    /**
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public UsuarioEntity toEntity() {
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
+        usuarioEntity.setId(this.getId());
+        usuarioEntity.setNombre(this.getNombre());
+        return usuarioEntity;
+    }
+    
     /**
      * @return the pago
      */

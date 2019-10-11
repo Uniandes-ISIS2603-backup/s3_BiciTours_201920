@@ -45,14 +45,14 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     @ManyToMany
     private List<TourEntity> visitados;
     
-    //Relación de posesión con seguro
-    //@PodamExclude
-    //@OneToMany(
-    //    mappedBy = "usuario",
-    //	cascade = CascadeType.PERSIST,
-    //	fetch = FetchType.EAGER,
-    //    orphanRemoval = true)
-    //private List<SeguroEntity> seguros; 
+//    Relación de posesión con seguro
+//    @PodamExclude
+//    @OneToMany(
+//        mappedBy = "usuario",
+//    	cascade = CascadeType.PERSIST,
+//    	fetch = FetchType.EAGER,
+//        orphanRemoval = true)
+//    private List<SeguroEntity> seguros; 
     
     //Relación de autoría con blog
     @PodamExclude
@@ -151,6 +151,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
         this.deuda = deuda;
     }
 
+    ///////////////////////MÉTODOS RELACIONES ENTRE ENTITIES////////////////////
     /**
      * @return the comentarios
      */
