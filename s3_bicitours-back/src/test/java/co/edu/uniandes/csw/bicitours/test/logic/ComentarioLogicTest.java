@@ -217,4 +217,12 @@ public class ComentarioLogicTest {
 //        Assert.assertEquals(prueba.getCalificacion(), comentarioA.getCalificacion());
 //        Assert.assertEquals(prueba.getTexto(), comentarioA.getTexto());
 //    }
+//
+//    @Test
+//    public void deleteComentarioTest() throws BusinessLogicException {
+//        ComentarioEntity entity = data.get(0);
+//        logica.deleteComentario(entity.getId());
+//        ComentarioEntity deleted = em.find(ComentarioEntity.class, entity.getId());
+//        Assert.assertNull(deleted);
+//    }
 }
