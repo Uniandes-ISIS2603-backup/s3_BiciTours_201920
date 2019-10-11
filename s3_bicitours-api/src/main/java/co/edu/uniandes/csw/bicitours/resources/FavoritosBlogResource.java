@@ -44,7 +44,7 @@ public class FavoritosBlogResource {
         if (blogLogic.getBlog(blogsId) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
-        BlogDetailDTO detailDTO = new BlogDetailDTO(favoritosBlogLogic.addFavorito(usuariosId, blogsId));
+        BlogDetailDTO detailDTO = new BlogDetailDTO(favoritosBlogLogic.addFavorito(blogsId,usuariosId));
         return detailDTO;
     }
 

@@ -44,7 +44,7 @@ public class UsuarioMisBlogsResource {
         if (blogLogic.getBlog(blogsId) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
-        BlogDetailDTO detailDTO = new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(usuariosId, blogsId));
+        BlogDetailDTO detailDTO = new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId,usuariosId));
         return detailDTO;
     }
 

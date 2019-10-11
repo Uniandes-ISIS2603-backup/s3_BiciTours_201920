@@ -1,4 +1,5 @@
 delete from BlogEntity;
+delete from BlogEntity_UsuarioEntity;
 delete from UsuarioEntity; 
 delete from SeguroEntity;
 delete from ComentarioEntity;
@@ -8,6 +9,7 @@ insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPr
 insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (1, 'D:\', 'G:\', 'B', 'F', 11);
 insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (2, 'C:\', 'F:\', 'C', 'G', 12);
 insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (6, 'C:\', 'F:\', 'D', 'H', 16);
+insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (79, 'C:\', 'F:\', 'D', 'H', 16);
 
 insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(0, 'tour', 'Neiva', 'Traer bici', 3, 3, 0);
 insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(1, 'tours', 'Neivas', 'Traer bicis', 4, 4, 0);
