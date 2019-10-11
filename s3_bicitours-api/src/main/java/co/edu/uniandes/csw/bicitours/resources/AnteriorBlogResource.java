@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
+import co.edu.uniandes.csw.bicitours.dtos.BlogDTO;
 import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.AnteriorBlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
@@ -25,6 +26,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Oscar Julian Castañeda G.
  */
+@Path("blogs/{blogsId: \\d+}/anterior")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class AnteriorBlogResource {
@@ -45,12 +47,14 @@ public class AnteriorBlogResource {
     }
 
     @PUT
-    @Path("{blogsId: \\d+}")
-    public BlogDetailDTO replaceAnterior(@PathParam("blogsId") Long blogsId, @PathParam("blogsId2") Long blogsId2) {
-        if (blogLogic.getBlog(blogsId2) == null) {
+    public BlogDetailDTO replaceAnterior(@PathParam("blogsId") Long blogsId, BlogDTO blog) {
+        if (blogLogic.getBlog(blogsId) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
-        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(anteriorBlogLogic.replaceAnterior(blogsId, blogsId2));
+        if (blogLogic.getBlog(blog.getId()) == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blog.getId() + " no existe.", 404);
+        }
+        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(anteriorBlogLogic.replaceAnterior(blogsId, blog.getId()));
         return blogDetailDTO;
     }
 

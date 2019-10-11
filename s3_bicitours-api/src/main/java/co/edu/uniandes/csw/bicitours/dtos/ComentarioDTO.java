@@ -34,7 +34,7 @@ public class ComentarioDTO implements Serializable
             this.calificacion = comentario.getCalificacion();
             if (comentario.getUsuario() != null) 
             {
-                //this.usuario = new UsuarioDTO(comentario.getUsuario());
+                this.usuario = new UsuarioDTO(comentario.getUsuario());
             }
             else 
             {
@@ -67,18 +67,18 @@ public class ComentarioDTO implements Serializable
         comentario.setId(this.getId());
         comentario.setTexto(this.getTexto());
         comentario.setCalificacion(this.getCalificacion());
-        //if (this.usuario != null) 
-        //{
-        //    comentario.setUsuario(this.usuario.toEntity());
-        //}
+        if (this.usuario != null) 
+        {
+            comentario.setUsuario(this.usuario.toEntity());
+        }
         if (this.blog != null) 
         {
             comentario.setBlog(this.blog.toEntity());
         }
-        //if (this.tour != null) 
-        //{
-        //    comentario.setTour(this.tour.toEntity());
-        //}
+        if (this.tour != null) 
+        {
+            comentario.setTour(this.tour.toEntity());
+        }
         return comentario;
     }
 
@@ -127,16 +127,16 @@ public class ComentarioDTO implements Serializable
     /**
      * @return the usuario.
      */
-    //public UsuarioDTO getUsuario() {
-    //    return usuario;
-    //}
+    public UsuarioDTO getUsuario() {
+        return usuario;
+    }
 
     /**
      * @param usuario the usuario to set
      */
-    //public void setUsuario(UsuarioDTO usuario) {
-    //    this.usuario = usuario;
-    //}
+    public void setUsuario(UsuarioDTO usuario) {
+        this.usuario = usuario;
+    }
     
     /**
      * @return the blog.
@@ -155,15 +155,15 @@ public class ComentarioDTO implements Serializable
     /**
      * @return the tour.
      */
-    //public TourDTO getTour() {
-    //    return tour;
-    //}
+    public TourDTO getTour() {
+        return tour;
+    }
 
     /**
      * @param tour the tour to set
      */
-    //public void setTour(TourDTO tour) {
-    //    this.tour = tour;
-    //}
+    public void setTour(TourDTO tour) {
+        this.tour = tour;
+    }
     
 }

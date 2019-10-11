@@ -1,0 +1,68 @@
+{
+	"info": {
+		"_postman_id": "90d7eb4c-d4bd-4091-a6de-670b7afafdc4",
+		"name": "UsuarioResourceTest",
+		"description": "Usuario Resource Test //Just following the tutorial mate",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "83f8b87a-ca9a-4e15-9e86-362bbe0701d6",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code===200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "xoxp-756961010144-745496312803-744195208834-9b898d4088aebfe507e213483832817b",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/usuario",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"usuario"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Oscar Julian Castañeda G.
  */
+@Path("tours/{toursId: \\d+}/blogs")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TourBlogsResource {
@@ -43,7 +44,7 @@ public class TourBlogsResource {
         if (blogLogic.getBlog(blogsId) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
-        BlogDetailDTO detailDTO = new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(toursId, blogsId));
+        BlogDetailDTO detailDTO = new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId,toursId));
         return detailDTO;
     }
 

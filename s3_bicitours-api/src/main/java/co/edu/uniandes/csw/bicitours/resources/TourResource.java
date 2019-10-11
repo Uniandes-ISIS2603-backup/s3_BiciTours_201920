@@ -48,10 +48,10 @@ public class TourResource {
      * a crear no cumple con las reglas de negocio.
      */    
     @POST
-    public TourDTO createTour(TourDTO t) throws BusinessLogicException {
+    public TourDetailDTO createTour(TourDTO t) throws BusinessLogicException {
         TourEntity tourEntity = t.toEntity();
         TourEntity nuevoTourEntity = tourLogic.createTour(tourEntity);
-        TourDTO nuevoTourDTO = new TourDTO(nuevoTourEntity);
+        TourDetailDTO nuevoTourDTO = new TourDetailDTO(nuevoTourEntity);
         return nuevoTourDTO;
     }
 

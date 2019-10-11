@@ -5,7 +5,11 @@
  */
 package co.edu.uniandes.csw.bicitours.dtos;
 
+<<<<<<< HEAD
 import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
+=======
+import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
+>>>>>>> 8fccd090fa23db4aa29e68ab6ff3cb898a138895
 import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import java.io.Serializable;
@@ -20,6 +24,7 @@ import java.util.List;
 public class TourDetailDTO extends TourDTO implements Serializable{
     
     private LinkedList<FotoDTO> fotos;
+    private List<BlogDTO> blogs;
     
     private List<EventoDTO> eventos;
     
@@ -66,6 +71,12 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             FotoDTO nueva = new FotoDTO(f);
             fotos.add(nueva);
         }
+        blogs = new ArrayList<BlogDTO>();
+        for(BlogEntity f : tour.getBlogs())
+        {
+            BlogDTO nueva = new BlogDTO(f);
+            blogs.add(nueva);
+        }
         }
         
         //Convierte el conjunto de eventos
@@ -90,6 +101,7 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             fotosE.add(nueva);
         }
         tour.setFotos(fotosE);
+<<<<<<< HEAD
         
         if (eventos != null) {
             List<EventoEntity> eventosEntity = new ArrayList<>();
@@ -99,8 +111,31 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             tour.setEventosTour(eventosEntity);
         }
         
+=======
+        List<BlogEntity> blogsE = new ArrayList<BlogEntity>();
+        for(BlogDTO f : blogs)
+        {
+            BlogEntity nueva = f.toEntity();
+            blogsE.add(nueva);
+        }
+        tour.setBlogs(blogsE);        
+>>>>>>> 8fccd090fa23db4aa29e68ab6ff3cb898a138895
         return tour;
         
+    }
+
+    /**
+     * @return the blogs
+     */
+    public List<BlogDTO> getBlogs() {
+        return blogs;
+    }
+
+    /**
+     * @param blogs the blogs to set
+     */
+    public void setBlogs(List<BlogDTO> blogs) {
+        this.blogs = blogs;
     }
     
     

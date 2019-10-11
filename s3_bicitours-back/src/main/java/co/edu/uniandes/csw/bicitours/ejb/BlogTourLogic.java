@@ -29,12 +29,12 @@ public class BlogTourLogic {
         TourEntity tourEntity = blogPersistence.find(blogsId).getTour();
         return tourEntity;
     }
-        public TourEntity replaceTour(Long blogsId, Long toursId) {
+        public BlogEntity replaceTour(Long blogsId, Long toursId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         TourEntity tourEntity = tourPersistence.find(blogEntity.getTour().getId());
         tourEntity.getBlogs().remove(blogEntity);
         blogEntity.setTour(tourPersistence.find(toursId));
-        return tourPersistence.find(toursId);
+        return blogPersistence.find(blogsId);
     }
     public void removeTour(Long blogsId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);

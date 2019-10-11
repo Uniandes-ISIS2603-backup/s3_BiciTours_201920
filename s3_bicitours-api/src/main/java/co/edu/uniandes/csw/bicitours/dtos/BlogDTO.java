@@ -45,7 +45,7 @@ public class BlogDTO implements Serializable{
             this.siguiente = null;
         }
         if (blogEntity.getCreador() != null) {
-//            this.creador = new UsuarioDTO(blogEntity.getCreador());
+            this.creador = new UsuarioDTO(blogEntity.getCreador());
         } else {
             this.creador = null;
         }

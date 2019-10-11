@@ -22,13 +22,38 @@ public class UsuarioDTO implements Serializable{
     private boolean esAdmin;
     private boolean pago;
     
+    public UsuarioDTO(){
+        
+    }
+    
     public UsuarioDTO(UsuarioEntity usuarioEntity){
         if (usuarioEntity != null) {
             this.id = usuarioEntity.getId();
             this.nombre = usuarioEntity.getNombre();
             this.esAdmin=false;
+            this.correo=usuarioEntity.getCorreo();
+            this.codigo=usuarioEntity.getCodigo();
+            this.pago=false;
         }
     }
+    
+    /**
+     * Convertir DTO a Entity
+     *
+     * @return Un Entity con los valores del DTO
+     */
+    public UsuarioEntity toEntity() {
+        UsuarioEntity usuarioEntity = new UsuarioEntity();
+        usuarioEntity.setId(this.getId());
+        usuarioEntity.setNombre(this.getNombre());
+        usuarioEntity.setCorreo(this.getCorreo());
+        usuarioEntity.setCodigo(this.getCodigo());
+        usuarioEntity.setEsAdmin(this.isEsAdmin());
+        usuarioEntity.setPago(this.isPago());
+        //usuarioEntity.setDeuda(this.getDeuda());
+        return usuarioEntity;
+    }
+    
     /**
      * @return the pago
      */

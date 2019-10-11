@@ -191,28 +191,38 @@ public class ComentarioLogicTest {
             Assert.assertTrue(found);
         }
     }
+
+//    @Test
+//    public void getComentarioTest() {
+//        configTest();
+//        ComentarioEntity comentario = data.get(0);
+//        ComentarioEntity prueba = logica.getComentario(comentario.getId());
+//        Assert.assertNotNull(prueba);
+//        Assert.assertEquals(comentario.getId(), prueba.getId());
+//        Assert.assertEquals(comentario.getCalificacion(), prueba.getCalificacion());
+//        Assert.assertEquals(comentario.getTexto(), prueba.getTexto());
+//    }
     
-    //@Test
-    //public void getComentarioTest() {
-    //    ComentarioEntity comentario = data.get(0);
-    //    ComentarioEntity prueba = logica.getComentario(comentario.getId());
-    //    Assert.assertNotNull(prueba);
-    //    Assert.assertEquals(comentario.getId(), prueba.getId());
-    //    Assert.assertEquals(comentario.getCalificacion(), prueba.getCalificacion());
-    //    Assert.assertEquals(comentario.getTexto(), prueba.getTexto());
-    //}
-    
-    //@Test
-    //public void updateComentarioTest() throws BusinessLogicException {
-    //    ComentarioEntity comentario = data.get(0);
-    //    ComentarioEntity prueba = factory.manufacturePojo(ComentarioEntity.class);
-    //    prueba.setId(comentario.getId());
-    //    prueba.setCalificacion(4);
-    //    prueba.setTexto("Chao");
-    //    logica.updateComentario(prueba.getId(), prueba);
-    //    ComentarioEntity comentarioA = em.find(ComentarioEntity.class, comentario.getId());
-    //    Assert.assertEquals(prueba.getId(), comentarioA.getId());
-    //    Assert.assertEquals(prueba.getCalificacion(), comentarioA.getCalificacion());
-    //    Assert.assertEquals(prueba.getTexto(), comentarioA.getTexto());
-    //}
+//    @Test
+//    public void updateComentarioTest() throws BusinessLogicException {
+//        configTest();
+//        ComentarioEntity comentario = data.get(0);
+//        ComentarioEntity prueba = factory.manufacturePojo(ComentarioEntity.class);
+//        prueba.setId(comentario.getId());
+//        prueba.setCalificacion(4);
+//        prueba.setTexto("Chao");
+//        logica.updateComentario(prueba.getId(), prueba);
+//        ComentarioEntity comentarioA = em.find(ComentarioEntity.class, comentario.getId());
+//        Assert.assertEquals(prueba.getId(), comentarioA.getId());
+//        Assert.assertEquals(prueba.getCalificacion(), comentarioA.getCalificacion());
+//        Assert.assertEquals(prueba.getTexto(), comentarioA.getTexto());
+//    }
+//
+//    @Test
+//    public void deleteComentarioTest() throws BusinessLogicException {
+//        ComentarioEntity entity = data.get(0);
+//        logica.deleteComentario(entity.getId());
+//        ComentarioEntity deleted = em.find(ComentarioEntity.class, entity.getId());
+//        Assert.assertNull(deleted);
+//    }
 }

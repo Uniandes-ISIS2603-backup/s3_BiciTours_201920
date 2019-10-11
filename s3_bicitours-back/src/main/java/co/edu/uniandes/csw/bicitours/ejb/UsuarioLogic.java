@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.bicitours.ejb;
 import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.UsuarioPersistence;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -43,8 +44,65 @@ public class UsuarioLogic {
         usuario=persistencia.create(usuario); //Creación de usuario en la persistencia
         return usuario;
     }
-        public UsuarioEntity getUsuario(Long usuariosId) {
+     /**
+     * Obtener un Usuario.
+     *
+     * @param usuarioId: id del usuario para que sea buscado en la base de datos
+     * @return el usuario buscado.
+     */
+    public UsuarioEntity getUsuario(Long usuariosId) {
         UsuarioEntity usuarioEntity = persistencia.find(usuariosId);
         return usuarioEntity;
+    }
+    
+    /**
+     * Obtener Usuarioss.
+     * @return usuarios.
+     */
+    public List<UsuarioEntity> getUsuarios() {
+        List<UsuarioEntity> usuariosEntity = persistencia.findAll();
+        return usuariosEntity;
+    }
+    
+    /**
+     * Obtener un Usuario por su nombre.
+     *
+     * @param usuarioName: nombre del usuario para que sea buscado en la base de datos
+     * @return el usuario buscado.
+     */
+    public UsuarioEntity getUsuarioByNombre(String usuariosName) {
+        UsuarioEntity usuarioEntity = persistencia.findByNombre(usuariosName);
+        return usuarioEntity;
+    }
+    
+    /**
+     * Obtener un Usuario por su correo.
+     *
+     * @param usuarioCorreo: correo del usuario para que sea buscado en la base de datos
+     * @return el usuario buscado.
+     */
+    public UsuarioEntity getUsuarioByCorreo(String usuariosCorreo) {
+        UsuarioEntity usuarioEntity = persistencia.findByCorreo(usuariosCorreo);
+        return usuarioEntity;
+    }
+    
+    /**
+     * Actualizar un Usuario.
+     * @param usuarioId: id del usuario para que sea buscado en la base de datos
+     * @param usuarioEntity: información de usuario a actualizar.
+     * @return el usuario con los cambios actualizados en la base de datos.
+     */
+    public UsuarioEntity updateUsuario(Long usuarioId, UsuarioEntity usuarioEntity) {
+        UsuarioEntity newUsuario = persistencia.update(usuarioEntity);
+        return newUsuario;
+    }
+    
+    /**
+     * Eliminar un Usuario.
+     * @param usuarioId: id del usuario para que sea buscado en la base de datos
+     * @return el usuario con los cambios actualizados en la base de datos.
+     */
+    public void deleteUsuario(Long usuarioId) {
+        persistencia.delete(usuarioId);
     }
 }

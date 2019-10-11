@@ -46,13 +46,13 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private List<TourEntity> visitados;
     
     //Relación de posesión con seguro
-    //@PodamExclude
-    //@OneToMany(
-    //    mappedBy = "usuario",
-    //	cascade = CascadeType.PERSIST,
-    //	fetch = FetchType.EAGER,
-    //    orphanRemoval = true)
-    //private List<SeguroEntity> seguros; 
+    @PodamExclude
+    @OneToMany(
+        mappedBy = "usuario",
+    	cascade = CascadeType.PERSIST,
+    	fetch = FetchType.EAGER,
+        orphanRemoval = true)
+    private List<SeguroEntity> seguros; 
     
     //Relación de autoría con blog
     @PodamExclude
@@ -151,6 +151,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
         this.deuda = deuda;
     }
 
+    ///////////////////////MÉTODOS RELACIONES ENTRE ENTITIES////////////////////
     /**
      * @return the comentarios
      */
@@ -193,19 +194,19 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
         this.visitados = visitados;
     }
 
-//    /**
-//     * @return the seguros
-//     */
-//    public List<SeguroEntity> getSeguros() {
-//        return seguros;
-//    }
-//
-//    /**
-//     * @param seguros the seguros to set
-//     */
-//    public void setSeguros(List<SeguroEntity> seguros) {
-//        this.seguros = seguros;
-//    }
+    /**
+     * @return the seguros
+     */
+    public List<SeguroEntity> getSeguros() {
+        return seguros;
+    }
+
+    /**
+     * @param seguros the seguros to set
+     */
+    public void setSeguros(List<SeguroEntity> seguros) {
+        this.seguros = seguros;
+    }
 
     /**
      * @return the misBlogs

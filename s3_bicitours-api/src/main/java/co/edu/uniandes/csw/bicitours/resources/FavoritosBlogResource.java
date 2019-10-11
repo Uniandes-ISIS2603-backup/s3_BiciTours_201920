@@ -28,6 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Oscar Julian Castañeda G.
  */
+@Path("usuarios/{usuariosId: \\d+}/favoritos")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class FavoritosBlogResource {
@@ -97,5 +98,5 @@ public class FavoritosBlogResource {
             list.add(dto.toEntity());
         }
         return list;
-    }        
+    }  
 }
