@@ -5,6 +5,9 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
+import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
+import co.edu.uniandes.csw.bicitours.dtos.UsuarioDTO;
+import co.edu.uniandes.csw.bicitours.dtos.UsuarioDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.BlogCreadorLogic;
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
@@ -34,8 +37,9 @@ public class BlogCreadorResource {
 
     @Inject
     private UsuarioLogic usuarioLogic;
-
-    /**@GET
+    @Inject
+    private BlogLogic blogLogic;
+    @GET
     public UsuarioDetailDTO getCreador(@PathParam("blogsId") Long blogsId) {
         UsuarioEntity usuarioEntity = blogCreadorLogic.getCreador(blogsId);
         if (usuarioEntity == null) {
@@ -46,17 +50,19 @@ public class BlogCreadorResource {
     }
 
     @PUT
-    @Path("{usuariosId: \\d+}")
-    public UsuarioDetailDTO replaceCreador(@PathParam("blogsId") Long blogsId, @PathParam("usuariosId") Long usuariosId) {
-        if (usuarioLogic.getCreador(usuariosId) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuariosId + " no existe.", 404);
+    public BlogDetailDTO replaceCreador(@PathParam("blogsId") Long blogsId, UsuarioDTO usuario) {
+        if (blogLogic.getBlog(blogsId) == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
-        UsuarioDetailDTO usuarioDetailDTO = new UsuarioDetailDTO(blogCreadorLogic.replaceCreador(blogsId, usuariosId));
-        return usuarioDetailDTO;
+        if (usuarioLogic.getUsuario(usuario.getId()) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + " no existe.", 404);
+        }
+        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(blogCreadorLogic.replaceCreador(blogsId, usuario.getId()));
+        return blogDetailDTO;
     }
 
     @DELETE
     public void removeCreador(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         blogCreadorLogic.removeCreador(blogsId);
-    }*/   
+    }   
 }
