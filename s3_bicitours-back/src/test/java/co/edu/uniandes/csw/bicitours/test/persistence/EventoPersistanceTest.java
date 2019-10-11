@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.bicitours.test.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
+import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.persistence.EventoPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public class EventoPersistanceTest {
     UserTransaction utx;
     
     private List<EventoEntity> data = new ArrayList<EventoEntity>();
+    
+    private List<TourEntity> dataTour = new ArrayList<TourEntity>();
     
     @Deployment
     public static JavaArchive createDeployment( )
@@ -80,6 +83,7 @@ public class EventoPersistanceTest {
     private void clearData() 
     {
         em.createQuery("delete from EventoEntity").executeUpdate();
+        em.createQuery("delete from TourEntity").executeUpdate();
     }
     
     /**
@@ -88,9 +92,18 @@ public class EventoPersistanceTest {
     private void insertData() 
     {
         PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 3; i++) 
+        {
+            TourEntity entity = factory.manufacturePojo(TourEntity.class);
+            em.persist(entity);
+            dataTour.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
             EventoEntity entity = factory.manufacturePojo(EventoEntity.class);
-
+            if (i == 0) {
+                entity.setTour(dataTour.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
@@ -118,7 +131,7 @@ public class EventoPersistanceTest {
     public void findEventoTest()
     {
         EventoEntity evento = data.get(0);
-        EventoEntity newEntity = ep.find(evento.getId());
+        EventoEntity newEntity = ep.find(dataTour.get(0).getId(), evento.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(evento.getNombre( ), newEntity.getNombre( ));
         Assert.assertEquals(evento.getDescripcion(), newEntity.getDescripcion());

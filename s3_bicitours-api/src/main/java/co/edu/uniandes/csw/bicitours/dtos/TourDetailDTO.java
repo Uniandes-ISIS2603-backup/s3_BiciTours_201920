@@ -5,10 +5,13 @@
  */
 package co.edu.uniandes.csw.bicitours.dtos;
 
+import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
 import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +20,8 @@ import java.util.LinkedList;
 public class TourDetailDTO extends TourDTO implements Serializable{
     
     private LinkedList<FotoDTO> fotos;
+    
+    private List<EventoDTO> eventos;
     
     /////////
     ///Aquí solo hay sets y gets
@@ -62,8 +67,17 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             fotos.add(nueva);
         }
         }
+        
+        //Convierte el conjunto de eventos
+        if (tour.getEventosTour() != null) {
+            eventos = new ArrayList<>();
+            for (EventoEntity entityEvento : tour.getEventosTour()) {
+                eventos.add(new EventoDTO(entityEvento));
+            }
+        }
     }
     
+    @Override
     public TourEntity toEntity()
     {
         TourEntity tour = super.toEntity();
@@ -76,6 +90,14 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             fotosE.add(nueva);
         }
         tour.setFotos(fotosE);
+        
+        if (eventos != null) {
+            List<EventoEntity> eventosEntity = new ArrayList<>();
+            for (EventoDTO dtoEvento : eventos) {
+                eventosEntity.add(dtoEvento.toEntity());
+            }
+            tour.setEventosTour(eventosEntity);
+        }
         
         return tour;
         

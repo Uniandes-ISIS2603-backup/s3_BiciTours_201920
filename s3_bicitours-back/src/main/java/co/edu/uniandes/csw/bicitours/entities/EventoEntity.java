@@ -8,9 +8,12 @@ package co.edu.uniandes.csw.bicitours.entities;
 import co.edu.uniandes.csw.bicitours.podam.DateStrategy;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import uk.co.jemos.podam.common.PodamExclude;
 import uk.co.jemos.podam.common.PodamStrategyValue;
 
 /**
@@ -25,13 +28,13 @@ public class EventoEntity extends BaseEntity implements Serializable{
     //descripcion del evento
     private String descripcion;
     //hora en que inicia el evento
-    @Temporal(TemporalType.DATE)
-    @PodamStrategyValue(DateStrategy.class)
-    private Date horaInicio;
+    private Long horaInicio;
     //hora en que termina el evento
-    @Temporal(javax.persistence.TemporalType.DATE)
-    @PodamStrategyValue(DateStrategy.class)
-    private Date horaFin;
+    private Long horaFin;
+    //Tour al que se relaciona el evento
+    @PodamExclude
+    @ManyToOne (cascade = CascadeType.PERSIST)
+    private TourEntity tour;
     
     public EventoEntity()
     {
@@ -78,7 +81,7 @@ public class EventoEntity extends BaseEntity implements Serializable{
      *
      * @return hora de inicio del evento
      */
-    public Date getHoraInicio( )
+    public Long getHoraInicio( )
     {
         return this.horaInicio;
     }
@@ -87,7 +90,7 @@ public class EventoEntity extends BaseEntity implements Serializable{
      *
      * @param pHora a la que se va a iniciar el evento
      */
-    public void setHoraInicio(Date pHora)
+    public void setHoraInicio(Long pHora)
     {
         this.horaInicio = pHora;
     }
@@ -96,7 +99,7 @@ public class EventoEntity extends BaseEntity implements Serializable{
      *
      * @return hora en que termina el evento
      */
-    public Date getHoraFin( )
+    public Long getHoraFin( )
     {
         return this.horaFin;
     }
@@ -105,8 +108,22 @@ public class EventoEntity extends BaseEntity implements Serializable{
      *
      * @param pHora en la que se va a tetrminar el evento
      */
-    public void setHoraFin(Date pHora)
+    public void setHoraFin(Long pHora)
     {
         this.horaFin = pHora;
+    }
+    
+    /**
+     * @return the tour
+     */
+    public TourEntity getTour() {
+        return tour;
+    }
+
+    /**
+     * @param tour the tour to set
+     */
+    public void setTour(TourEntity tour) {
+        this.tour = tour;
     }
 }

@@ -36,9 +36,25 @@ public class EventoPersistence {
         return pEvento;
     }
     
-    public EventoEntity find(Long eventosId)
+    public EventoEntity find(Long tourId, Long eventosId)
     {
-        return em.find(EventoEntity.class, eventosId);
+        TypedQuery<EventoEntity> q = em.createQuery("select p from EventoEntity p where (p.tour.id = :tourid) and (p.id = :eventosId)", EventoEntity.class);
+        q.setParameter("tourid", tourId);
+        q.setParameter("eventosId", eventosId);
+        List<EventoEntity> results = q.getResultList();
+        EventoEntity evento = null;
+        if(results == null)
+        {
+            evento = null;
+        }
+        else if(results.isEmpty()) 
+        {
+            evento = null;
+        } 
+        else if (results.size() >= 1) {
+            evento = results.get(0);
+        }
+        return evento;
     }
     
     public List<EventoEntity> findAll( )
@@ -59,7 +75,7 @@ public class EventoPersistence {
     
     public void delete(Long eventoId)
     {
-        EventoEntity eventoEntity = find(eventoId);
+        EventoEntity eventoEntity = em.find(EventoEntity.class, eventoId);
         em.remove(eventoEntity);
     }
 }
