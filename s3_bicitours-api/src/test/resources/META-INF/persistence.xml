@@ -3,9 +3,16 @@
   <persistence-unit name="bicitoursPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <!--Toca entity por entity, exclude-unlisted-clases = false no funciona-->
-    
-    <exclude-unlisted-classes>true</exclude-unlisted-classes>
- <shared-cache-mode>NONE</shared-cache-mode>
+    <class>co.edu.uniandes.csw.bicitours.entities.BlogEntity</class>
+    <class>co.edu.uniandes.csw.bicitours.entities.ComentarioEntity</class>
+    <class>co.edu.uniandes.csw.bicitours.entities.EventoEntity</class>
+    <class>co.edu.uniandes.csw.bicitours.entities.FotoEntity</class>
+    <class>co.edu.uniandes.csw.bicitours.entities.RecomendacionEntity</class>
+    <class>co.edu.uniandes.csw.bicitours.entities.SeguroEntity</class>
+    <class>co.edu.uniandes.csw.bicitours.entities.TourEntity</class>
+    <class>co.edu.uniandes.csw.bicitours.entities.UsuarioEntity</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <shared-cache-mode>NONE</shared-cache-mode>
     <properties>
       <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
       <property name="eclipselink.target-database" value="Derby"/>
