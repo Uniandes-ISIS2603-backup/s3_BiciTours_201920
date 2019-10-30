@@ -74,15 +74,16 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             BlogDTO nueva = new BlogDTO(f);
             blogs.add(nueva);
         }
-        }
-        
-        //Convierte el conjunto de eventos
-        if (tour.getEventosTour() != null) {
+                if (tour.getEventosTour() != null) {
             eventos = new ArrayList<>();
             for (EventoEntity entityEvento : tour.getEventosTour()) {
                 eventos.add(new EventoDTO(entityEvento));
             }
         }
+        }
+        
+        //Convierte el conjunto de eventos
+
     }
     
     @Override
