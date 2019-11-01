@@ -28,9 +28,9 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     //Correo del usuario
     private String correo;
     //Estado de paz y salvo del usuario
-    private boolean pago;
+    private Boolean pago;
     //Clasificación como cliente o administrador
-    private boolean esAdmin;
+    private Boolean esAdmin;
     //Deuda total del usuario
     private Integer deuda;
 
@@ -112,28 +112,28 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     /**
      * @return the pago
      */
-    public boolean isPago() {
+    public Boolean isPago() {
         return pago;
     }
 
     /**
      * @param pago the pago to set
      */
-    public void setPago(boolean pago) {
+    public void setPago(Boolean pago) {
         this.pago = pago;
     }
 
     /**
      * @return the esAdmin
      */
-    public boolean isEsAdmin() {
+    public Boolean isEsAdmin() {
         return esAdmin;
     }
 
     /**
      * @param esAdmin Definir si el usuario es de tipo Administrador
      */
-    public void setEsAdmin(boolean esAdmin) {
+    public void setEsAdmin(Boolean esAdmin) {
         this.esAdmin = esAdmin;
     }
 

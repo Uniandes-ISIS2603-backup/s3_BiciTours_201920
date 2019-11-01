@@ -9,12 +9,14 @@ import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.FotoPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author Jhuliana Barrios
  */
+@Stateless
 public class FotoLogic {
     
     @Inject

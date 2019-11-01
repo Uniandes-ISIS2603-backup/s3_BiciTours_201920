@@ -19,8 +19,8 @@ public class UsuarioDTO implements Serializable{
     private String nombre;
     private String correo;
     private String codigo;
-    private boolean esAdmin;
-    private boolean pago;
+    private Boolean esAdmin;
+    private Boolean pago;
     
     public UsuarioDTO(){
         
@@ -57,27 +57,27 @@ public class UsuarioDTO implements Serializable{
     /**
      * @return the pago
      */
-    public boolean isPago() {
+    public Boolean isPago() {
         return pago;
     }
 
     /**
      * @param pago the pago to set
      */
-    public void setPago(boolean pago) {
+    public void setPago(Boolean pago) {
         this.pago = pago;
     }
     /**
      * @return the esAdmin
      */
-    public boolean isEsAdmin() {
+    public Boolean isEsAdmin() {
         return esAdmin;
     }
 
     /**
      * @param esAdmin the esAdmin to set
      */
-    public void setEsAdmin(boolean esAdmin) {
+    public void setEsAdmin(Boolean esAdmin) {
         this.esAdmin = esAdmin;
     }
     /**

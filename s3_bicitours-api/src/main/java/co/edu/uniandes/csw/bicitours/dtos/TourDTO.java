@@ -30,11 +30,11 @@ public class TourDTO implements Serializable{
 
     private Date fecha;
 
-    private int duracion;
+    private Integer duracion;
 
-    private int costo;
+    private Integer costo;
     
-    private boolean terminado;
+    private Boolean terminado;
         
     /////////
     ///Aquí solo hay sets y gets
@@ -64,15 +64,15 @@ public class TourDTO implements Serializable{
         this.fecha = fecha;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(Integer duracion) {
         this.duracion = duracion;
     }
 
-    public void setCosto(int costo) {
+    public void setCosto(Integer costo) {
         this.costo = costo;
     }
 
-    public void setTerminado(boolean terminado) {
+    public void setTerminado(Boolean terminado) {
         this.terminado = terminado;
     }
 
@@ -100,15 +100,15 @@ public class TourDTO implements Serializable{
         return fecha;
     }
 
-    public int getDuracion() {
+    public Integer getDuracion() {
         return duracion;
     }
 
-    public int getCosto() {
+    public Integer getCosto() {
         return costo;
     }
 
-    public boolean isTerminado() {
+    public Boolean isTerminado() {
         return terminado;
     }
     

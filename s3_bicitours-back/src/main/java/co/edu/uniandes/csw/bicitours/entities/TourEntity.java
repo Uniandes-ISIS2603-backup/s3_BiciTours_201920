@@ -47,11 +47,11 @@ public class TourEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
 
-    private int duracion;
+    private Integer duracion;
 
-    private int costo;
+    private Integer costo;
     
-    private boolean terminado;
+    private Boolean terminado;
     
     @PodamExclude
     @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
@@ -120,22 +120,22 @@ public class TourEntity extends BaseEntity implements Serializable {
         return this.fecha;
     }
 
-    public void setDuracion(int dur)
+    public void setDuracion(Integer dur)
     {
         this.duracion = dur;
     }
 
-    public int getDuracion()
+    public Integer getDuracion()
     {
         return this.duracion;
     }
 
-    public void setCosto(int cost)
+    public void setCosto(Integer cost)
     {
         this.costo = cost;
     }
 
-    public int getCosto()
+    public Integer getCosto()
     {
         return this.costo;
     }
@@ -143,11 +143,11 @@ public class TourEntity extends BaseEntity implements Serializable {
     /**
      * @return the terminado
      */
-    public boolean getTerminado() {
+    public Boolean getTerminado() {
         return terminado;
     }
     
-    public void setTerminado(boolean ter)
+    public void setTerminado(Boolean ter)
     {
     terminado = ter;
     }

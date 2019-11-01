@@ -6,14 +6,15 @@
 package co.edu.uniandes.csw.bicitours.dtos;
 
 import co.edu.uniandes.csw.bicitours.entities.RecomendacionEntity;
+import java.io.Serializable;
 
 /**
  *
  * @author Maria Clara Noguera
  */
-public class RecomendacionDTO {
+public class RecomendacionDTO implements Serializable{
     private Long id;
-     private String tipoBici ;
+    private String tipoBici ;
     private String indumentaria;
 
     /**
@@ -72,6 +73,10 @@ public class RecomendacionDTO {
         }
    
     } 
+    public RecomendacionDTO( )
+    {
+   
+    }
     /**
      * Convierte este objeto RecomendacionDTO en una entidad con los mismos datos
      * @return un RecomendacionEntity con los mismos datos de este recomendacionDTO

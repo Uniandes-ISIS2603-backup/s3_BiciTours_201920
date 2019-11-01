@@ -28,6 +28,19 @@ public class TourDetailDTO extends TourDTO implements Serializable{
     /////////
     ///Aquí solo hay sets y gets
     ////////
+        /**
+     * @return the eventos
+     */
+    public List<EventoDTO> getEventos() {
+        return eventos;
+    }
+
+    /**
+     * @param eventos the eventos to set
+     */
+    public void setEventos(List<EventoDTO> eventos) {
+        this.eventos = eventos;
+    }
     
     public void setFotos(LinkedList<FotoDTO> fs)
     {
@@ -101,9 +114,9 @@ public class TourDetailDTO extends TourDTO implements Serializable{
         tour.setFotos(fotosE);
 
         
-        if (eventos != null) {
+        if (getEventos() != null) {
             List<EventoEntity> eventosEntity = new ArrayList<>();
-            for (EventoDTO dtoEvento : eventos) {
+            for (EventoDTO dtoEvento : getEventos()) {
                 eventosEntity.add(dtoEvento.toEntity());
             }
             tour.setEventosTour(eventosEntity);

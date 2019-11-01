@@ -9,12 +9,14 @@ import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.persistence.ComentarioPersistence;
 import co.edu.uniandes.csw.bicitours.persistence.TourPersistence;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
  *
  * @author JuanRueda
  */
+@Stateless
 public class ComentarioTourLogic {
     @Inject
     private ComentarioPersistence persistenciaC;
