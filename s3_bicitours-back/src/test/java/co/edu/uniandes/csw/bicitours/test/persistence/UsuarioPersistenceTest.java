@@ -165,4 +165,22 @@ public class UsuarioPersistenceTest {
             data.add(entity);
         }
     }
+    @Test
+    public void findUsuarioByCorreoTest() {
+        UsuarioEntity entity = data.get(0);
+        UsuarioEntity newEntity = up.findByCorreo(entity.getCorreo());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getCorreo(), newEntity.getCorreo());
+        newEntity = up.findByCorreo(null);
+        Assert.assertNull(newEntity);
+    }
+        @Test
+    public void findUsuarioByNombreTest() {
+        UsuarioEntity entity = data.get(0);
+        UsuarioEntity newEntity = up.findByNombre(entity.getNombre());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        newEntity = up.findByNombre(null);
+        Assert.assertNull(newEntity);
+    }
 }

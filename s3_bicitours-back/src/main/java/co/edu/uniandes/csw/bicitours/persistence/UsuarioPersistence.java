@@ -90,13 +90,9 @@ public class UsuarioPersistence {
      * @return null si no existe ningun usuario con el nombre del argumento. Si
      * existe alguno devuelve el primero encontrado.
      */
-    public UsuarioEntity findByNombre(String pNombreUsuario) {
-
-        // Se crea un query para buscar usuarios con el nombre que recibe el método como argumento. ":pNombreUsuario" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select u From UsuarioEntity u where u.nombre = :pNombreUsuario", UsuarioEntity.class);
-        // Se remplaza el placeholder ":pNombreUsuario" con el valor del argumento 
-        query = query.setParameter("pNombreUsuario", pNombreUsuario);
-        // Se invoca el query se obtiene la lista resultado
+    public UsuarioEntity findByNombre(String nombre) {
+        TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.nombre = :nombre", UsuarioEntity.class);
+        query = query.setParameter("nombre", nombre);
         List<UsuarioEntity> sameNombre = query.getResultList();
         UsuarioEntity result;
         if (sameNombre == null) {
@@ -104,9 +100,8 @@ public class UsuarioPersistence {
         } else if (sameNombre.isEmpty()) {
             result = null;
         } else {
-            result = sameNombre.get(0);//si hay varios usuarios con el mismo nombre se escoge el primero, sin embargo esto no debería ocurrir
+            result = sameNombre.get(0);
         }
-
         return result;
     }
     
@@ -117,13 +112,9 @@ public class UsuarioPersistence {
      * @return null si no existe ningun usuario con el correo del argumento. Si
      * existe alguno devuelve el primero encontrado.
      */
-    public UsuarioEntity findByCorreo(String pCorreo) {
-
-        // Se crea un query para buscar usuarios con el correo que recibe el método como argumento. ":pCorreo" es un placeholder que debe ser remplazado
-        TypedQuery query = em.createQuery("Select u From UsuarioEntity u where u.correo = :pCorreo", UsuarioEntity.class);
-        // Se remplaza el placeholder ":pCorreo" con el valor del argumento 
-        query = query.setParameter("pCorreo", pCorreo);
-        // Se invoca el query se obtiene la lista resultado
+    public UsuarioEntity findByCorreo(String correo) {
+        TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.correo = :correo", UsuarioEntity.class);
+        query = query.setParameter("correo", correo);
         List<UsuarioEntity> sameCorreo = query.getResultList();
         UsuarioEntity result;
         if (sameCorreo == null) {
@@ -131,9 +122,9 @@ public class UsuarioPersistence {
         } else if (sameCorreo.isEmpty()) {
             result = null;
         } else {
-            result = sameCorreo.get(0);//si hay varios usuarios con el mismo correo se escoge el primero, sin embargo esto no debería ocurrir
+            result = sameCorreo.get(0);
         }
-
         return result;
     }
+    
 }

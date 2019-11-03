@@ -77,7 +77,7 @@ public class EventoResource {
         }
 
         
-        return new EventoDTO(eventoLogic.updateEventoEntity(evento.toEntity(), tourId));
+        return new EventoDTO(eventoLogic.updateEventoEntity(evento.toEntity()));
 
     }
 

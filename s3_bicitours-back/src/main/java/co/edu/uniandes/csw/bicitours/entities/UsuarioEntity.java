@@ -37,7 +37,10 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     //Relaciones entre clases:
     //Relación de autoría con comentario
     @PodamExclude
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario",
+    	cascade = CascadeType.PERSIST,
+    	fetch = FetchType.EAGER,
+        orphanRemoval = true)
     private List<ComentarioEntity> comentarios; 
     //Relación de toures visitados con usuario
     

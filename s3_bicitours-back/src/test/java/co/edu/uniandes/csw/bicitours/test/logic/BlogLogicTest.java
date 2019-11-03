@@ -11,8 +11,6 @@ import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.BlogPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -47,7 +45,7 @@ public class BlogLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<BlogEntity> data = new ArrayList<BlogEntity>();
+    private List<BlogEntity> data = new ArrayList<>();
     
     @Deployment
     public static JavaArchive createDeployment() {

@@ -82,7 +82,7 @@ public class ComentarioResource
             throw new WebApplicationException(RECURSO + comentarioId + NOEXISTE, 404);
         }
 
-        return new ComentarioDetailDTO(logica.updateComentario(comentarioId, comentarios.toEntity()));
+        return new ComentarioDetailDTO(logica.updateComentario(comentarios.toEntity()));
     }
 
     @DELETE

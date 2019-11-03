@@ -39,7 +39,7 @@ public class UsuarioLogicTest {
     @PersistenceContext
     private EntityManager em; //entityManager para no utilizar nuestros métodos y validar desde la persistencia
     private List<UsuarioEntity> data = new ArrayList<UsuarioEntity>();//Lista para almacenamiento de usuarios aleatorios
-    
+    @Inject
     UserTransaction utx;
     
     @Deployment
@@ -52,7 +52,7 @@ public class UsuarioLogicTest {
               .addAsManifestResource("META-INF/beans.xml","beans.xml");
     } 
     @Before
-    public void configTest(){
+    public void configTest() {
         try {
             utx.begin();
             em.joinTransaction();
@@ -78,45 +78,51 @@ public class UsuarioLogicTest {
         UsuarioEntity usuarioBuscado= em.find(UsuarioEntity.class, creacion.getId());
         Assert.assertEquals(usuarioBuscado.getNombre(), creacion.getNombre());
     }
-    //Prueba que la creación de un usuario con nombre nulo de como resultado una exception
+    /**
+    Prueba que la creación de un usuario con nombre nulo de como resultado una exception
+    */
     @Test (expected =BusinessLogicException.class)
     public void createUsuarioNombreNull() throws BusinessLogicException{
         UsuarioEntity usuarioNombreNull= factory.manufacturePojo(UsuarioEntity.class);
         usuarioNombreNull.setNombre(null);
         UsuarioEntity resultado= usuarioLogic.create(usuarioNombreNull);//se espera un error
     }
-    //Prueba que la creación de un usuario con codigo nulo de como resultado una exception
+    /**
+    Prueba que la creación de un usuario con codigo nulo de como resultado una exception
+    */
     @Test (expected =BusinessLogicException.class)
     public void createUsuarioCodigoNull() throws BusinessLogicException{
         UsuarioEntity usuarioCodigoNull= factory.manufacturePojo(UsuarioEntity.class);
         usuarioCodigoNull.setCodigo(null);
         UsuarioEntity resultado= usuarioLogic.create(usuarioCodigoNull);//se espera un error
     }
-    //Prueba que la creación de un usuario con correo nulo de como resultado una exception
+    /**
+    Prueba que la creación de un usuario con correo nulo de como resultado una exception
+    */
     @Test (expected =BusinessLogicException.class)
     public void createUsuarioCorreoNull() throws BusinessLogicException{
         UsuarioEntity usuarioCorreoNull= factory.manufacturePojo(UsuarioEntity.class);
         usuarioCorreoNull.setCorreo(null);
         UsuarioEntity resultado= usuarioLogic.create(usuarioCorreoNull);//se espera un error
     }
-    
-    //Prueba que la creación de un usuario con nombre repetido de como resultado una exception
-    //@Test (expected =BusinessLogicException.class)
-    //public void createUsuarioNombreRepetido() throws BusinessLogicException{
-    //    UsuarioEntity usuarioNombreRepetido= factory.manufacturePojo(UsuarioEntity.class);
-    //    System.out.println("usuario: "+ data.get(0));
-    //    usuarioNombreRepetido.setNombre(data.get(0).getNombre());
-    //    UsuarioEntity resultado= usuarioLogic.create(usuarioNombreRepetido);//se espera un error
-    //}
-    
-    //Prueba que la creación de un usuario con nombre repetido de como resultado una exception
-    //@Test (expected =BusinessLogicException.class)
-    //public void createUsuarioCorreoRepetido() throws BusinessLogicException{
-    //    UsuarioEntity usuarioCorreoRepetido= factory.manufacturePojo(UsuarioEntity.class);
-    //    System.out.println("usuario: "+ data.get(0));
-    //    usuarioCorreoRepetido.setCorreo(data.get(0).getCorreo());
-    //    UsuarioEntity resultado= usuarioLogic.create(usuarioCorreoRepetido);//se espera un error
-    //}
+    /**
+    Prueba que la creación de un usuario con nombre repetido de como resultado una exception
+    */
+    @Test (expected =BusinessLogicException.class)
+    public void createUsuarioNombreRepetido() throws BusinessLogicException{
+        UsuarioEntity usuarioNombreRepetido= factory.manufacturePojo(UsuarioEntity.class);
+        usuarioNombreRepetido.setNombre(data.get(0).getNombre());
+        UsuarioEntity resultado= usuarioLogic.create(usuarioNombreRepetido);//se espera un error
+    }
+    /**
+    Prueba que la creación de un usuario con nombre repetido de como resultado una exception
+    */
+    @Test (expected =BusinessLogicException.class)
+    public void createUsuarioCorreoRepetido() throws BusinessLogicException{
+        UsuarioEntity usuarioCorreoRepetido= factory.manufacturePojo(UsuarioEntity.class);
+        usuarioCorreoRepetido.setCorreo(data.get(0).getCorreo());
+        UsuarioEntity resultado= usuarioLogic.create(usuarioCorreoRepetido);//se espera un error
+    }
     
     //Métodos adicionales
     /**
@@ -130,7 +136,6 @@ public class UsuarioLogicTest {
      * Inserta los datos iniciales para diferentes usuarios, de tal manera que puedan ser testeados todos los métodos
      */
     private void insertData() {
-        PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) { //se crean tres usuarios para el análisis
             UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
             em.persist(entity);

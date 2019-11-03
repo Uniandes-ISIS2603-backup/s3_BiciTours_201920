@@ -48,7 +48,7 @@ public class BlogsComentarioLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<BlogEntity> data = new ArrayList<BlogEntity>();
+    private List<BlogEntity> data = new ArrayList<>();
 
     private List<ComentarioEntity> comentariosData = new ArrayList();
 

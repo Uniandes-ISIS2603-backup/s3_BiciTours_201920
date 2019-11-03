@@ -65,28 +65,6 @@ public class UsuarioLogic {
     }
     
     /**
-     * Obtener un Usuario por su nombre.
-     *
-     * @param usuarioName: nombre del usuario para que sea buscado en la base de datos
-     * @return el usuario buscado.
-     */
-    public UsuarioEntity getUsuarioByNombre(String usuariosName) {
-
-        return persistencia.findByNombre(usuariosName);
-    }
-    
-    /**
-     * Obtener un Usuario por su correo.
-     *
-     * @param usuarioCorreo: correo del usuario para que sea buscado en la base de datos
-     * @return el usuario buscado.
-     */
-    public UsuarioEntity getUsuarioByCorreo(String usuariosCorreo) {
-
-        return persistencia.findByCorreo(usuariosCorreo);
-    }
-    
-    /**
      * Actualizar un Usuario.
      * @param usuarioId: id del usuario para que sea buscado en la base de datos
      * @param usuarioEntity: información de usuario a actualizar.
