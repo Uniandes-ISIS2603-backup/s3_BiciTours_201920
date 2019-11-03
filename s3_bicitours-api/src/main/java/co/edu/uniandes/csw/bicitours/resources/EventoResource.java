@@ -33,30 +33,27 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class EventoResource {
 
-    private static final String NOEXISTE=" no existe.";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private EventoLogic eventoLogic;
-    
+
     @POST
-    public EventoDTO createEvento(@PathParam("tourId")Long tourId, EventoDTO evento) throws BusinessLogicException
-    {
+    public EventoDTO createEvento(@PathParam("tourId") Long tourId, EventoDTO evento) throws BusinessLogicException {
 
         return new EventoDTO(eventoLogic.createEventoEntity(evento.toEntity(), tourId));
     }
-    
+
     @GET
     public List<EventoDTO> getEventos(@PathParam("tourId") Long tourId) {
 
         return listEntity2DTO(eventoLogic.getEventos(tourId));
     }
-    
+
     @GET
     @Path("{eventoId: \\d+}")
-    public EventoDTO getComentario(@PathParam("tourId") Long tourId, @PathParam("eventoId") Long eventoId) 
-    {
+    public EventoDTO getComentario(@PathParam("tourId") Long tourId, @PathParam("eventoId") Long eventoId) {
         EventoEntity entity = eventoLogic.getEvento(eventoId, tourId);
-        if (entity == null) 
-        {
+        if (entity == null) {
             throw new WebApplicationException("El recurso /Evento/" + eventoId + NOEXISTE, 404);
         }
 
@@ -65,8 +62,7 @@ public class EventoResource {
 
     @PUT
     @Path("{eventoId: \\d+}")
-    public EventoDTO updateEvento(@PathParam("tourId")Long tourId, @PathParam("eventoId") Long eventoId, EventoDTO evento) throws BusinessLogicException 
-    {
+    public EventoDTO updateEvento(@PathParam("tourId") Long tourId, @PathParam("eventoId") Long eventoId, EventoDTO evento) throws BusinessLogicException {
         if (eventoId.equals(evento.getId())) {
             throw new BusinessLogicException("Los ids del Review no coinciden.");
         }
@@ -76,31 +72,26 @@ public class EventoResource {
 
         }
 
-        
         return new EventoDTO(eventoLogic.updateEventoEntity(evento.toEntity()));
 
     }
 
     @DELETE
     @Path("{eventoId: \\d+}")
-    public void deleteEvento(@PathParam("tourId")Long tourId, @PathParam("eventoId") Long eventoId) throws BusinessLogicException 
-    {
+    public void deleteEvento(@PathParam("tourId") Long tourId, @PathParam("eventoId") Long eventoId) throws BusinessLogicException {
         EventoEntity evento = eventoLogic.getEvento(eventoId, tourId);
-        if (evento == null) 
-        {
+        if (evento == null) {
             throw new WebApplicationException("El recurso /Evento/" + eventoId + NOEXISTE, 404);
         }
         eventoLogic.deleteEvento(eventoId);
     }
-    
-    private List<EventoDTO> listEntity2DTO(List<EventoEntity> entityList) 
-    {
+
+    private List<EventoDTO> listEntity2DTO(List<EventoEntity> entityList) {
         List<EventoDTO> list = new ArrayList<>();
-        for (EventoEntity evento : entityList) 
-        {
+        for (EventoEntity evento : entityList) {
             list.add(new EventoDTO(evento));
         }
         return list;
     }
-    
+
 }

@@ -32,8 +32,9 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class FavoritosBlogResource {
-    private static final String RECURSO="El recurso /blogs/";
-    private static final String NOEXISTE=" no existe.";
+
+    private static final String RECURSO = "El recurso /blogs/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private FavoritosBlogLogic favoritosBlogLogic;
 
@@ -47,7 +48,7 @@ public class FavoritosBlogResource {
             throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
 
-        return new BlogDetailDTO(favoritosBlogLogic.addFavorito(blogsId,usuariosId));
+        return new BlogDetailDTO(favoritosBlogLogic.addFavorito(blogsId, usuariosId));
     }
 
     @GET
@@ -70,7 +71,7 @@ public class FavoritosBlogResource {
     public List<BlogDetailDTO> replaceFavoritos(@PathParam("usuariosId") Long usuariosId, List<BlogDetailDTO> blogs) {
         for (BlogDetailDTO blog : blogs) {
             if (blogLogic.getBlog(blog.getId()) == null) {
-                throw new WebApplicationException(RECURSO + blog.getId() +NOEXISTE, 404);
+                throw new WebApplicationException(RECURSO + blog.getId() + NOEXISTE, 404);
             }
         }
 
@@ -100,5 +101,5 @@ public class FavoritosBlogResource {
             list.add(dto.toEntity());
         }
         return list;
-    }  
+    }
 }

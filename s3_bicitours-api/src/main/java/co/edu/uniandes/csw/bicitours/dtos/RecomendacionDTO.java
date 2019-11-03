@@ -12,9 +12,10 @@ import java.io.Serializable;
  *
  * @author Maria Clara Noguera
  */
-public class RecomendacionDTO implements Serializable{
+public class RecomendacionDTO implements Serializable {
+
     private Long id;
-    private String tipoBici ;
+    private String tipoBici;
     private String indumentaria;
 
     /**
@@ -58,31 +59,36 @@ public class RecomendacionDTO implements Serializable{
     public void setIndumentaria(String indumentaria) {
         this.indumentaria = indumentaria;
     }
+
     /**
-     * Construye un nuevo RecomendacionDTO a partir de una entidad Recomendacion dada
-     * @param recomendacion, es la entidad recomendacion que se va a convertir a RecomendacionDTO
+     * Construye un nuevo RecomendacionDTO a partir de una entidad Recomendacion
+     * dada
+     *
+     * @param recomendacion, es la entidad recomendacion que se va a convertir a
+     * RecomendacionDTO
      */
-    public RecomendacionDTO(RecomendacionEntity recomendacion)
-    {
-        if(recomendacion != null)
-        {
+    public RecomendacionDTO(RecomendacionEntity recomendacion) {
+        if (recomendacion != null) {
             id = recomendacion.getId();
-           indumentaria=recomendacion.getIndumentaria();
-           tipoBici=recomendacion.getTipoBici();
-         
+            indumentaria = recomendacion.getIndumentaria();
+            tipoBici = recomendacion.getTipoBici();
+
         }
-   
-    } 
-    public RecomendacionDTO( )
-    {
-   
+
     }
+
+    public RecomendacionDTO() {
+
+    }
+
     /**
-     * Convierte este objeto RecomendacionDTO en una entidad con los mismos datos
-     * @return un RecomendacionEntity con los mismos datos de este recomendacionDTO
+     * Convierte este objeto RecomendacionDTO en una entidad con los mismos
+     * datos
+     *
+     * @return un RecomendacionEntity con los mismos datos de este
+     * recomendacionDTO
      */
-    public RecomendacionEntity toEntity()
-    {
+    public RecomendacionEntity toEntity() {
         RecomendacionEntity recomendacion = new RecomendacionEntity();
         recomendacion.setId(id);
         recomendacion.setIndumentaria(indumentaria);

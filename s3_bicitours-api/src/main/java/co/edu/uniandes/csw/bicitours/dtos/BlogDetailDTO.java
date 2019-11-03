@@ -16,10 +16,11 @@ import java.util.List;
  *
  * @author Oscar Julian Castañeda G.
  */
-public class BlogDetailDTO extends BlogDTO implements Serializable{
-    
+public class BlogDetailDTO extends BlogDTO implements Serializable {
+
     private List<UsuarioDTO> usuarios;
     private List<ComentarioDTO> comentarios;
+
     public BlogDetailDTO() {
         super();
     }
@@ -37,7 +38,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
             for (ComentarioEntity entityComentario : blogEntity.getComentarios()) {
                 comentarios.add(new ComentarioDTO(entityComentario));
             }
-        }        
+        }
     }
 
     @Override
@@ -56,7 +57,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
                 comentariosEntity.add(dtoComentario.toEntity());
             }
             blogEntity.setComentarios(comentariosEntity);
-        }        
+        }
         return blogEntity;
     }
 

@@ -22,30 +22,27 @@ public class BlogLogic {
     @Inject
     private BlogPersistence persistence;
 
-        /**
+    /**
      * Guardar un nuevo blog
      *
      * @param blog La entidad de tipo blog del nuevo blog a persistir.
      * @return La entidad luego de persistirla
-     * @throws BusinessLogicException Si el titulo es inválido o el contenido es invalido.
+     * @throws BusinessLogicException Si el titulo es inválido o el contenido es
+     * invalido.
      */
     public BlogEntity createBlog(BlogEntity blog) throws BusinessLogicException {
-        if (blog.getRutaImagen() == null && blog.getRutaVideo() == null && blog.getTexto() == null ) 
-        {
+        if (blog.getRutaImagen() == null && blog.getRutaVideo() == null && blog.getTexto() == null) {
             throw new BusinessLogicException("El blog no puede tener contenido nulo");
-        }
-        else if(blog.getRutaImagen().equals("") && blog.getRutaVideo().equals("") && blog.getTexto().equals(""))
-        {
+        } else if (blog.getRutaImagen().equals("") && blog.getRutaVideo().equals("") && blog.getTexto().equals("")) {
             throw new BusinessLogicException("El blog no puede tener contenido vacio");
-        }
-        else if(blog.getTitulo()==null||blog.getTitulo().equals(""))
-        {
-            throw new BusinessLogicException("El blog debe tener titulo"); 
+        } else if (blog.getTitulo() == null || blog.getTitulo().equals("")) {
+            throw new BusinessLogicException("El blog debe tener titulo");
         }
 
         return persistence.create(blog);
     }
-        /**
+
+    /**
      * Devuelve todos los bloigs que hay en la base de datos.
      *
      * @return Lista de entidades de tipo blog.
@@ -54,6 +51,7 @@ public class BlogLogic {
 
         return persistence.findAll();
     }
+
     /**
      * Busca un blog por ID
      *
@@ -61,10 +59,11 @@ public class BlogLogic {
      * @return El blog encontrado, null si no lo encuentra.
      */
     public BlogEntity getBlog(Long blogsId) {
- 
+
         return persistence.find(blogsId);
     }
-        /**
+
+    /**
      * Actualizar un blog por ID
      *
      * @param blogEntity La entidad del blog con los cambios deseados
@@ -74,14 +73,14 @@ public class BlogLogic {
 
         return persistence.update(blogEntity);
     }
+
     /**
      * Eliminar un blog por ID
      *
      * @param blogsId El ID del blog a eliminar
-
+     *
      */
     public void deleteBlog(Long blogsId) {
         persistence.delete(blogsId);
     }
 }
-

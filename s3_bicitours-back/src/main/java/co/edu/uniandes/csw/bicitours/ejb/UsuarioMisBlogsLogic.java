@@ -20,12 +20,13 @@ import javax.inject.Inject;
  */
 @Stateless
 public class UsuarioMisBlogsLogic {
+
     @Inject
     private BlogPersistence blogPersistence;
 
     @Inject
     private UsuarioPersistence usuarioPersistence;
-    
+
     public BlogEntity addBlog(Long blogsId, Long usuariosId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         UsuarioEntity usuarioEntity = usuarioPersistence.find(usuariosId);
@@ -40,8 +41,7 @@ public class UsuarioMisBlogsLogic {
     public BlogEntity getBlog(Long usuariosId, Long blogsId) throws BusinessLogicException {
         List<BlogEntity> blogs = usuarioPersistence.find(usuariosId).getMisBlogs();
         BlogEntity blogEntity = blogPersistence.find(blogsId);
-        if(blogs.contains(blogEntity))
-        {
+        if (blogs.contains(blogEntity)) {
             return blogEntity;
         }
         throw new BusinessLogicException("El blog no está asociado a el usuario");
@@ -59,7 +59,8 @@ public class UsuarioMisBlogsLogic {
         }
         return blogs;
     }
-        public void removeBlog(Long usuariosId, Long blogsId) throws BusinessLogicException{
-        blogPersistence.delete(getBlog(usuariosId,blogsId).getId());
+
+    public void removeBlog(Long usuariosId, Long blogsId) throws BusinessLogicException {
+        blogPersistence.delete(getBlog(usuariosId, blogsId).getId());
     }
 }

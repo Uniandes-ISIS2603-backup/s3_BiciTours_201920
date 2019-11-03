@@ -33,20 +33,24 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class BlogResource {
-    private static final String RECURSO="El recurso /blogs/";
-    private static final String NOEXISTE=" no existe.";
+
+    private static final String RECURSO = "El recurso /blogs/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private BlogLogic blogLogic;
+
     @POST
     public BlogDTO createBlog(BlogDTO blog) throws BusinessLogicException {
 
         return new BlogDTO(blogLogic.createBlog(blog.toEntity()));
     }
+
     @GET
     public List<BlogDetailDTO> getBlogs() {
- 
+
         return listEntity2DetailDTO(blogLogic.getBlogs());
     }
+
     @GET
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO getBlog(@PathParam("blogsId") Long blogsId) {
@@ -57,6 +61,7 @@ public class BlogResource {
 
         return new BlogDetailDTO(blogEntity);
     }
+
     @PUT
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO updateBlog(@PathParam("blogsId") Long blogsId, BlogDetailDTO blog) throws BusinessLogicException {

@@ -32,9 +32,10 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TourBlogsResource {
-    private static final String RECURSO="El recurso /blogs/";
-    private static final String NOEXISTE=" no existe.";    
-        @Inject
+
+    private static final String RECURSO = "El recurso /blogs/";
+    private static final String NOEXISTE = " no existe.";
+    @Inject
     private UsuarioMisBlogsLogic usuarioMisBlogsLogic;
 
     @Inject
@@ -47,7 +48,7 @@ public class TourBlogsResource {
             throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
 
-        return new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId,toursId));
+        return new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId, toursId));
     }
 
     @GET
@@ -73,7 +74,7 @@ public class TourBlogsResource {
                 throw new WebApplicationException(RECURSO + blog.getId() + NOEXISTE, 404);
             }
         }
-        
+
         return blogsListEntity2DTOTourBlogs(usuarioMisBlogsLogic.replaceBlogs(toursId, blogsListDTO2EntityTourBlogs(blogs)));
     }
 
@@ -100,5 +101,5 @@ public class TourBlogsResource {
             list.add(dto.toEntity());
         }
         return list;
-    } 
+    }
 }

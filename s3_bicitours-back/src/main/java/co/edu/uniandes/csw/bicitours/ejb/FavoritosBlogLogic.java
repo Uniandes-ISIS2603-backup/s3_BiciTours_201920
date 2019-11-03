@@ -21,6 +21,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class FavoritosBlogLogic {
+
     @Inject
     private BlogPersistence blogPersistence;
 
@@ -41,8 +42,7 @@ public class FavoritosBlogLogic {
     public BlogEntity getFavorito(Long usuariosId, Long blogsId) throws BusinessLogicException {
         List<BlogEntity> blogs = usuarioPersistence.find(usuariosId).getFavoritos();
         BlogEntity blogEntity = blogPersistence.find(blogsId);
-        if(blogs.contains(blogEntity))
-        {
+        if (blogs.contains(blogEntity)) {
             return blogEntity;
         }
         throw new BusinessLogicException("El blog no está asociado a el usuario");
@@ -57,12 +57,13 @@ public class FavoritosBlogLogic {
                 blog.getUsuarios().add(usuarioEntity);
             } else if (!blog.getUsuarios().isEmpty() && blog.getUsuarios().contains(usuarioEntity)) {
                 blog.getUsuarios().remove(usuarioEntity);
-        }
+            }
         }
         return blogs;
     }
-        public void removeFavorito(Long usuariosId, Long blogsId) throws BusinessLogicException{
-        blogPersistence.delete(getFavorito(usuariosId,blogsId).getId());
+
+    public void removeFavorito(Long usuariosId, Long blogsId) throws BusinessLogicException {
+        blogPersistence.delete(getFavorito(usuariosId, blogsId).getId());
     }
 
 }

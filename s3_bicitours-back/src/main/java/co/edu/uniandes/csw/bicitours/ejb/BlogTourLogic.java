@@ -18,28 +18,30 @@ import javax.inject.Inject;
  */
 @Stateless
 public class BlogTourLogic {
+
     @Inject
     private BlogPersistence blogPersistence;
 
     @Inject
     private TourPersistence tourPersistence;
 
-
     public TourEntity getTour(Long blogsId) {
 
         return blogPersistence.find(blogsId).getTour();
     }
-        public BlogEntity replaceTour(Long blogsId, Long toursId) {
+
+    public BlogEntity replaceTour(Long blogsId, Long toursId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         TourEntity tourEntity = tourPersistence.find(blogEntity.getTour().getId());
         tourEntity.getBlogs().remove(blogEntity);
         blogEntity.setTour(tourPersistence.find(toursId));
         return blogPersistence.find(blogsId);
     }
+
     public void removeTour(Long blogsId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         TourEntity tourEntity = tourPersistence.find(blogEntity.getTour().getId());
         tourEntity.getBlogs().remove(blogEntity);
         blogEntity.setTour(null);
-    }    
+    }
 }

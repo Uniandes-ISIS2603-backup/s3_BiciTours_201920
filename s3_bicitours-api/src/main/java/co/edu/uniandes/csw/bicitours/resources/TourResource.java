@@ -33,22 +33,23 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class TourResource {
-    private static final String RECURSO="El recurso /tours/";
-    private static final String NOEXISTE=" no existe.";
+
+    private static final String RECURSO = "El recurso /tours/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private TourLogic tourLogic;
 
     /**
      * Crea un nuevo tour con la informacion que se recibe en el cuerpo de la
-     * petición y se regresa un objeto identico con una identificación generada por la
-     * base de datos.
+     * petición y se regresa un objeto identico con una identificación generada
+     * por la base de datos.
      *
      * @param t {@link TourDTO} - EL tour que se desea guardar.
      * @return JSON {@link TourDTO} - El tour guardado con el atributo id
      * autogenerado.
-     * @throws co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException si el tour 
-     * a crear no cumple con las reglas de negocio.
-     */    
+     * @throws co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException
+     * si el tour a crear no cumple con las reglas de negocio.
+     */
     @POST
     public TourDetailDTO createTour(TourDTO t) throws BusinessLogicException {
         TourEntity tourEntity = t.toEntity();
@@ -61,83 +62,80 @@ public class TourResource {
      *
      * @return JSONArray {@link TourDetailDTO} - Los tours encontrados en la
      * aplicación. Si no hay ninguno retorna una lista vacía.
-     */    
+     */
     @GET
     public List<TourDetailDTO> getTours() {
-        
+
         List<TourDetailDTO> listaTours = new ArrayList<>();
-        
-        for(TourEntity e : tourLogic.getTours())
-        {
+
+        for (TourEntity e : tourLogic.getTours()) {
             TourDetailDTO nueva = new TourDetailDTO(e);
             listaTours.add(nueva);
         }
-        
+
         return listaTours;
     }
-    
+
     /**
      * Busca el tour con el id asociado recibido en la URL y lo devuelve.
      *
-     * @param toursId Identificador del tour que se esta buscando. Este debe
-     * ser una cadena de dígitos.
+     * @param toursId Identificador del tour que se esta buscando. Este debe ser
+     * una cadena de dígitos.
      * @return JSON {@link TourDetailDTO} - El tour buscado
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el tour.
-     */    
+     */
     @GET
     @Path("{toursId: \\d+}")
-    public TourDetailDTO getTour(@PathParam("tourId") long toursId)
-    {
+    public TourDetailDTO getTour(@PathParam("tourId") long toursId) {
         TourEntity entidad = tourLogic.getTour(toursId);
-        
-        if(entidad == null)
+
+        if (entidad == null) {
             throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
-        
+        }
+
         return new TourDetailDTO(entidad);
-        
+
     }
-    
+
     /**
      * Actualiza el tour con el id recibido en la URL con la información que se
      * recibe en el cuerpo de la petición.
      *
-     * @param toursId Identificador del tour que se desea actualizar. Este
-     * debe ser una cadena de dígitos.
+     * @param toursId Identificador del tour que se desea actualizar. Este debe
+     * ser una cadena de dígitos.
      * @param tour {@link TourDTO} El tour que se desea guardar.
      * @return JSON {@link AuthorDTO} - El tour guardado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el tour a
      * actualizar.
-     */    
+     */
     @PUT
     @Path("{toursId: \\d+}")
-    public TourDetailDTO updateTour(@PathParam("toursId") long toursId, TourDetailDTO tour)
-    {
+    public TourDetailDTO updateTour(@PathParam("toursId") long toursId, TourDetailDTO tour) {
         tour.setId(toursId);
-        
-        if(tourLogic.getTour(toursId) == null)
-            throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
-        
 
-        return new TourDetailDTO(tourLogic.updateTour(tour.toEntity()));      
+        if (tourLogic.getTour(toursId) == null) {
+            throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
+        }
+
+        return new TourDetailDTO(tourLogic.updateTour(tour.toEntity()));
     }
-    
-    
+
     /**
      * Borra el tour con el id asociado recibido en la URL.
      *
-     * @param toursId Identificador del tour que se desea borrar. Este debe
-     * ser una cadena de dígitos.
+     * @param toursId Identificador del tour que se desea borrar. Este debe ser
+     * una cadena de dígitos.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper}
      * Error de lógica que se genera cuando no se encuentra el tour a eliminar.
      */
     @DELETE
     @Path("{toursId: \\d+}")
-    public void deletoTour(@PathParam("toursId")long toursId)
-    {
-        if(tourLogic.getTour(toursId)== null)
+    public void deletoTour(@PathParam("toursId") long toursId) {
+        if (tourLogic.getTour(toursId) == null) {
             throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
-        tourLogic.deleteTour(toursId);       
+        }
+        tourLogic.deleteTour(toursId);
     }
 }

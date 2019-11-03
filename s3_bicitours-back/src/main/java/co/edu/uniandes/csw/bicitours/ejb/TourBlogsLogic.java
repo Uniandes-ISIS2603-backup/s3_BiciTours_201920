@@ -20,11 +20,12 @@ import javax.inject.Inject;
  */
 @Stateless
 public class TourBlogsLogic {
+
     @Inject
     private BlogPersistence blogPersistence;
 
     @Inject
-    private TourPersistence tourPersistence;    
+    private TourPersistence tourPersistence;
 
     public BlogEntity addBlog(Long blogsId, Long toursId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
@@ -40,8 +41,7 @@ public class TourBlogsLogic {
     public BlogEntity getBlog(Long toursId, Long blogsId) throws BusinessLogicException {
         List<BlogEntity> blogs = tourPersistence.find(toursId).getBlogs();
         BlogEntity blogEntity = blogPersistence.find(blogsId);
-        if(blogs.contains(blogEntity))
-        {
+        if (blogs.contains(blogEntity)) {
             return blogEntity;
         }
         throw new BusinessLogicException("El blog no está asociado a el tour");
@@ -59,7 +59,8 @@ public class TourBlogsLogic {
         }
         return blogs;
     }
-    public void removeBlog(Long ToursId, Long blogsId) throws BusinessLogicException{
-        blogPersistence.delete(getBlog(ToursId,blogsId).getId());
-    }    
+
+    public void removeBlog(Long ToursId, Long blogsId) throws BusinessLogicException {
+        blogPersistence.delete(getBlog(ToursId, blogsId).getId());
+    }
 }

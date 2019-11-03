@@ -19,7 +19,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Juan Sebastián González Rojas
  */
 @Entity
-public class UsuarioEntity extends BaseEntity implements Serializable{
+public class UsuarioEntity extends BaseEntity implements Serializable {
 
     //Nombre del usuario
     private String nombre;
@@ -38,25 +38,25 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     //Relación de autoría con comentario
     @PodamExclude
     @OneToMany(mappedBy = "usuario",
-    	cascade = CascadeType.PERSIST,
-    	fetch = FetchType.EAGER,
-        orphanRemoval = true)
-    private List<ComentarioEntity> comentarios; 
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    private List<ComentarioEntity> comentarios;
     //Relación de toures visitados con usuario
-    
+
     @PodamExclude
     @ManyToMany
     private List<TourEntity> visitados;
-    
+
     //Relación de posesión con seguro
     @PodamExclude
     @OneToMany(
-        mappedBy = "usuario",
-    	cascade = CascadeType.PERSIST,
-    	fetch = FetchType.EAGER,
-        orphanRemoval = true)
-    private List<SeguroEntity> seguros; 
-    
+            mappedBy = "usuario",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    private List<SeguroEntity> seguros;
+
     //Relación de autoría con blog
     @PodamExclude
     @OneToMany(mappedBy = "creador")
@@ -65,7 +65,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToMany(mappedBy = "usuarios")
     private List<BlogEntity> favoritos;
-    
 
     /**
      * @return the nombre
@@ -165,7 +164,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     public void setComentarios(List<ComentarioEntity> comentarios) {
         this.comentarios = comentarios;
     }
-    
+
     /**
      * @param comentario the comentario to add
      */
@@ -179,7 +178,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     public void deleteComentario(ComentarioEntity comentario) {
         this.comentarios.remove(comentario);
     }
-    
+
     /**
      * @return the visitados
      */
@@ -235,5 +234,5 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     public void setFavoritos(List<BlogEntity> favoritos) {
         this.favoritos = favoritos;
     }
-    
+
 }

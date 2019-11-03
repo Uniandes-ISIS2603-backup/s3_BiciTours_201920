@@ -32,10 +32,10 @@ public class BlogEntity extends BaseEntity implements Serializable {
     private BlogEntity siguiente;
     @PodamExclude
     @OneToMany(
-        mappedBy = "blog",
-    	cascade = CascadeType.PERSIST,
-    	fetch = FetchType.EAGER,
-    	orphanRemoval = true
+            mappedBy = "blog",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true
     )
     private List<ComentarioEntity> comentarios;
     @PodamExclude
@@ -46,13 +46,12 @@ public class BlogEntity extends BaseEntity implements Serializable {
     private TourEntity tour;
     @PodamExclude
     @ManyToOne
-    private UsuarioEntity creador;    
+    private UsuarioEntity creador;
     private String texto;
     private String rutaImagen;
     private String rutaVideo;
     private Double calificacionPromedio;
     private String titulo;
-
 
     /**
      * @return the texto

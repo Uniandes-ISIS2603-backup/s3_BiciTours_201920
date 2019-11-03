@@ -33,6 +33,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class BlogTourLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -93,24 +94,27 @@ public class BlogTourLogicTest {
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-               blogsData.get(i).setTour(entity);
+                blogsData.get(i).setTour(entity);
             }
         }
     }
+
     @Test
     public void getTourTest() {
         TourEntity tour = blogTourLogic.getTour(blogsData.get(0).getId());
 
         Assert.assertEquals(data.get(0), tour);
     }
+
     @Test
-        public void removeTourTest() {
+    public void removeTourTest() {
         blogTourLogic.removeTour(blogsData.get(0).getId());
         Assert.assertNull(blogTourLogic.getTour(blogsData.get(0).getId()));
     }
+
     @Test
-        public void replaceTourTest() {
-        blogTourLogic.replaceTour(blogsData.get(0).getId(),data.get(1).getId());
+    public void replaceTourTest() {
+        blogTourLogic.replaceTour(blogsData.get(0).getId(), data.get(1).getId());
         Assert.assertEquals(blogTourLogic.getTour(blogsData.get(0).getId()), data.get(1));
-    }        
+    }
 }

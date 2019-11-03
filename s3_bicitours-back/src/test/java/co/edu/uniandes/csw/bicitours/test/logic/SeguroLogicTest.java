@@ -35,7 +35,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class SeguroLogicTest {
-   private PodamFactory factory = new PodamFactoryImpl();
+
+    private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private SeguroLogic seguroLogic;
@@ -57,7 +58,6 @@ public class SeguroLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
 
     /**
      * Configuración inicial de la prueba.
@@ -98,7 +98,7 @@ public class SeguroLogicTest {
             data.add(entity);
         }
     }
-    
+
     /**
      * Prueba para crear un Seguro
      *
@@ -111,13 +111,13 @@ public class SeguroLogicTest {
         Assert.assertNotNull(result);
         SeguroEntity entity = em.find(SeguroEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getCaracteristicas(),entity.getCaracteristicas());
+        Assert.assertEquals(newEntity.getCaracteristicas(), entity.getCaracteristicas());
         Assert.assertEquals(newEntity.getCondiciones(), entity.getCondiciones());
         Assert.assertEquals(newEntity.getTipo(), entity.getTipo());
-       
+
     }
 
-    @Test (expected = BusinessLogicException.class)
+    @Test(expected = BusinessLogicException.class)
     public void createSeguroContenidoNull() throws BusinessLogicException {
         SeguroEntity seguro = factory.manufacturePojo(SeguroEntity.class);
         seguro.setCaracteristicas(null);
@@ -125,7 +125,8 @@ public class SeguroLogicTest {
         seguro.setTipo(null);
         SeguroEntity result = seguroLogic.createSeguro(seguro);
     }
-        /**
+
+    /**
      * Prueba para consultar la lista de Seguros.
      */
     @Test
@@ -155,14 +156,14 @@ public class SeguroLogicTest {
         Assert.assertEquals(resultEntity.getCaracteristicas(), entity.getCaracteristicas());
         Assert.assertEquals(resultEntity.getCondiciones(), entity.getCondiciones());
         Assert.assertEquals(resultEntity.getTipo(), entity.getTipo());
-      
+
     }
 
     /**
      * Prueba para actualizar un Seguro.
      */
     @Test
-    public void updateSeguroTest(){
+    public void updateSeguroTest() {
         SeguroEntity entity = data.get(0);
         SeguroEntity pojoEntity = factory.manufacturePojo(SeguroEntity.class);
         pojoEntity.setId(entity.getId());
@@ -171,7 +172,7 @@ public class SeguroLogicTest {
         Assert.assertEquals(pojoEntity.getId(), resp.getId());
         Assert.assertEquals(pojoEntity.getCaracteristicas(), resp.getCaracteristicas());
         Assert.assertEquals(pojoEntity.getCondiciones(), resp.getCondiciones());
-        Assert.assertEquals(pojoEntity.getTipo() , resp.getTipo() );
+        Assert.assertEquals(pojoEntity.getTipo(), resp.getTipo());
     }
 
     /**

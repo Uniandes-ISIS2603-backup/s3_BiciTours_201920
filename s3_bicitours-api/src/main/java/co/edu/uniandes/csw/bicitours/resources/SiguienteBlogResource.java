@@ -30,7 +30,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class SiguienteBlogResource {
-    private static final String RECURSO="El recurso /blogs/";
+
+    private static final String RECURSO = "El recurso /blogs/";
     @Inject
     private SiguienteBlogLogic siguienteBlogLogic;
 

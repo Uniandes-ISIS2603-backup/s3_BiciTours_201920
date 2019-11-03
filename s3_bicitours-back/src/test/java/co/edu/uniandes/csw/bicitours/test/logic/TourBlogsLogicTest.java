@@ -34,6 +34,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class TourBlogsLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -94,7 +95,7 @@ public class TourBlogsLogicTest {
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-               blogsData.get(i).setTour(entity);
+                blogsData.get(i).setTour(entity);
             }
         }
     }
@@ -154,13 +155,15 @@ public class TourBlogsLogicTest {
         Assert.assertTrue(entity.getBlogs().contains(blogsData.get(1)));
         Assert.assertTrue(entity.getBlogs().contains(blogsData.get(2)));
     }
-        @Test
-    public void removeBlogTest() throws BusinessLogicException{
-        tourBlogsLogic.removeBlog(data.get(0).getId(),blogsData.get(0).getId());
-        Assert.assertEquals(0,tourBlogsLogic.getBlogs(blogsData.get(0).getId()).size());
+
+    @Test
+    public void removeBlogTest() throws BusinessLogicException {
+        tourBlogsLogic.removeBlog(data.get(0).getId(), blogsData.get(0).getId());
+        Assert.assertEquals(0, tourBlogsLogic.getBlogs(blogsData.get(0).getId()).size());
     }
+
     @Test(expected = BusinessLogicException.class)
-    public void removeBlogNoAsociadoTest() throws BusinessLogicException{
+    public void removeBlogNoAsociadoTest() throws BusinessLogicException {
         tourBlogsLogic.removeBlog(blogsData.get(0).getId(), data.get(1).getId());
-    }           
+    }
 }

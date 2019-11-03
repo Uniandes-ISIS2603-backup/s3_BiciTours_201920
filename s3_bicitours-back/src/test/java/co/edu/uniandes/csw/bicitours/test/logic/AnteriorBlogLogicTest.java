@@ -32,9 +32,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class AnteriorBlogLogicTest {
-        
-    private PodamFactory factory = new PodamFactoryImpl();
 
+    private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private AnteriorBlogLogic anteriorBlogLogic;
@@ -87,20 +86,23 @@ public class AnteriorBlogLogicTest {
         data.get(1).setSiguiente(data.get(2));
         data.get(1).setAnterior(data.get(0));
     }
+
     @Test
     public void removeAnteriorTest() {
         anteriorBlogLogic.removeAnterior(data.get(1).getId());
         Assert.assertNull(anteriorBlogLogic.getAnterior(data.get(1).getId()));
     }
+
     @Test
     public void getAnteriorTest() {
         BlogEntity anterior = anteriorBlogLogic.getAnterior(data.get(1).getId());
 
         Assert.assertEquals(data.get(0), anterior);
     }
-        @Test
-        public void replaceAnteriorTest() {
-        anteriorBlogLogic.replaceAnterior(data.get(1).getId(),data.get(3).getId());
+
+    @Test
+    public void replaceAnteriorTest() {
+        anteriorBlogLogic.replaceAnterior(data.get(1).getId(), data.get(3).getId());
         Assert.assertEquals(anteriorBlogLogic.getAnterior(data.get(1).getId()), data.get(3));
     }
 }

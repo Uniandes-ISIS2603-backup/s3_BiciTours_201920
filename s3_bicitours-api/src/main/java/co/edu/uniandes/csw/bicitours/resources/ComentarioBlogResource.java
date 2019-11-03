@@ -19,6 +19,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
+
 /**
  *
  * @author JuanRueda
@@ -29,6 +30,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 
 public class ComentarioBlogResource {
+
     @Inject
     private ComentarioLogic comentarioLogic; // Variable para acceder a la lógica de la aplicación. Es una inyección de dependencias.
 
@@ -41,14 +43,13 @@ public class ComentarioBlogResource {
     /**
      * Remplaza la instancia de Blog asociada a un Comentario.
      *
-     * @param comentariosId Identificador del libro que se esta actualizando. Este
-     * debe ser una cadena de dígitos.
+     * @param comentariosId Identificador del libro que se esta actualizando.
+     * Este debe ser una cadena de dígitos.
      * @param blog La blog que se será del libro.
-     * @return JSON {@link ComentarioDetailDTO} - El arreglo de libros guardado en la
-     * blog.
+     * @return JSON {@link ComentarioDetailDTO} - El arreglo de libros guardado
+     * en la blog.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra la blog o el
-     * libro.
+     * Error de lógica que se genera cuando no se encuentra la blog o el libro.
      */
     @PUT
     public ComentarioDetailDTO replaceBlog(@PathParam("comentariosId") Long comentariosId, BlogDTO blog) {

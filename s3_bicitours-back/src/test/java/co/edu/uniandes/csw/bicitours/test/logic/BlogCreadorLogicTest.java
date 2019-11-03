@@ -33,9 +33,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class BlogCreadorLogicTest {
-    
+
     private PodamFactory factory = new PodamFactoryImpl();
-    
+
     @Inject
     private BlogCreadorLogic blogCreadorLogic;
 
@@ -92,23 +92,26 @@ public class BlogCreadorLogicTest {
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-               blogsData.get(i).setCreador(entity);
+                blogsData.get(i).setCreador(entity);
             }
         }
     }
+
     @Test
     public void removeCreadorTest() {
         blogCreadorLogic.removeCreador(blogsData.get(0).getId());
         Assert.assertNull(blogCreadorLogic.getCreador(blogsData.get(0).getId()));
     }
+
     @Test
     public void getCreadorTest() {
         UsuarioEntity creador = blogCreadorLogic.getCreador(blogsData.get(0).getId());
         Assert.assertEquals(data.get(0), creador);
     }
-        @Test
-        public void replaceCreadorTest() {
-        blogCreadorLogic.replaceCreador(blogsData.get(0).getId(),data.get(1).getId());
+
+    @Test
+    public void replaceCreadorTest() {
+        blogCreadorLogic.replaceCreador(blogsData.get(0).getId(), data.get(1).getId());
         Assert.assertEquals(blogCreadorLogic.getCreador(blogsData.get(0).getId()), data.get(1));
-    }   
+    }
 }

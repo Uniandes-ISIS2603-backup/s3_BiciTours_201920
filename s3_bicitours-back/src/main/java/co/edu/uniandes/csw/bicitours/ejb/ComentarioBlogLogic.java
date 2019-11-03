@@ -18,6 +18,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class ComentarioBlogLogic {
+
     @Inject
     private ComentarioPersistence persistenciaC;
 

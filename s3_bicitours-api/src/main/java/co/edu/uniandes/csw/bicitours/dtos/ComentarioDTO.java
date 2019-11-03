@@ -12,71 +12,54 @@ import java.io.Serializable;
  *
  * @author JuanRueda
  */
-public class ComentarioDTO implements Serializable
-{
+public class ComentarioDTO implements Serializable {
+
     private Long id;
     private String texto;
     private Integer calificacion;
     private UsuarioDTO usuario;
     private BlogDTO blog;
     private TourDTO tour;
-    
-    public ComentarioDTO()
-    {
-        
+
+    public ComentarioDTO() {
+
     }
-    
-    public ComentarioDTO(ComentarioEntity comentario) 
-    {
+
+    public ComentarioDTO(ComentarioEntity comentario) {
         if (comentario != null) {
             this.id = comentario.getId();
             this.texto = comentario.getTexto();
             this.calificacion = comentario.getCalificacion();
-            if (comentario.getUsuario() != null) 
-            {
+            if (comentario.getUsuario() != null) {
                 this.usuario = new UsuarioDTO(comentario.getUsuario());
-            }
-            else 
-            {
+            } else {
                 this.usuario = null;
             }
-            if (comentario.getBlog() != null) 
-            {
+            if (comentario.getBlog() != null) {
                 this.blog = new BlogDTO(comentario.getBlog());
-            }
-            else 
-            {
+            } else {
                 this.blog = null;
             }
-            if (comentario.getTour() != null) 
-            {
+            if (comentario.getTour() != null) {
                 this.tour = new TourDTO(comentario.getTour());
-            }
-            else 
-            {
+            } else {
                 this.tour = null;
             }
         }
     }
-    
-    
 
-    public ComentarioEntity toEntity() 
-    {
+    public ComentarioEntity toEntity() {
         ComentarioEntity comentario = new ComentarioEntity();
         comentario.setId(this.getId());
         comentario.setTexto(this.getTexto());
         comentario.setCalificacion(this.getCalificacion());
-        if (this.usuario != null) 
-        {
+        if (this.usuario != null) {
             comentario.setUsuario(this.usuario.toEntity());
         }
-        if (this.blog != null) 
-        {
+        if (this.blog != null) {
             comentario.setBlog(this.blog.toEntity());
         }
-        if (this.tour != null) 
-        {
+        if (this.tour != null) {
             comentario.setTour(this.tour.toEntity());
         }
         return comentario;
@@ -123,7 +106,7 @@ public class ComentarioDTO implements Serializable
     public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
-    
+
     /**
      * @return the usuario.
      */
@@ -137,7 +120,7 @@ public class ComentarioDTO implements Serializable
     public void setUsuario(UsuarioDTO usuario) {
         this.usuario = usuario;
     }
-    
+
     /**
      * @return the blog.
      */
@@ -151,7 +134,7 @@ public class ComentarioDTO implements Serializable
     public void setBlog(BlogDTO blog) {
         this.blog = blog;
     }
-    
+
     /**
      * @return the tour.
      */
@@ -165,5 +148,5 @@ public class ComentarioDTO implements Serializable
     public void setTour(TourDTO tour) {
         this.tour = tour;
     }
-    
+
 }

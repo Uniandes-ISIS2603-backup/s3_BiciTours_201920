@@ -19,13 +19,11 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class FotoPersistence {
-    
+
     @PersistenceContext(unitName = "bicitoursPU")
 
     protected EntityManager em;
-    
 
-    
     /**
      * Método para persisitir la entidad en la base de datos.
      *
@@ -38,28 +36,28 @@ public class FotoPersistence {
 
         return fotoEntity;
     }
-    
-     /**
+
+    /**
      * Busca si existe una foto con el id pasado por parámetro
+     *
      * @param fotoId: id correspondiente a la foto buscada.
      * @return la foto buscada.
      */
-    public FotoEntity find(long fotoId)
-    {
+    public FotoEntity find(long fotoId) {
         return em.find(FotoEntity.class, fotoId);
     }
-    
-         /**
+
+    /**
      * Devuelve una lista con todas las fotos de la base de datos.
+     *
      * @return una lista con todas las fotos que encuentre en la base de datos,
      */
-    public List<FotoEntity> findAll()
-    {
+    public List<FotoEntity> findAll() {
 
-        TypedQuery<FotoEntity> query=em.createQuery("select u from FotoEntity u", FotoEntity.class);
+        TypedQuery<FotoEntity> query = em.createQuery("select u from FotoEntity u", FotoEntity.class);
         return query.getResultList();
     }
-    
+
     /**
      * Actualiza una foto.
      *
@@ -71,12 +69,11 @@ public class FotoPersistence {
         return em.merge(fotoEntity);
     }
 
-        public void delete(Long fotoId)
-    {
+    public void delete(Long fotoId) {
         FotoEntity fotoEntity = find(fotoId);
-        if(fotoEntity != null)
+        if (fotoEntity != null) {
             em.remove(fotoEntity);
+        }
     }
-    
-}
 
+}

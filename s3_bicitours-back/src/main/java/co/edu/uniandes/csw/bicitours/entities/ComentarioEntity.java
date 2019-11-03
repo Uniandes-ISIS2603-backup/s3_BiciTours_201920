@@ -18,34 +18,31 @@ import uk.co.jemos.podam.common.PodamExclude;
  *
  * @author JuanRueda
  */
-
 @Entity
-public class ComentarioEntity extends BaseEntity implements Serializable{
-    
+public class ComentarioEntity extends BaseEntity implements Serializable {
+
     private String texto;
-    
+
     private Integer calificacion;
-    
+
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<ComentarioEntity> respuestas = new ArrayList<>();
-    
-    /**@ManyToOne
-    private ComentarioEntity head;
-    */
-    
+
+    /**
+     * @ManyToOne private ComentarioEntity head;
+     */
     @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
-    
+
     @PodamExclude
     @ManyToOne
     private BlogEntity blog;
-    
+
     @PodamExclude
     @ManyToOne
     private TourEntity tour;
-    
 
     /**
      * @return the texto
@@ -88,7 +85,7 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     public void setRespuestas(List<ComentarioEntity> respuestas) {
         this.respuestas = respuestas;
     }
-    
+
     /**
      * @return the blog
      */
@@ -116,7 +113,7 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
-    
+
     /**
      * @return the tour
      */
@@ -130,6 +127,5 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     public void setTour(TourEntity tour) {
         this.tour = tour;
     }
-    
-    
+
 }

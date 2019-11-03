@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package co.edu.uniandes.csw.bicitours.test.persistence;
+
 import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
 import co.edu.uniandes.csw.bicitours.persistence.SeguroPersistence;
 import java.util.ArrayList;
@@ -172,7 +173,7 @@ public class SeguroPersistenceTest {
 
         SeguroEntity resp = em.find(SeguroEntity.class, entity.getId());
 
-           org.junit.Assert.assertEquals(newEntity.getTipo(), resp.getTipo());
+        org.junit.Assert.assertEquals(newEntity.getTipo(), resp.getTipo());
         org.junit.Assert.assertEquals(newEntity.getCaracteristicas(), resp.getCaracteristicas());
         org.junit.Assert.assertEquals(newEntity.getCondiciones(), resp.getCondiciones());
     }

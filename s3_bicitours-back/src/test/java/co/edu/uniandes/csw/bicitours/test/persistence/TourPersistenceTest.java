@@ -30,31 +30,30 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class TourPersistenceTest {
-         
+
     @Inject
     private TourPersistence tp;
-    
-    @PersistenceContext 
+
+    @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     UserTransaction utx;
-    
+
     private List<TourEntity> data = new ArrayList<TourEntity>();
-    
+
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
      */
     @Deployment
-    public static JavaArchive createDeployment()
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(TourEntity.class.getPackage())
                 .addPackage(TourPersistence.class.getPackage())
-                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
-                .addAsManifestResource("META-INF/beans.xml","beans.xml");
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
     /**
@@ -77,9 +76,9 @@ public class TourPersistenceTest {
             }
         }
     }
-    
-        /**
-     * Inserta los datos iniciales 
+
+    /**
+     * Inserta los datos iniciales
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -90,15 +89,15 @@ public class TourPersistenceTest {
             data.add(entity);
         }
     }
-       
-     /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
         em.createQuery("delete from TourEntity").executeUpdate();
     }
-    
-     /**
+
+    /**
      * Prueba el funcionamiento del método findAll() de TourPersistence
      */
     @Test
@@ -124,38 +123,36 @@ public class TourPersistenceTest {
         TourEntity entity = data.get(0);
         TourEntity newEntity = tp.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(newEntity.getNombre(),entity.getNombre());
-        Assert.assertEquals(newEntity.getCosto(),entity.getCosto());
-        Assert.assertEquals(newEntity.getLugar(),entity.getLugar());
-        Assert.assertEquals(newEntity.getDescripcion(),entity.getDescripcion());
-        Assert.assertEquals(newEntity.getDuracion(),entity.getDuracion());
-        Assert.assertEquals(newEntity.getDificultad(),entity.getDificultad());
-        Assert.assertEquals(newEntity.getFecha(),entity.getFecha());
-        Assert.assertEquals(newEntity.getTerminado(),entity.getTerminado());
+        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newEntity.getCosto(), entity.getCosto());
+        Assert.assertEquals(newEntity.getLugar(), entity.getLugar());
+        Assert.assertEquals(newEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newEntity.getDuracion(), entity.getDuracion());
+        Assert.assertEquals(newEntity.getDificultad(), entity.getDificultad());
+        Assert.assertEquals(newEntity.getFecha(), entity.getFecha());
+        Assert.assertEquals(newEntity.getTerminado(), entity.getTerminado());
     }
 
     /**
      * Prueba el método create() de la clase TourPersistence
      */
     @Test
-    public void createTourTest()
-    {
+    public void createTourTest() {
         PodamFactory factory = new PodamFactoryImpl();
         TourEntity newTEntity = factory.manufacturePojo(TourEntity.class);
         TourEntity tEntity = tp.create(newTEntity);
         Assert.assertNotNull(tEntity);
         TourEntity entity = em.find(TourEntity.class, tEntity.getId());
-        Assert.assertEquals(newTEntity.getNombre(),entity.getNombre());
-        Assert.assertEquals(newTEntity.getCosto(),entity.getCosto());
-        Assert.assertEquals(newTEntity.getLugar(),entity.getLugar());
-        Assert.assertEquals(newTEntity.getDescripcion(),entity.getDescripcion());
-        Assert.assertEquals(newTEntity.getDuracion(),entity.getDuracion());
-        Assert.assertEquals(newTEntity.getDificultad(),entity.getDificultad());
-        Assert.assertEquals(newTEntity.getFecha(),entity.getFecha());
-        Assert.assertEquals(newTEntity.getTerminado(),entity.getTerminado());
+        Assert.assertEquals(newTEntity.getNombre(), entity.getNombre());
+        Assert.assertEquals(newTEntity.getCosto(), entity.getCosto());
+        Assert.assertEquals(newTEntity.getLugar(), entity.getLugar());
+        Assert.assertEquals(newTEntity.getDescripcion(), entity.getDescripcion());
+        Assert.assertEquals(newTEntity.getDuracion(), entity.getDuracion());
+        Assert.assertEquals(newTEntity.getDificultad(), entity.getDificultad());
+        Assert.assertEquals(newTEntity.getFecha(), entity.getFecha());
+        Assert.assertEquals(newTEntity.getTerminado(), entity.getTerminado());
     }
-    
-    
+
     /**
      * Prueba el método que elimina un tour.
      */
@@ -182,16 +179,15 @@ public class TourPersistenceTest {
 
         TourEntity resp = em.find(TourEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getNombre(),resp.getNombre());
-        Assert.assertEquals(newEntity.getCosto(),resp.getCosto());
-        Assert.assertEquals(newEntity.getDuracion(),resp.getDuracion());
-        Assert.assertEquals(newEntity.getFecha(),resp.getFecha());
-        Assert.assertEquals(newEntity.getDescripcion(),resp.getDescripcion());
-        Assert.assertEquals(newEntity.getDificultad(),resp.getDificultad());
-        Assert.assertEquals(newEntity.getLugar(),resp.getLugar());
-        Assert.assertEquals(newEntity.getTerminado(),resp.getTerminado());
+        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(newEntity.getCosto(), resp.getCosto());
+        Assert.assertEquals(newEntity.getDuracion(), resp.getDuracion());
+        Assert.assertEquals(newEntity.getFecha(), resp.getFecha());
+        Assert.assertEquals(newEntity.getDescripcion(), resp.getDescripcion());
+        Assert.assertEquals(newEntity.getDificultad(), resp.getDificultad());
+        Assert.assertEquals(newEntity.getLugar(), resp.getLugar());
+        Assert.assertEquals(newEntity.getTerminado(), resp.getTerminado());
 
     }
 
 }
-

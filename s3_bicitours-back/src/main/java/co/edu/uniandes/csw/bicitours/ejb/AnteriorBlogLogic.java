@@ -16,19 +16,22 @@ import javax.inject.Inject;
  */
 @Stateless
 public class AnteriorBlogLogic {
+
     @Inject
     private BlogPersistence blogPersistence;
+
     public BlogEntity getAnterior(Long blogsId) {
 
         return blogPersistence.find(blogsId).getAnterior();
     }
-    
+
     public BlogEntity replaceAnterior(Long blogsId, Long blogsAnteriorId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         blogEntity.setAnterior(blogPersistence.find(blogsAnteriorId));
         return blogPersistence.find(blogsAnteriorId);
-        
+
     }
+
     public void removeAnterior(Long blogsId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         blogEntity.setAnterior(null);

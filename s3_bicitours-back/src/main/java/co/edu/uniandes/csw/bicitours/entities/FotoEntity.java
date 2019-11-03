@@ -16,36 +16,30 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Jhuliana Barrios
  */
 @Entity
-public class FotoEntity extends BaseEntity implements Serializable{
-    
+public class FotoEntity extends BaseEntity implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     private String ruta;
-    
+
     @PodamExclude
     @ManyToOne()
     TourEntity tour;
-    
-    
-    public String getRuta()
-    {
-    return ruta;
+
+    public String getRuta() {
+        return ruta;
     }
-    
-    public void setRuta(String r)
-    {
+
+    public void setRuta(String r) {
         ruta = r;
     }
-    
-    public TourEntity getTour()
-    {
+
+    public TourEntity getTour() {
         return tour;
     }
-    
-    public void setTour(TourEntity t)
-    {
-        tour=t;
-    }
-    
-}
 
+    public void setTour(TourEntity t) {
+        tour = t;
+    }
+
+}

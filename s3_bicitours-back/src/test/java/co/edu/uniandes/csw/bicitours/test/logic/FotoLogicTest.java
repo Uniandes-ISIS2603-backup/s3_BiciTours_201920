@@ -33,7 +33,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class FotoLogicTest {
 
-
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -46,7 +45,7 @@ public class FotoLogicTest {
     private UserTransaction utx;
 
     private List<FotoEntity> data = new ArrayList<>();
-    
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -56,7 +55,6 @@ public class FotoLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
 
     /**
      * Configuración inicial de la prueba.
@@ -97,7 +95,7 @@ public class FotoLogicTest {
             data.add(entity);
         }
     }
-    
+
     @Test
     public void createFotoTest() throws BusinessLogicException {
         FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
@@ -133,7 +131,7 @@ public class FotoLogicTest {
     }
 
     @Test
-    public void updateFotoTest(){
+    public void updateFotoTest() {
         FotoEntity entity = data.get(0);
         FotoEntity pojoEntity = factory.manufacturePojo(FotoEntity.class);
         pojoEntity.setId(entity.getId());
@@ -144,10 +142,10 @@ public class FotoLogicTest {
     }
 
     @Test
-    public void deleteFotoTest()  {
+    public void deleteFotoTest() {
         FotoEntity entity = data.get(0);
         fotoLogic.deleteFoto(entity.getId());
         FotoEntity deleted = em.find(FotoEntity.class, entity.getId());
         Assert.assertNull(deleted);
-    }    
+    }
 }

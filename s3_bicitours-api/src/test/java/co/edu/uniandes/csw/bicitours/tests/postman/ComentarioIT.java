@@ -25,10 +25,9 @@ import org.junit.runner.RunWith;
  *
  * @author JuanRueda
  */
-
 @RunWith(Arquillian.class)
 public class ComentarioIT {
-    
+
     private static final String COLLECTION = "Comentario-Tests.postman_collection";
 
     @Deployment(testable = true)

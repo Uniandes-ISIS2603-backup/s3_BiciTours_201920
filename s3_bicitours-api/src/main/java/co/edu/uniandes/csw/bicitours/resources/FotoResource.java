@@ -28,27 +28,27 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class FotoResource {
-    
+
     @Inject
     private FotoLogic fotoLogic;
-    
+
     /**
      * Crea una nueva foto con la informacion que se recibe en el cuerpo de la
-     * petición y se regresa un objeto identico con una identificación generada por la
-     * base de datos.
+     * petición y se regresa un objeto identico con una identificación generada
+     * por la base de datos.
      *
      * @param t {@link FotoDTO} - La foto que se desea guardar.
      * @return JSON {@link FotoDTO} - La foto guardada con el atributo id
      * autogenerado.
-     */    
+     */
     @POST
-    public FotoDTO createFoto(FotoDTO t){
+    public FotoDTO createFoto(FotoDTO t) {
         FotoEntity fotoEntity = t.toEntity();
         FotoEntity nuevoFotoEntity = fotoLogic.createFoto(fotoEntity);
 
         return new FotoDTO(nuevoFotoEntity);
     }
-    
+
     /**
      * Borra la foto con el id asociado recibido en la URL.
      *
@@ -59,13 +59,13 @@ public class FotoResource {
      */
     @DELETE
     @Path("{fotosId: \\d+}")
-    public void deletoFoto(@PathParam("fotosId")long fotosId)
-    {
-        if(fotoLogic.getFoto(fotosId)== null)
+    public void deletoFoto(@PathParam("fotosId") long fotosId) {
+        if (fotoLogic.getFoto(fotosId) == null) {
             throw new WebApplicationException("El recurso /fotos/" + fotosId + " no existe.", 404);
-        fotoLogic.deleteFoto(fotosId);       
+        }
+        fotoLogic.deleteFoto(fotosId);
     }
-    
+
     /**
      * Busca la foto con el id asociado recibido en la URL y lo devuelve.
      *
@@ -74,19 +74,18 @@ public class FotoResource {
      * @return JSON {@link FotoDTO} - La foto buscada
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra la foto.
-     */    
+     */
     @GET
     @Path("{fotosId: \\d+}")
-    public FotoDTO getFoto(@PathParam("fotoId") long fotosId)
-    {
+    public FotoDTO getFoto(@PathParam("fotoId") long fotosId) {
         FotoEntity entidad = fotoLogic.getFoto(fotosId);
-        
-        if(entidad == null)
+
+        if (entidad == null) {
             throw new WebApplicationException("El recurso /fotos/" + fotosId + " no existe.", 404);
-        
+        }
 
         return new FotoDTO(entidad);
-        
+
     }
-    
+
 }

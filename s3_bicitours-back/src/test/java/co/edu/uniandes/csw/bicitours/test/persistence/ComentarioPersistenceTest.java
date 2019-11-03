@@ -30,41 +30,34 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ComentarioPersistenceTest {
-    
+
     @Inject
     private ComentarioPersistence cp;
-    
+
     @PersistenceContext
     private EntityManager em;
-     
+
     @Inject
     UserTransaction utx;
-    
+
     private List<ComentarioEntity> data = new ArrayList<ComentarioEntity>();
-    
-     /**
+
+    /**
      * Configuración inicial de la prueba.
      */
     @Before
-    public void configTest() 
-    {
-        try 
-        {
+    public void configTest() {
+        try {
             utx.begin();
             em.joinTransaction();
             clearData();
             insertData();
             utx.commit();
-        } 
-        catch (Exception e) 
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-            try 
-            {
+            try {
                 utx.rollback();
-            } 
-            catch (Exception e1) 
-            {
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
         }
@@ -90,20 +83,18 @@ public class ComentarioPersistenceTest {
             data.add(entity);
         }
     }
-    
+
     @Deployment
-    public static JavaArchive createDeployment()
-    {
-         return ShrinkWrap.create(JavaArchive.class)
+    public static JavaArchive createDeployment() {
+        return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(ComentarioEntity.class.getPackage())
                 .addPackage(ComentarioPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     @Test
-    public void createComentarioTest()
-    {
+    public void createComentarioTest() {
         PodamFactory factory = new PodamFactoryImpl();
         ComentarioEntity newComentarioEntity = factory.manufacturePojo(ComentarioEntity.class);
         ComentarioEntity comentarioEntity = cp.create(newComentarioEntity);
@@ -112,7 +103,7 @@ public class ComentarioPersistenceTest {
         Assert.assertEquals(newComentarioEntity.getTexto(), entity.getTexto());
         Assert.assertEquals(newComentarioEntity.getCalificacion(), entity.getCalificacion());
     }
-    
+
     /**
      * Prueba para consultar un Comentario.
      */
@@ -124,7 +115,7 @@ public class ComentarioPersistenceTest {
         Assert.assertEquals(entity.getTexto(), newEntity.getTexto());
         Assert.assertEquals(entity.getCalificacion(), newEntity.getCalificacion());
     }
-    
+
     /**
      * Prueba para consultar la lista de Comentarios.
      */
@@ -132,20 +123,17 @@ public class ComentarioPersistenceTest {
     public void findAllComentariosTest() {
         List<ComentarioEntity> list = cp.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (ComentarioEntity ent : list) 
-        {
+        for (ComentarioEntity ent : list) {
             boolean found = false;
-            for (ComentarioEntity entity : data) 
-            {
-                if (ent.getId().equals(entity.getId())) 
-                {
+            for (ComentarioEntity entity : data) {
+                if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
             }
             Assert.assertTrue(found);
         }
     }
-    
+
     /**
      * Prueba para actualizar un Comentario.
      */
@@ -160,7 +148,7 @@ public class ComentarioPersistenceTest {
         Assert.assertEquals(newEntity.getTexto(), resp.getTexto());
         Assert.assertEquals(newEntity.getCalificacion(), resp.getCalificacion());
     }
-    
+
     /**
      * Prueba para eliminar un Comentario.
      */

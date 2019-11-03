@@ -95,7 +95,7 @@ public class BlogsComentarioLogicTest {
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-               comentariosData.get(i).setBlog(entity);
+                comentariosData.get(i).setBlog(entity);
             }
         }
     }
@@ -149,14 +149,15 @@ public class BlogsComentarioLogicTest {
         Assert.assertTrue(entity.getComentarios().contains(comentariosData.get(1)));
         Assert.assertTrue(entity.getComentarios().contains(comentariosData.get(2)));
     }
-    
+
     @Test
-    public void removeComentarioTest() throws BusinessLogicException{
+    public void removeComentarioTest() throws BusinessLogicException {
         blogComentariosLogic.removeComentario(comentariosData.get(0).getId(), data.get(0).getId());
         Assert.assertEquals(0, blogComentariosLogic.getComentarios(data.get(0).getId()).size());
     }
+
     @Test(expected = BusinessLogicException.class)
-    public void removeComentarioNoAsociadoTest() throws BusinessLogicException{
+    public void removeComentarioNoAsociadoTest() throws BusinessLogicException {
         blogComentariosLogic.removeComentario(comentariosData.get(0).getId(), data.get(1).getId());
-    }      
+    }
 }

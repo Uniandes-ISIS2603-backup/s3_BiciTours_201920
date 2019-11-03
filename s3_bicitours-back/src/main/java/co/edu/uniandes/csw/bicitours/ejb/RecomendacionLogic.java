@@ -20,26 +20,22 @@ import javax.inject.Inject;
 @Stateless
 public class RecomendacionLogic {
 
-
     @Inject
     private RecomendacionPersistence persistence;
 
     /**
      * Se encarga de crear un Recomendacion en la base de datos.
      *
-     * @param recomendacionEntity Objeto de RecomendacionEntity con los datos nuevos
+     * @param recomendacionEntity Objeto de RecomendacionEntity con los datos
+     * nuevos
      * @return Objeto de RecomendacionEntity con los datos nuevos y su ID.
      */
     public RecomendacionEntity createRecomendacion(RecomendacionEntity recomendacionEntity) throws BusinessLogicException {
-        if(recomendacionEntity.getIndumentaria()!=null && recomendacionEntity.getTipoBici()!=null)
-        {
+        if (recomendacionEntity.getIndumentaria() != null && recomendacionEntity.getTipoBici() != null) {
 
-
-        return persistence.create(recomendacionEntity);
-        }
-        else
-              {
-            throw new BusinessLogicException("Los campos ingresados para la informacion de la recomendacion no son correctos"); 
+            return persistence.create(recomendacionEntity);
+        } else {
+            throw new BusinessLogicException("Los campos ingresados para la informacion de la recomendacion no son correctos");
         }
     }
 
@@ -50,8 +46,6 @@ public class RecomendacionLogic {
      */
     public List<RecomendacionEntity> getRecomendacions() {
 
-
-
         return persistence.findAll();
     }
 
@@ -59,7 +53,8 @@ public class RecomendacionLogic {
      * Obtiene los datos de una instancia de Recomendacion a partir de su ID.
      *
      * @param recomendacionsId Identificador de la instancia a consultar
-     * @return Instancia de RecomendacionEntity con los datos del Recomendacion consultado.
+     * @return Instancia de RecomendacionEntity con los datos del Recomendacion
+     * consultado.
      */
     public RecomendacionEntity getRecomendacion(Long recomendacionesId) {
 
@@ -70,16 +65,16 @@ public class RecomendacionLogic {
      * Actualiza la información de una instancia de Recomendacion.
      *
      * @param recomendacionsId Identificador de la instancia a actualizar
-     * @param recomendacionEntity Instancia de RecomendacionEntity con los nuevos datos.
+     * @param recomendacionEntity Instancia de RecomendacionEntity con los
+     * nuevos datos.
      * @return Instancia de RecomendacionEntity con los datos actualizados.
      */
     public RecomendacionEntity updateRecomendacion(Long recomendacionsId, RecomendacionEntity recomendacionEntity) {
 
-
-
         return persistence.update(recomendacionEntity);
     }
-     public RecomendacionEntity updateRecomendacion(RecomendacionEntity recomendacionEntity) {
+
+    public RecomendacionEntity updateRecomendacion(RecomendacionEntity recomendacionEntity) {
 
         return persistence.update(recomendacionEntity);
     }
@@ -88,9 +83,10 @@ public class RecomendacionLogic {
      * Elimina una instancia de Recomendacion de la base de datos.
      *
      * @param recomendacionsId Identificador de la instancia a eliminar.
-     * @throws BusinessLogicException si el recomendacion tiene libros asociados.
+     * @throws BusinessLogicException si el recomendacion tiene libros
+     * asociados.
      */
     public void deleteRecomendacion(Long recomendacionsId) {
         persistence.delete(recomendacionsId);
-} 
+    }
 }

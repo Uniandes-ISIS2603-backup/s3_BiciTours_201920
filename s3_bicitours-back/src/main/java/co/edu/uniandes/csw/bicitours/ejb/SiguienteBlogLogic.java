@@ -16,6 +16,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class SiguienteBlogLogic {
+
     @Inject
     private BlogPersistence blogPersistence;
 
@@ -23,13 +24,14 @@ public class SiguienteBlogLogic {
 
         return blogPersistence.find(blogsId).getSiguiente();
     }
-    
+
     public BlogEntity replaceSiguiente(Long blogsId, Long blogsSiguienteId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         blogEntity.setSiguiente(blogPersistence.find(blogsSiguienteId));
         return blogPersistence.find(blogsSiguienteId);
-        
+
     }
+
     public void removeSiguiente(Long blogsId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         blogEntity.setSiguiente(null);

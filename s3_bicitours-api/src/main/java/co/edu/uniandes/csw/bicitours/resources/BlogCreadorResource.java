@@ -32,6 +32,7 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogCreadorResource {
+
     @Inject
     private BlogCreadorLogic blogCreadorLogic;
 
@@ -39,6 +40,7 @@ public class BlogCreadorResource {
     private UsuarioLogic usuarioLogic;
     @Inject
     private BlogLogic blogLogic;
+
     @GET
     public UsuarioDetailDTO getCreador(@PathParam("blogsId") Long blogsId) {
         UsuarioEntity usuarioEntity = blogCreadorLogic.getCreador(blogsId);
@@ -64,5 +66,5 @@ public class BlogCreadorResource {
     @DELETE
     public void removeCreador(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         blogCreadorLogic.removeCreador(blogsId);
-    }   
+    }
 }

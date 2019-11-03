@@ -14,16 +14,14 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
-*@author Jhuliana Barrios 
-*/
-
+ * @author Jhuliana Barrios
+ */
 @Stateless
-public class TourPersistence{
+public class TourPersistence {
+
     @PersistenceContext(unitName = "bicitoursPU")
 
     protected EntityManager em;
-    
-
 
     /**
      * Método para persisitir la entidad en la base de datos.
@@ -37,29 +35,29 @@ public class TourPersistence{
 
         return tourEntity;
     }
-    
+
     /**
      * Busca si existe un tour con el id pasado por parámetro
+     *
      * @param tourId: id correspondiente al tour buscado.
      * @return un tour.
      */
-    public TourEntity find(long tourId)
-    {
+    public TourEntity find(long tourId) {
 
         return em.find(TourEntity.class, tourId);
     }
-    
-         /**
+
+    /**
      * Devuelve una lista con todos los toures de la base de datos.
+     *
      * @return una lista con todos los toures que encuentre en la base de datos,
      */
-    public List<TourEntity> findAll()
-    {
+    public List<TourEntity> findAll() {
 
-        TypedQuery<TourEntity> query=em.createQuery("select u from TourEntity u", TourEntity.class);
+        TypedQuery<TourEntity> query = em.createQuery("select u from TourEntity u", TourEntity.class);
         return query.getResultList();
     }
-    
+
     /**
      * Actualiza un tour.
      *
@@ -71,10 +69,9 @@ public class TourPersistence{
         return em.merge(tourEntity);
     }
 
-        public void delete(Long tourId)
-    {
+    public void delete(Long tourId) {
         TourEntity tourEntity = find(tourId);
         em.remove(tourEntity);
     }
-	
+
 }

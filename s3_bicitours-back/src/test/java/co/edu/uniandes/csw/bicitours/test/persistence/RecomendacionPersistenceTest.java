@@ -30,27 +30,27 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class RecomendacionPersistenceTest {
+
     @Inject
     private RecomendacionPersistence ep;
-    
+
     @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     UserTransaction utx;
-    
+
     private List<RecomendacionEntity> data = new ArrayList<RecomendacionEntity>();
-    
+
     @Deployment
-    public static JavaArchive createDeployment( )
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(RecomendacionEntity.class.getPackage())
                 .addPackage(RecomendacionPersistence.class.getPackage())
-                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
-                .addAsManifestResource("META-INF/beans.xml","beans.xml");
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
+
     /**
      * Configuración inicial de la prueba.
      */
@@ -75,16 +75,14 @@ public class RecomendacionPersistenceTest {
     /**
      * Limpia las tablas implicadas en las pruebas
      */
-    private void clearData() 
-    {
+    private void clearData() {
         em.createQuery("delete from RecomendacionEntity").executeUpdate();
     }
-    
+
     /**
      * Inserta los datos iniciales para las pruebas
      */
-    private void insertData() 
-    {
+    private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
             RecomendacionEntity entity = factory.manufacturePojo(RecomendacionEntity.class);
@@ -93,55 +91,49 @@ public class RecomendacionPersistenceTest {
             data.add(entity);
         }
     }
-    
+
     @Test
-    public void createRecomendacionTest( )
-    {
-        PodamFactory factory = new PodamFactoryImpl( );
+    public void createRecomendacionTest() {
+        PodamFactory factory = new PodamFactoryImpl();
         RecomendacionEntity recomendacion = factory.manufacturePojo(RecomendacionEntity.class);
         RecomendacionEntity result = ep.create(recomendacion);
         Assert.assertNotNull(result);
-        
-        RecomendacionEntity entity = em.find(RecomendacionEntity.class, result.getId( ));
+
+        RecomendacionEntity entity = em.find(RecomendacionEntity.class, result.getId());
         Assert.assertEquals(recomendacion.getIndumentaria(), entity.getIndumentaria());
         Assert.assertEquals(recomendacion.getTipoBici(), entity.getTipoBici());
     }
-    
+
     /**
      * Prueba para encontrar un Recomendacion.
      */
     @Test
-    public void findRecomendacionTest()
-    {
+    public void findRecomendacionTest() {
         RecomendacionEntity recomendacion = data.get(0);
         RecomendacionEntity newEntity = ep.find(recomendacion.getId());
         Assert.assertNotNull(newEntity);
         Assert.assertEquals(recomendacion.getIndumentaria(), newEntity.getIndumentaria());
         Assert.assertEquals(recomendacion.getTipoBici(), newEntity.getTipoBici());
     }
-    
+
     /**
      * Prueba para consultar la lista de Recomendacions.
      */
     @Test
-    public void findAllRecomendacionsTest() 
-    {
+    public void findAllRecomendacionsTest() {
         List<RecomendacionEntity> list = ep.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for (RecomendacionEntity recomendacion : list) 
-        {
+        for (RecomendacionEntity recomendacion : list) {
             boolean found = false;
-            for (RecomendacionEntity entity : data) 
-            {
-                if (recomendacion.getId().equals(entity.getId())) 
-                {
+            for (RecomendacionEntity entity : data) {
+                if (recomendacion.getId().equals(entity.getId())) {
                     found = true;
                 }
             }
             Assert.assertTrue(found);
         }
     }
-    
+
     /**
      * Prueba para actualizar un Recomendacion.
      */
@@ -160,7 +152,7 @@ public class RecomendacionPersistenceTest {
         Assert.assertEquals(newEntity.getIndumentaria(), resp.getIndumentaria());
         Assert.assertEquals(newEntity.getTipoBici(), resp.getTipoBici());
     }
-    
+
     /**
      * Prueba para eliminar un Recomendacion.
      */
@@ -171,5 +163,5 @@ public class RecomendacionPersistenceTest {
         RecomendacionEntity deleted = em.find(RecomendacionEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-    
+
 }

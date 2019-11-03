@@ -19,23 +19,23 @@ import java.util.List;
  * @author Juan Sebastián González Rojas
  */
 //clase para el manejo de relaciones con cardinalidad múltiple en modelo DTO
+public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
+    // relación  cero o muchos comentarios 
 
-public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
-     // relación  cero o muchos comentarios 
     private List<ComentarioDTO> comentarios;
-    
+
     // relación  cero o muchos seguros 
     private List<SeguroDTO> seguros;
 
     // relación  cero o muchos Tours
     private List<TourDTO> visitados;
-    
+
     // relación  cero o muchos Blog 
     private List<BlogDTO> favoritos;
 
     // relación  cero o muchos Blog
     private List<BlogDTO> misBlogs;
-    
+
     /**
      * Constructor por defecto
      */
@@ -53,8 +53,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
         //Revisión de listas asociadas para transformarlas a DTOs
         if (usuarioEntity.getComentarios() != null) {
             comentarios = new ArrayList<>();
-            for (ComentarioEntity comentarioActual : usuarioEntity.getComentarios()) 
-            {
+            for (ComentarioEntity comentarioActual : usuarioEntity.getComentarios()) {
                 comentarios.add(new ComentarioDTO(comentarioActual));
             }
         }
@@ -64,27 +63,21 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
                 favoritos.add(new BlogDTO(blogActual));
             }
         }
-        if (usuarioEntity.getMisBlogs() != null)
-        {
+        if (usuarioEntity.getMisBlogs() != null) {
             misBlogs = new ArrayList<>();
-            for (BlogEntity blogActual : usuarioEntity.getMisBlogs()) 
-            {
+            for (BlogEntity blogActual : usuarioEntity.getMisBlogs()) {
                 misBlogs.add(new BlogDTO(blogActual));
             }
         }
-        if (usuarioEntity.getVisitados() != null)
-        {
+        if (usuarioEntity.getVisitados() != null) {
             visitados = new ArrayList<>();
-            for (TourEntity tourActual : usuarioEntity.getVisitados()) 
-            {
+            for (TourEntity tourActual : usuarioEntity.getVisitados()) {
                 visitados.add(new TourDTO(tourActual));
             }
         }
-        if (usuarioEntity.getSeguros() != null)
-        {
+        if (usuarioEntity.getSeguros() != null) {
             seguros = new ArrayList<>();
-            for(SeguroEntity seguroActual : usuarioEntity.getSeguros())
-            {
+            for (SeguroEntity seguroActual : usuarioEntity.getSeguros()) {
                 seguros.add(new SeguroDTO(seguroActual));
             }
         }
@@ -101,42 +94,35 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
         //Revisión de listas asociadas para transformarlas a entities
         if (comentarios != null) {
             List<ComentarioEntity> comentariosEntity = new ArrayList<>();
-            for (ComentarioDTO comentarioDTOActual : getComentarios()) 
-            {
+            for (ComentarioDTO comentarioDTOActual : getComentarios()) {
                 comentariosEntity.add(comentarioDTOActual.toEntity());
             }
             usuarioEntity.setComentarios(comentariosEntity);
         }
-        if (favoritos!= null) {
+        if (favoritos != null) {
             List<BlogEntity> blogsEntity = new ArrayList<>();
             for (BlogDTO blogDTOActual : getFavoritos()) {
                 blogsEntity.add(blogDTOActual.toEntity());
             }
             usuarioEntity.setFavoritos(blogsEntity);
         }
-        if (usuarioEntity.getMisBlogs() != null)
-        {
+        if (usuarioEntity.getMisBlogs() != null) {
             List<BlogEntity> misBlogsEntity = new ArrayList<>();
-            for (BlogDTO blogDTOActual : getMisBlogs()) 
-            {
+            for (BlogDTO blogDTOActual : getMisBlogs()) {
                 misBlogsEntity.add(blogDTOActual.toEntity());
             }
             usuarioEntity.setMisBlogs(misBlogsEntity);
         }
-        if (usuarioEntity.getVisitados() != null)
-        {
+        if (usuarioEntity.getVisitados() != null) {
             List<TourEntity> visitadosEntity = new ArrayList<>();
-            for (TourDTO tourDTOActual : getVisitados()) 
-            {
+            for (TourDTO tourDTOActual : getVisitados()) {
                 visitadosEntity.add(tourDTOActual.toEntity());
             }
             usuarioEntity.setVisitados(visitadosEntity);
         }
-        if (usuarioEntity.getSeguros() != null)
-        {
+        if (usuarioEntity.getSeguros() != null) {
             List<SeguroEntity> segurosEntity = new ArrayList<>();
-            for(SeguroDTO seguroDTOActual : getSeguros())
-            {
+            for (SeguroDTO seguroDTOActual : getSeguros()) {
                 segurosEntity.add(seguroDTOActual.toEntity());
             }
             usuarioEntity.setSeguros(segurosEntity);
@@ -144,9 +130,8 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
 
         return usuarioEntity;
     }
-    
-    /////////////////////////MÉTODOS DTOS////////////////////////////////////
 
+    /////////////////////////MÉTODOS DTOS////////////////////////////////////
     /**
      * @return the comentarios
      */
@@ -216,5 +201,5 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
     public void setMisBlogs(List<BlogDTO> misBlogs) {
         this.misBlogs = misBlogs;
     }
-    
+
 }

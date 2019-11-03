@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.bicitours.persistence;
 
-
 import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
 
 import java.util.List;
@@ -17,19 +16,16 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
-
 /**
  *
  * @author Maria Clara Noguera Echeverri
  */
 @Stateless
 public class SeguroPersistence {
-    
-
 
     @PersistenceContext(unitName = "bicitoursPU")
     protected EntityManager e;
-   
+
     /**
      * Método para persisitir la entidad en la base de datos.
      *
@@ -55,7 +51,6 @@ public class SeguroPersistence {
         Query q = e.createQuery("select u from SeguroEntity u");
         return q.getResultList();
     }
-    
 
     /**
      * Busca si hay algun lubro con el id que se envía de argumento
@@ -71,12 +66,13 @@ public class SeguroPersistence {
     /**
      * Actualiza un libro.
      *
-     * @param seguroEntity: el libro que viene con los nuevos cambios. Por ejemplo
-     * el nombre pudo cambiar. En ese caso, se haria uso del método update.
+     * @param seguroEntity: el libro que viene con los nuevos cambios. Por
+     * ejemplo el nombre pudo cambiar. En ese caso, se haria uso del método
+     * update.
      * @return un libro con los cambios aplicados.
      */
     public SeguroEntity update(SeguroEntity seguroEntity) {
- 
+
         return e.merge(seguroEntity);
     }
 
@@ -97,8 +93,8 @@ public class SeguroPersistence {
      * Busca si hay algun libro con el ISBN que se envía de argumento
      *
      * @param id: ISBN de la editorial que se está buscando
-     * @return null si no existe ningun libro con el id del argumento. Si
-     * existe alguno devuelve el primero.
+     * @return null si no existe ningun libro con el id del argumento. Si existe
+     * alguno devuelve el primero.
      */
     public SeguroEntity findById(String id) {
 
@@ -119,5 +115,5 @@ public class SeguroPersistence {
 
         return result;
     }
-    
+
 }

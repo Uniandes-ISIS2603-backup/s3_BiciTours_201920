@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.bicitours.entities;
 
-
 import java.io.Serializable;
 
 import javax.persistence.CascadeType;
@@ -14,14 +13,13 @@ import javax.persistence.ManyToOne;
 
 import uk.co.jemos.podam.common.PodamExclude;
 
-
 /**
  *
  * @author Michel Succar
  */
 @Entity
-public class EventoEntity extends BaseEntity implements Serializable{
-        
+public class EventoEntity extends BaseEntity implements Serializable {
+
     //nombre del evento
     private String nombre;
     //descripcion del evento
@@ -32,83 +30,73 @@ public class EventoEntity extends BaseEntity implements Serializable{
     private Long horaFin;
     //Tour al que se relaciona el evento
     @PodamExclude
-    @ManyToOne (cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private TourEntity tour;
-    
 
-    
     /**
      *
      * @return nombre
      */
-    public String getNombre( )
-    {
+    public String getNombre() {
         return nombre;
     }
-    
+
     /**
      *
      * @param pNombre nombre que darle al evento
      */
-    public void setNombre(String pNombre)
-    {
+    public void setNombre(String pNombre) {
         nombre = pNombre;
     }
-    
+
     /**
      *
      * @return descripcion
      */
-    public String getDescripcion( )
-    {
+    public String getDescripcion() {
         return descripcion;
     }
-    
+
     /**
      *
      * @param pDescripcion descripcion que darle al evento
      */
-    public void setDescripcion(String pDescripcion)
-    {
+    public void setDescripcion(String pDescripcion) {
         descripcion = pDescripcion;
     }
-    
+
     /**
      *
      * @return hora de inicio del evento
      */
-    public Long getHoraInicio( )
-    {
+    public Long getHoraInicio() {
         return this.horaInicio;
     }
-    
+
     /**
      *
      * @param pHora a la que se va a iniciar el evento
      */
-    public void setHoraInicio(Long pHora)
-    {
+    public void setHoraInicio(Long pHora) {
         this.horaInicio = pHora;
     }
-    
+
     /**
      *
      * @return hora en que termina el evento
      */
-    public Long getHoraFin( )
-    {
+    public Long getHoraFin() {
         return this.horaFin;
     }
-    
+
     /**
      *
      * @param pHora en la que se va a tetrminar el evento
      */
-    public void setHoraFin(Long pHora)
-    {
+    public void setHoraFin(Long pHora) {
         this.horaFin = pHora;
     }
-    
+
     /**
      * @return the tour
      */

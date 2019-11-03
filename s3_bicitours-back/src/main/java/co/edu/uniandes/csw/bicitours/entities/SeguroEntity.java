@@ -16,12 +16,14 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class SeguroEntity extends BaseEntity implements Serializable {
-    private String tipo ;
+
+    private String tipo;
     private String caracteristicas;
     private String condiciones;
-@PodamExclude
+    @PodamExclude
     @ManyToOne
     private UsuarioEntity usuario;
+
     /**
      * @return the tipo
      */
@@ -65,16 +67,14 @@ public class SeguroEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the usuario */
-     
+     * @return the usuario
+     */
     public UsuarioEntity getUsuario() {
         return usuario;
     }
 
-    
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
     }
-    
-    
+
 }

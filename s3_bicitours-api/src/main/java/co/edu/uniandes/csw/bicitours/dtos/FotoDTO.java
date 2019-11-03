@@ -12,8 +12,8 @@ import java.io.Serializable;
  *
  * @author Jhuliana Barrios
  */
-public class FotoDTO implements Serializable{
-    
+public class FotoDTO implements Serializable {
+
     /////Atributos del dto
     private Long id;
     private String ruta;
@@ -36,36 +36,34 @@ public class FotoDTO implements Serializable{
     public String getRuta() {
         return ruta;
     }
-    
+
     /////////
     ///Métodos propios del DTO
     ////////
-    
     /**
      * Constructor sin parámetros
      */
-    public FotoDTO()
-    {
+    public FotoDTO() {
     }
-    
+
     /**
      * Construye un nuevo FotoDTO a partir de un FotoEntity dado
+     *
      * @param f la entidad de la foto
      */
-    public FotoDTO(FotoEntity f)
-    {
+    public FotoDTO(FotoEntity f) {
         if (f != null) {
             f.setId(id);
             f.setRuta(ruta);
         }
     }
-    
+
     /**
      * Convierte esta foto a una entidad
+     *
      * @return la entidad con los mismos datos de esta foto
      */
-    public FotoEntity toEntity()
-    {
+    public FotoEntity toEntity() {
         FotoEntity f = new FotoEntity();
         f.setId(id);
         f.setRuta(ruta);

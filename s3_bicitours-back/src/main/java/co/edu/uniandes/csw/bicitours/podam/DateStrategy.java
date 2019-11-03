@@ -36,10 +36,12 @@ import uk.co.jemos.podam.common.AttributeStrategy;
  */
 public class DateStrategy implements AttributeStrategy<Date> {
 
+    Random r = new Random();
+
     @Override
     public Date getValue() {
         Calendar c = Calendar.getInstance();
-        Random r = new Random();
+
         int maxYear = 9999;
         c.set(Calendar.YEAR, r.nextInt(
                 maxYear - c.getActualMinimum(Calendar.YEAR) + 1)

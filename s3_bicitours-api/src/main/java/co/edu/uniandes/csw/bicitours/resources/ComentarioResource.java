@@ -29,25 +29,23 @@ import javax.ws.rs.WebApplicationException;
  *
  * @author JuanRueda
  */
-
 @Path("comentarios")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 
-public class ComentarioResource 
-{
-    private static final String RECURSO="El recurso /Comentarios/";
-    private static final String NOEXISTE=" no existe.";
+public class ComentarioResource {
+
+    private static final String RECURSO = "El recurso /Comentarios/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private ComentarioLogic logica;
-    
+
     @Inject
     private ComentarioUsuarioLogic comentarioUsuarioLogica;
 
     @POST
-    public ComentarioDTO createComentario(ComentarioDTO comentario) throws BusinessLogicException 
-    {
+    public ComentarioDTO createComentario(ComentarioDTO comentario) throws BusinessLogicException {
 
         return new ComentarioDTO(logica.createComentario(comentario.toEntity()));
     }
@@ -58,14 +56,11 @@ public class ComentarioResource
         return listEntity2DetailDTO(logica.getComentarios());
     }
 
-    
     @GET
     @Path("{comentarioId: \\d+}")
-    public ComentarioDetailDTO getComentario(@PathParam("comentarioId") Long comentarioId) 
-    {
+    public ComentarioDetailDTO getComentario(@PathParam("comentarioId") Long comentarioId) {
         ComentarioEntity comentario = logica.getComentario(comentarioId);
-        if (comentario == null) 
-        {
+        if (comentario == null) {
             throw new WebApplicationException(RECURSO + comentarioId + NOEXISTE, 404);
         }
 
@@ -74,11 +69,9 @@ public class ComentarioResource
 
     @PUT
     @Path("{comentarioId: \\d+}")
-    public ComentarioDetailDTO updateComentario(@PathParam("comentarioId") Long comentarioId, ComentarioDetailDTO comentarios) throws BusinessLogicException 
-    {
+    public ComentarioDetailDTO updateComentario(@PathParam("comentarioId") Long comentarioId, ComentarioDetailDTO comentarios) throws BusinessLogicException {
         comentarios.setId(comentarioId);
-        if (logica.getComentario(comentarioId) == null) 
-        {
+        if (logica.getComentario(comentarioId) == null) {
             throw new WebApplicationException(RECURSO + comentarioId + NOEXISTE, 404);
         }
 
@@ -87,11 +80,9 @@ public class ComentarioResource
 
     @DELETE
     @Path("{comentarioId: \\d+}")
-    public void deleteComentario(@PathParam("comentarioId") Long comentarioId) throws BusinessLogicException 
-    {
+    public void deleteComentario(@PathParam("comentarioId") Long comentarioId) throws BusinessLogicException {
         ComentarioEntity comentario = logica.getComentario(comentarioId);
-        if (comentario == null) 
-        {
+        if (comentario == null) {
             throw new WebApplicationException(RECURSO + comentarioId + NOEXISTE, 404);
         }
         comentarioUsuarioLogica.removeUsuario(comentarioId);
@@ -110,16 +101,14 @@ public class ComentarioResource
      * @return El servicio de Reseñas para ese libro en paricular.\
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el libro.
-     
-    @Path("{comentarioId: \\d+}/reviews")
-    public Class<ReviewResource> getReviewResource(@PathParam("comentarioId") Long comentarioId) {
-        if (ComentarioLogic.getComentario(comentarioId) == null) {
-            throw new WebApplicationException("El recurso /Comentarios/" + comentarioId + "/reviews no existe.", 404);
-        }
-        return ReviewResource.class;
-    }
-
-    /**
+     *
+     * @Path("{comentarioId: \\d+}/reviews") public Class<ReviewResource>
+     * getReviewResource(@PathParam("comentarioId") Long comentarioId) { if
+     * (ComentarioLogic.getComentario(comentarioId) == null) { throw new
+     * WebApplicationException("El recurso /Comentarios/" + comentarioId +
+     * "/reviews no existe.", 404); } return ReviewResource.class; }
+     *
+     * /**
      * Conexión con el servicio de autores para un libro.
      * {@link ComentarioAuthorsResource}
      *
@@ -132,21 +121,18 @@ public class ComentarioResource
      * @return El servicio de autores para ese libro en paricular.\
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el libro.
-     
-    @Path("{comentarioId: \\d+}/authors")
-    public Class<ComentarioAuthorsResource> getComentarioAuthorsResource(@PathParam("comentarioId") Long comentarioId) {
-        if (ComentarioLogic.getComentario(comentarioId) == null) {
-            throw new WebApplicationException("El recurso /Comentarios/" + comentarioId + " no existe.", 404);
-        }
-        return ComentarioAuthorsResource.class;
-    }
-    */
-
-    private List<ComentarioDetailDTO> listEntity2DetailDTO(List<ComentarioEntity> entityList) 
-    {
+     *
+     * @Path("{comentarioId: \\d+}/authors") public
+     * Class<ComentarioAuthorsResource>
+     * getComentarioAuthorsResource(@PathParam("comentarioId") Long
+     * comentarioId) { if (ComentarioLogic.getComentario(comentarioId) == null)
+     * { throw new WebApplicationException("El recurso /Comentarios/" +
+     * comentarioId + " no existe.", 404); } return
+     * ComentarioAuthorsResource.class; }
+     */
+    private List<ComentarioDetailDTO> listEntity2DetailDTO(List<ComentarioEntity> entityList) {
         List<ComentarioDetailDTO> list = new ArrayList<>();
-        for (ComentarioEntity comentario : entityList) 
-        {
+        for (ComentarioEntity comentario : entityList) {
             list.add(new ComentarioDetailDTO(comentario));
         }
         return list;

@@ -19,43 +19,37 @@ import javax.persistence.TypedQuery;
  */
 @Stateless
 public class RecomendacionPersistence {
-    @PersistenceContext(unitName = "bicitoursPU")
-    
-    protected EntityManager em;
-    
 
-    
-    public RecomendacionEntity create(RecomendacionEntity pRecomendacion)
-    {
+    @PersistenceContext(unitName = "bicitoursPU")
+
+    protected EntityManager em;
+
+    public RecomendacionEntity create(RecomendacionEntity pRecomendacion) {
 
         em.persist(pRecomendacion);
 
         return pRecomendacion;
     }
-    
-    public RecomendacionEntity find(Long recomendacionId)
-    {
+
+    public RecomendacionEntity find(Long recomendacionId) {
         return em.find(RecomendacionEntity.class, recomendacionId);
     }
-    
-    public List<RecomendacionEntity> findAll( )
-    {
+
+    public List<RecomendacionEntity> findAll() {
         TypedQuery<RecomendacionEntity> query = em.createQuery("select u from RecomendacionEntity u", RecomendacionEntity.class);
-        return query.getResultList( );
+        return query.getResultList();
     }
-    
+
     /**
      *
      * @param recomendacionEntity
      * @return
      */
-    public RecomendacionEntity update(RecomendacionEntity recomendacionEntity)
-    {
+    public RecomendacionEntity update(RecomendacionEntity recomendacionEntity) {
         return em.merge(recomendacionEntity);
     }
-    
-    public void delete(Long recomendacionId)
-    {
+
+    public void delete(Long recomendacionId) {
         RecomendacionEntity recomendacionEntity = find(recomendacionId);
         em.remove(recomendacionEntity);
     }

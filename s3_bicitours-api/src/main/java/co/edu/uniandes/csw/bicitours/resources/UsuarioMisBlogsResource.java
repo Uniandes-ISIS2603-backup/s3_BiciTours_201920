@@ -32,8 +32,9 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UsuarioMisBlogsResource {
-    private static final String RECURSO="El recurso /blogs/";
-    private static final String NOEXISTE=" no existe.";
+
+    private static final String RECURSO = "El recurso /blogs/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private UsuarioMisBlogsLogic usuarioMisBlogsLogic;
 
@@ -44,14 +45,14 @@ public class UsuarioMisBlogsResource {
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO addBlog(@PathParam("usuariosId") Long usuariosId, @PathParam("blogsId") Long blogsId) {
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException( RECURSO+ blogsId + NOEXISTE, 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
-        return new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId,usuariosId));
+        return new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId, usuariosId));
     }
 
     @GET
     public List<BlogDetailDTO> getBlogs(@PathParam("usuariosId") Long usuariosId) {
-         
+
         return blogsListEntity2DTOUsuarioMisBlogs(usuarioMisBlogsLogic.getBlogs(usuariosId));
     }
 
@@ -62,7 +63,7 @@ public class UsuarioMisBlogsResource {
             throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
 
-        return  new BlogDetailDTO(usuarioMisBlogsLogic.getBlog(usuariosId, blogsId));
+        return new BlogDetailDTO(usuarioMisBlogsLogic.getBlog(usuariosId, blogsId));
     }
 
     @PUT
@@ -72,7 +73,7 @@ public class UsuarioMisBlogsResource {
                 throw new WebApplicationException(RECURSO + blog.getId() + NOEXISTE, 404);
             }
         }
-         
+
         return blogsListEntity2DTOUsuarioMisBlogs(usuarioMisBlogsLogic.replaceBlogs(usuariosId, blogsListDTO2EntityUsuarioMisBlogs(blogs)));
     }
 
@@ -99,5 +100,5 @@ public class UsuarioMisBlogsResource {
             list.add(dto.toEntity());
         }
         return list;
-    }    
+    }
 }

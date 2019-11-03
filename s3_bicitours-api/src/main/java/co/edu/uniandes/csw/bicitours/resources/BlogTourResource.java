@@ -34,12 +34,13 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogTourResource {
-        @Inject
+
+    @Inject
     private BlogTourLogic blogTourLogic;
 
     @Inject
     private TourLogic tourLogic;
-    
+
     @Inject
     private BlogLogic blogLogic;
 
@@ -64,6 +65,7 @@ public class BlogTourResource {
 
         return new BlogDetailDTO(blogTourLogic.replaceTour(blogsId, tour.getId()));
     }
+
     @DELETE
     public void removeTour(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         blogTourLogic.removeTour(blogsId);

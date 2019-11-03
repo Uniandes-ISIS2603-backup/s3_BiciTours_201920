@@ -20,7 +20,6 @@ import javax.inject.Inject;
 @Stateless
 public class SeguroLogic {
 
-
     @Inject
     private SeguroPersistence persistence;
 
@@ -31,14 +30,11 @@ public class SeguroLogic {
      * @return Objeto de SeguroEntity con los datos nuevos y su ID.
      */
     public SeguroEntity createSeguro(SeguroEntity seguroEntity) throws BusinessLogicException {
-        if(seguroEntity.getCaracteristicas()!=null && seguroEntity.getCondiciones()!=null && seguroEntity.getTipo()!=null)
-        {
+        if (seguroEntity.getCaracteristicas() != null && seguroEntity.getCondiciones() != null && seguroEntity.getTipo() != null) {
 
-        return persistence.create(seguroEntity);
-        }
-        else
-              {
-            throw new BusinessLogicException("Los campos ingresados para la informacion del seguro no son correctos"); 
+            return persistence.create(seguroEntity);
+        } else {
+            throw new BusinessLogicException("Los campos ingresados para la informacion del seguro no son correctos");
         }
     }
 
@@ -48,8 +44,6 @@ public class SeguroLogic {
      * @return Colección de objetos de SeguroEntity.
      */
     public List<SeguroEntity> getSeguros() {
-
-
 
         return persistence.findAll();
     }
@@ -61,8 +55,6 @@ public class SeguroLogic {
      * @return Instancia de SeguroEntity con los datos del Seguro consultado.
      */
     public SeguroEntity getSeguro(Long segurosId) {
-
-
 
         return persistence.find(segurosId);
     }
@@ -76,12 +68,11 @@ public class SeguroLogic {
      */
     public SeguroEntity updateSeguro(Long segurosId, SeguroEntity seguroEntity) {
 
-
-
         return persistence.update(seguroEntity);
     }
-     public SeguroEntity updateSeguro(SeguroEntity seguroEntity) {
- 
+
+    public SeguroEntity updateSeguro(SeguroEntity seguroEntity) {
+
         return persistence.update(seguroEntity);
     }
 

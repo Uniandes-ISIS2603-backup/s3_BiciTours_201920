@@ -12,7 +12,7 @@ import java.io.Serializable;
  *
  * @author Juan Sebastián González Rojas
  */
-public class UsuarioDTO implements Serializable{
+public class UsuarioDTO implements Serializable {
 
     //Atributos de DTO 
     private Long id;
@@ -22,23 +22,23 @@ public class UsuarioDTO implements Serializable{
     private Boolean esAdmin;
     private Boolean pago;
     private Integer deuda;
-    
-    public UsuarioDTO(){
-        
+
+    public UsuarioDTO() {
+
     }
-    
-    public UsuarioDTO(UsuarioEntity usuarioEntity){
+
+    public UsuarioDTO(UsuarioEntity usuarioEntity) {
         if (usuarioEntity != null) {
             this.id = usuarioEntity.getId();
             this.nombre = usuarioEntity.getNombre();
-            this.esAdmin=false;
-            this.correo=usuarioEntity.getCorreo();
-            this.codigo=usuarioEntity.getCodigo();
-            this.pago=false;
-            this.deuda=usuarioEntity.getDeuda();
+            this.esAdmin = false;
+            this.correo = usuarioEntity.getCorreo();
+            this.codigo = usuarioEntity.getCodigo();
+            this.pago = false;
+            this.deuda = usuarioEntity.getDeuda();
         }
     }
-    
+
     /**
      * Convertir DTO a Entity
      *
@@ -55,7 +55,7 @@ public class UsuarioDTO implements Serializable{
         usuarioEntity.setDeuda(this.getDeuda());
         return usuarioEntity;
     }
-    
+
     /**
      * @return the pago
      */
@@ -69,6 +69,7 @@ public class UsuarioDTO implements Serializable{
     public void setPago(Boolean pago) {
         this.pago = pago;
     }
+
     /**
      * @return the esAdmin
      */
@@ -82,6 +83,7 @@ public class UsuarioDTO implements Serializable{
     public void setEsAdmin(Boolean esAdmin) {
         this.esAdmin = esAdmin;
     }
+
     /**
      * @return the nombre
      */

@@ -31,31 +31,30 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class FotoPersistenceTest {
-    
-@Inject
+
+    @Inject
     private FotoPersistence tp;
-    
-    @PersistenceContext 
+
+    @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     UserTransaction utx;
-    
+
     private List<FotoEntity> data = new ArrayList<FotoEntity>();
-    
+
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
      */
     @Deployment
-    public static JavaArchive createDeployment()
-    {
+    public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(FotoEntity.class.getPackage())
                 .addPackage(FotoPersistence.class.getPackage())
-                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
-                .addAsManifestResource("META-INF/beans.xml","beans.xml");
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
 
     /**
@@ -78,9 +77,9 @@ public class FotoPersistenceTest {
             }
         }
     }
-    
-        /**
-     * Inserta los datos iniciales 
+
+    /**
+     * Inserta los datos iniciales
      */
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
@@ -91,22 +90,22 @@ public class FotoPersistenceTest {
             data.add(entity);
         }
     }
-       
-     /**
+
+    /**
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
         em.createQuery("delete from FotoEntity").executeUpdate();
     }
-    
-     /**
+
+    /**
      * Prueba el funcionamiento del método findAll() de FotoPersistence
      */
     @Test
     public void findAllTest() {
         List<FotoEntity> list = tp.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for(FotoEntity ent : list) {
+        for (FotoEntity ent : list) {
             boolean found = false;
             for (FotoEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
@@ -125,24 +124,22 @@ public class FotoPersistenceTest {
         FotoEntity entity = data.get(0);
         FotoEntity newEntity = tp.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(newEntity.getRuta(),entity.getRuta());
+        Assert.assertEquals(newEntity.getRuta(), entity.getRuta());
     }
 
     /**
      * Prueba el método create() de la clase FotoPersistence
      */
     @Test
-    public void createFotoTest()
-    {
+    public void createFotoTest() {
         PodamFactory factory = new PodamFactoryImpl();
         FotoEntity newFEntity = factory.manufacturePojo(FotoEntity.class);
         FotoEntity fEntity = tp.create(newFEntity);
         Assert.assertNotNull(fEntity);
         FotoEntity entity = em.find(FotoEntity.class, fEntity.getId());
-        Assert.assertEquals(newFEntity.getRuta(),entity.getRuta());
+        Assert.assertEquals(newFEntity.getRuta(), entity.getRuta());
     }
-    
-    
+
     /**
      * Prueba el método que elimina una foto.
      */
@@ -169,11 +166,8 @@ public class FotoPersistenceTest {
 
         FotoEntity resp = em.find(FotoEntity.class, entity.getId());
 
-        Assert.assertEquals(newEntity.getRuta(),resp.getRuta());
+        Assert.assertEquals(newEntity.getRuta(), resp.getRuta());
 
     }
 
 }
-
-
-
