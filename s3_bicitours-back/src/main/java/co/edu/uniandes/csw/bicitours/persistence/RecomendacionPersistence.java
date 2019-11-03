@@ -7,8 +7,7 @@ package co.edu.uniandes.csw.bicitours.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.RecomendacionEntity;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,13 +23,13 @@ public class RecomendacionPersistence {
     
     protected EntityManager em;
     
-    private static final Logger LOGGER= Logger.getLogger(RecomendacionPersistence.class.getName());
+
     
     public RecomendacionEntity create(RecomendacionEntity pRecomendacion)
     {
-        LOGGER.log(Level.INFO, "Creando una recomendacion nueva");
+
         em.persist(pRecomendacion);
-        LOGGER.log(Level.INFO, "Recomendacion creada");
+
         return pRecomendacion;
     }
     

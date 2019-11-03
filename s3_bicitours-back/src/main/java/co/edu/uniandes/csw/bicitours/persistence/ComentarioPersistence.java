@@ -6,9 +6,9 @@
 package co.edu.uniandes.csw.bicitours.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
-import java.util.logging.Logger;
+
 import java.util.List;
-import java.util.logging.Level;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,7 +22,7 @@ import javax.persistence.Query;
 @Stateless
 public class ComentarioPersistence {
     
-    private static final Logger LOGGER = Logger.getLogger(ComentarioPersistence.class.getName());
+
     @PersistenceContext (unitName = "bicitoursPU")
     protected EntityManager em;
     
@@ -33,9 +33,9 @@ public class ComentarioPersistence {
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public ComentarioEntity create(ComentarioEntity comentarioEntity) {
-        LOGGER.log(Level.INFO, "Creando un comentario nuevo");
+
         em.persist(comentarioEntity);
-        LOGGER.log(Level.INFO, "Comentario creado");
+
         return comentarioEntity;
     }
     

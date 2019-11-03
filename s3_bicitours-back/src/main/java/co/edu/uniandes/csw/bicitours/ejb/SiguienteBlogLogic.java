@@ -20,8 +20,8 @@ public class SiguienteBlogLogic {
     private BlogPersistence blogPersistence;
 
     public BlogEntity getSiguiente(Long blogsId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId).getSiguiente();
-        return blogEntity;
+
+        return blogPersistence.find(blogsId).getSiguiente();
     }
     
     public BlogEntity replaceSiguiente(Long blogsId, Long blogsSiguienteId) {

@@ -33,7 +33,7 @@ public class TourEntity extends BaseEntity implements Serializable {
     ALTA,
     MEDIA,
     BAJA
-    };
+    }
     
     private String nombre;
 
@@ -73,9 +73,6 @@ public class TourEntity extends BaseEntity implements Serializable {
     @ManyToMany
     private List<TourEntity> usuarios;
     
-    public TourEntity()
-    {
-    }
     
     public void setNombre(String nomb) {
         this.nombre = nomb;

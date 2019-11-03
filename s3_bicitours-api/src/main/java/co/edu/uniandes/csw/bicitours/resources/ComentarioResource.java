@@ -37,7 +37,8 @@ import javax.ws.rs.WebApplicationException;
 
 public class ComentarioResource 
 {
-
+    private static final String RECURSO="El recurso /Comentarios/";
+    private static final String NOEXISTE=" no existe.";
     @Inject
     private ComentarioLogic logica;
     
@@ -47,14 +48,14 @@ public class ComentarioResource
     @POST
     public ComentarioDTO createComentario(ComentarioDTO comentario) throws BusinessLogicException 
     {
-        ComentarioDTO respuesta = new ComentarioDTO(logica.createComentario(comentario.toEntity()));
-        return respuesta;
+
+        return new ComentarioDTO(logica.createComentario(comentario.toEntity()));
     }
 
     @GET
     public List<ComentarioDetailDTO> getComentarios() {
-        List<ComentarioDetailDTO> comentarios = listEntity2DetailDTO(logica.getComentarios());
-        return comentarios;
+
+        return listEntity2DetailDTO(logica.getComentarios());
     }
 
     
@@ -65,10 +66,10 @@ public class ComentarioResource
         ComentarioEntity comentario = logica.getComentario(comentarioId);
         if (comentario == null) 
         {
-            throw new WebApplicationException("El recurso /Comentarios/" + comentarioId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + comentarioId + NOEXISTE, 404);
         }
-        ComentarioDetailDTO comentarios = new ComentarioDetailDTO(comentario);
-        return comentarios;
+
+        return new ComentarioDetailDTO(comentario);
     }
 
     @PUT
@@ -78,10 +79,10 @@ public class ComentarioResource
         comentarios.setId(comentarioId);
         if (logica.getComentario(comentarioId) == null) 
         {
-            throw new WebApplicationException("El recurso /Comentarios/" + comentarioId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + comentarioId + NOEXISTE, 404);
         }
-        ComentarioDetailDTO detailDTO = new ComentarioDetailDTO(logica.updateComentario(comentarioId, comentarios.toEntity()));
-        return detailDTO;
+
+        return new ComentarioDetailDTO(logica.updateComentario(comentarioId, comentarios.toEntity()));
     }
 
     @DELETE
@@ -91,7 +92,7 @@ public class ComentarioResource
         ComentarioEntity comentario = logica.getComentario(comentarioId);
         if (comentario == null) 
         {
-            throw new WebApplicationException("El recurso /Comentarios/" + comentarioId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + comentarioId + NOEXISTE, 404);
         }
         comentarioUsuarioLogica.removeUsuario(comentarioId);
         logica.deleteComentario(comentarioId);

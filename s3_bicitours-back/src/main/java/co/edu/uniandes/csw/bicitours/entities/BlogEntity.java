@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.bicitours.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -54,9 +53,6 @@ public class BlogEntity extends BaseEntity implements Serializable {
     private Double calificacionPromedio;
     private String titulo;
 
-    public BlogEntity() {
-
-    }
 
     /**
      * @return the texto

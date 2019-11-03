@@ -9,8 +9,7 @@ import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.ComentarioPersistence;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -22,8 +21,8 @@ import javax.inject.Inject;
 @Stateless
 public class ComentarioLogic {
     
-    private static final Logger LOGGER = Logger.getLogger(ComentarioLogic.class.getName());
-    
+
+    private static final String ERROR="El comentario tiene que tener un mensaje y/o una calificación.";
     @Inject
     private ComentarioPersistence persistence;
     
@@ -35,7 +34,7 @@ public class ComentarioLogic {
             {
                 if(comentario.getCalificacion() == 0 && comentario.getTexto().equals(""))
                 {
-                    throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
+                    throw new BusinessLogicException(ERROR);
                 }
                 else
                 {
@@ -52,7 +51,7 @@ public class ComentarioLogic {
             }
             else
             {
-                throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
+                throw new BusinessLogicException(ERROR);
             }
         }
         else
@@ -64,18 +63,15 @@ public class ComentarioLogic {
     
     public List<ComentarioEntity> getComentarios() 
     {
-        List<ComentarioEntity> comentarios = persistence.findAll();
-        return comentarios;
+
+        return persistence.findAll();
     }
     
     public ComentarioEntity getComentario(Long comentarioId) 
     {
-        ComentarioEntity comentario = persistence.find(comentarioId);
-        if (comentario == null) 
-        {
-            LOGGER.log(Level.SEVERE, "El comentario con el id = {0} no existe", comentarioId);
-        }
-        return comentario;
+
+
+        return persistence.find(comentarioId);
     }
 
     public ComentarioEntity updateComentario(Long comentarioId, ComentarioEntity comentario) throws BusinessLogicException 
@@ -89,7 +85,7 @@ public class ComentarioLogic {
                 {
                     if(comentario.getCalificacion() == 0 && comentario.getTexto().equals(""))
                     {
-                        throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
+                        throw new BusinessLogicException(ERROR);
                     }
                     else
                     {
@@ -106,7 +102,7 @@ public class ComentarioLogic {
                 }
                 else
                 {
-                    throw new BusinessLogicException("El comentario tiene que tener un mensaje y/o una calificación.");
+                    throw new BusinessLogicException(ERROR);
                 }
             }
             else
@@ -121,17 +117,10 @@ public class ComentarioLogic {
         return comentario;
     }
 
-    public void deleteComentario(Long comentarioId) throws BusinessLogicException 
+    public void deleteComentario(Long comentarioId)  
     {
-        //Regla solo el autor puede borrarlo? O se manejará en front
-        //ComentarioEntity comentario = persistence.find(comentarioId);
-        //if (comentario != null && comentario.getAutor().getId().equals(usuarioId))
-        //{
+
             persistence.delete(comentarioId);
-        //}
-        //else
-        //{
-        //    throw new BusinessLogicException("Solo el autor puede borrar el comentario");
-        //}
+
     }
 }

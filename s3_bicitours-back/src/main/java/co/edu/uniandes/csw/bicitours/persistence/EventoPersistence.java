@@ -7,8 +7,7 @@ package co.edu.uniandes.csw.bicitours.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,13 +25,13 @@ public class EventoPersistence {
     
     protected EntityManager em;
     
-    private static final Logger LOGGER= Logger.getLogger(EventoPersistence.class.getName());
+
     
     public EventoEntity create(EventoEntity pEvento)
     {
-        LOGGER.log(Level.INFO, "Creando un evento nuevo");
+
         em.persist(pEvento);
-        LOGGER.log(Level.INFO, "Evento creado");
+
         return pEvento;
     }
     
@@ -51,7 +50,7 @@ public class EventoPersistence {
         {
             evento = null;
         } 
-        else if (results.size() >= 1) {
+        else{
             evento = results.get(0);
         }
         return evento;

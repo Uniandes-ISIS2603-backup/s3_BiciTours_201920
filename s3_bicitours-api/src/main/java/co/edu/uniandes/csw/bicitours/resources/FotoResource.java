@@ -45,8 +45,8 @@ public class FotoResource {
     public FotoDTO createFoto(FotoDTO t){
         FotoEntity fotoEntity = t.toEntity();
         FotoEntity nuevoFotoEntity = fotoLogic.createFoto(fotoEntity);
-        FotoDTO nuevoFotoDTO = new FotoDTO(nuevoFotoEntity);
-        return nuevoFotoDTO;
+
+        return new FotoDTO(nuevoFotoEntity);
     }
     
     /**
@@ -77,15 +77,15 @@ public class FotoResource {
      */    
     @GET
     @Path("{fotosId: \\d+}")
-    public FotoDTO getFoto(@PathParam("fotoId") long fotosId)throws WebApplicationException
+    public FotoDTO getFoto(@PathParam("fotoId") long fotosId)
     {
         FotoEntity entidad = fotoLogic.getFoto(fotosId);
         
         if(entidad == null)
             throw new WebApplicationException("El recurso /fotos/" + fotosId + " no existe.", 404);
         
-        FotoDTO foto = new FotoDTO(entidad);
-        return foto;
+
+        return new FotoDTO(entidad);
         
     }
     

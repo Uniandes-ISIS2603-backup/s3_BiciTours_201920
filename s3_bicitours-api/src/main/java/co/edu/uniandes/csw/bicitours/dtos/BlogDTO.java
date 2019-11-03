@@ -71,7 +71,7 @@ public class BlogDTO implements Serializable{
             blogEntity.setSiguiente(this.getSiguiente().toEntity());
         }
         if (this.getCreador() != null) {
-//            blogEntity.seCreador(this.getCreador().toEntity());
+            blogEntity.setCreador(this.getCreador().toEntity());
         }
         if (this.getTour() != null) {
             blogEntity.setTour(this.getTour().toEntity());

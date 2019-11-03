@@ -5,16 +5,15 @@
  */
 package co.edu.uniandes.csw.bicitours.entities;
 
-import co.edu.uniandes.csw.bicitours.podam.DateStrategy;
+
 import java.io.Serializable;
-import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import uk.co.jemos.podam.common.PodamExclude;
-import uk.co.jemos.podam.common.PodamStrategyValue;
+
 
 /**
  *
@@ -36,10 +35,7 @@ public class EventoEntity extends BaseEntity implements Serializable{
     @ManyToOne (cascade = CascadeType.PERSIST)
     private TourEntity tour;
     
-    public EventoEntity()
-    {
-        
-    }
+
     
     /**
      *

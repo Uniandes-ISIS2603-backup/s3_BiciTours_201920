@@ -12,8 +12,7 @@ import co.edu.uniandes.csw.bicitours.persistence.EventoPersistence;
 import co.edu.uniandes.csw.bicitours.persistence.TourPersistence;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -24,8 +23,8 @@ import javax.inject.Inject;
 @Stateless
 public class EventoLogic {
     
-    private static final Logger LOGGER = Logger.getLogger(EventoLogic.class.getName());
-    
+
+    private static final String ERROR="No se puede crear el evento, pues ya hay un evento programado en esta fecha";
     @Inject
     private EventoPersistence eventoPersistence;
     
@@ -65,17 +64,16 @@ public class EventoLogic {
             if((eventos.get(i).getHoraInicio()).compareTo(evento.getHoraInicio()) >= 0 
                     && (eventos.get(i).getHoraInicio()).compareTo(evento.getHoraFin()) < 0)
             {
-                throw new BusinessLogicException("No se puede crear el evento, pues ya hay un evento programado en esta fecha");
+                throw new BusinessLogicException(ERROR);
             }
             if((eventos.get(i).getHoraFin()).compareTo(evento.getHoraInicio()) >= 0 
                     && (eventos.get(i).getHoraFin()).compareTo(evento.getHoraFin()) < 0)
             {
-                throw new BusinessLogicException("No se puede crear el evento, pues ya hay un evento programado en esta fecha");
+                throw new BusinessLogicException(ERROR);
             }
         }
         // || fechaFinalTour.compareTo(evento.getHoraFin()) < 0
-        long fechaF = evento.getTour().getFecha().getTime()+(evento.getTour().getDuracion()*60000);
-        Date fechaFinalTour = new Date(fechaF);
+
         if(evento.getTour().getFecha().getTime() > evento.getHoraInicio())
         {
             throw new BusinessLogicException("No se puede crear un evento que no ocurra durante el tour.");
@@ -92,12 +90,9 @@ public class EventoLogic {
     
     public EventoEntity getEvento(Long eventoId, Long tourId) 
     {
-        EventoEntity comentario = eventoPersistence.find(tourId, eventoId);
-        if (comentario == null) 
-        {
-            LOGGER.log(Level.SEVERE, "El evento con el id = {0} no existe", eventoId);
-        }
-        return comentario;
+
+
+        return eventoPersistence.find(tourId, eventoId);
     }
     
     public EventoEntity updateEventoEntity(EventoEntity evento, Long tourId) throws BusinessLogicException
@@ -127,21 +122,21 @@ public class EventoLogic {
             if((eventos.get(i).getHoraInicio()).compareTo(evento.getHoraInicio()) >= 0 
                     && (eventos.get(i).getHoraInicio()).compareTo(evento.getHoraFin()) < 0)
             {
-                throw new BusinessLogicException("No se puede crear el evento, pues ya hay un evento programado en esta fecha");
+                throw new BusinessLogicException(ERROR);
             }
             if((eventos.get(i).getHoraFin()).compareTo(evento.getHoraInicio()) >= 0 
                     && (eventos.get(i).getHoraFin()).compareTo(evento.getHoraFin()) < 0)
             {
-                throw new BusinessLogicException("No se puede crear el evento, pues ya hay un evento programado en esta fecha");
+                throw new BusinessLogicException(ERROR);
             }
         }
         evento = eventoPersistence.create(evento);
         return evento;
     }
     
-    public void deleteEvento(Long eventoId, Long tourId) throws BusinessLogicException 
+    public void deleteEvento(Long eventoId, Long tourId) 
     {
-        EventoEntity old = getEvento(eventoId, tourId);
+
         eventoPersistence.delete(eventoId);
     }
 

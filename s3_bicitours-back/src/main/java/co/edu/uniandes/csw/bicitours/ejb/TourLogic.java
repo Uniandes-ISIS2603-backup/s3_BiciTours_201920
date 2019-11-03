@@ -80,8 +80,8 @@ public class TourLogic {
      * @return una entidad tour si esta existe en la base de datos, en caso contrario null
      */
     public TourEntity getTour(Long toursId) {
-        TourEntity tourEntity = tp.find(toursId);
-        return tourEntity;
+ 
+        return tp.find(toursId);
     }
     
     /**

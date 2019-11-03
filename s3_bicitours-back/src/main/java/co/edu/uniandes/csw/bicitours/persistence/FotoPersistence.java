@@ -7,8 +7,7 @@ package co.edu.uniandes.csw.bicitours.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,7 +24,7 @@ public class FotoPersistence {
 
     protected EntityManager em;
     
-    private static final Logger LOGGER = Logger.getLogger(FotoPersistence.class.getName());
+
     
     /**
      * Método para persisitir la entidad en la base de datos.
@@ -34,9 +33,9 @@ public class FotoPersistence {
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public FotoEntity create(FotoEntity fotoEntity) {
-        LOGGER.log(Level.INFO, "Creando una foto nueva");
+
         em.persist(fotoEntity);
-        LOGGER.log(Level.INFO, "foto creada");
+
         return fotoEntity;
     }
     
@@ -56,7 +55,7 @@ public class FotoPersistence {
      */
     public List<FotoEntity> findAll()
     {
-        LOGGER.log(Level.INFO, "Consultando todos las fotos");
+
         TypedQuery<FotoEntity> query=em.createQuery("select u from FotoEntity u", FotoEntity.class);
         return query.getResultList();
     }
@@ -68,7 +67,7 @@ public class FotoPersistence {
      * @return una foto con los cambios aplicados.
      */
     public FotoEntity update(FotoEntity fotoEntity) {
-        LOGGER.log(Level.INFO, "Actualizando la foto con id={0}", fotoEntity.getId());
+
         return em.merge(fotoEntity);
     }
 

@@ -25,8 +25,8 @@ public class BlogCreadorLogic {
     private UsuarioPersistence usuarioPersistence;
 
     public UsuarioEntity getCreador(Long blogsId) {
-        UsuarioEntity usuarioEntity = blogPersistence.find(blogsId).getCreador();
-        return usuarioEntity;
+
+        return blogPersistence.find(blogsId).getCreador();
     }
     
     public BlogEntity replaceCreador(Long blogsId, Long usuariosId) {

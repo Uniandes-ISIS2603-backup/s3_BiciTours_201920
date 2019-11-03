@@ -58,7 +58,7 @@ public class ComentarioTourResource {
         if (tourLogic.getTour(tour.getId()) == null) {
             throw new WebApplicationException("El recurso /tours/" + tour.getId() + " no existe.", 404);
         }
-        ComentarioDetailDTO comentarioDetailDTO = new ComentarioDetailDTO(comentarioTourLogic.replaceTour(comentariosId, tour.getId()));
-        return comentarioDetailDTO;
+
+        return new ComentarioDetailDTO(comentarioTourLogic.replaceTour(comentariosId, tour.getId()));
     }
 }

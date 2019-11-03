@@ -51,8 +51,8 @@ public class UsuarioLogic {
      * @return el usuario buscado.
      */
     public UsuarioEntity getUsuario(Long usuariosId) {
-        UsuarioEntity usuarioEntity = persistencia.find(usuariosId);
-        return usuarioEntity;
+
+        return persistencia.find(usuariosId);
     }
     
     /**
@@ -60,8 +60,8 @@ public class UsuarioLogic {
      * @return usuarios.
      */
     public List<UsuarioEntity> getUsuarios() {
-        List<UsuarioEntity> usuariosEntity = persistencia.findAll();
-        return usuariosEntity;
+
+        return persistencia.findAll();
     }
     
     /**
@@ -71,8 +71,8 @@ public class UsuarioLogic {
      * @return el usuario buscado.
      */
     public UsuarioEntity getUsuarioByNombre(String usuariosName) {
-        UsuarioEntity usuarioEntity = persistencia.findByNombre(usuariosName);
-        return usuarioEntity;
+
+        return persistencia.findByNombre(usuariosName);
     }
     
     /**
@@ -82,8 +82,8 @@ public class UsuarioLogic {
      * @return el usuario buscado.
      */
     public UsuarioEntity getUsuarioByCorreo(String usuariosCorreo) {
-        UsuarioEntity usuarioEntity = persistencia.findByCorreo(usuariosCorreo);
-        return usuarioEntity;
+
+        return persistencia.findByCorreo(usuariosCorreo);
     }
     
     /**
@@ -92,9 +92,9 @@ public class UsuarioLogic {
      * @param usuarioEntity: información de usuario a actualizar.
      * @return el usuario con los cambios actualizados en la base de datos.
      */
-    public UsuarioEntity updateUsuario(Long usuarioId, UsuarioEntity usuarioEntity) {
-        UsuarioEntity newUsuario = persistencia.update(usuarioEntity);
-        return newUsuario;
+    public UsuarioEntity updateUsuario(UsuarioEntity usuarioEntity) {
+
+        return persistencia.update(usuarioEntity);
     }
     
     /**

@@ -7,8 +7,8 @@ package co.edu.uniandes.csw.bicitours.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,7 +27,7 @@ public class UsuarioPersistence {
     protected EntityManager em; //realiza acceso a la base de datos
     
     //Comunicación 
-    private static final Logger LOGGER= Logger.getLogger(UsuarioPersistence.class.getName());
+
     
      /**
      * Método para persistir la clase UsuarioEntity en la base de datos.
@@ -37,7 +37,7 @@ public class UsuarioPersistence {
      */
     public UsuarioEntity create(UsuarioEntity usuarioEntity){
         
-        LOGGER.log(Level.INFO, "Creando nuevo blog en base de datos");
+
         em.persist(usuarioEntity);   
         return usuarioEntity;
     }
@@ -49,7 +49,7 @@ public class UsuarioPersistence {
      * @return un blog.
      */
     public UsuarioEntity find(Long usuarioId){
-        LOGGER.log(Level.INFO, "Consultando el blog con id:", usuarioId);
+
         return em.find(UsuarioEntity.class, usuarioId);
     }
     
@@ -58,7 +58,7 @@ public class UsuarioPersistence {
      * @return un blog.
      */
     public List<UsuarioEntity> findAll(){
-        LOGGER.log(Level.INFO, "Solicitando una lista con todoos los Usuarios de la base de datos");
+
         TypedQuery<UsuarioEntity> query= em.createQuery("select u from UsuarioEntity u", UsuarioEntity.class);
         return query.getResultList();
     }
@@ -69,7 +69,7 @@ public class UsuarioPersistence {
      * @param usuarioEntity: El usuario viene con nuevos parámetros que deben unirse a la anterior versión.
      */
     public UsuarioEntity update(UsuarioEntity nuevoUsuarioEntity) {
-        LOGGER.log(Level.INFO, "Actualizando el usuario con id:", nuevoUsuarioEntity.getId());
+
         return em.merge(nuevoUsuarioEntity);
     }
     
@@ -78,7 +78,7 @@ public class UsuarioPersistence {
      * @param usuarioId: id del Usuario a eliminar.
      */
     public void delete(Long usuarioId) {
-        LOGGER.log(Level.INFO, "Eliminando el usuario con id:", usuarioId);
+
         UsuarioEntity usuarioEntityElimitated = em.find(UsuarioEntity.class, usuarioId);
         em.remove(usuarioEntityElimitated);
     }
@@ -91,7 +91,7 @@ public class UsuarioPersistence {
      * existe alguno devuelve el primero encontrado.
      */
     public UsuarioEntity findByNombre(String pNombreUsuario) {
-        LOGGER.log(Level.INFO, "Consultando usuarios por nombre: ", pNombreUsuario);
+
         // Se crea un query para buscar usuarios con el nombre que recibe el método como argumento. ":pNombreUsuario" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select u From UsuarioEntity u where u.nombre = :pNombreUsuario", UsuarioEntity.class);
         // Se remplaza el placeholder ":pNombreUsuario" con el valor del argumento 
@@ -106,7 +106,7 @@ public class UsuarioPersistence {
         } else {
             result = sameNombre.get(0);//si hay varios usuarios con el mismo nombre se escoge el primero, sin embargo esto no debería ocurrir
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar usuarios por nombre: ",pNombreUsuario );
+
         return result;
     }
     
@@ -118,7 +118,7 @@ public class UsuarioPersistence {
      * existe alguno devuelve el primero encontrado.
      */
     public UsuarioEntity findByCorreo(String pCorreo) {
-        LOGGER.log(Level.INFO, "Consultando usuarios por correo: ", pCorreo);
+
         // Se crea un query para buscar usuarios con el correo que recibe el método como argumento. ":pCorreo" es un placeholder que debe ser remplazado
         TypedQuery query = em.createQuery("Select u From UsuarioEntity u where u.correo = :pCorreo", UsuarioEntity.class);
         // Se remplaza el placeholder ":pCorreo" con el valor del argumento 
@@ -133,7 +133,7 @@ public class UsuarioPersistence {
         } else {
             result = sameCorreo.get(0);//si hay varios usuarios con el mismo correo se escoge el primero, sin embargo esto no debería ocurrir
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar usuarios por correo: ",pCorreo );
+
         return result;
     }
 }

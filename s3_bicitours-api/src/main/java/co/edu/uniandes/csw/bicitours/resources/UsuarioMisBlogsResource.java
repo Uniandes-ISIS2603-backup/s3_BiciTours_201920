@@ -32,6 +32,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UsuarioMisBlogsResource {
+    private static final String RECURSO="El recurso /blogs/";
+    private static final String NOEXISTE=" no existe.";
     @Inject
     private UsuarioMisBlogsLogic usuarioMisBlogsLogic;
 
@@ -42,44 +44,43 @@ public class UsuarioMisBlogsResource {
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO addBlog(@PathParam("usuariosId") Long usuariosId, @PathParam("blogsId") Long blogsId) {
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException( RECURSO+ blogsId + NOEXISTE, 404);
         }
-        BlogDetailDTO detailDTO = new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId,usuariosId));
-        return detailDTO;
+        return new BlogDetailDTO(usuarioMisBlogsLogic.addBlog(blogsId,usuariosId));
     }
 
     @GET
     public List<BlogDetailDTO> getBlogs(@PathParam("usuariosId") Long usuariosId) {
-        List<BlogDetailDTO> lista = blogsListEntity2DTO(usuarioMisBlogsLogic.getBlogs(usuariosId));
-        return lista;
+         
+        return blogsListEntity2DTO(usuarioMisBlogsLogic.getBlogs(usuariosId));
     }
 
     @GET
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO getBlog(@PathParam("usuariosId") Long usuariosId, @PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
-        BlogDetailDTO detailDTO = new BlogDetailDTO(usuarioMisBlogsLogic.getBlog(usuariosId, blogsId));
-        return detailDTO;
+
+        return  new BlogDetailDTO(usuarioMisBlogsLogic.getBlog(usuariosId, blogsId));
     }
 
     @PUT
     public List<BlogDetailDTO> replaceBlogs(@PathParam("usuariosId") Long usuariosId, List<BlogDetailDTO> blogs) {
         for (BlogDetailDTO blog : blogs) {
             if (blogLogic.getBlog(blog.getId()) == null) {
-                throw new WebApplicationException("El recurso /blogs/" + blog.getId() + " no existe.", 404);
+                throw new WebApplicationException(RECURSO + blog.getId() + NOEXISTE, 404);
             }
         }
-        List<BlogDetailDTO> lista = blogsListEntity2DTO(usuarioMisBlogsLogic.replaceBlogs(usuariosId, blogsListDTO2Entity(blogs)));
-        return lista;
+         
+        return blogsListEntity2DTO(usuarioMisBlogsLogic.replaceBlogs(usuariosId, blogsListDTO2Entity(blogs)));
     }
 
     @DELETE
     @Path("{blogsId: \\d+}")
     public void removeBlog(@PathParam("usuariosId") Long usuariosId, @PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
         usuarioMisBlogsLogic.removeBlog(usuariosId, blogsId);
     }

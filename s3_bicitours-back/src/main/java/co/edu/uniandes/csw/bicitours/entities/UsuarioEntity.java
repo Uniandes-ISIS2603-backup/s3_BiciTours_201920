@@ -63,9 +63,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     @ManyToMany(mappedBy = "usuarios")
     private List<BlogEntity> favoritos;
     
-    public UsuarioEntity() {
-        
-    }
 
     /**
      * @return the nombre

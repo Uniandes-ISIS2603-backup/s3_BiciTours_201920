@@ -29,7 +29,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
         if (blogEntity.getUsuarios() != null) {
             usuarios = new ArrayList<>();
             for (UsuarioEntity entityUsuario : blogEntity.getUsuarios()) {
-//                usuarios.add(new UsuarioDTO(entityUsuario));
+                usuarios.add(new UsuarioDTO(entityUsuario));
             }
         }
         if (blogEntity.getComentarios() != null) {
@@ -46,7 +46,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
         if (usuarios != null) {
             List<UsuarioEntity> usuariosEntity = new ArrayList<>();
             for (UsuarioDTO dtoUsuario : usuarios) {
-//                usuariosEntity.add(dtoUsuario.toEntity());
+                usuariosEntity.add(dtoUsuario.toEntity());
             }
             blogEntity.setUsuarios(usuariosEntity);
         }

@@ -33,6 +33,8 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class TourResource {
+    private static final String RECURSO="El recurso /tours/";
+    private static final String NOEXISTE=" no existe.";
     @Inject
     private TourLogic tourLogic;
 
@@ -51,8 +53,7 @@ public class TourResource {
     public TourDetailDTO createTour(TourDTO t) throws BusinessLogicException {
         TourEntity tourEntity = t.toEntity();
         TourEntity nuevoTourEntity = tourLogic.createTour(tourEntity);
-        TourDetailDTO nuevoTourDTO = new TourDetailDTO(nuevoTourEntity);
-        return nuevoTourDTO;
+        return new TourDetailDTO(nuevoTourEntity);
     }
 
     /**
@@ -86,15 +87,14 @@ public class TourResource {
      */    
     @GET
     @Path("{toursId: \\d+}")
-    public TourDetailDTO getTour(@PathParam("tourId") long toursId)throws WebApplicationException
+    public TourDetailDTO getTour(@PathParam("tourId") long toursId)
     {
         TourEntity entidad = tourLogic.getTour(toursId);
         
         if(entidad == null)
-            throw new WebApplicationException("El recurso /tours/" + toursId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
         
-        TourDetailDTO tour = new TourDetailDTO(entidad);
-        return tour;
+        return new TourDetailDTO(entidad);
         
     }
     
@@ -117,10 +117,10 @@ public class TourResource {
         tour.setId(toursId);
         
         if(tourLogic.getTour(toursId) == null)
-            throw new WebApplicationException("El recurso /tours/" + toursId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
         
-        TourDetailDTO detail = new TourDetailDTO(tourLogic.updateTour(tour.toEntity()));
-        return detail;        
+
+        return new TourDetailDTO(tourLogic.updateTour(tour.toEntity()));      
     }
     
     
@@ -137,7 +137,7 @@ public class TourResource {
     public void deletoTour(@PathParam("toursId")long toursId)
     {
         if(tourLogic.getTour(toursId)== null)
-            throw new WebApplicationException("El recurso /tours/" + toursId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
         tourLogic.deleteTour(toursId);       
     }
 }

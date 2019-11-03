@@ -7,8 +7,7 @@ package co.edu.uniandes.csw.bicitours.persistence;
 
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,7 +23,7 @@ public class TourPersistence{
 
     protected EntityManager em;
     
-    private static final Logger LOGGER = Logger.getLogger(TourPersistence.class.getName());
+
 
     /**
      * Método para persisitir la entidad en la base de datos.
@@ -33,9 +32,9 @@ public class TourPersistence{
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public TourEntity create(TourEntity tourEntity) {
-        LOGGER.log(Level.INFO, "Creando un Tour nuevo");
+
         em.persist(tourEntity);
-        LOGGER.log(Level.INFO, "Tour creado");
+
         return tourEntity;
     }
     
@@ -46,7 +45,7 @@ public class TourPersistence{
      */
     public TourEntity find(long tourId)
     {
- //       LOGGER.log(Level.INFO, "Consultando el blog con id={0}", tourId);
+
         return em.find(TourEntity.class, tourId);
     }
     
@@ -56,7 +55,7 @@ public class TourPersistence{
      */
     public List<TourEntity> findAll()
     {
-        LOGGER.log(Level.INFO, "Consultando todos los toures");
+
         TypedQuery<TourEntity> query=em.createQuery("select u from TourEntity u", TourEntity.class);
         return query.getResultList();
     }
@@ -68,7 +67,7 @@ public class TourPersistence{
      * @return un tour con los cambios aplicados.
      */
     public TourEntity update(TourEntity tourEntity) {
-        LOGGER.log(Level.INFO, "Actualizando el tour con id={0}", tourEntity.getId());
+
         return em.merge(tourEntity);
     }
 

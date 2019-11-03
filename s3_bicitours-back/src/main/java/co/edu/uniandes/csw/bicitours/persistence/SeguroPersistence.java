@@ -5,19 +5,18 @@
  */
 package co.edu.uniandes.csw.bicitours.persistence;
 
-import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
+
 import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
-import co.edu.uniandes.csw.bicitours.persistence.SeguroPersistence;
+
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
-import javax.inject.Inject;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.transaction.UserTransaction;
+
 
 /**
  *
@@ -26,7 +25,7 @@ import javax.transaction.UserTransaction;
 @Stateless
 public class SeguroPersistence {
     
-     private static final Logger LOGGER = Logger.getLogger(SeguroPersistence.class.getName());
+
 
     @PersistenceContext(unitName = "bicitoursPU")
     protected EntityManager e;
@@ -38,9 +37,9 @@ public class SeguroPersistence {
      * @return devuelve la entidad creada con un id dado por la base de datos.
      */
     public SeguroEntity create(SeguroEntity seguroentity) {
-        LOGGER.log(Level.INFO, "Creando un libro nuevo");
+
         e.persist(seguroentity);
-        LOGGER.log(Level.INFO, "Libro creado");
+
         return seguroentity;
     }
 
@@ -52,7 +51,7 @@ public class SeguroPersistence {
      * "SELECT * FROM table_name" en SQL.
      */
     public List<SeguroEntity> findAll() {
-        LOGGER.log(Level.INFO, "Consultando todos los libros");
+
         Query q = e.createQuery("select u from SeguroEntity u");
         return q.getResultList();
     }
@@ -65,7 +64,7 @@ public class SeguroPersistence {
      * @return un libro.
      */
     public SeguroEntity find(Long segurosId) {
-        LOGGER.log(Level.INFO, "Consultando el libro con id={0}", segurosId);
+
         return e.find(SeguroEntity.class, segurosId);
     }
 
@@ -77,7 +76,7 @@ public class SeguroPersistence {
      * @return un libro con los cambios aplicados.
      */
     public SeguroEntity update(SeguroEntity seguroEntity) {
-        LOGGER.log(Level.INFO, "Actualizando el libro con id={0}", seguroEntity.getId());
+ 
         return e.merge(seguroEntity);
     }
 
@@ -89,7 +88,7 @@ public class SeguroPersistence {
      * @param segurosId: id correspondiente al libro a borrar.
      */
     public void delete(Long segurosId) {
-        LOGGER.log(Level.INFO, "Borrando el libro con id={0}", segurosId);
+
         SeguroEntity seguroEntity = e.find(SeguroEntity.class, segurosId);
         e.remove(seguroEntity);
     }
@@ -102,7 +101,7 @@ public class SeguroPersistence {
      * existe alguno devuelve el primero.
      */
     public SeguroEntity findById(String id) {
-        LOGGER.log(Level.INFO, "Consultando libros por id ", id);
+
         // Se crea un query para buscar libros con el id que recibe el método como argumento. ":id" es un placeholder que debe ser remplazado
         TypedQuery query = e.createQuery("Select e From SeguroEntity e where e.id = :id", SeguroEntity.class);
         // Se remplaza el placeholder ":id" con el valor del argumento 
@@ -117,7 +116,7 @@ public class SeguroPersistence {
         } else {
             result = sameISBN.get(0);
         }
-        LOGGER.log(Level.INFO, "Saliendo de consultar libros por id ", id);
+
         return result;
     }
     

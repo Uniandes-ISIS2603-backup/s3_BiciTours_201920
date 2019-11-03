@@ -26,8 +26,8 @@ public class BlogTourLogic {
 
 
     public TourEntity getTour(Long blogsId) {
-        TourEntity tourEntity = blogPersistence.find(blogsId).getTour();
-        return tourEntity;
+
+        return blogPersistence.find(blogsId).getTour();
     }
         public BlogEntity replaceTour(Long blogsId, Long toursId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);

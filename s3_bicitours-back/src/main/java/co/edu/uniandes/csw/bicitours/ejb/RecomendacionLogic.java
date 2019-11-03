@@ -9,8 +9,7 @@ import co.edu.uniandes.csw.bicitours.entities.RecomendacionEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.RecomendacionPersistence;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -20,7 +19,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class RecomendacionLogic {
-      private static final Logger LOGGER = Logger.getLogger(RecomendacionLogic.class.getName());
+
 
     @Inject
     private RecomendacionPersistence persistence;
@@ -34,9 +33,9 @@ public class RecomendacionLogic {
     public RecomendacionEntity createRecomendacion(RecomendacionEntity recomendacionEntity) throws BusinessLogicException {
         if(recomendacionEntity.getIndumentaria()!=null && recomendacionEntity.getTipoBici()!=null)
         {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación de la recomendacion");
+
         RecomendacionEntity newRecomendacionEntity = persistence.create(recomendacionEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación de la recomendacion");
+
         return newRecomendacionEntity;
         }
         else
@@ -51,10 +50,10 @@ public class RecomendacionLogic {
      * @return Colección de objetos de RecomendacionEntity.
      */
     public List<RecomendacionEntity> getRecomendacions() {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las recomendaciones");
-        List<RecomendacionEntity> lista = persistence.findAll();
-        LOGGER.log(Level.INFO, "Termina proceso de consultar todas las  recomendaciones");
-        return lista;
+
+
+
+        return persistence.findAll();
     }
 
     /**
@@ -64,12 +63,12 @@ public class RecomendacionLogic {
      * @return Instancia de RecomendacionEntity con los datos del Recomendacion consultado.
      */
     public RecomendacionEntity getRecomendacion(Long recomendacionesId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el recomendacion con id = {0}", recomendacionesId);
+
         RecomendacionEntity recomendacionEntity = persistence.find(recomendacionesId);
         if (recomendacionEntity == null) {
-            LOGGER.log(Level.SEVERE, "La editorial con el id = {0} no existe", recomendacionesId);
+
         }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el recomendacion con id = {0}", recomendacionesId);
+
         return recomendacionEntity;
     }
 
@@ -81,14 +80,14 @@ public class RecomendacionLogic {
      * @return Instancia de RecomendacionEntity con los datos actualizados.
      */
     public RecomendacionEntity updateRecomendacion(Long recomendacionsId, RecomendacionEntity recomendacionEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el recomendacion con id = {0}", recomendacionsId);
-        RecomendacionEntity newRecomendacionEntity = persistence.update(recomendacionEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el recomendacion con id = {0}", recomendacionsId);
-        return newRecomendacionEntity;
+
+
+
+        return persistence.update(recomendacionEntity);
     }
      public RecomendacionEntity updateRecomendacion(RecomendacionEntity recomendacionEntity) {
-        RecomendacionEntity newEntity = persistence.update(recomendacionEntity);
-        return newEntity;
+
+        return persistence.update(recomendacionEntity);
     }
 
     /**

@@ -30,6 +30,7 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class SiguienteBlogResource {
+    private static final String RECURSO="El recurso /blogs/";
     @Inject
     private SiguienteBlogLogic siguienteBlogLogic;
 
@@ -40,22 +41,22 @@ public class SiguienteBlogResource {
     public BlogDetailDTO getSiguiente(@PathParam("blogsId") Long blogsId) {
         BlogEntity blogEntity = siguienteBlogLogic.getSiguiente(blogsId);
         if (blogEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + "/blog no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + "/blog no existe.", 404);
         }
-        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(blogEntity);
-        return blogDetailDTO;
+
+        return new BlogDetailDTO(blogEntity);
     }
 
     @PUT
     public BlogDetailDTO replaceSiguiente(@PathParam("blogsId") Long blogsId, BlogDTO blog) {
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + " no existe.", 404);
         }
         if (blogLogic.getBlog(blog.getId()) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blog.getId() + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blog.getId() + " no existe.", 404);
         }
-        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(siguienteBlogLogic.replaceSiguiente(blogsId, blog.getId()));
-        return blogDetailDTO;
+
+        return new BlogDetailDTO(siguienteBlogLogic.replaceSiguiente(blogsId, blog.getId()));
     }
 
     @DELETE

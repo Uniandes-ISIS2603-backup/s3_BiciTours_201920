@@ -82,10 +82,10 @@ public class UsuarioComentarioLogic {
         List<ComentarioEntity> comentarios = comentarioPersistence.findAll(); //se obtienen todos los comentarios de la persistencia
         for (ComentarioEntity comentarioActual : comentarios) { //se recorre la lista de comentarios para evaluar si ya existen comentarios
             if (nuevosComentarios.contains(comentarioActual)) {
-                //comentarioActual.setUsuario(usuario); //se reasigna el autor del comentario
-            } //else if (comentarioActual.getUsuario()!= null && comentarioActual.getUsuario().equals(usuario)) {
-                //comentarioActual.setUsuario(null);
-            //}
+                comentarioActual.setUsuario(usuario); //se reasigna el autor del comentario
+            } else if (comentarioActual.getUsuario()!= null && comentarioActual.getUsuario().equals(usuario)) {
+                comentarioActual.setUsuario(null);
+            }
         }
         return nuevosComentarios;
     }

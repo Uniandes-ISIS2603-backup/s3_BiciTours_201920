@@ -50,15 +50,15 @@ public class ComentarioUsuarioResource {
      * Error de lógica que se genera cuando no se encuentra la usuario o el
      * libro.
      */
-    //@PUT
-    //public ComentarioDetailDTO replaceUsuario(@PathParam("comentariosId") Long comentariosId, UsuarioDTO usuario) {
-        //if (comentarioLogic.getComentario(comentariosId) == null) {
-        //    throw new WebApplicationException("El recurso /comentarios/" + comentariosId + " no existe.", 404);
-        //}
-        //if (usuarioLogic.getUsuario(usuario.getId()) == null) {
-        //    throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + " no existe.", 404);
-        //}
-        //ComentarioDetailDTO comentarioDetailDTO = new ComentarioDetailDTO(comentarioUsuarioLogic.replaceUsuario(comentariosId, usuario.getId()));
-        //return comentarioDetailDTO;
-    //}
+    /**@PUT
+    public ComentarioDetailDTO replaceUsuario(@PathParam("comentariosId") Long comentariosId, UsuarioDTO usuario) {
+        if (comentarioLogic.getComentario(comentariosId) == null) {
+            throw new WebApplicationException("El recurso /comentarios/" + comentariosId + " no existe.", 404);
+        }
+        if (usuarioLogic.getUsuario(usuario.getId()) == null) {
+            throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + " no existe.", 404);
+        }
+        ComentarioDetailDTO comentarioDetailDTO = new ComentarioDetailDTO(comentarioUsuarioLogic.replaceUsuario(comentariosId, usuario.getId()));
+        return comentarioDetailDTO;
+    }*/
 }

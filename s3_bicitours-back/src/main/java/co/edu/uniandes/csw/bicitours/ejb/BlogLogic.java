@@ -42,8 +42,8 @@ public class BlogLogic {
         {
             throw new BusinessLogicException("El blog debe tener titulo"); 
         }
-        blog = persistence.create(blog);
-        return blog;
+
+        return persistence.create(blog);
     }
         /**
      * Devuelve todos los bloigs que hay en la base de datos.
@@ -51,8 +51,8 @@ public class BlogLogic {
      * @return Lista de entidades de tipo blog.
      */
     public List<BlogEntity> getBlogs() {
-        List<BlogEntity> blogs = persistence.findAll();
-        return blogs;
+
+        return persistence.findAll();
     }
     /**
      * Busca un blog por ID
@@ -61,8 +61,8 @@ public class BlogLogic {
      * @return El blog encontrado, null si no lo encuentra.
      */
     public BlogEntity getBlog(Long blogsId) {
-        BlogEntity blogEntity = persistence.find(blogsId);
-        return blogEntity;
+ 
+        return persistence.find(blogsId);
     }
         /**
      * Actualizar un blog por ID
@@ -71,8 +71,8 @@ public class BlogLogic {
      * @return La entidad del blog luego de actualizarla
      */
     public BlogEntity updateBlog(BlogEntity blogEntity) {
-        BlogEntity newEntity = persistence.update(blogEntity);
-        return newEntity;
+
+        return persistence.update(blogEntity);
     }
     /**
      * Eliminar un blog por ID

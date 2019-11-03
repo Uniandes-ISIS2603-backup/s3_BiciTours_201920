@@ -12,7 +12,6 @@ import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -36,9 +35,8 @@ import javax.ws.rs.WebApplicationException;
 public class UsuarioResource {
     @Inject
     UsuarioLogic usuarioLogic;  //El objeto asociado con esta variable sea asignado por el contenedor
-    
-    private final static Logger LOGGER = Logger.getLogger(UsuarioResource.class.getName());
-    
+    private static final String RECURSO="El recurso /usuario/";
+    private static final String NOEXISTE=" no existe.";
      /**
      * Crea un nuevo usuario con la información que se recibe en el cuerpo de
      * la petición y se regresa un objeto idéntico con un id auto-generado por
@@ -56,8 +54,7 @@ public class UsuarioResource {
         UsuarioEntity usuarioEntity = usuario.toEntity();
         UsuarioEntity nuevoUsuarioEntity = usuarioLogic.create(usuarioEntity);
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
-        UsuarioDTO nuevoUsuarioDTO = new UsuarioDTO(nuevoUsuarioEntity);
-        return nuevoUsuarioDTO;        
+        return new UsuarioDTO(nuevoUsuarioEntity);    
     }
     
     /**
@@ -75,7 +72,7 @@ public class UsuarioResource {
         UsuarioEntity usuario= usuarioLogic.getUsuario(usuarioId);
         if(usuario == null)
         {
-            throw new WebApplicationException("El recurso /usuario/" + usuarioId + " no existe.", 404);
+            throw new WebApplicationException( RECURSO + usuarioId + " no existe.", 404);
         }
         return new UsuarioDetailDTO(usuario);
     }
@@ -125,13 +122,12 @@ public class UsuarioResource {
      */
     @PUT
     @Path("{usuarioId: \\d+}")
-    public UsuarioDetailDTO updateUsuario(@PathParam("usuarioId") Long usuarioId, UsuarioDetailDTO nuevoUsuario) throws WebApplicationException {
+    public UsuarioDetailDTO updateUsuario(@PathParam("usuarioId") Long usuarioId, UsuarioDetailDTO nuevoUsuario) {
         nuevoUsuario.setId(usuarioId);
         if (usuarioLogic.getUsuario(usuarioId) == null) {
-            throw new WebApplicationException("El recurso /usuario/" + usuarioId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + usuarioId + NOEXISTE, 404);
         }
-        UsuarioDetailDTO detailDTO = new UsuarioDetailDTO(usuarioLogic.updateUsuario(usuarioId, nuevoUsuario.toEntity()));
-        return detailDTO;
+        return new UsuarioDetailDTO(usuarioLogic.updateUsuario(nuevoUsuario.toEntity()));
     }
 
     /**
@@ -146,7 +142,7 @@ public class UsuarioResource {
     @Path("{usuarioId: \\d+}")
     public void deleteUsuario(@PathParam("usuarioId") Long usuarioId) throws BusinessLogicException {
         if (usuarioLogic.getUsuario(usuarioId) == null) {
-            throw new WebApplicationException("El recurso /usuario/" + usuarioId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + usuarioId + NOEXISTE, 404);
         }
         usuarioLogic.deleteUsuario(usuarioId);
     }

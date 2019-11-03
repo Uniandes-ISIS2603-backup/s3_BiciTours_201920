@@ -33,22 +33,23 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 
 public class RecomendacionResource {
-    
+    private static final String RECURSO="El recurso /Recomendacions/";
+    private static final String NOEXISTE=" no existe.";
     @Inject
     private RecomendacionLogic logica;
 
     @POST
     public RecomendacionDTO createRecomendacion(RecomendacionDTO recomendacion) throws BusinessLogicException 
     {
-         RecomendacionDTO respuesta = new RecomendacionDTO(logica.createRecomendacion(recomendacion.toEntity()));
-        return respuesta;
+
+        return new RecomendacionDTO(logica.createRecomendacion(recomendacion.toEntity()));
     }
 
     @GET
     public List<RecomendacionDTO> getRecomendacions() {
         
-        List<RecomendacionDTO> listaRecomendacions = listEntity2DetailDTO(logica.getRecomendacions());
-        return listaRecomendacions;
+
+        return listEntity2DetailDTO(logica.getRecomendacions());
     }
  @GET
     @Path("{recomendacionId: \\d+}")
@@ -57,10 +58,10 @@ public class RecomendacionResource {
         RecomendacionEntity recomendacion = logica.getRecomendacion(recomendacionId);
         if (recomendacion == null) 
         {
-            throw new WebApplicationException("El recurso /Recomendacions/" + recomendacionId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + recomendacionId + NOEXISTE, 404);
         }
-        RecomendacionDTO recomendacions = new RecomendacionDTO(recomendacion);
-        return recomendacions;
+
+        return new RecomendacionDTO(recomendacion);
     }
     
   
@@ -71,10 +72,10 @@ public class RecomendacionResource {
          recomendacions.setId(recomendacionId);
         if (logica.getRecomendacion(recomendacionId) == null) 
         {
-            throw new WebApplicationException("El recurso /Recomendacions/" + recomendacionId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + recomendacionId + NOEXISTE, 404);
         }
-        RecomendacionDTO DTO = new RecomendacionDTO(logica.updateRecomendacion(recomendacionId, recomendacions.toEntity()));
-        return DTO;
+
+        return new RecomendacionDTO(logica.updateRecomendacion(recomendacionId, recomendacions.toEntity()));
     }
 
     @DELETE
@@ -84,7 +85,7 @@ public class RecomendacionResource {
          RecomendacionEntity recomendacion = logica.getRecomendacion(recomendacionId);
         if (recomendacion == null) 
         {
-            throw new WebApplicationException("El recurso /Recomendacions/" + recomendacionId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + recomendacionId + NOEXISTE, 404);
         }
         logica.deleteRecomendacion(recomendacionId);
     }

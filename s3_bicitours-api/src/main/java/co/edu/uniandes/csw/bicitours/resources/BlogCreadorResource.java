@@ -45,8 +45,8 @@ public class BlogCreadorResource {
         if (usuarioEntity == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + "/blog no existe.", 404);
         }
-        UsuarioDetailDTO usuarioDetailDTO = new UsuarioDetailDTO(usuarioEntity);
-        return usuarioDetailDTO;
+
+        return new UsuarioDetailDTO(usuarioEntity);
     }
 
     @PUT
@@ -57,8 +57,8 @@ public class BlogCreadorResource {
         if (usuarioLogic.getUsuario(usuario.getId()) == null) {
             throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + " no existe.", 404);
         }
-        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(blogCreadorLogic.replaceCreador(blogsId, usuario.getId()));
-        return blogDetailDTO;
+
+        return new BlogDetailDTO(blogCreadorLogic.replaceCreador(blogsId, usuario.getId()));
     }
 
     @DELETE

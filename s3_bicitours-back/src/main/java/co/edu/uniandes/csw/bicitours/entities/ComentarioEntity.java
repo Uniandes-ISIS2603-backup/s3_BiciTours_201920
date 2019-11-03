@@ -30,7 +30,7 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     @OneToMany(cascade = CascadeType.PERSIST)
     private List<ComentarioEntity> respuestas = new ArrayList<ComentarioEntity>();
     
-    /*@ManyToOne
+    /**@ManyToOne
     private ComentarioEntity head;
     */
     
@@ -46,10 +46,7 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     @ManyToOne
     private TourEntity tour;
     
-    public ComentarioEntity()
-    {
-        
-    }
+
     /**
      * @return the texto
      */

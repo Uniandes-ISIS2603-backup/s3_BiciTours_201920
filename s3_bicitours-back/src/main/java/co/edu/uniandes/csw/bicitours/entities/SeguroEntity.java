@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.bicitours.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;

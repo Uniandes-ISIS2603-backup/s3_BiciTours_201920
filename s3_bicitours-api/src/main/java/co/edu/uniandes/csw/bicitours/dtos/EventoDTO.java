@@ -7,9 +7,6 @@ package co.edu.uniandes.csw.bicitours.dtos;
 
 import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *

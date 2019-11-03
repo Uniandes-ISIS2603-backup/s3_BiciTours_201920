@@ -21,6 +21,7 @@ public class UsuarioDTO implements Serializable{
     private String codigo;
     private Boolean esAdmin;
     private Boolean pago;
+    private Integer deuda;
     
     public UsuarioDTO(){
         
@@ -34,6 +35,7 @@ public class UsuarioDTO implements Serializable{
             this.correo=usuarioEntity.getCorreo();
             this.codigo=usuarioEntity.getCodigo();
             this.pago=false;
+            this.deuda=usuarioEntity.getDeuda();
         }
     }
     
@@ -50,7 +52,7 @@ public class UsuarioDTO implements Serializable{
         usuarioEntity.setCodigo(this.getCodigo());
         usuarioEntity.setEsAdmin(this.isEsAdmin());
         usuarioEntity.setPago(this.isPago());
-        //usuarioEntity.setDeuda(this.getDeuda());
+        usuarioEntity.setDeuda(this.getDeuda());
         return usuarioEntity;
     }
     
@@ -58,7 +60,7 @@ public class UsuarioDTO implements Serializable{
      * @return the pago
      */
     public Boolean isPago() {
-        return pago;
+        return getPago();
     }
 
     /**
@@ -71,7 +73,7 @@ public class UsuarioDTO implements Serializable{
      * @return the esAdmin
      */
     public Boolean isEsAdmin() {
-        return esAdmin;
+        return getEsAdmin();
     }
 
     /**
@@ -134,5 +136,33 @@ public class UsuarioDTO implements Serializable{
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    /**
+     * @return the esAdmin
+     */
+    public Boolean getEsAdmin() {
+        return esAdmin;
+    }
+
+    /**
+     * @return the pago
+     */
+    public Boolean getPago() {
+        return pago;
+    }
+
+    /**
+     * @return the deuda
+     */
+    public Integer getDeuda() {
+        return deuda;
+    }
+
+    /**
+     * @param deuda the deuda to set
+     */
+    public void setDeuda(Integer deuta) {
+        this.deuda = deuta;
     }
 }

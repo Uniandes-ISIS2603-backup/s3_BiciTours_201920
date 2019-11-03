@@ -33,22 +33,23 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 
 public class SeguroResource {
-    
+    private static final String RECURSO="El recurso /Seguros/";
+    private static final String NOEXISTE=" no existe."; 
     @Inject
     private SeguroLogic logica;
 
     @POST
     public SeguroDTO createSeguro(SeguroDTO seguro) throws BusinessLogicException 
     {
-         SeguroDTO respuesta = new SeguroDTO(logica.createSeguro(seguro.toEntity()));
-        return respuesta;
+
+        return new SeguroDTO(logica.createSeguro(seguro.toEntity()));
     }
 
     @GET
     public List<SeguroDTO> getSeguros() {
         
-        List<SeguroDTO> listaSeguros = listEntity2DetailDTO(logica.getSeguros());
-        return listaSeguros;
+
+        return listEntity2DetailDTO(logica.getSeguros());
     }
     @GET
     @Path("{seguroId: \\d+}")
@@ -57,10 +58,10 @@ public class SeguroResource {
         SeguroEntity seguro = logica.getSeguro(seguroId);
         if (seguro == null) 
         {
-            throw new WebApplicationException("El recurso /Seguros/" + seguroId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + seguroId + NOEXISTE, 404);
         }
-        SeguroDTO seguros = new SeguroDTO(seguro);
-        return seguros;
+
+        return new SeguroDTO(seguro);
     }
     
   
@@ -71,10 +72,10 @@ public class SeguroResource {
          seguros.setId(seguroId);
         if (logica.getSeguro(seguroId) == null) 
         {
-            throw new WebApplicationException("El recurso /Seguros/" + seguroId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + seguroId + NOEXISTE, 404);
         }
-        SeguroDTO DTO = new SeguroDTO(logica.updateSeguro(seguroId, seguros.toEntity()));
-        return DTO;
+
+        return new SeguroDTO(logica.updateSeguro(seguroId, seguros.toEntity()));
     }
 
     @DELETE
@@ -84,7 +85,7 @@ public class SeguroResource {
          SeguroEntity seguro = logica.getSeguro(seguroId);
         if (seguro == null) 
         {
-            throw new WebApplicationException("El recurso /Seguros/" + seguroId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + seguroId + NOEXISTE, 404);
         }
         logica.deleteSeguro(seguroId);
     }

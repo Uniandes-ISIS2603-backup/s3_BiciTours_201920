@@ -32,6 +32,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogComentariosResource {
+    private static final String RECURSO="El recurso /comentarios/";
+    private static final String NOEXISTE=" no existe.";
     @Inject
     private BlogComentariosLogic blogComentariosLogic;
 
@@ -42,44 +44,44 @@ public class BlogComentariosResource {
     @Path("{comentariosId: \\d+}")
     public ComentarioDetailDTO addComentario(@PathParam("blogsId") Long blogsId, @PathParam("comentariosId") Long comentariosId) {
         if (comentarioLogic.getComentario(comentariosId) == null) {
-            throw new WebApplicationException("El recurso /comentarios/" + comentariosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + comentariosId + NOEXISTE, 404);
         }
-        ComentarioDetailDTO detailDTO = new ComentarioDetailDTO(blogComentariosLogic.addComentario(blogsId, comentariosId));
-        return detailDTO;
+ 
+        return new ComentarioDetailDTO(blogComentariosLogic.addComentario(blogsId, comentariosId));
     }
 
     @GET
     public List<ComentarioDetailDTO> getComentarios(@PathParam("blogsId") Long blogsId) {
-        List<ComentarioDetailDTO> lista = comentariosListEntity2DTO(blogComentariosLogic.getComentarios(blogsId));
-        return lista;
+
+        return comentariosListEntity2DTO(blogComentariosLogic.getComentarios(blogsId));
     }
 
     @GET
     @Path("{comentariosId: \\d+}")
     public ComentarioDetailDTO getComentario(@PathParam("blogsId") Long blogsId, @PathParam("comentariosId") Long comentariosId) throws BusinessLogicException {
         if (comentarioLogic.getComentario(comentariosId) == null) {
-            throw new WebApplicationException("El recurso /comentarios/" + comentariosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + comentariosId + NOEXISTE, 404);
         }
-        ComentarioDetailDTO detailDTO = new ComentarioDetailDTO(blogComentariosLogic.getComentario(blogsId, comentariosId));
-        return detailDTO;
+
+        return new ComentarioDetailDTO(blogComentariosLogic.getComentario(blogsId, comentariosId));
     }
 
     @PUT
     public List<ComentarioDetailDTO> replaceComentarios(@PathParam("blogsId") Long blogsId, List<ComentarioDetailDTO> comentarios) {
         for (ComentarioDetailDTO comentario : comentarios) {
             if (comentarioLogic.getComentario(comentario.getId()) == null) {
-                throw new WebApplicationException("El recurso /comentarios/" + comentario.getId() + " no existe.", 404);
+                throw new WebApplicationException(RECURSO + comentario.getId() + NOEXISTE, 404);
             }
         }
-        List<ComentarioDetailDTO> lista = comentariosListEntity2DTO(blogComentariosLogic.replaceComentarios(blogsId, comentariosListDTO2Entity(comentarios)));
-        return lista;
+
+        return comentariosListEntity2DTO(blogComentariosLogic.replaceComentarios(blogsId, comentariosListDTO2Entity(comentarios)));
     }
 
     @DELETE
     @Path("{comentariosId: \\d+}")
     public void removeComentario(@PathParam("blogsId") Long blogsId, @PathParam("comentariosId") Long comentariosId) throws BusinessLogicException {
         if (comentarioLogic.getComentario(comentariosId) == null) {
-            throw new WebApplicationException("El recurso /comentarios/" + comentariosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + comentariosId + NOEXISTE, 404);
         }
         blogComentariosLogic.removeComentario(blogsId, comentariosId);
     }

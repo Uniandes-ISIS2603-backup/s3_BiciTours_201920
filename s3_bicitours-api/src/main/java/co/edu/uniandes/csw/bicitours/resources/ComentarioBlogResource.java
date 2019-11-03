@@ -58,7 +58,7 @@ public class ComentarioBlogResource {
         if (blogLogic.getBlog(blog.getId()) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blog.getId() + " no existe.", 404);
         }
-        ComentarioDetailDTO comentarioDetailDTO = new ComentarioDetailDTO(comentarioBlogLogic.replaceBlog(comentariosId, blog.getId()));
-        return comentarioDetailDTO;
+
+        return new ComentarioDetailDTO(comentarioBlogLogic.replaceBlog(comentariosId, blog.getId()));
     }
 }

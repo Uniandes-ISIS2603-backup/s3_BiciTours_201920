@@ -6,7 +6,7 @@
 package co.edu.uniandes.csw.bicitours.entities;
 
 import java.io.Serializable;
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -26,9 +26,6 @@ public class FotoEntity extends BaseEntity implements Serializable{
     @ManyToOne()
     TourEntity tour;
     
-    public FotoEntity()
-    {
-    }
     
     public String getRuta()
     {

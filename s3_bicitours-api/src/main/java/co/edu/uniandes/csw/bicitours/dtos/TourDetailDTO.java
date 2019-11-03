@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class TourDetailDTO extends TourDTO implements Serializable{
     
-    private LinkedList<FotoDTO> fotos;
+    private List<FotoDTO> fotos;
     private List<BlogDTO> blogs;
     
     private List<EventoDTO> eventos;
@@ -42,12 +42,12 @@ public class TourDetailDTO extends TourDTO implements Serializable{
         this.eventos = eventos;
     }
     
-    public void setFotos(LinkedList<FotoDTO> fs)
+    public void setFotos(List<FotoDTO> fs)
     {
         fotos = fs;
     } 
     
-    public LinkedList<FotoDTO> getFotos()
+    public List<FotoDTO> getFotos()
     {
         return fotos;
     }

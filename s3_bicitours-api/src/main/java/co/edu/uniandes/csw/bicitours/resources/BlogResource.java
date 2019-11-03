@@ -33,38 +33,39 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class BlogResource {
-
+    private static final String RECURSO="El recurso /blogs/";
+    private static final String NOEXISTE=" no existe.";
     @Inject
     private BlogLogic blogLogic;
     @POST
     public BlogDTO createBlog(BlogDTO blog) throws BusinessLogicException {
-        BlogDTO nuevoBlogDTO = new BlogDTO(blogLogic.createBlog(blog.toEntity()));
-        return nuevoBlogDTO;
+
+        return new BlogDTO(blogLogic.createBlog(blog.toEntity()));
     }
     @GET
     public List<BlogDetailDTO> getBlogs() {
-        List<BlogDetailDTO> listaBlogs = listEntity2DetailDTO(blogLogic.getBlogs());
-        return listaBlogs;
+ 
+        return listEntity2DetailDTO(blogLogic.getBlogs());
     }
     @GET
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO getBlog(@PathParam("blogsId") Long blogsId) {
         BlogEntity blogEntity = blogLogic.getBlog(blogsId);
         if (blogEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
-        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(blogEntity);
-        return blogDetailDTO;
+
+        return new BlogDetailDTO(blogEntity);
     }
     @PUT
     @Path("{blogsId: \\d+}")
     public BlogDetailDTO updateBlog(@PathParam("blogsId") Long blogsId, BlogDetailDTO blog) throws BusinessLogicException {
         blog.setId(blogsId);
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
-        BlogDetailDTO detailDTO = new BlogDetailDTO(blogLogic.updateBlog(blog.toEntity()));
-        return detailDTO;
+
+        return new BlogDetailDTO(blogLogic.updateBlog(blog.toEntity()));
     }
 
     @DELETE
@@ -72,7 +73,7 @@ public class BlogResource {
     public void deleteBlog(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         BlogEntity entity = blogLogic.getBlog(blogsId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
         blogLogic.deleteBlog(blogsId);
     }

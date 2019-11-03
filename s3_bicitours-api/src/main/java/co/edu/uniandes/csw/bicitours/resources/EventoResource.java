@@ -32,21 +32,22 @@ import javax.ws.rs.WebApplicationException;
 @Consumes("application/json")
 @RequestScoped
 public class EventoResource {
-    
+
+    private static final String NOEXISTE=" no existe.";
     @Inject
     private EventoLogic eventoLogic;
     
     @POST
     public EventoDTO createEvento(@PathParam("tourId")Long tourId, EventoDTO evento) throws BusinessLogicException
     {
-        EventoDTO respuesta = new EventoDTO(eventoLogic.createEventoEntity(evento.toEntity(), tourId));
-        return respuesta;
+
+        return new EventoDTO(eventoLogic.createEventoEntity(evento.toEntity(), tourId));
     }
     
     @GET
     public List<EventoDTO> getEventos(@PathParam("tourId") Long tourId) {
-        List<EventoDTO> eventos = listEntity2DTO(eventoLogic.getEventos(tourId));
-        return eventos;
+
+        return listEntity2DTO(eventoLogic.getEventos(tourId));
     }
     
     @GET
@@ -56,10 +57,10 @@ public class EventoResource {
         EventoEntity entity = eventoLogic.getEvento(eventoId, tourId);
         if (entity == null) 
         {
-            throw new WebApplicationException("El recurso /Evento/" + eventoId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /Evento/" + eventoId + NOEXISTE, 404);
         }
-        EventoDTO evento = new EventoDTO(entity);
-        return evento;
+
+        return new EventoDTO(entity);
     }
 
     @PUT
@@ -71,12 +72,12 @@ public class EventoResource {
         }
         EventoEntity entity = eventoLogic.getEvento(tourId, eventoId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /tour/" + tourId + "/evento/" + eventoId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /tour/" + tourId + "/evento/" + eventoId + NOEXISTE, 404);
 
         }
-        EventoDTO reviewDTO = new EventoDTO(eventoLogic.updateEventoEntity(evento.toEntity(), tourId));
+
         
-        return reviewDTO;
+        return new EventoDTO(eventoLogic.updateEventoEntity(evento.toEntity(), tourId));
 
     }
 
@@ -87,7 +88,7 @@ public class EventoResource {
         EventoEntity evento = eventoLogic.getEvento(eventoId, tourId);
         if (evento == null) 
         {
-            throw new WebApplicationException("El recurso /Evento/" + eventoId + " no existe.", 404);
+            throw new WebApplicationException("El recurso /Evento/" + eventoId + NOEXISTE, 404);
         }
         eventoLogic.deleteEvento(eventoId, tourId);
     }

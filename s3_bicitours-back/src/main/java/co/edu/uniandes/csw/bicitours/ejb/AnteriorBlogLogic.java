@@ -19,8 +19,8 @@ public class AnteriorBlogLogic {
     @Inject
     private BlogPersistence blogPersistence;
     public BlogEntity getAnterior(Long blogsId) {
-        BlogEntity blogEntity = blogPersistence.find(blogsId).getAnterior();
-        return blogEntity;
+
+        return blogPersistence.find(blogsId).getAnterior();
     }
     
     public BlogEntity replaceAnterior(Long blogsId, Long blogsAnteriorId) {
