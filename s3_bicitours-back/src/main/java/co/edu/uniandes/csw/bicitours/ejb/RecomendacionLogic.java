@@ -63,12 +63,7 @@ public class RecomendacionLogic {
      */
     public RecomendacionEntity getRecomendacion(Long recomendacionesId) {
 
-        RecomendacionEntity recomendacionEntity = persistence.find(recomendacionesId);
-        if (recomendacionEntity == null) {
-
-        }
-
-        return recomendacionEntity;
+        return persistence.find(recomendacionesId);
     }
 
     /**

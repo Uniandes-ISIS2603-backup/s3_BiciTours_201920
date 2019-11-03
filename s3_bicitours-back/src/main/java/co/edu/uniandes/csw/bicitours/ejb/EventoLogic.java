@@ -95,7 +95,7 @@ public class EventoLogic {
         return eventoPersistence.find(tourId, eventoId);
     }
     
-    public EventoEntity updateEventoEntity(EventoEntity evento) throws BusinessLogicException
+    public EventoEntity updateEventoEntity(EventoEntity evento)
     {
 
         return eventoPersistence.update(evento);

@@ -74,7 +74,7 @@ public class ComentarioLogic {
         return persistence.find(comentarioId);
     }
 
-    public ComentarioEntity updateComentario(ComentarioEntity comentario) throws BusinessLogicException 
+    public ComentarioEntity updateComentario(ComentarioEntity comentario)
     {
         return persistence.update(comentario);
     }
