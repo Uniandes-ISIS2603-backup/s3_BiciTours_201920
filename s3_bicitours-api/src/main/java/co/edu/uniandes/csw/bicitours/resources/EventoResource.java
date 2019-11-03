@@ -90,7 +90,7 @@ public class EventoResource {
         {
             throw new WebApplicationException("El recurso /Evento/" + eventoId + NOEXISTE, 404);
         }
-        eventoLogic.deleteEvento(eventoId, tourId);
+        eventoLogic.deleteEvento(eventoId);
     }
     
     private List<EventoDTO> listEntity2DTO(List<EventoEntity> entityList) 

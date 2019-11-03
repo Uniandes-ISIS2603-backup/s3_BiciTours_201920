@@ -134,7 +134,7 @@ public class EventoLogic {
         return evento;
     }
     
-    public void deleteEvento(Long eventoId, Long tourId) 
+    public void deleteEvento(Long eventoId) 
     {
 
         eventoPersistence.delete(eventoId);

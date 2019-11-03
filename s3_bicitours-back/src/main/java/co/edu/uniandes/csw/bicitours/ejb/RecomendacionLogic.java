@@ -34,9 +34,8 @@ public class RecomendacionLogic {
         if(recomendacionEntity.getIndumentaria()!=null && recomendacionEntity.getTipoBici()!=null)
         {
 
-        RecomendacionEntity newRecomendacionEntity = persistence.create(recomendacionEntity);
 
-        return newRecomendacionEntity;
+        return persistence.create(recomendacionEntity);
         }
         else
               {

@@ -72,7 +72,7 @@ public class UsuarioResource {
         UsuarioEntity usuario= usuarioLogic.getUsuario(usuarioId);
         if(usuario == null)
         {
-            throw new WebApplicationException( RECURSO + usuarioId + " no existe.", 404);
+            throw new WebApplicationException( RECURSO + usuarioId + NOEXISTE, 404);
         }
         return new UsuarioDetailDTO(usuario);
     }

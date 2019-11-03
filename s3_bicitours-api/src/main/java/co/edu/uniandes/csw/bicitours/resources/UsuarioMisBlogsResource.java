@@ -52,7 +52,7 @@ public class UsuarioMisBlogsResource {
     @GET
     public List<BlogDetailDTO> getBlogs(@PathParam("usuariosId") Long usuariosId) {
          
-        return blogsListEntity2DTO(usuarioMisBlogsLogic.getBlogs(usuariosId));
+        return blogsListEntity2DTOUsuarioMisBlogs(usuarioMisBlogsLogic.getBlogs(usuariosId));
     }
 
     @GET
@@ -73,7 +73,7 @@ public class UsuarioMisBlogsResource {
             }
         }
          
-        return blogsListEntity2DTO(usuarioMisBlogsLogic.replaceBlogs(usuariosId, blogsListDTO2Entity(blogs)));
+        return blogsListEntity2DTOUsuarioMisBlogs(usuarioMisBlogsLogic.replaceBlogs(usuariosId, blogsListDTO2EntityUsuarioMisBlogs(blogs)));
     }
 
     @DELETE
@@ -85,7 +85,7 @@ public class UsuarioMisBlogsResource {
         usuarioMisBlogsLogic.removeBlog(usuariosId, blogsId);
     }
 
-    private List<BlogDetailDTO> blogsListEntity2DTO(List<BlogEntity> entityList) {
+    private List<BlogDetailDTO> blogsListEntity2DTOUsuarioMisBlogs(List<BlogEntity> entityList) {
         List<BlogDetailDTO> list = new ArrayList<>();
         for (BlogEntity entity : entityList) {
             list.add(new BlogDetailDTO(entity));
@@ -93,7 +93,7 @@ public class UsuarioMisBlogsResource {
         return list;
     }
 
-    private List<BlogEntity> blogsListDTO2Entity(List<BlogDetailDTO> dtos) {
+    private List<BlogEntity> blogsListDTO2EntityUsuarioMisBlogs(List<BlogDetailDTO> dtos) {
         List<BlogEntity> list = new ArrayList<>();
         for (BlogDetailDTO dto : dtos) {
             list.add(dto.toEntity());

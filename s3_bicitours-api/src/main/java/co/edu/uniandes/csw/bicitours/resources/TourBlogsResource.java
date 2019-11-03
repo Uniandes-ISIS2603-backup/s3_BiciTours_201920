@@ -53,7 +53,7 @@ public class TourBlogsResource {
     @GET
     public List<BlogDetailDTO> getBlogs(@PathParam("toursId") Long toursId) {
 
-        return blogsListEntity2DTO(usuarioMisBlogsLogic.getBlogs(toursId));
+        return blogsListEntity2DTOTourBlogs(usuarioMisBlogsLogic.getBlogs(toursId));
     }
 
     @GET
@@ -74,7 +74,7 @@ public class TourBlogsResource {
             }
         }
         
-        return blogsListEntity2DTO(usuarioMisBlogsLogic.replaceBlogs(toursId, blogsListDTO2Entity(blogs)));
+        return blogsListEntity2DTOTourBlogs(usuarioMisBlogsLogic.replaceBlogs(toursId, blogsListDTO2EntityTourBlogs(blogs)));
     }
 
     @DELETE
@@ -86,7 +86,7 @@ public class TourBlogsResource {
         usuarioMisBlogsLogic.removeBlog(toursId, blogsId);
     }
 
-    private List<BlogDetailDTO> blogsListEntity2DTO(List<BlogEntity> entityList) {
+    private List<BlogDetailDTO> blogsListEntity2DTOTourBlogs(List<BlogEntity> entityList) {
         List<BlogDetailDTO> list = new ArrayList<>();
         for (BlogEntity entity : entityList) {
             list.add(new BlogDetailDTO(entity));
@@ -94,7 +94,7 @@ public class TourBlogsResource {
         return list;
     }
 
-    private List<BlogEntity> blogsListDTO2Entity(List<BlogDetailDTO> dtos) {
+    private List<BlogEntity> blogsListDTO2EntityTourBlogs(List<BlogDetailDTO> dtos) {
         List<BlogEntity> list = new ArrayList<>();
         for (BlogDetailDTO dto : dtos) {
             list.add(dto.toEntity());

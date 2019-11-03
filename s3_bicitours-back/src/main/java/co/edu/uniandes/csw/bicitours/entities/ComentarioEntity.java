@@ -28,7 +28,7 @@ public class ComentarioEntity extends BaseEntity implements Serializable{
     
     @PodamExclude
     @OneToMany(cascade = CascadeType.PERSIST)
-    private List<ComentarioEntity> respuestas = new ArrayList<ComentarioEntity>();
+    private List<ComentarioEntity> respuestas = new ArrayList<>();
     
     /**@ManyToOne
     private ComentarioEntity head;

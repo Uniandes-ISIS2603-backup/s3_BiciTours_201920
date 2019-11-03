@@ -53,7 +53,7 @@ public class FavoritosBlogResource {
     @GET
     public List<BlogDetailDTO> getFavoritos(@PathParam("usuariosId") Long usuariosId) {
 
-        return blogsListEntity2DTO(favoritosBlogLogic.getFavoritos(usuariosId));
+        return blogsListEntity2DTOFavoritosBlog(favoritosBlogLogic.getFavoritos(usuariosId));
     }
 
     @GET
@@ -74,7 +74,7 @@ public class FavoritosBlogResource {
             }
         }
 
-        return blogsListEntity2DTO(favoritosBlogLogic.replaceFavoritos(usuariosId, blogsListDTO2Entity(blogs)));
+        return blogsListEntity2DTOFavoritosBlog(favoritosBlogLogic.replaceFavoritos(usuariosId, blogsListDTO2EntityFavoritosBlog(blogs)));
     }
 
     @DELETE
@@ -86,7 +86,7 @@ public class FavoritosBlogResource {
         favoritosBlogLogic.removeFavorito(usuariosId, blogsId);
     }
 
-    private List<BlogDetailDTO> blogsListEntity2DTO(List<BlogEntity> entityList) {
+    private List<BlogDetailDTO> blogsListEntity2DTOFavoritosBlog(List<BlogEntity> entityList) {
         List<BlogDetailDTO> list = new ArrayList<>();
         for (BlogEntity entity : entityList) {
             list.add(new BlogDetailDTO(entity));
@@ -94,7 +94,7 @@ public class FavoritosBlogResource {
         return list;
     }
 
-    private List<BlogEntity> blogsListDTO2Entity(List<BlogDetailDTO> dtos) {
+    private List<BlogEntity> blogsListDTO2EntityFavoritosBlog(List<BlogDetailDTO> dtos) {
         List<BlogEntity> list = new ArrayList<>();
         for (BlogDetailDTO dto : dtos) {
             list.add(dto.toEntity());

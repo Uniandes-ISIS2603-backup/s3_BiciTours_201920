@@ -55,19 +55,19 @@ public class TourEntity extends BaseEntity implements Serializable {
     
     @PodamExclude
     @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<ComentarioEntity> comentariosTour = new ArrayList<ComentarioEntity>();
+    private List<ComentarioEntity> comentariosTour = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<EventoEntity> eventosTour = new ArrayList<EventoEntity>();
+    private List<EventoEntity> eventosTour = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "tour")
-    private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
+    private List<BlogEntity> blogs = new ArrayList<>();
     
     @PodamExclude
     @OneToMany(mappedBy = "tour")
-    private List<FotoEntity> fotos = new ArrayList<FotoEntity>();
+    private List<FotoEntity> fotos = new ArrayList<>();
 
     @PodamExclude
     @ManyToMany

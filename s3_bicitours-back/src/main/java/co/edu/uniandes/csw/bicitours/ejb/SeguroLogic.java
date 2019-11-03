@@ -34,9 +34,7 @@ public class SeguroLogic {
         if(seguroEntity.getCaracteristicas()!=null && seguroEntity.getCondiciones()!=null && seguroEntity.getTipo()!=null)
         {
 
-        SeguroEntity newSeguroEntity = persistence.create(seguroEntity);
-
-        return newSeguroEntity;
+        return persistence.create(seguroEntity);
         }
         else
               {
@@ -64,12 +62,9 @@ public class SeguroLogic {
      */
     public SeguroEntity getSeguro(Long segurosId) {
 
-        SeguroEntity seguroEntity = persistence.find(segurosId);
-        if (seguroEntity == null) {
 
-        }
 
-        return seguroEntity;
+        return persistence.find(segurosId);
     }
 
     /**

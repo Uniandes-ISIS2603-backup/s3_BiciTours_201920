@@ -52,7 +52,7 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable{
         super(usuarioEntity);
         //Revisión de listas asociadas para transformarlas a DTOs
         if (usuarioEntity.getComentarios() != null) {
-            comentarios = new ArrayList<ComentarioDTO>();
+            comentarios = new ArrayList<>();
             for (ComentarioEntity comentarioActual : usuarioEntity.getComentarios()) 
             {
                 comentarios.add(new ComentarioDTO(comentarioActual));
