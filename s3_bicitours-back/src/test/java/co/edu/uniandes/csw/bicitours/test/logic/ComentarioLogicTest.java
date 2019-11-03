@@ -47,8 +47,6 @@ public class ComentarioLogicTest {
 
     private List<ComentarioEntity> data = new ArrayList();
 
-    private List<UsuarioEntity> usuarioData = new ArrayList();
-
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -84,7 +82,6 @@ public class ComentarioLogicTest {
      */
     private void clearData() {
         em.createQuery("delete from ComentarioEntity").executeUpdate();
-        em.createQuery("delete from UsuarioEntity").executeUpdate();
     }
 
     /**
@@ -93,20 +90,10 @@ public class ComentarioLogicTest {
      */
     private void insertData() {
         for (int i = 0; i < 3; i++) {
-            ComentarioEntity comentario = factory.manufacturePojo(ComentarioEntity.class);
-            comentario.setCalificacion(2);
-            comentario.setTexto("Hola");
-            //comentario.setHead(null);
-            //comentario.setRespuestas(null);
-            comentario.setUsuario(usuarioData.get(0));
-
-            em.persist(comentario);
-            data.add(comentario);
+            ComentarioEntity entity = factory.manufacturePojo(ComentarioEntity.class);
+            em.persist(entity);
+            data.add(entity);
         }
-        UsuarioEntity usuario = factory.manufacturePojo(UsuarioEntity.class);
-        em.persist(usuario);
-        usuario.getComentarios().add(data.get(1));
-        data.get(1).setUsuario(usuario);
     }
 
     @Test
@@ -183,36 +170,32 @@ public class ComentarioLogicTest {
         }
     }
 
-//    @Test
-//    public void getComentarioTest() {
-//        configTest();
-//        ComentarioEntity comentario = data.get(0);
-//        ComentarioEntity prueba = logica.getComentario(comentario.getId());
-//        Assert.assertNotNull(prueba);
-//        Assert.assertEquals(comentario.getId(), prueba.getId());
-//        Assert.assertEquals(comentario.getCalificacion(), prueba.getCalificacion());
-//        Assert.assertEquals(comentario.getTexto(), prueba.getTexto());
-//    }
-//    @Test
-//    public void updateComentarioTest() throws BusinessLogicException {
-//        configTest();
-//        ComentarioEntity comentario = data.get(0);
-//        ComentarioEntity prueba = factory.manufacturePojo(ComentarioEntity.class);
-//        prueba.setId(comentario.getId());
-//        prueba.setCalificacion(4);
-//        prueba.setTexto("Chao");
-//        logica.updateComentario(prueba.getId(), prueba);
-//        ComentarioEntity comentarioA = em.find(ComentarioEntity.class, comentario.getId());
-//        Assert.assertEquals(prueba.getId(), comentarioA.getId());
-//        Assert.assertEquals(prueba.getCalificacion(), comentarioA.getCalificacion());
-//        Assert.assertEquals(prueba.getTexto(), comentarioA.getTexto());
-//    }
-//
-//    @Test
-//    public void deleteComentarioTest() throws BusinessLogicException {
-//        ComentarioEntity entity = data.get(0);
-//        logica.deleteComentario(entity.getId());
-//        ComentarioEntity deleted = em.find(ComentarioEntity.class, entity.getId());
-//        Assert.assertNull(deleted);
-//    }
+    @Test
+    public void getComentarioTest() {
+        ComentarioEntity comentario = data.get(0);
+        ComentarioEntity prueba = logica.getComentario(comentario.getId());
+        Assert.assertNotNull(prueba);
+        Assert.assertEquals(comentario.getId(), prueba.getId());
+        Assert.assertEquals(comentario.getCalificacion(), prueba.getCalificacion());
+        Assert.assertEquals(comentario.getTexto(), prueba.getTexto());
+    }
+    @Test
+    public void updateComentarioTest() throws BusinessLogicException {
+        ComentarioEntity entity = data.get(0);
+        ComentarioEntity pojoEntity = factory.manufacturePojo(ComentarioEntity.class);
+        pojoEntity.setId(entity.getId());
+        logica.updateComentario(pojoEntity);
+        ComentarioEntity resp = em.find(ComentarioEntity.class, entity.getId());
+        Assert.assertEquals(pojoEntity.getId(), resp.getId());
+        Assert.assertEquals(pojoEntity.getCalificacion(), resp.getCalificacion());
+        Assert.assertEquals(pojoEntity.getTexto(), resp.getTexto());
+    }
+
+    @Test
+    public void deleteComentarioTest() throws BusinessLogicException {
+        ComentarioEntity entity = data.get(0);
+        logica.deleteComentario(entity.getId());
+        ComentarioEntity deleted = em.find(ComentarioEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }

@@ -71,9 +71,7 @@ public class FotoPersistence {
 
     public void delete(Long fotoId) {
         FotoEntity fotoEntity = find(fotoId);
-        if (fotoEntity != null) {
-            em.remove(fotoEntity);
-        }
+        em.remove(fotoEntity);
     }
 
 }

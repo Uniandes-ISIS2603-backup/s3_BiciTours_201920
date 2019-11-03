@@ -89,31 +89,4 @@ public class SeguroPersistence {
         e.remove(seguroEntity);
     }
 
-    /**
-     * Busca si hay algun libro con el ISBN que se envía de argumento
-     *
-     * @param id: ISBN de la editorial que se está buscando
-     * @return null si no existe ningun libro con el id del argumento. Si existe
-     * alguno devuelve el primero.
-     */
-    public SeguroEntity findById(String id) {
-
-        // Se crea un query para buscar libros con el id que recibe el método como argumento. ":id" es un placeholder que debe ser remplazado
-        TypedQuery query = e.createQuery("Select e From SeguroEntity e where e.id = :id", SeguroEntity.class);
-        // Se remplaza el placeholder ":id" con el valor del argumento 
-        query = query.setParameter("id", id);
-        // Se invoca el query se obtiene la lista resultado
-        List<SeguroEntity> sameISBN = query.getResultList();
-        SeguroEntity result;
-        if (sameISBN == null) {
-            result = null;
-        } else if (sameISBN.isEmpty()) {
-            result = null;
-        } else {
-            result = sameISBN.get(0);
-        }
-
-        return result;
-    }
-
 }

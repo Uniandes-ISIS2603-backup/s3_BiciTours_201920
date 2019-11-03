@@ -173,13 +173,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @param comentarios the comentarios to set
-     */
-    public void deleteComentario(ComentarioEntity comentario) {
-        this.comentarios.remove(comentario);
-    }
-
-    /**
      * @return the visitados
      */
     public List<TourEntity> getVisitados() {

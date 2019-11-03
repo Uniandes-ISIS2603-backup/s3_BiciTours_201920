@@ -69,11 +69,6 @@ public class RecomendacionLogic {
      * nuevos datos.
      * @return Instancia de RecomendacionEntity con los datos actualizados.
      */
-    public RecomendacionEntity updateRecomendacion(Long recomendacionsId, RecomendacionEntity recomendacionEntity) {
-
-        return persistence.update(recomendacionEntity);
-    }
-
     public RecomendacionEntity updateRecomendacion(RecomendacionEntity recomendacionEntity) {
 
         return persistence.update(recomendacionEntity);

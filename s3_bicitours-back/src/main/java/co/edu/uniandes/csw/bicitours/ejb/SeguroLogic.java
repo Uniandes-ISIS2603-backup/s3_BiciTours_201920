@@ -66,11 +66,6 @@ public class SeguroLogic {
      * @param seguroEntity Instancia de SeguroEntity con los nuevos datos.
      * @return Instancia de SeguroEntity con los datos actualizados.
      */
-    public SeguroEntity updateSeguro(Long segurosId, SeguroEntity seguroEntity) {
-
-        return persistence.update(seguroEntity);
-    }
-
     public SeguroEntity updateSeguro(SeguroEntity seguroEntity) {
 
         return persistence.update(seguroEntity);

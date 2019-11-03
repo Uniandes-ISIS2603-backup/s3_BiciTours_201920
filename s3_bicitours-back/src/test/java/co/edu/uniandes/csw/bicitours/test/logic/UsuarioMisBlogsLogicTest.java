@@ -143,7 +143,7 @@ public class UsuarioMisBlogsLogicTest {
     }
 
     @Test
-    public void replaceBlogsTest() {
+    public void setBlogsTest() {
         UsuarioEntity entity = data.get(0);
         List<BlogEntity> list = blogsData.subList(1, 3);
         usuarioMisBlogsLogic.replaceBlogs(entity.getId(), list);

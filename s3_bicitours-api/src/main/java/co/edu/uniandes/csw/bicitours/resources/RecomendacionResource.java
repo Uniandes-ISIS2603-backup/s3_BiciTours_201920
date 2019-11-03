@@ -70,7 +70,7 @@ public class RecomendacionResource {
             throw new WebApplicationException(RECURSO + recomendacionId + NOEXISTE, 404);
         }
 
-        return new RecomendacionDTO(logica.updateRecomendacion(recomendacionId, recomendacions.toEntity()));
+        return new RecomendacionDTO(logica.updateRecomendacion(recomendacions.toEntity()));
     }
 
     @DELETE

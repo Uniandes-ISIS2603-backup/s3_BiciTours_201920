@@ -70,7 +70,7 @@ public class SeguroResource {
             throw new WebApplicationException(RECURSO + seguroId + NOEXISTE, 404);
         }
 
-        return new SeguroDTO(logica.updateSeguro(seguroId, seguros.toEntity()));
+        return new SeguroDTO(logica.updateSeguro(seguros.toEntity()));
     }
 
     @DELETE
