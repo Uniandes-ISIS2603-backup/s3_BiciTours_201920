@@ -55,10 +55,6 @@ public class BlogIT {
     public void postman() throws IOException {
         PostmanTestBuilder tp = new PostmanTestBuilder();
         tp.setTestWithoutLogin(COLLECTION, "Entorno-Colecciones.postman_environment");
-        System.out.println(tp.getIterations_failed());
-        System.out.println(tp.getRequests_failed());
-        System.out.println(tp.getTest_scripts_failed());
-        System.out.println(tp.getAssertions_failed());        
         String desiredResult = "0";
         Assert.assertEquals("Error en Iterations de: " + COLLECTION, desiredResult, tp.getIterations_failed());
 
