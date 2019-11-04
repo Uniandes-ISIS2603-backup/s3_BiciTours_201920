@@ -32,7 +32,7 @@ public class UsuarioIT {
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "s3_bicitours-api.war")//War del modulo api
+        return ShrinkWrap.create(WebArchive.class, "s3_bicitours-api-1.0.war")//War del modulo api
                 // Se agrega las dependencias
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
                         .importRuntimeDependencies().resolve()
@@ -54,7 +54,7 @@ public class UsuarioIT {
     @RunAsClient
     public void postman() throws IOException {
         PostmanTestBuilder tp = new PostmanTestBuilder();
-        tp.setTestWithoutLogin(COLLECTION, "Entorno-IT.postman_environment");
+        tp.setTestWithoutLogin(COLLECTION, "Entorno-Colecciones.postman_environment");
         String desiredResult = "0";
         Assert.assertEquals("Error en Iterations de: " + COLLECTION, desiredResult, tp.getIterations_failed());
 
