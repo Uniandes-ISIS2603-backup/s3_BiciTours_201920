@@ -15,7 +15,6 @@
 						"id": "8268852d-a2b8-44ed-b29d-f6fa994e3b21",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_a2\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -34,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 9,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -84,7 +83,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -134,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"rutaImagen\": \"\",\r\n        \"rutaVideo\": \"\",\r\n        \"texto\": \"\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 97,\r\n        \"rutaImagen\": \"\",\r\n        \"rutaVideo\": \"\",\r\n        \"texto\": \"\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -184,7 +183,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 797,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -234,7 +233,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 979,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -252,112 +251,6 @@
 						"s3_bicitours-api",
 						"api",
 						"blogs"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener todos los blogs",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "213ce7a0-d58a-4d79-8ddb-f00d8a46a5e6",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
-							"tests[\"blogs count\"] = data.length >= 0;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_bicitours-api",
-						"api",
-						"blogs"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un blog",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "75b8fa87-a643-4276-88c2-011c885f334c",
-						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_a2}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_bicitours-api",
-						"api",
-						"blogs",
-						"{{new_id_a2}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un blog nulo",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "75b8fa87-a643-4276-88c2-011c885f334c",
-						"exec": [
-							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/2222 no existe.\");"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/2222",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_bicitours-api",
-						"api",
-						"blogs",
-						"2222"
 					]
 				}
 			},
@@ -399,7 +292,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_a2}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -409,7 +302,7 @@
 						"s3_bicitours-api",
 						"api",
 						"blogs",
-						"{{new_id_a2}}"
+						"{{new_id_c}}"
 					]
 				}
 			},
@@ -467,6 +360,112 @@
 			"response": []
 		},
 		{
+			"name": "Obtener un blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "75b8fa87-a643-4276-88c2-011c885f334c",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"{{new_id_c}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener todos los blogs",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "213ce7a0-d58a-4d79-8ddb-f00d8a46a5e6",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
+							"tests[\"blogs count\"] = data.length >= 0;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un blog nulo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "75b8fa87-a643-4276-88c2-011c885f334c",
+						"exec": [
+							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/2222 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/2222",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"2222"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Borra un blog",
 			"event": [
 				{
@@ -484,7 +483,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_a2}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -494,7 +493,7 @@
 						"s3_bicitours-api",
 						"api",
 						"blogs",
-						"{{new_id_a2}}"
+						"{{new_id_c}}"
 					]
 				}
 			},
