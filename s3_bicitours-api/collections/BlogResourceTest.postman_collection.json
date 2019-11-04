@@ -15,7 +15,6 @@
 						"id": "8268852d-a2b8-44ed-b29d-f6fa994e3b21",
 						"exec": [
 							"var data = JSON.parse(responseBody);",
-							"postman.setGlobalVariable(\"new_id_c\",data.id);",
 							"tests[\"no genera error en el Post\"] = responseCode.code === 200;"
 						],
 						"type": "text/javascript"
@@ -34,7 +33,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 9,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -84,7 +83,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": null,\r\n        \"rutaVideo\": null,\r\n        \"texto\": null,\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -134,7 +133,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"\",\r\n        \"rutaVideo\": \"\",\r\n        \"texto\": \"\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 97,\r\n        \"rutaImagen\": \"\",\r\n        \"rutaVideo\": \"\",\r\n        \"texto\": \"\",\r\n        \"titulo\": \"Es\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -184,7 +183,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 797,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": \"\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -234,7 +233,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 79,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"titulo\": null,\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
+					"raw": "    {\r\n        \"calificacionPromedio\": 87.0,\r\n        \"id\": 979,\r\n        \"rutaImagen\": \"Pepega\",\r\n        \"rutaVideo\": \"Clap\",\r\n        \"texto\": \"Monka\",\r\n        \"comentarios\": [],\r\n        \"usuarios\": []\r\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -406,7 +405,7 @@
 						"exec": [
 							"var data= JSON.parse(responseBody);",
 							"tests[\"No genera error en el Get all\"] = responseCode.code === 200;",
-							"tests[\"books count\"] = data.length >= 0;"
+							"tests[\"blogs count\"] = data.length >= 0;"
 						],
 						"type": "text/javascript"
 					}
@@ -440,7 +439,7 @@
 						"id": "75b8fa87-a643-4276-88c2-011c885f334c",
 						"exec": [
 							"tests[\"No consulta con id que no existe\"] = responseCode.code === 404; ",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/4 no existe.\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/2222 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -450,7 +449,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/4",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/2222",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -460,7 +459,7 @@
 						"s3_bicitours-api",
 						"api",
 						"blogs",
-						"4"
+						"2222"
 					]
 				}
 			},
@@ -509,7 +508,7 @@
 						"id": "fc7a3d0c-0360-428f-a6ae-a62a4ab4a783",
 						"exec": [
 							"tests[\"No borra con id que no existe\"] = responseCode.code === 404;",
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/3 no existe.\");"
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /blogs/10000 no existe.\");"
 						],
 						"type": "text/javascript"
 					}
@@ -519,7 +518,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/3",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/10000",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -529,7 +528,7 @@
 						"s3_bicitours-api",
 						"api",
 						"blogs",
-						"3"
+						"10000"
 					]
 				}
 			},
