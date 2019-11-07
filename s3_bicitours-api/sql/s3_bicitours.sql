@@ -33,3 +33,9 @@ insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) val
 insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) values (400, 'Michel Succar', 'code4', 'm.succar@uniandes.edu.co', 1,1,10);
 insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) values (500, 'Maria Clara', 'code5', 'mc.noguera@uniandes.edu.co', 1,1,10);
 insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) values (600, 'Jhuliana Barrios', 'code6', 'jj.barriosm@uniandes.edu.co',1,1,10);
+
+insert into ComentarioEntity (id, texto, calificacion) values (0, 'Súper', 5);
+insert into ComentarioEntity (id, texto, calificacion) values (1, 'Nada mal', 4);
+
+update ComentarioEntity set blog_id = 0, usuario_id = 100 where id = 0;
+update ComentarioEntity set blog_id = 0, usuario_id = 200 where id = 1;
