@@ -14,8 +14,6 @@ import java.io.Serializable;
  */
 public class BlogDTO implements Serializable {
 
-    private BlogDTO anterior;
-    private BlogDTO siguiente;
     private Long id;
     private String texto;
     private String rutaImagen;
@@ -36,16 +34,6 @@ public class BlogDTO implements Serializable {
             this.rutaVideo = blogEntity.getRutaVideo();
             this.calificacionPromedio = blogEntity.getCalificacionPromedio();
             this.titulo = blogEntity.getTitulo();
-            if (blogEntity.getAnterior() != null) {
-                this.anterior = new BlogDTO(blogEntity.getAnterior());
-            } else {
-                this.anterior = null;
-            }
-            if (blogEntity.getSiguiente() != null) {
-                this.siguiente = new BlogDTO(blogEntity.getSiguiente());
-            } else {
-                this.siguiente = null;
-            }
             if (blogEntity.getCreador() != null) {
                 this.creador = new UsuarioDTO(blogEntity.getCreador());
             } else {
@@ -67,12 +55,6 @@ public class BlogDTO implements Serializable {
         blogEntity.setRutaVideo(this.getRutaVideo());
         blogEntity.setCalificacionPromedio(this.getCalificacionPromedio());
         blogEntity.setTitulo(this.getTitulo());
-        if (this.getAnterior() != null) {
-            blogEntity.setAnterior(this.getAnterior().toEntity());
-        }
-        if (this.getSiguiente() != null) {
-            blogEntity.setSiguiente(this.getSiguiente().toEntity());
-        }
         if (this.getCreador() != null) {
             blogEntity.setCreador(this.getCreador().toEntity());
         }
@@ -80,20 +62,6 @@ public class BlogDTO implements Serializable {
             blogEntity.setTour(this.getTour().toEntity());
         }
         return blogEntity;
-    }
-
-    /**
-     * @return the anterior
-     */
-    public BlogDTO getAnterior() {
-        return anterior;
-    }
-
-    /**
-     * @return the siguiente
-     */
-    public BlogDTO getSiguiente() {
-        return siguiente;
     }
 
     /**
@@ -150,20 +118,6 @@ public class BlogDTO implements Serializable {
      */
     public UsuarioDTO getCreador() {
         return creador;
-    }
-
-    /**
-     * @param anterior the anterior to set
-     */
-    public void setAnterior(BlogDTO anterior) {
-        this.anterior = anterior;
-    }
-
-    /**
-     * @param siguiente the siguiente to set
-     */
-    public void setSiguiente(BlogDTO siguiente) {
-        this.siguiente = siguiente;
     }
 
     /**

@@ -14,14 +14,6 @@ insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPr
 insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(0, 'tour', 'Neiva', 'Traer bici', 3, 3, 0);
 insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(1, 'tours', 'Neivas', 'Traer bicis', 4, 4, 0);
 
-update BlogEntity set siguiente_id = 1 where id = 0;
-update BlogEntity set anterior_id = 2 where id = 6;
-
-update BlogEntity set tour_id = 0 where id = 1;
-update BlogEntity set tour_id = 0 where id = 2;
-
-update BlogEntity set creador_id = 300 where id = 1;
-
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (0,'Seguro contra robo de bicicletas','El robo de debe reportar 24 horas despues de sucedido para hacer valido el seguro', 'Antirobo');
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (1,'Seguro para fallecimiento','Se hace efectivo si es cliente fallece en un accidente durante el tour', 'Seguro de vida');
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (2,'Seguro para lesiones','Se cubren todos los gastos medicos que requiera el participante tras sufrir una lesion en el tour', 'Seguro de salud');

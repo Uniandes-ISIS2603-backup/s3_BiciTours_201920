@@ -13,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -24,12 +23,6 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class BlogEntity extends BaseEntity implements Serializable {
 
-    @PodamExclude
-    @OneToOne
-    private BlogEntity anterior;
-    @PodamExclude
-    @OneToOne
-    private BlogEntity siguiente;
     @PodamExclude
     @OneToMany(
             mappedBy = "blog",
@@ -121,34 +114,6 @@ public class BlogEntity extends BaseEntity implements Serializable {
      */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
-    }
-
-    /**
-     * @return the anterior
-     */
-    public BlogEntity getAnterior() {
-        return anterior;
-    }
-
-    /**
-     * @param anterior the anterior to set
-     */
-    public void setAnterior(BlogEntity anterior) {
-        this.anterior = anterior;
-    }
-
-    /**
-     * @return the siguiente
-     */
-    public BlogEntity getSiguiente() {
-        return siguiente;
-    }
-
-    /**
-     * @param siguiente the siguiente to set
-     */
-    public void setSiguiente(BlogEntity siguiente) {
-        this.siguiente = siguiente;
     }
 
     /**
