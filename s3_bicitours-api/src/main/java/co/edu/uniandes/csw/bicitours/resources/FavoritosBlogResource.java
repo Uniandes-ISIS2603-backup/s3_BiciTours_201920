@@ -26,7 +26,7 @@ import javax.ws.rs.core.MediaType;
 
 /**
  *
- * @author Oscar Julian Castañeda G.
+ * @author Juan Sebastián González Rojas
  */
 @Path("usuarios/{usuariosId: \\d+}/favoritos")
 @Consumes(MediaType.APPLICATION_JSON)

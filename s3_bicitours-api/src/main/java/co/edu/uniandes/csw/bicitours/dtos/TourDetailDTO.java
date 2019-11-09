@@ -85,13 +85,13 @@ public class TourDetailDTO extends TourDTO implements Serializable{
         if(tour != null){
         
          //Convierte el conjunto de fotos
-        fotos = new ArrayList<FotoDTO>();
+        fotos = new ArrayList<>();
         for(FotoEntity f : tour.getFotos())
         {
             FotoDTO nueva = new FotoDTO(f);
             fotos.add(nueva);
         }
-        blogs = new ArrayList<BlogDTO>();
+        blogs = new ArrayList<>();
         for(BlogEntity f : tour.getBlogs())
         {
             BlogDTO nueva = new BlogDTO(f);

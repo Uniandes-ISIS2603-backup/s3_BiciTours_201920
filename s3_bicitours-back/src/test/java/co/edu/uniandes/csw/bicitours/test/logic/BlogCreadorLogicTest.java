@@ -45,7 +45,7 @@ public class BlogCreadorLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<UsuarioEntity> data = new ArrayList<UsuarioEntity>();
+    private List<UsuarioEntity> data = new ArrayList<>();
 
     private List<BlogEntity> blogsData = new ArrayList();
 

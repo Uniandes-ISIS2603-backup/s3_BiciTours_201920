@@ -31,7 +31,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
- * @author Oscar Julian Castañeda G.
+ * @author Juan Sebastián González Rojas
  */
 @RunWith(Arquillian.class)
 public class FavoritosBlogLogicTest {

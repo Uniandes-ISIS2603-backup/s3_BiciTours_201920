@@ -35,8 +35,9 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 public class FotoResource {
     
- private static final Logger LOGGER = Logger.getLogger(FotoResource.class.getName());
-
+    private static final String RECURSO = "El recurso /tours/";
+    private static final String NOEXISTE = " no existe.";
+    private static final String FOTOS = "/fotos/";
     @Inject
     private FotoLogic fotoLogic;
 
@@ -52,10 +53,7 @@ public class FotoResource {
      */
     @POST
     public FotoDTO createFoto(@PathParam("toursId") Long toursId, FotoDTO foto){
-        LOGGER.log(Level.INFO, "FotoResource createFoto: input: {0}", foto);
-        FotoDTO nuevoFotoDTO = new FotoDTO(fotoLogic.createFoto(toursId, foto.toEntity()));
-        LOGGER.log(Level.INFO, "FotoResource createFoto: output: {0}", nuevoFotoDTO);
-        return nuevoFotoDTO;
+        return new FotoDTO(fotoLogic.createFoto(toursId, foto.toEntity()));
     }
 
     /**
@@ -67,10 +65,7 @@ public class FotoResource {
      */
     @GET
     public List<FotoDTO> getFotos(@PathParam("toursId") Long toursId) {
-        LOGGER.log(Level.INFO, "FotoResource getFotos: input: {0}", toursId);
-        List<FotoDTO> listaDTOs = listEntity2DTO(fotoLogic.getFotos(toursId));
-        LOGGER.log(Level.INFO, "EditorialToursResource getTours: output: {0}", listaDTOs);
-        return listaDTOs;
+        return listEntity2DTO(fotoLogic.getFotos(toursId));
     }
 
     /**
@@ -86,14 +81,11 @@ public class FotoResource {
     @GET
     @Path("{fotosId: \\d+}")
     public FotoDTO getFoto(@PathParam("toursId") Long toursId, @PathParam("fotosId") Long fotosId){
-        LOGGER.log(Level.INFO, "FotoResource getFoto: input: {0}", fotosId);
         FotoEntity entity = fotoLogic.getFoto(fotosId,toursId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /tours/" + toursId + "/fotos/" + fotosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + FOTOS + fotosId + NOEXISTE, 404);
         }
-        FotoDTO fotoDTO = new FotoDTO(entity);
-        LOGGER.log(Level.INFO, "FotoResource getFoto: output: {0}", fotoDTO);
-        return fotoDTO;
+        return new FotoDTO(entity);
     }
 
     /**
@@ -112,18 +104,15 @@ public class FotoResource {
     @PUT
     @Path("{fotosId: \\d+}")
     public FotoDTO updateFoto(@PathParam("toursId") Long toursId, @PathParam("fotosId") Long fotosId, FotoDTO foto) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "FotoResource updateFoto: input: toursId: {0} , fotosId: {1} , foto:{2}", new Object[]{toursId, fotosId, foto});
         if (!fotosId.equals(foto.getId())) {
             throw new BusinessLogicException("Los ids de la foto no coinciden. " );
         }
         FotoEntity entity = fotoLogic.getFoto(fotosId,toursId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /tours/" + toursId + "/fotos/" + fotosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + FOTOS + fotosId + NOEXISTE, 404);
 
         }
-        FotoDTO fotoDTO = new FotoDTO(fotoLogic.updateFoto(toursId, foto.toEntity()));
-        LOGGER.log(Level.INFO, "FotoResource updateFoto: output:{0}", fotoDTO);
-        return fotoDTO;
+        return new FotoDTO(fotoLogic.updateFoto(toursId, foto.toEntity()));
 
     }
 
@@ -142,7 +131,7 @@ public class FotoResource {
     public void deleteFoto(@PathParam("toursId") Long toursId, @PathParam("fotosId") Long fotosId) throws BusinessLogicException {
         FotoEntity entity = fotoLogic.getFoto(fotosId,toursId);
         if (entity == null) {
-            throw new WebApplicationException("El recurso /tours/" + toursId + "/fotos/" + fotosId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + FOTOS + fotosId + NOEXISTE, 404);
         }
         fotoLogic.deleteFoto(toursId, fotosId);
     }
@@ -158,7 +147,7 @@ public class FotoResource {
      * @return la lista de fotos en forma DTO (json)
      */
     private List<FotoDTO> listEntity2DTO(List<FotoEntity> entityList) {
-        List<FotoDTO> list = new ArrayList<FotoDTO>();
+        List<FotoDTO> list = new ArrayList<>();
         for (FotoEntity entity : entityList) {
             list.add(new FotoDTO(entity));
         }

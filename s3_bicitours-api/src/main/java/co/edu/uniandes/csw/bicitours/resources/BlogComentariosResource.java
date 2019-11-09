@@ -64,7 +64,7 @@ public class BlogComentariosResource {
             throw new WebApplicationException(RECURSO + comentariosId + NOEXISTE, 404);
         }
 
-        return new ComentarioDetailDTO(blogComentariosLogic.getComentario(blogsId, comentariosId));
+        return new ComentarioDetailDTO(blogComentariosLogic.getComentario(comentariosId, blogsId));
     }
 
     @PUT
@@ -84,7 +84,7 @@ public class BlogComentariosResource {
         if (comentarioLogic.getComentario(comentariosId) == null) {
             throw new WebApplicationException(RECURSO + comentariosId + NOEXISTE, 404);
         }
-        blogComentariosLogic.removeComentario(blogsId, comentariosId);
+        blogComentariosLogic.removeComentario(comentariosId, blogsId);
     }
 
     private List<ComentarioDetailDTO> comentariosListEntity2DTO(List<ComentarioEntity> entityList) {

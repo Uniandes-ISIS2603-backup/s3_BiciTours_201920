@@ -3,7 +3,6 @@ delete from BlogEntity_UsuarioEntity;
 delete from UsuarioEntity; 
 delete from SeguroEntity;
 delete from ComentarioEntity;
-delete from TourEntity;
 delete from FotoEntity;
 
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaImagen) 
@@ -30,9 +29,6 @@ values (4,
 727.0,'Azer isn''t so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet?',/**
 'Azer isn''t so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet? Alex puts the game in another level, and we will be blessed if we ever see a player with his skill and passion for the game again. Cookiezi breaks records. Rafis breaks records. Azer breaks the rules. You can keep your statistics. I prefer the magic.',
 */'https://upload.wikimedia.org/wikipedia/commons/d/d3/Osu%21Logo_%282015%29.png');
-
-insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(0, 'tour', 'Neiva', 'Traer bici', 3, 3, 0);
-insert into TourEntity (id, nombre, lugar, descripcion, duracion, costo, terminado) values(1, 'tours', 'Neivas', 'Traer bicis', 4, 4, 0);
 
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (0,'Seguro contra robo de bicicletas','El robo de debe reportar 24 horas despues de sucedido para hacer valido el seguro', 'Antirobo');
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (1,'Seguro para fallecimiento','Se hace efectivo si es cliente fallece en un accidente durante el tour', 'Seguro de vida');

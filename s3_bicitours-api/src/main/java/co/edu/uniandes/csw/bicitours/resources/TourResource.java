@@ -54,8 +54,7 @@ public class TourResource {
     public TourDTO createTour(TourDTO t) throws BusinessLogicException {
         TourEntity tourEntity = t.toEntity();
         TourEntity nuevoTourEntity = tourLogic.createTour(tourEntity);
-        TourDTO nuevoTourDTO = new TourDetailDTO(nuevoTourEntity);
-        return nuevoTourDTO;
+        return new TourDetailDTO(nuevoTourEntity);
     }
 
     /**
@@ -89,7 +88,7 @@ public class TourResource {
      */
     @GET
     @Path("{toursId: \\d+}")
-    public TourDetailDTO getTour(@PathParam("toursId") Long toursId)throws WebApplicationException
+    public TourDetailDTO getTour(@PathParam("toursId") Long toursId)
     {
         TourEntity entidad = tourLogic.getTour(toursId);
 
@@ -140,7 +139,7 @@ public class TourResource {
     {
         TourEntity t = tourLogic.getTour(toursId);
         if(t == null)
-            throw new WebApplicationException("El recurso /tours/" + toursId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + NOEXISTE, 404);
                
         tourLogic.deleteTour(toursId);       
     }
@@ -161,7 +160,7 @@ public class TourResource {
     @Path("{toursId: \\d+}/fotos")
     public Class<FotoResource> getFotoResource(@PathParam("toursId") Long toursId) {
         if (tourLogic.getTour(toursId) == null) {
-            throw new WebApplicationException("El recurso /tours/" + toursId + "/fotos no existe.", 404);
+            throw new WebApplicationException(RECURSO + toursId + "/fotos no existe.", 404);
         }
         return FotoResource.class;
     }
