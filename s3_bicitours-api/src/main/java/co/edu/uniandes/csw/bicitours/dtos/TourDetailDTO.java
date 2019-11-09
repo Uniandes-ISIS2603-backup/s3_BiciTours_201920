@@ -21,6 +21,7 @@ import java.util.List;
 public class TourDetailDTO extends TourDTO implements Serializable{
     
     private LinkedList<FotoDTO> fotos;
+    
     private List<BlogDTO> blogs;
     
     private List<EventoDTO> eventos;
@@ -37,6 +38,20 @@ public class TourDetailDTO extends TourDTO implements Serializable{
     public LinkedList<FotoDTO> getFotos()
     {
         return fotos;
+    }
+    
+        /**
+     * @return the blogs
+     */
+    public List<BlogDTO> getBlogs() {
+        return blogs;
+    }
+
+    /**
+     * @param blogs the blogs to set
+     */
+    public void setBlogs(List<BlogDTO> blogs) {
+        this.blogs = blogs;
     }
     
     ////////////
@@ -74,7 +89,6 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             BlogDTO nueva = new BlogDTO(f);
             blogs.add(nueva);
         }
-        }
         
         //Convierte el conjunto de eventos
         if (tour.getEventosTour() != null) {
@@ -82,6 +96,7 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             for (EventoEntity entityEvento : tour.getEventosTour()) {
                 eventos.add(new EventoDTO(entityEvento));
             }
+        }
         }
     }
     
@@ -121,19 +136,7 @@ public class TourDetailDTO extends TourDTO implements Serializable{
         
     }
 
-    /**
-     * @return the blogs
-     */
-    public List<BlogDTO> getBlogs() {
-        return blogs;
-    }
 
-    /**
-     * @param blogs the blogs to set
-     */
-    public void setBlogs(List<BlogDTO> blogs) {
-        this.blogs = blogs;
-    }
     
     
     

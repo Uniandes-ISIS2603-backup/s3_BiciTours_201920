@@ -40,27 +40,37 @@ public class FotoPersistence {
         return fotoEntity;
     }
     
-     /**
-     * Busca si existe una foto con el id pasado por parámetro
-     * @param fotoId: id correspondiente a la foto buscada.
-     * @return la foto buscada.
-     */
-    public FotoEntity find(long fotoId)
-    {
-        return em.find(FotoEntity.class, fotoId);
-    }
     
-         /**
-     * Devuelve una lista con todas las fotos de la base de datos.
-     * @return una lista con todas las fotos que encuentre en la base de datos,
+    /**
+     * Buscar una foto
+     *
+     * Busca si hay alguna foto asociada a un tour con un ID específico
+     *
+     * @param toursId El ID del tour con respecto al cual se busca
+     * @param fotosId El ID de la foto buscada
+     * @return La foto encontrada o null. Nota: Si existe una o más fotos
+     * devuelve siempre la primera que encuentra
      */
-    public List<FotoEntity> findAll()
-    {
-        LOGGER.log(Level.INFO, "Consultando todos las fotos");
-        TypedQuery<FotoEntity> query=em.createQuery("select u from FotoEntity u", FotoEntity.class);
-        return query.getResultList();
+    public FotoEntity find(Long toursId, Long fotosId) {
+        FotoEntity e = em.find(FotoEntity.class, fotosId);
+        Long t = e.getTour().getId();
+        System.out.println("id del parámetro: "+ toursId + "  id del tour: "+t);
+        if(t == toursId)
+            return e;
+        else
+            return null;
     }
-    
+    /**
+     * Borra una foto de la base de datos
+     * @param fotoId , id de la foto a borrar
+     * @param toursId, id del tour
+     */
+    public void delete(Long toursId,Long fotoId)
+    {
+        FotoEntity fEntity = find(toursId, fotoId);
+        em.remove(fEntity);
+    }
+        
     /**
      * Actualiza una foto.
      *
@@ -71,13 +81,6 @@ public class FotoPersistence {
         LOGGER.log(Level.INFO, "Actualizando la foto con id={0}", fotoEntity.getId());
         return em.merge(fotoEntity);
     }
-
-        public void delete(Long fotoId)
-    {
-        FotoEntity fotoEntity = find(fotoId);
-        if(fotoEntity != null)
-            em.remove(fotoEntity);
-    }
-    
+        
 }
 

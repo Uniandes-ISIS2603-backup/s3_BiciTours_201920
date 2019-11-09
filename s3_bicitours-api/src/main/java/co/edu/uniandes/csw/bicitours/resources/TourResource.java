@@ -48,10 +48,10 @@ public class TourResource {
      * a crear no cumple con las reglas de negocio.
      */    
     @POST
-    public TourDetailDTO createTour(TourDTO t) throws BusinessLogicException {
+    public TourDTO createTour(TourDTO t) throws BusinessLogicException {
         TourEntity tourEntity = t.toEntity();
         TourEntity nuevoTourEntity = tourLogic.createTour(tourEntity);
-        TourDetailDTO nuevoTourDTO = new TourDetailDTO(nuevoTourEntity);
+        TourDTO nuevoTourDTO = new TourDetailDTO(nuevoTourEntity);
         return nuevoTourDTO;
     }
 
@@ -75,6 +75,7 @@ public class TourResource {
         return listaTours;
     }
     
+    
     /**
      * Busca el tour con el id asociado recibido en la URL y lo devuelve.
      *
@@ -86,7 +87,7 @@ public class TourResource {
      */    
     @GET
     @Path("{toursId: \\d+}")
-    public TourDetailDTO getTour(@PathParam("tourId") long toursId)throws WebApplicationException
+    public TourDetailDTO getTour(@PathParam("toursId") Long toursId)throws WebApplicationException
     {
         TourEntity entidad = tourLogic.getTour(toursId);
         
@@ -105,14 +106,14 @@ public class TourResource {
      * @param toursId Identificador del tour que se desea actualizar. Este
      * debe ser una cadena de dígitos.
      * @param tour {@link TourDTO} El tour que se desea guardar.
-     * @return JSON {@link AuthorDTO} - El tour guardado.
+     * @return JSON {@link TourDTO} - El tour guardado.
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el tour a
      * actualizar.
      */    
     @PUT
     @Path("{toursId: \\d+}")
-    public TourDetailDTO updateTour(@PathParam("toursId") long toursId, TourDetailDTO tour)
+    public TourDetailDTO updateTour(@PathParam("toursId") Long toursId, TourDetailDTO tour)
     {
         tour.setId(toursId);
         
@@ -134,10 +135,33 @@ public class TourResource {
      */
     @DELETE
     @Path("{toursId: \\d+}")
-    public void deletoTour(@PathParam("toursId")long toursId)
+    public void deleteTour(@PathParam("toursId")Long toursId)
     {
-        if(tourLogic.getTour(toursId)== null)
+        TourEntity t = tourLogic.getTour(toursId);
+        if(t == null)
             throw new WebApplicationException("El recurso /tours/" + toursId + " no existe.", 404);
+               
         tourLogic.deleteTour(toursId);       
+    }
+    
+        /**
+     * Conexión con el servicio de Fotos para un tour. {@link FotoResource}
+     *
+     * Este método conecta la ruta de /tours con las rutas de /fotos que
+     * dependen del tour, es una redirección al servicio que maneja el segmento
+     * de la URL que se encarga de las Fotos.
+     *
+     * @param toursId El ID del tour con respecto al cual se accede al
+     * servicio.
+     * @return El servicio de Fotos para ese tour en particular.\
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el libro.
+     */
+    @Path("{toursId: \\d+}/fotos")
+    public Class<FotoResource> getFotoResource(@PathParam("toursId") Long toursId) {
+        if (tourLogic.getTour(toursId) == null) {
+            throw new WebApplicationException("El recurso /tours/" + toursId + "/fotos no existe.", 404);
+        }
+        return FotoResource.class;
     }
 }

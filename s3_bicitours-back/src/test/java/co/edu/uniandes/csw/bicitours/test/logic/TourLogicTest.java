@@ -10,15 +10,19 @@ import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.TourPersistence;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
@@ -36,10 +40,15 @@ public class TourLogicTest{
     @Inject
     private TourLogic tourLogic;
     
+    @Inject
+    private UserTransaction utx;
+        
     @PersistenceContext
     private EntityManager em;
     
     private TourEntity tourPrueba;
+    
+    private List<TourEntity> data = new ArrayList<TourEntity>();
     
     
     @Deployment
@@ -51,6 +60,47 @@ public class TourLogicTest{
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
+    
+    /**
+    * Configuración inicial de la prueba.
+    */
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Limpia las tablas que son usadas en el test.
+     */
+    private void clearData() {
+        em.createQuery("delete from TourEntity").executeUpdate();
+    }
+
+    /**
+     * Inserta los datos iniciales para el correcto funcionamiento de las
+     * pruebas.
+     */
+    private void insertData() throws BusinessLogicException {
+        for (int i = 0; i < 3; i++) {
+            TourEntity entity = factory.manufacturePojo(TourEntity.class);
+            em.persist(entity);
+            data.add(entity);
+        }
+    }
+    
     
     /**
      * El escenario crea un tour que cumple todas las reglas de negocio
@@ -191,5 +241,71 @@ public class TourLogicTest{
         tourPrueba.setCosto(random);
         tourLogic.createTour(tourPrueba);        
     }
-  
+    
+    @Test
+    public void getTour()
+    {
+        TourEntity entity = data.get(0);
+        TourEntity e = tourLogic.getTour(entity.getId());
+        Assert.assertEquals(entity.getId(), e.getId());
+        Assert.assertEquals(entity.getCosto(), e.getCosto());
+        Assert.assertEquals(entity.getDescripcion(), e.getDescripcion());
+        Assert.assertEquals(entity.getDificultad(), e.getDificultad());
+        Assert.assertEquals(entity.getDuracion(), e.getDuracion());
+        Assert.assertEquals(entity.getFecha(), e.getFecha());
+        Assert.assertEquals(entity.getLugar(), e.getLugar());
+        Assert.assertEquals(entity.getNombre(), e.getNombre());
+        Assert.assertEquals(entity.getTerminado(), e.getTerminado());
+    }
+    
+        /**
+     * Prueba para consultar la lista de Tours.
+     */
+    @Test
+    public void getToursTest() {
+        List<TourEntity> list = tourLogic.getTours();
+        Assert.assertEquals(data.size(), list.size());
+        for (TourEntity entity : list) {
+            boolean found = false;
+            for (TourEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+    
+        /**
+     * Prueba para actualizar un Tour.
+     *
+     */
+    @Test
+    public void updateTourTest() throws BusinessLogicException {
+        TourEntity entity = data.get(0);
+        TourEntity otraEntity = factory.manufacturePojo(TourEntity.class);
+        otraEntity.setId(entity.getId());
+        tourLogic.updateTour(otraEntity);
+        TourEntity resp = em.find(TourEntity.class, entity.getId());
+        Assert.assertEquals(otraEntity.getId(), resp.getId());
+        Assert.assertEquals(otraEntity.getCosto(), resp.getCosto());
+        Assert.assertEquals(otraEntity.getDescripcion(), resp.getDescripcion());
+        Assert.assertEquals(otraEntity.getDificultad(), resp.getDificultad());
+        Assert.assertEquals(otraEntity.getDuracion(), resp.getDuracion());
+        Assert.assertEquals(otraEntity.getFecha(), resp.getFecha());
+        Assert.assertEquals(otraEntity.getLugar(), resp.getLugar());
+        Assert.assertEquals(otraEntity.getNombre(), resp.getNombre());
+        Assert.assertEquals(otraEntity.getTerminado(), resp.getTerminado());
+    }
+    
+     /**
+     * Prueba para eliminar un Tour.
+     */
+    @Test
+    public void deleteTourTest() {
+        TourEntity entity = data.get(0);
+        tourLogic.deleteTour(entity.getId());
+        TourEntity deleted = em.find(TourEntity.class, entity.getId());
+        Assert.assertNull(deleted);
+    }
 }

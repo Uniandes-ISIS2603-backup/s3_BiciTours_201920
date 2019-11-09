@@ -4,6 +4,7 @@ delete from UsuarioEntity;
 delete from SeguroEntity;
 delete from ComentarioEntity;
 delete from TourEntity;
+delete from FotoEntity;
 
 insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (0, 'D:\', 'G:\', 'A', 'E', 10);
 insert into BlogEntity (id, rutaImagen, rutaVideo, texto, titulo, calificacionPromedio) values (1, 'D:\', 'G:\', 'B', 'F', 11);
@@ -33,3 +34,11 @@ insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) val
 insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) values (400, 'Michel Succar', 'code4', 'm.succar@uniandes.edu.co', 1,1,10);
 insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) values (500, 'Maria Clara', 'code5', 'mc.noguera@uniandes.edu.co', 1,1,10);
 insert into UsuarioEntity (id, nombre, codigo, correo, pago, esAdmin, deuda) values (600, 'Jhuliana Barrios', 'code6', 'jj.barriosm@uniandes.edu.co',1,1,10);
+
+insert into FotoEntity (id, ruta, tour_id) values (300, 'ruta1', 0);
+insert into FotoEntity (id, ruta, tour_id) values (400, 'ruta2', 0);
+insert into FotoEntity (id, ruta, tour_id) values (500, 'ruta3', 0);
+insert into FotoEntity (id, ruta, tour_id) values (600, 'ruta4', 0);
+insert into FotoEntity (id, ruta, tour_id) values (700, 'ruta5', 1);
+insert into FotoEntity (id, ruta, tour_id) values (800, 'ruta6', 1);
+

@@ -108,4 +108,6 @@ public class TourLogic {
     public void deleteTour(Long toursId) {
         tp.delete(toursId);
     }
+    
+    
 }

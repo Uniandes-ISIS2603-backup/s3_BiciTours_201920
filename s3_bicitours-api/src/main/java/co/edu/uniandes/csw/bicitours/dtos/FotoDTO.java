@@ -55,8 +55,8 @@ public class FotoDTO implements Serializable{
     public FotoDTO(FotoEntity f)
     {
         if (f != null) {
-            f.setId(id);
-            f.setRuta(ruta);
+            this.id = f.getId();
+            this.ruta=f.getRuta();  
         }
     }
     

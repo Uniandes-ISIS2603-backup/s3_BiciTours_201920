@@ -26,7 +26,7 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
  */
 @Entity
 public class TourEntity extends BaseEntity implements Serializable {
-//
+
     private static final long serialVersionUID = 1L;
     
     public enum Dificultad{
@@ -66,7 +66,7 @@ public class TourEntity extends BaseEntity implements Serializable {
     private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
     
     @PodamExclude
-    @OneToMany(mappedBy = "tour")
+    @OneToMany(mappedBy = "tour",cascade = CascadeType.PERSIST,orphanRemoval = true)
     private List<FotoEntity> fotos = new ArrayList<FotoEntity>();
 
     @PodamExclude

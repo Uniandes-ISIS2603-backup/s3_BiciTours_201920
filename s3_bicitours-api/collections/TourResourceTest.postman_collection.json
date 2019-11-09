@@ -1,0 +1,336 @@
+{
+	"info": {
+		"_postman_id": "60d37c83-8f17-4423-9dff-020c68a80dbb",
+		"name": "TourResourceTest",
+		"description": "Tour Resource Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "CREATE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c41aafb-87a9-40a8-9c9d-16e6b96c771b",
+						"exec": [
+							"var data = JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id\",data.id);",
+							"tests[\"No genera error en el create\"] = responseCode.code == 200"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"costo\": 5600000,\r\n        \"descripcion\": \"Tour de 200 horas por toda  Francia\",\r\n        \"dificultad\": \"ALTA\",\r\n        \"duracion\": 200,\r\n        \"fecha\": \"2022-06-02T05:00:00Z[UTC]\",\r\n        \"id\": 2,\r\n        \"lugar\": \"Paris\",\r\n        \"nombre\": \"vuelta a Francia\",\r\n        \"terminado\": false,\r\n        \"fotos\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET general",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1abc9ad0-9e74-47fc-a8be-69b05b3119cd",
+						"exec": [
+							"tests[\"No genera error en el get\"] = responseCode.code == 200"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET tour no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "65bc11b0-b95d-4c0e-a525-f10784c75d0e",
+						"exec": [
+							"tests[\"No se deberia obtener un tour con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /tours/77 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/77",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						"77"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get tour existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "de8a3d05-cab4-4a79-9014-0e26eabd32c4",
+						"exec": [
+							"tests[\"No genera error en el get\"] = responseCode.code == 200"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE tour",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79894053-5ba5-4571-8014-f13d17b1c0c8",
+						"exec": [
+							"tests[\"No genera error en el update\"] = responseCode.code == 200"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"costo\": 40000,\r\n        \"descripcion\": \"Tour de 4 horas en el barrio por Colina\",\r\n        \"dificultad\": \"BAJA\",\r\n        \"duracion\": 240,\r\n        \"fecha\": \"2022-07-28T05:00:00Z[UTC]\",\r\n        \"lugar\": \"Bogotá\",\r\n        \"nombre\": \"tour Colina\",\r\n        \"terminado\": false,\r\n        \"blogs\":[],\r\n        \"fotos\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE tour no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2a3cfb27-9e88-463d-9dec-6f5dffbb2035",
+						"exec": [
+							"tests[\"No se deberia actualizar un tour con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /tours/0 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"costo\": 37000,\r\n        \"descripcion\": \"Tour de 3 horas en el barrio por Colina\",\r\n        \"dificultad\": \"BAJA\",\r\n        \"duracion\": 180,\r\n        \"fecha\": \"2022-07-28T05:00:00Z[UTC]\",\r\n        \"id\": 1000,\r\n        \"lugar\": \"Bogotá\",\r\n        \"nombre\": \"tour Colina\",\r\n        \"terminado\": false,\r\n        \"fotos\": []\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/0",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						"0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE tour no existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2c6517f1-3a67-4b7c-8c5d-d50385f2c59f",
+						"exec": [
+							"tests[\"No se deberia eliminar un tour con un id que no existe\"] = responseCode.code === 404;",
+							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El recurso /tours/89 no existe.\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/89",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						"89"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE tour existe",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aaf3d053-4162-458c-a1db-31ad16744bce",
+						"exec": [
+							"tests[\"No genera error borrando\"] = responseCode.code == 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/tours/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"tours",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

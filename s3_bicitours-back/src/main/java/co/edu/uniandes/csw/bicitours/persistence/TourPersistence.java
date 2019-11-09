@@ -46,7 +46,6 @@ public class TourPersistence{
      */
     public TourEntity find(long tourId)
     {
- //       LOGGER.log(Level.INFO, "Consultando el blog con id={0}", tourId);
         return em.find(TourEntity.class, tourId);
     }
     

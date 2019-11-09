@@ -32,10 +32,10 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class FotoPersistenceTest {
     
-@Inject
-    private FotoPersistence tp;
+    @Inject
+    private FotoPersistence ep;
     
-    @PersistenceContext 
+    @PersistenceContext
     private EntityManager em;
     
     @Inject
@@ -43,13 +43,10 @@ public class FotoPersistenceTest {
     
     private List<FotoEntity> data = new ArrayList<FotoEntity>();
     
-    /**
-     * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
-     * El jar contiene las clases, el descriptor de la base de datos y el
-     * archivo beans.xml para resolver la inyección de dependencias.
-     */
+    private List<TourEntity> dataTour = new ArrayList<TourEntity>();
+    
     @Deployment
-    public static JavaArchive createDeployment()
+    public static JavaArchive createDeployment( )
     {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(FotoEntity.class.getPackage())
@@ -57,7 +54,7 @@ public class FotoPersistenceTest {
                 .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml","beans.xml");
     }
-
+    
     /**
      * Configuración inicial de la prueba.
      */
@@ -78,102 +75,114 @@ public class FotoPersistenceTest {
             }
         }
     }
-    
-        /**
-     * Inserta los datos iniciales 
-     */
-    private void insertData() {
-        PodamFactory factory = new PodamFactoryImpl();
-        for (int i = 0; i < 3; i++) {
-            FotoEntity entity = factory.manufacturePojo(FotoEntity.class);
 
+    /**
+     * Limpia las tablas implicadas en las pruebas
+     */
+    private void clearData() 
+    {
+        em.createQuery("delete from FotoEntity").executeUpdate();
+        em.createQuery("delete from TourEntity").executeUpdate();
+    }
+    
+    /**
+     * Inserta los datos iniciales para las pruebas
+     */
+    private void insertData() 
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+        for (int i = 0; i < 3; i++) 
+        {
+            TourEntity entity = factory.manufacturePojo(TourEntity.class);
+            em.persist(entity);
+            dataTour.add(entity);
+        }
+        for (int i = 0; i < 3; i++) 
+        {
+            FotoEntity entity = factory.manufacturePojo(FotoEntity.class);
+            if (i == 0) {
+                entity.setTour(dataTour.get(0));
+            }
             em.persist(entity);
             data.add(entity);
         }
     }
-       
-     /**
-     * Limpia las tablas que están implicadas en la prueba.
-     */
-    private void clearData() {
-        em.createQuery("delete from FotoEntity").executeUpdate();
+    
+    @Test
+    public void createFotoTest( )
+    {
+        PodamFactory factory = new PodamFactoryImpl( );
+        FotoEntity foto = factory.manufacturePojo(FotoEntity.class);
+        FotoEntity result = ep.create(foto);
+        Assert.assertNotNull(result);
+        
+        FotoEntity entity = em.find(FotoEntity.class, result.getId( ));
+        Assert.assertEquals(foto.getRuta( ), entity.getRuta( ));
+
     }
     
-     /**
-     * Prueba el funcionamiento del método findAll() de FotoPersistence
+    /**
+     * Prueba para encontrar un Foto.
      */
     @Test
-    public void findAllTest() {
-        List<FotoEntity> list = tp.findAll();
+    public void findFotoTest()
+    {
+        FotoEntity foto = data.get(0);
+        FotoEntity newEntity = ep.find(dataTour.get(0).getId(), foto.getId());
+        Assert.assertNotNull(newEntity);
+        Assert.assertEquals(foto.getRuta( ), newEntity.getRuta( ));
+    }
+    
+    /**
+     * Prueba para consultar la lista de Fotos.
+     */
+    @Test
+    public void findAllFotosTest() 
+    {
+ /**       List<FotoEntity> list = ep.findAll();
         Assert.assertEquals(data.size(), list.size());
-        for(FotoEntity ent : list) {
+        for (FotoEntity foto : list) 
+        {
             boolean found = false;
-            for (FotoEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
+            for (FotoEntity entity : data) 
+            {
+                if (foto.getId().equals(entity.getId())) 
+                {
                     found = true;
                 }
             }
             Assert.assertTrue(found);
         }
+        * */
     }
-
+    
     /**
-     * Prueba para el métofo getFototTest() que retorna una foto si existe
+     * Prueba para actualizar un Foto.
      */
     @Test
-    public void getFotoTest() {
-        FotoEntity entity = data.get(0);
-        FotoEntity newEntity = tp.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(newEntity.getRuta(),entity.getRuta());
-    }
-
-    /**
-     * Prueba el método create() de la clase FotoPersistence
-     */
-    @Test
-    public void createFotoTest()
-    {
+    public void updateFotoTest() {
+        FotoEntity foto = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        FotoEntity newFEntity = factory.manufacturePojo(FotoEntity.class);
-        FotoEntity fEntity = tp.create(newFEntity);
-        Assert.assertNotNull(fEntity);
-        FotoEntity entity = em.find(FotoEntity.class, fEntity.getId());
-        Assert.assertEquals(newFEntity.getRuta(),entity.getRuta());
+        FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
+
+        newEntity.setId(foto.getId());
+
+        ep.update(newEntity);
+
+        FotoEntity resp = em.find(FotoEntity.class, foto.getId());
+
+        Assert.assertEquals(resp.getRuta( ), newEntity.getRuta( ));
     }
     
-    
     /**
-     * Prueba el método que elimina una foto.
+     * Prueba para eliminar un Foto.
      */
     @Test
     public void deleteFotoTest() {
         FotoEntity entity = data.get(0);
-        tp.delete(entity.getId());
+        ep.delete(data.get(0).getTour().getId(),entity.getId());
         FotoEntity deleted = em.find(FotoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
-
-    /**
-     * Prueba que una foto haya sido actualizada
-     */
-    @Test
-    public void updateFotoTest() {
-        FotoEntity entity = data.get(0);
-        PodamFactory factory = new PodamFactoryImpl();
-        FotoEntity newEntity = factory.manufacturePojo(FotoEntity.class);
-
-        newEntity.setId(entity.getId());
-
-        tp.update(newEntity);
-
-        FotoEntity resp = em.find(FotoEntity.class, entity.getId());
-
-        Assert.assertEquals(newEntity.getRuta(),resp.getRuta());
-
-    }
-
+    
 }
-
-
-
