@@ -109,7 +109,7 @@ public class BlogPersistenceTest {
         Assert.assertEquals(newEntity.getTexto(), entity.getTexto());
         Assert.assertEquals(newEntity.getRutaImagen(), entity.getRutaImagen());
         Assert.assertEquals(newEntity.getRutaVideo(), entity.getRutaVideo());
-        Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(), 0.001);
         Assert.assertEquals(newEntity.getTitulo(), entity.getTitulo());
     }
 
@@ -142,7 +142,7 @@ public class BlogPersistenceTest {
         Assert.assertEquals(newEntity.getTexto(), entity.getTexto());
         Assert.assertEquals(newEntity.getRutaImagen(), entity.getRutaImagen());
         Assert.assertEquals(newEntity.getRutaVideo(), entity.getRutaVideo());
-        Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(), 0.001);
         Assert.assertEquals(newEntity.getTitulo(), entity.getTitulo());
     }
 
@@ -175,7 +175,7 @@ public class BlogPersistenceTest {
         Assert.assertEquals(newEntity.getTexto(), resp.getTexto());
         Assert.assertEquals(newEntity.getRutaImagen(), resp.getRutaImagen());
         Assert.assertEquals(newEntity.getRutaVideo(), resp.getRutaVideo());
-        Assert.assertEquals(newEntity.getCalificacionPromedio(), resp.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(newEntity.getCalificacionPromedio(), resp.getCalificacionPromedio(), 0.001);
         Assert.assertEquals(newEntity.getTitulo(), resp.getTitulo());
     }
 

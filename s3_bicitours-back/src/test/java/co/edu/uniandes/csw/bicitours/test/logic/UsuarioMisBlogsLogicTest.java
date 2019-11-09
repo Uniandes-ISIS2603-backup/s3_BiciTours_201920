@@ -34,12 +34,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class UsuarioMisBlogsLogicTest {
-    
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private UsuarioLogic usuarioLogic;
-    
+
     @Inject
     private UsuarioMisBlogsLogic usuarioMisBlogsLogic;
 
@@ -96,7 +96,7 @@ public class UsuarioMisBlogsLogicTest {
             em.persist(entity);
             data.add(entity);
             if (i == 0) {
-               blogsData.get(i).setCreador(entity);
+                blogsData.get(i).setCreador(entity);
             }
         }
     }
@@ -143,7 +143,7 @@ public class UsuarioMisBlogsLogicTest {
     }
 
     @Test
-    public void replaceBlogsTest() {
+    public void setBlogsTest() {
         UsuarioEntity entity = data.get(0);
         List<BlogEntity> list = blogsData.subList(1, 3);
         usuarioMisBlogsLogic.replaceBlogs(entity.getId(), list);
@@ -152,13 +152,15 @@ public class UsuarioMisBlogsLogicTest {
         Assert.assertTrue(entity.getMisBlogs().contains(blogsData.get(1)));
         Assert.assertTrue(entity.getMisBlogs().contains(blogsData.get(2)));
     }
+
     @Test
-    public void removeBlogTest() throws BusinessLogicException{
+    public void removeBlogTest() throws BusinessLogicException {
         usuarioMisBlogsLogic.removeBlog(data.get(0).getId(), blogsData.get(0).getId());
-        Assert.assertEquals(0,usuarioMisBlogsLogic.getBlogs(blogsData.get(0).getId()).size());
+        Assert.assertEquals(0, usuarioMisBlogsLogic.getBlogs(blogsData.get(0).getId()).size());
     }
+
     @Test(expected = BusinessLogicException.class)
-    public void removeBlogNoAsociadoTest() throws BusinessLogicException{
+    public void removeBlogNoAsociadoTest() throws BusinessLogicException {
         usuarioMisBlogsLogic.removeBlog(blogsData.get(0).getId(), data.get(1).getId());
-    }  
+    }
 }

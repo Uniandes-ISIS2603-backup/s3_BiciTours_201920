@@ -8,11 +8,11 @@ package co.edu.uniandes.csw.bicitours.resources;
 import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
 import co.edu.uniandes.csw.bicitours.dtos.TourDTO;
 import co.edu.uniandes.csw.bicitours.dtos.TourDetailDTO;
-import co.edu.uniandes.csw.bicitours.ejb.BlogCreadorLogic;
+
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.BlogTourLogic;
 import co.edu.uniandes.csw.bicitours.ejb.TourLogic;
-import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
+
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import javax.inject.Inject;
@@ -34,12 +34,13 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogTourResource {
-        @Inject
+
+    @Inject
     private BlogTourLogic blogTourLogic;
 
     @Inject
     private TourLogic tourLogic;
-    
+
     @Inject
     private BlogLogic blogLogic;
 
@@ -49,8 +50,8 @@ public class BlogTourResource {
         if (usuarioEntity == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + "/blog no existe.", 404);
         }
-        TourDetailDTO usuarioDetailDTO = new TourDetailDTO(usuarioEntity);
-        return usuarioDetailDTO;
+
+        return new TourDetailDTO(usuarioEntity);
     }
 
     @PUT
@@ -61,9 +62,10 @@ public class BlogTourResource {
         if (tourLogic.getTour(tour.getId()) == null) {
             throw new WebApplicationException("El recurso /tours/" + tour.getId() + " no existe.", 404);
         }
-        BlogDetailDTO blogDetailDTO = new BlogDetailDTO(blogTourLogic.replaceTour(blogsId, tour.getId()));
-        return blogDetailDTO;
+
+        return new BlogDetailDTO(blogTourLogic.replaceTour(blogsId, tour.getId()));
     }
+
     @DELETE
     public void removeTour(@PathParam("blogsId") Long blogsId) throws BusinessLogicException {
         blogTourLogic.removeTour(blogsId);

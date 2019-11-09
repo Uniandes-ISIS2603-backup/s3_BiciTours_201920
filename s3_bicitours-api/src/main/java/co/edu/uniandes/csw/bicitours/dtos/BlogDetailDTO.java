@@ -16,10 +16,11 @@ import java.util.List;
  *
  * @author Oscar Julian Castañeda G.
  */
-public class BlogDetailDTO extends BlogDTO implements Serializable{
-    
+public class BlogDetailDTO extends BlogDTO implements Serializable {
+
     private List<UsuarioDTO> usuarios;
     private List<ComentarioDTO> comentarios;
+
     public BlogDetailDTO() {
         super();
     }
@@ -29,7 +30,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
         if (blogEntity.getUsuarios() != null) {
             usuarios = new ArrayList<>();
             for (UsuarioEntity entityUsuario : blogEntity.getUsuarios()) {
-//                usuarios.add(new UsuarioDTO(entityUsuario));
+                usuarios.add(new UsuarioDTO(entityUsuario));
             }
         }
         if (blogEntity.getComentarios() != null) {
@@ -37,7 +38,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
             for (ComentarioEntity entityComentario : blogEntity.getComentarios()) {
                 comentarios.add(new ComentarioDTO(entityComentario));
             }
-        }        
+        }
     }
 
     @Override
@@ -46,7 +47,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
         if (usuarios != null) {
             List<UsuarioEntity> usuariosEntity = new ArrayList<>();
             for (UsuarioDTO dtoUsuario : usuarios) {
-//                usuariosEntity.add(dtoUsuario.toEntity());
+                usuariosEntity.add(dtoUsuario.toEntity());
             }
             blogEntity.setUsuarios(usuariosEntity);
         }
@@ -56,7 +57,7 @@ public class BlogDetailDTO extends BlogDTO implements Serializable{
                 comentariosEntity.add(dtoComentario.toEntity());
             }
             blogEntity.setComentarios(comentariosEntity);
-        }        
+        }
         return blogEntity;
     }
 

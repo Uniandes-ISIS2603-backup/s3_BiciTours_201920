@@ -14,36 +14,30 @@ import java.util.List;
  *
  * @author JuanRueda
  */
-public class ComentarioDetailDTO extends ComentarioDTO implements Serializable{
-    
+public class ComentarioDetailDTO extends ComentarioDTO implements Serializable {
+
     private List<ComentarioDTO> respuestas;
 
     public ComentarioDetailDTO() {
         super();
     }
 
-    public ComentarioDetailDTO(ComentarioEntity comentario) 
-    {
+    public ComentarioDetailDTO(ComentarioEntity comentario) {
         super(comentario);
-        if (comentario.getRespuestas() != null) 
-        {
+        if (comentario.getRespuestas() != null) {
             respuestas = new ArrayList<>();
-            for (ComentarioEntity respuesta : comentario.getRespuestas()) 
-            {
+            for (ComentarioEntity respuesta : comentario.getRespuestas()) {
                 respuestas.add(new ComentarioDTO(respuesta));
             }
         }
     }
 
     @Override
-    public ComentarioEntity toEntity() 
-    {
+    public ComentarioEntity toEntity() {
         ComentarioEntity comentario = super.toEntity();
-        if (getRespuestas() != null) 
-        {
+        if (getRespuestas() != null) {
             List<ComentarioEntity> respuestasEntity = new ArrayList<>();
-            for (ComentarioDTO dtoComentario : getRespuestas()) 
-            {
+            for (ComentarioDTO dtoComentario : getRespuestas()) {
                 respuestasEntity.add(dtoComentario.toEntity());
             }
             comentario.setRespuestas(respuestasEntity);

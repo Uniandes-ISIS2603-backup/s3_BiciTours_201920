@@ -35,7 +35,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class FavoritosBlogLogicTest {
-        
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -91,7 +91,7 @@ public class FavoritosBlogLogicTest {
             em.persist(blogs);
             blogs.setUsuarios(new ArrayList());
             blogsData.add(blogs);
-            
+
         }
         for (int i = 0; i < 3; i++) {
             UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
@@ -158,13 +158,15 @@ public class FavoritosBlogLogicTest {
         Assert.assertTrue(entity.getFavoritos().contains(blogsData.get(1)));
         Assert.assertTrue(entity.getFavoritos().contains(blogsData.get(2)));
     }
+
     @Test
-    public void removeFavoritoTest() throws BusinessLogicException{
+    public void removeFavoritoTest() throws BusinessLogicException {
         favoritosBlogLogic.removeFavorito(data.get(0).getId(), blogsData.get(0).getId());
-        Assert.assertEquals(0,favoritosBlogLogic.getFavoritos(blogsData.get(0).getId()).size());
+        Assert.assertEquals(0, favoritosBlogLogic.getFavoritos(blogsData.get(0).getId()).size());
     }
+
     @Test(expected = BusinessLogicException.class)
-    public void removeFavoritoNoAsociadoTest() throws BusinessLogicException{
+    public void removeFavoritoNoAsociadoTest() throws BusinessLogicException {
         favoritosBlogLogic.removeFavorito(blogsData.get(0).getId(), data.get(1).getId());
-    }    
+    }
 }

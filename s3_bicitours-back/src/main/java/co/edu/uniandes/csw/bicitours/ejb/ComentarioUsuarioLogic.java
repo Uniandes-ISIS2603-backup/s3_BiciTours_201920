@@ -14,11 +14,11 @@ import javax.inject.Inject;
 
 /**
  *
- *  @author JuanRueda
+ * @author JuanRueda
  */
-
 @Stateless
 public class ComentarioUsuarioLogic {
+
     @Inject
     private ComentarioPersistence persistenciaC;
 

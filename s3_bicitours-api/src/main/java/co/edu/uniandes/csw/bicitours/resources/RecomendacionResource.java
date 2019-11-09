@@ -33,92 +33,85 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 
 public class RecomendacionResource {
-    
+
+    private static final String RECURSO = "El recurso /Recomendacions/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private RecomendacionLogic logica;
 
     @POST
-    public RecomendacionDTO createRecomendacion(RecomendacionDTO recomendacion) throws BusinessLogicException 
-    {
-         RecomendacionDTO respuesta = new RecomendacionDTO(logica.createRecomendacion(recomendacion.toEntity()));
-        return respuesta;
+    public RecomendacionDTO createRecomendacion(RecomendacionDTO recomendacion) throws BusinessLogicException {
+
+        return new RecomendacionDTO(logica.createRecomendacion(recomendacion.toEntity()));
     }
 
     @GET
     public List<RecomendacionDTO> getRecomendacions() {
-        
-        List<RecomendacionDTO> listaRecomendacions = listEntity2DetailDTO(logica.getRecomendacions());
-        return listaRecomendacions;
+
+        return listEntity2DetailDTO(logica.getRecomendacions());
     }
- @GET
+
+    @GET
     @Path("{recomendacionId: \\d+}")
-    public RecomendacionDTO getRecomendacion(@PathParam("recomendacionId") Long recomendacionId) 
-    {
+    public RecomendacionDTO getRecomendacion(@PathParam("recomendacionId") Long recomendacionId) {
         RecomendacionEntity recomendacion = logica.getRecomendacion(recomendacionId);
-        if (recomendacion == null) 
-        {
-            throw new WebApplicationException("El recurso /Recomendacions/" + recomendacionId + " no existe.", 404);
+        if (recomendacion == null) {
+            throw new WebApplicationException(RECURSO + recomendacionId + NOEXISTE, 404);
         }
-        RecomendacionDTO recomendacions = new RecomendacionDTO(recomendacion);
-        return recomendacions;
+
+        return new RecomendacionDTO(recomendacion);
     }
-    
-  
+
     @PUT
     @Path("{recomendacionId: \\d+}")
-    public RecomendacionDTO updateRecomendacion(@PathParam("recomendacionId") Long recomendacionId, RecomendacionDTO recomendacions) throws BusinessLogicException 
-    {
-         recomendacions.setId(recomendacionId);
-        if (logica.getRecomendacion(recomendacionId) == null) 
-        {
-            throw new WebApplicationException("El recurso /Recomendacions/" + recomendacionId + " no existe.", 404);
+    public RecomendacionDTO updateRecomendacion(@PathParam("recomendacionId") Long recomendacionId, RecomendacionDTO recomendacions) throws BusinessLogicException {
+        recomendacions.setId(recomendacionId);
+        if (logica.getRecomendacion(recomendacionId) == null) {
+            throw new WebApplicationException(RECURSO + recomendacionId + NOEXISTE, 404);
         }
-        RecomendacionDTO DTO = new RecomendacionDTO(logica.updateRecomendacion(recomendacionId, recomendacions.toEntity()));
-        return DTO;
+
+        return new RecomendacionDTO(logica.updateRecomendacion(recomendacions.toEntity()));
     }
 
     @DELETE
     @Path("{recomendacionId: \\d+}")
-    public void deleteRecomendacion(@PathParam("recomendacionId") Long recomendacionId) throws BusinessLogicException 
-    {
-         RecomendacionEntity recomendacion = logica.getRecomendacion(recomendacionId);
-        if (recomendacion == null) 
-        {
-            throw new WebApplicationException("El recurso /Recomendacions/" + recomendacionId + " no existe.", 404);
+    public void deleteRecomendacion(@PathParam("recomendacionId") Long recomendacionId) throws BusinessLogicException {
+        RecomendacionEntity recomendacion = logica.getRecomendacion(recomendacionId);
+        if (recomendacion == null) {
+            throw new WebApplicationException(RECURSO + recomendacionId + NOEXISTE, 404);
         }
         logica.deleteRecomendacion(recomendacionId);
     }
+
     /**
      * Conexión con el servicio de autores para un bicitour.
      * {@link RecomendacionRecomendacionsResource}
      *
-     * Este método conecta la ruta de /Recomendacions con las rutas de /recomendacions que
-     * dependen del bicitour, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de las reseñas.
+     * Este método conecta la ruta de /Recomendacions con las rutas de
+     * /recomendacions que dependen del bicitour, es una redirección al servicio
+     * que maneja el segmento de la URL que se encarga de las reseñas.
      *
-     * @param recomendacionId El ID del bicitour con respecto al cual se accede al
-     * servicio.
+     * @param recomendacionId El ID del bicitour con respecto al cual se accede
+     * al servicio.
      * @return El servicio de autores para ese bicitour en paricular.\
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el bicitour.
-     
-    @Path("{recomendacionId: \\d+}/recomendacions")
-    public Class<RecomendacionRecomendacionsResource> getRecomendacionRecomendacionsResource(@PathParam("recomendacionId") Long recomendacionId) {
-        if (RecomendacionLogic.getRecomendacion(recomendacionId) == null) {
-            throw new WebApplicationException("El recurso /Recomendacions/" + recomendacionId + " no existe.", 404);
-        }
-        return RecomendacionRecomendacionsResource.class;
-    }
-    */
+     *
+     * @Path("{recomendacionId: \\d+}/recomendacions") public
+     * Class<RecomendacionRecomendacionsResource>
+     * getRecomendacionRecomendacionsResource(@PathParam("recomendacionId") Long
+     * recomendacionId) { if
+     * (RecomendacionLogic.getRecomendacion(recomendacionId) == null) { throw
+     * new WebApplicationException("El recurso /Recomendacions/" +
+     * recomendacionId + " no existe.", 404); } return
+     * RecomendacionRecomendacionsResource.class; }
+     */
 
-    private List<RecomendacionDTO> listEntity2DetailDTO(List<RecomendacionEntity> entityList) 
-    {
+    private List<RecomendacionDTO> listEntity2DetailDTO(List<RecomendacionEntity> entityList) {
         List<RecomendacionDTO> list = new ArrayList<>();
-        for (RecomendacionEntity recomendacion : entityList) 
-        {
+        for (RecomendacionEntity recomendacion : entityList) {
             list.add(new RecomendacionDTO(recomendacion));
         }
         return list;
     }
 }
-

@@ -11,8 +11,6 @@ import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.BlogPersistence;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -35,7 +33,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 @RunWith(Arquillian.class)
 public class BlogLogicTest {
 
-
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -47,8 +44,8 @@ public class BlogLogicTest {
     @Inject
     private UserTransaction utx;
 
-    private List<BlogEntity> data = new ArrayList<BlogEntity>();
-    
+    private List<BlogEntity> data = new ArrayList<>();
+
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
@@ -58,7 +55,6 @@ public class BlogLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
 
     /**
      * Configuración inicial de la prueba.
@@ -99,7 +95,7 @@ public class BlogLogicTest {
             data.add(entity);
         }
     }
-    
+
     /**
      * Prueba para crear un Blog
      *
@@ -119,41 +115,39 @@ public class BlogLogicTest {
         Assert.assertEquals(newEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(), 0.001);
     }
 
-
-    @Test (expected = BusinessLogicException.class)
-    public void createBlogContenidoNull() throws BusinessLogicException
-    {
+    @Test(expected = BusinessLogicException.class)
+    public void createBlogContenidoNull() throws BusinessLogicException {
         BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
         blog.setTexto(null);
         blog.setRutaImagen(null);
         blog.setRutaVideo(null);
-        BlogEntity result = blogLogic.createBlog(blog);  
+        BlogEntity result = blogLogic.createBlog(blog);
     }
 
-    @Test (expected = BusinessLogicException.class)
-    public void createBlogContenidoVacio() throws BusinessLogicException
-    {
+    @Test(expected = BusinessLogicException.class)
+    public void createBlogContenidoVacio() throws BusinessLogicException {
         BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
         blog.setTexto("");
         blog.setRutaImagen("");
         blog.setRutaVideo("");
-        BlogEntity result = blogLogic.createBlog(blog);  
+        BlogEntity result = blogLogic.createBlog(blog);
     }
-    @Test (expected = BusinessLogicException.class)
-    public void createBlogTituloNull() throws BusinessLogicException
-    {
+
+    @Test(expected = BusinessLogicException.class)
+    public void createBlogTituloNull() throws BusinessLogicException {
         BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
         blog.setTitulo(null);
-        BlogEntity result = blogLogic.createBlog(blog);  
+        BlogEntity result = blogLogic.createBlog(blog);
     }
-        @Test (expected = BusinessLogicException.class)
-    public void createBlogTituloVacio() throws BusinessLogicException
-    {
+
+    @Test(expected = BusinessLogicException.class)
+    public void createBlogTituloVacio() throws BusinessLogicException {
         BlogEntity blog = factory.manufacturePojo(BlogEntity.class);
         blog.setTitulo("");
-        BlogEntity result = blogLogic.createBlog(blog);  
+        BlogEntity result = blogLogic.createBlog(blog);
     }
-        /**
+
+    /**
      * Prueba para consultar la lista de Blogs.
      */
     @Test
@@ -183,7 +177,7 @@ public class BlogLogicTest {
         Assert.assertEquals(resultEntity.getTexto(), entity.getTexto());
         Assert.assertEquals(resultEntity.getRutaImagen(), entity.getRutaImagen());
         Assert.assertEquals(resultEntity.getRutaVideo(), entity.getRutaVideo());
-        Assert.assertEquals(resultEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(resultEntity.getCalificacionPromedio(), entity.getCalificacionPromedio(), 0.001);
         Assert.assertEquals(resultEntity.getTitulo(), entity.getTitulo());
     }
 
@@ -191,7 +185,7 @@ public class BlogLogicTest {
      * Prueba para actualizar un Blog.
      */
     @Test
-    public void updateBlogTest(){
+    public void updateBlogTest() {
         BlogEntity entity = data.get(0);
         BlogEntity pojoEntity = factory.manufacturePojo(BlogEntity.class);
         pojoEntity.setId(entity.getId());
@@ -201,7 +195,7 @@ public class BlogLogicTest {
         Assert.assertEquals(pojoEntity.getTexto(), resp.getTexto());
         Assert.assertEquals(pojoEntity.getRutaImagen(), resp.getRutaImagen());
         Assert.assertEquals(pojoEntity.getRutaVideo(), resp.getRutaVideo());
-        Assert.assertEquals(pojoEntity.getCalificacionPromedio(), resp.getCalificacionPromedio(),0.001);
+        Assert.assertEquals(pojoEntity.getCalificacionPromedio(), resp.getCalificacionPromedio(), 0.001);
         Assert.assertEquals(pojoEntity.getTitulo(), resp.getTitulo());
     }
 
@@ -209,11 +203,10 @@ public class BlogLogicTest {
      * Prueba para eliminar un Blog.
      */
     @Test
-    public void deleteBlogTest()  {
+    public void deleteBlogTest() {
         BlogEntity entity = data.get(0);
         blogLogic.deleteBlog(entity.getId());
         BlogEntity deleted = em.find(BlogEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 }
-

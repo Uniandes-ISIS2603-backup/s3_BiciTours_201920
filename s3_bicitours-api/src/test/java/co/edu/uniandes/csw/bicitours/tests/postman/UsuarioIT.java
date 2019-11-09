@@ -25,15 +25,14 @@ import org.junit.runner.RunWith;
  *
  * @author Juan Sebastián González Rojas
  */
-
 @RunWith(Arquillian.class)
 public class UsuarioIT {
-    
+
     private static final String COLLECTION = "UsuarioResourceTests.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "s3_bicitours-api.war")//War del modulo api
+        return ShrinkWrap.create(WebArchive.class, "s3_bicitours-api-1.0.war")//War del modulo api
                 // Se agrega las dependencias
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
                         .importRuntimeDependencies().resolve()
@@ -66,4 +65,3 @@ public class UsuarioIT {
         Assert.assertEquals("Error en Assertions de: " + COLLECTION, desiredResult, tp.getAssertions_failed());
     }
 }
-

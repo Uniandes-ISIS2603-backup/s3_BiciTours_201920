@@ -8,10 +8,10 @@ package co.edu.uniandes.csw.bicitours.ejb;
 import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
-import javax.ejb.Stateless;
 import co.edu.uniandes.csw.bicitours.persistence.FotoPersistence;
 import co.edu.uniandes.csw.bicitours.persistence.TourPersistence;
 import java.util.List;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 /**
@@ -20,7 +20,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class FotoLogic {
-    
+
     @Inject
     private FotoPersistence fp;
     
@@ -42,7 +42,8 @@ public class FotoLogic {
         foto = fp.create(foto);
         return foto;
     }
-   /**
+
+    /**
      * Devuelve todas las fotospertenecientes a un tour
      * @param tourId, id del tour que contiene la foto
      * @return una lista con todas las fotos del tour
@@ -50,7 +51,7 @@ public class FotoLogic {
     public List<FotoEntity> getFotos(Long tourId) {
         return tp.find(tourId).getFotos();
     }
-    
+
     /**
      * Busca un foto en la base de datos perteneciente a un tour
      * @param id, id de la foto
@@ -61,7 +62,7 @@ public class FotoLogic {
     {
        return fp.find(tourId, id);
     }
-    
+
     /**
      * Actualiza una foto que existe en la base de datos
      * @param tourId, id del tour al que pertenece la foto
@@ -75,7 +76,7 @@ public class FotoLogic {
         fp.update(foto);
         return foto;
     }
-    
+
     /**
      * Elimina la foto con la identificación dada por parámetro
      * @param tourId, id del tour al que pertenece la foto

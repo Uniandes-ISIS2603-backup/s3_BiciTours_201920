@@ -26,8 +26,6 @@ package co.edu.uniandes.csw.bicitours.adapters;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
@@ -37,8 +35,6 @@ import javax.xml.bind.annotation.adapters.XmlAdapter;
  * @author ISIS2603
  */
 public class DateAdapter extends XmlAdapter<String, Date> {
-    
-      private static final Logger LOGGER = Logger.getLogger(DateAdapter.class.getName());
 
     /**
      * Thread safe {@link DateFormat}.
@@ -53,7 +49,6 @@ public class DateAdapter extends XmlAdapter<String, Date> {
 
     @Override
     public Date unmarshal(String v) throws Exception {
-        LOGGER.log(Level.INFO, "input date "+v);
         return DATE_FORMAT_TL.get().parse(v);
     }
 

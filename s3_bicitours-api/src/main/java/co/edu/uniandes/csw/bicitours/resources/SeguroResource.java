@@ -33,89 +33,80 @@ import javax.ws.rs.WebApplicationException;
 @RequestScoped
 
 public class SeguroResource {
-    
+
+    private static final String RECURSO = "El recurso /Seguros/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private SeguroLogic logica;
 
     @POST
-    public SeguroDTO createSeguro(SeguroDTO seguro) throws BusinessLogicException 
-    {
-         SeguroDTO respuesta = new SeguroDTO(logica.createSeguro(seguro.toEntity()));
-        return respuesta;
+    public SeguroDTO createSeguro(SeguroDTO seguro) throws BusinessLogicException {
+
+        return new SeguroDTO(logica.createSeguro(seguro.toEntity()));
     }
 
     @GET
     public List<SeguroDTO> getSeguros() {
-        
-        List<SeguroDTO> listaSeguros = listEntity2DetailDTO(logica.getSeguros());
-        return listaSeguros;
+
+        return listEntity2DetailDTO(logica.getSeguros());
     }
+
     @GET
     @Path("{seguroId: \\d+}")
-    public SeguroDTO getSeguro(@PathParam("seguroId") Long seguroId) 
-    {
+    public SeguroDTO getSeguro(@PathParam("seguroId") Long seguroId) {
         SeguroEntity seguro = logica.getSeguro(seguroId);
-        if (seguro == null) 
-        {
-            throw new WebApplicationException("El recurso /Seguros/" + seguroId + " no existe.", 404);
+        if (seguro == null) {
+            throw new WebApplicationException(RECURSO + seguroId + NOEXISTE, 404);
         }
-        SeguroDTO seguros = new SeguroDTO(seguro);
-        return seguros;
+
+        return new SeguroDTO(seguro);
     }
-    
-  
+
     @PUT
     @Path("{seguroId: \\d+}")
-    public SeguroDTO updateSeguro(@PathParam("seguroId") Long seguroId, SeguroDTO seguros) throws BusinessLogicException 
-    {
-         seguros.setId(seguroId);
-        if (logica.getSeguro(seguroId) == null) 
-        {
-            throw new WebApplicationException("El recurso /Seguros/" + seguroId + " no existe.", 404);
+    public SeguroDTO updateSeguro(@PathParam("seguroId") Long seguroId, SeguroDTO seguros) throws BusinessLogicException {
+        seguros.setId(seguroId);
+        if (logica.getSeguro(seguroId) == null) {
+            throw new WebApplicationException(RECURSO + seguroId + NOEXISTE, 404);
         }
-        SeguroDTO DTO = new SeguroDTO(logica.updateSeguro(seguroId, seguros.toEntity()));
-        return DTO;
+
+        return new SeguroDTO(logica.updateSeguro(seguros.toEntity()));
     }
 
     @DELETE
     @Path("{seguroId: \\d+}")
-    public void deleteSeguro(@PathParam("seguroId") Long seguroId) throws BusinessLogicException 
-    {
-         SeguroEntity seguro = logica.getSeguro(seguroId);
-        if (seguro == null) 
-        {
-            throw new WebApplicationException("El recurso /Seguros/" + seguroId + " no existe.", 404);
+    public void deleteSeguro(@PathParam("seguroId") Long seguroId) throws BusinessLogicException {
+        SeguroEntity seguro = logica.getSeguro(seguroId);
+        if (seguro == null) {
+            throw new WebApplicationException(RECURSO + seguroId + NOEXISTE, 404);
         }
         logica.deleteSeguro(seguroId);
     }
+
     /**
      * Conexión con el servicio de autores para un bicitour.
      * {@link SeguroSegurosResource}
      *
      * Este método conecta la ruta de /Seguros con las rutas de /seguros que
-     * dependen del bicitour, es una redirección al servicio que maneja el segmento
-     * de la URL que se encarga de las reseñas.
+     * dependen del bicitour, es una redirección al servicio que maneja el
+     * segmento de la URL que se encarga de las reseñas.
      *
      * @param seguroId El ID del bicitour con respecto al cual se accede al
      * servicio.
      * @return El servicio de autores para ese bicitour en paricular.\
      * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
      * Error de lógica que se genera cuando no se encuentra el bicitour.
-     
-    @Path("{seguroId: \\d+}/seguros")
-    public Class<SeguroSegurosResource> getSeguroSegurosResource(@PathParam("seguroId") Long seguroId) {
-        if (SeguroLogic.getSeguro(seguroId) == null) {
-            throw new WebApplicationException("El recurso /Seguros/" + seguroId + " no existe.", 404);
-        }
-        return SeguroSegurosResource.class;
-    }
-    */
+     *
+     * @Path("{seguroId: \\d+}/seguros") public Class<SeguroSegurosResource>
+     * getSeguroSegurosResource(@PathParam("seguroId") Long seguroId) { if
+     * (SeguroLogic.getSeguro(seguroId) == null) { throw new
+     * WebApplicationException("El recurso /Seguros/" + seguroId + " no
+     * existe.", 404); } return SeguroSegurosResource.class; }
+     */
 
-    private List<SeguroDTO> listEntity2DetailDTO(List<SeguroEntity> entityList) 
-    {
+    private List<SeguroDTO> listEntity2DetailDTO(List<SeguroEntity> entityList) {
         List<SeguroDTO> list = new ArrayList<>();
-        for (SeguroEntity seguro : entityList) 
-        {
+        for (SeguroEntity seguro : entityList) {
             list.add(new SeguroDTO(seguro));
         }
         return list;

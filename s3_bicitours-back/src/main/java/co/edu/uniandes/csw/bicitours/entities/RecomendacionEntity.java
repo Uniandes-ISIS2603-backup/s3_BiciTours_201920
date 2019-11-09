@@ -16,11 +16,13 @@ import uk.co.jemos.podam.common.PodamExclude;
  */
 @Entity
 public class RecomendacionEntity extends BaseEntity implements Serializable {
-    private String tipoBici ;
+
+    private String tipoBici;
     private String indumentaria;
-@PodamExclude
+    @PodamExclude
     @ManyToOne
     private TourEntity tour;
+
     /**
      * @return the tipoBici
      */
@@ -62,5 +64,5 @@ public class RecomendacionEntity extends BaseEntity implements Serializable {
     public void setTour(TourEntity tour) {
         this.tour = tour;
     }
-    
+
 }

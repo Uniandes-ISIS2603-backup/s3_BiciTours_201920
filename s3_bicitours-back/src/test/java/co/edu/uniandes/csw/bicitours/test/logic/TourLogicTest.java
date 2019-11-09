@@ -33,8 +33,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author Jhuliana Barrios
  */
 @RunWith(Arquillian.class)
-public class TourLogicTest{
-        
+public class TourLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -45,7 +45,7 @@ public class TourLogicTest{
         
     @PersistenceContext
     private EntityManager em;
-    
+
     private TourEntity tourPrueba;
     
     private List<TourEntity> data = new ArrayList<TourEntity>();
@@ -105,141 +105,155 @@ public class TourLogicTest{
     /**
      * El escenario crea un tour que cumple todas las reglas de negocio
      */
-    public TourEntity setupEscenario()throws BusinessLogicException
-    {
-        tourPrueba= factory.manufacturePojo(TourEntity.class);
+    public TourEntity setupEscenario() throws BusinessLogicException {
+        tourPrueba = factory.manufacturePojo(TourEntity.class);
         Date fechaProv = new Date();
-        fechaProv.setYear(fechaProv.getYear()+5);
+        fechaProv.setYear(fechaProv.getYear() + 5);
         tourPrueba.setFecha(fechaProv);
-        int random = (int)(Math.random() * Integer.MAX_VALUE + 1);
+        int random = (int) (Math.random() * Integer.MAX_VALUE + 1);
         tourPrueba.setDuracion(random);
         tourPrueba.setCosto(random);
-        TourEntity r=tourLogic.createTour(tourPrueba);
+        TourEntity r = tourLogic.createTour(tourPrueba);
         return r;
     }
-    
+
     /**
      * Prueba que un tour que cumpla con las reglas de negocio sea creado
+     *
      * @throws BusinessLogicException
      */
     @Test
-    public void crearTour()throws BusinessLogicException{
-        TourEntity r=setupEscenario();
+    public void crearTour() throws BusinessLogicException {
+        TourEntity r = setupEscenario();
         Assert.assertNotNull(r);
     }
-    
+
     /**
      * Prueba que no se cree un tour con un nombre no existene
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearNombreNulo()throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearNombreNulo() throws BusinessLogicException {
         setupEscenario();
         tourPrueba.setNombre(null);
         tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
      * Prueba que no se cree un tour con un nombre vacio
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearNombreVacio()throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearNombreVacio() throws BusinessLogicException {
         setupEscenario();
         tourPrueba.setNombre("   ");
         tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
-     * Prueba que no se cree un tour con una duración inválida, la duración solo es inválida si es negativa
-     * @throws BusinessLogicException 
+     * Prueba que no se cree un tour con una duración inválida, la duración solo
+     * es inválida si es negativa
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearConDuracionInvalida() throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearConDuracionInvalida() throws BusinessLogicException {
         setupEscenario();
-        int random = (int)(Math.random() * Integer.MIN_VALUE + -1);
+        int random = (int) (Math.random() * Integer.MIN_VALUE + -1);
         tourPrueba.setDuracion(random);
-        tourLogic.createTour(tourPrueba);        
+        tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
-     * Prueba que no se cree un tour con una fecha inválida, una fecha es inválida si es antes de la fecha actual o al mismo instante en que se quiere crear el tour
-     * @throws BusinessLogicException 
+     * Prueba que no se cree un tour con una fecha inválida, una fecha es
+     * inválida si es antes de la fecha actual o al mismo instante en que se
+     * quiere crear el tour
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearFechaInvalida() throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearFechaInvalida() throws BusinessLogicException {
         setupEscenario();
         Date fechaProv = new Date();
-        fechaProv.setYear(fechaProv.getYear()-5);
+        fechaProv.setYear(fechaProv.getYear() - 5);
         tourPrueba.setFecha(fechaProv);
-        tourLogic.createTour(tourPrueba);        
+        tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
-     * Prueba que no se cree un tour con una dificultad inválida, una dificultad es inválida si es nula,
-     * @throws BusinessLogicException 
+     * Prueba que no se cree un tour con una dificultad inválida, una dificultad
+     * es inválida si es nula,
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearDificultadInvalida() throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearDificultadInvalida() throws BusinessLogicException {
         setupEscenario();
         tourPrueba.setDificultad(null);
-        tourLogic.createTour(tourPrueba);        
+        tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
      * Prueba que no se cree un tour con una descripción nula
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearDescripcionInvalida() throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearDescripcionInvalida() throws BusinessLogicException {
         setupEscenario();
         tourPrueba.setDescripcion(null);
-        tourLogic.createTour(tourPrueba);        
+        tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
      * Prueba que no se cree un tour con una descripción vacia
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearDescripcionVacia()throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearDescripcionVacia() throws BusinessLogicException {
         setupEscenario();
         tourPrueba.setDescripcion("   ");
         tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
      * Prueba que no se cree un tour con un lugar vacio
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearLugarVacio()throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearLugarVacio() throws BusinessLogicException {
         setupEscenario();
         tourPrueba.setLugar("   ");
         tourLogic.createTour(tourPrueba);
     }
-    
+
     /**
      * Prueba que no se cree un tour con un lugar nulo
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearLugarInvalido() throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearLugarInvalido() throws BusinessLogicException {
         setupEscenario();
         tourPrueba.setLugar(null);
-        tourLogic.createTour(tourPrueba);        
+        tourLogic.createTour(tourPrueba);
     }
-    
-        /**
+
+    /**
      * Prueba que no se cree un tour con un costo inválido
-     * @throws BusinessLogicException 
+     *
+     * @throws BusinessLogicException
      */
-    @Test (expected = BusinessLogicException.class)
-    public void crearCostoInvalido() throws BusinessLogicException{
+    @Test(expected = BusinessLogicException.class)
+    public void crearCostoInvalido() throws BusinessLogicException {
         setupEscenario();
-        int random = (int)(Math.random() * Integer.MIN_VALUE + -1);
+        int random = (int) (Math.random() * Integer.MIN_VALUE + -1);
         tourPrueba.setCosto(random);
-        tourLogic.createTour(tourPrueba);        
+        tourLogic.createTour(tourPrueba);
     }
     
     @Test

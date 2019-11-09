@@ -19,7 +19,7 @@ import uk.co.jemos.podam.common.PodamExclude;
  * @author Juan Sebastián González Rojas
  */
 @Entity
-public class UsuarioEntity extends BaseEntity implements Serializable{
+public class UsuarioEntity extends BaseEntity implements Serializable {
 
     //Nombre del usuario
     private String nombre;
@@ -28,32 +28,35 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     //Correo del usuario
     private String correo;
     //Estado de paz y salvo del usuario
-    private boolean pago;
+    private Boolean pago;
     //Clasificación como cliente o administrador
-    private boolean esAdmin;
+    private Boolean esAdmin;
     //Deuda total del usuario
     private Integer deuda;
 
     //Relaciones entre clases:
     //Relación de autoría con comentario
     @PodamExclude
-    @OneToMany(mappedBy = "usuario")
-    private List<ComentarioEntity> comentarios; 
+    @OneToMany(mappedBy = "usuario",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    private List<ComentarioEntity> comentarios;
     //Relación de toures visitados con usuario
-    
+
     @PodamExclude
     @ManyToMany
     private List<TourEntity> visitados;
-    
+
     //Relación de posesión con seguro
     @PodamExclude
     @OneToMany(
-        mappedBy = "usuario",
-    	cascade = CascadeType.PERSIST,
-    	fetch = FetchType.EAGER,
-        orphanRemoval = true)
-    private List<SeguroEntity> seguros; 
-    
+            mappedBy = "usuario",
+            cascade = CascadeType.PERSIST,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    private List<SeguroEntity> seguros;
+
     //Relación de autoría con blog
     @PodamExclude
     @OneToMany(mappedBy = "creador")
@@ -62,10 +65,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToMany(mappedBy = "usuarios")
     private List<BlogEntity> favoritos;
-    
-    public UsuarioEntity() {
-        
-    }
 
     /**
      * @return the nombre
@@ -112,28 +111,28 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     /**
      * @return the pago
      */
-    public boolean isPago() {
+    public Boolean isPago() {
         return pago;
     }
 
     /**
      * @param pago the pago to set
      */
-    public void setPago(boolean pago) {
+    public void setPago(Boolean pago) {
         this.pago = pago;
     }
 
     /**
      * @return the esAdmin
      */
-    public boolean isEsAdmin() {
+    public Boolean isEsAdmin() {
         return esAdmin;
     }
 
     /**
      * @param esAdmin Definir si el usuario es de tipo Administrador
      */
-    public void setEsAdmin(boolean esAdmin) {
+    public void setEsAdmin(Boolean esAdmin) {
         this.esAdmin = esAdmin;
     }
 
@@ -165,7 +164,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     public void setComentarios(List<ComentarioEntity> comentarios) {
         this.comentarios = comentarios;
     }
-    
+
     /**
      * @param comentario the comentario to add
      */
@@ -173,13 +172,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
         this.comentarios.add(comentario);
     }
 
-    /**
-     * @param comentarios the comentarios to set
-     */
-    public void deleteComentario(ComentarioEntity comentario) {
-        this.comentarios.remove(comentario);
-    }
-    
     /**
      * @return the visitados
      */
@@ -235,5 +227,5 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     public void setFavoritos(List<BlogEntity> favoritos) {
         this.favoritos = favoritos;
     }
-    
+
 }

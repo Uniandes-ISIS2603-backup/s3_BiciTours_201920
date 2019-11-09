@@ -34,8 +34,8 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class ComentarioUsuarioLogicTest {
-    
-     private PodamFactory factory = new PodamFactoryImpl();
+
+    private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
     private ComentarioLogic comentarioLogic;
@@ -116,8 +116,8 @@ public class ComentarioUsuarioLogicTest {
     }
 
     /**
-     * Prueba para remplazar las instancias de Comentarios asociadas a una instancia
-     * de Usuario.
+     * Prueba para remplazar las instancias de Comentarios asociadas a una
+     * instancia de Usuario.
      */
     @Test
     public void replaceUsuarioTest() {

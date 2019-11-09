@@ -35,6 +35,7 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class RecomendacionLogicTest {
+
     private PodamFactory factory = new PodamFactoryImpl();
 
     @Inject
@@ -57,7 +58,6 @@ public class RecomendacionLogicTest {
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
-    
 
     /**
      * Configuración inicial de la prueba.
@@ -98,7 +98,7 @@ public class RecomendacionLogicTest {
             data.add(entity);
         }
     }
-    
+
     /**
      * Prueba para crear un Recomendacion
      *
@@ -111,19 +111,20 @@ public class RecomendacionLogicTest {
         Assert.assertNotNull(result);
         RecomendacionEntity entity = em.find(RecomendacionEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
-        Assert.assertEquals(newEntity.getIndumentaria(),entity.getIndumentaria());
+        Assert.assertEquals(newEntity.getIndumentaria(), entity.getIndumentaria());
         Assert.assertEquals(newEntity.getTipoBici(), entity.getTipoBici());
-       
+
     }
 
-    @Test (expected = BusinessLogicException.class)
+    @Test(expected = BusinessLogicException.class)
     public void createRecomendacionContenidoNull() throws BusinessLogicException {
         RecomendacionEntity recomendacion = factory.manufacturePojo(RecomendacionEntity.class);
         recomendacion.setIndumentaria(null);
         recomendacion.setTipoBici(null);
         RecomendacionEntity result = recomendacionLogic.createRecomendacion(recomendacion);
     }
-        /**
+
+    /**
      * Prueba para consultar la lista de Recomendacions.
      */
     @Test
@@ -152,14 +153,14 @@ public class RecomendacionLogicTest {
         Assert.assertEquals(entity.getId(), resultEntity.getId());
         Assert.assertEquals(resultEntity.getIndumentaria(), entity.getIndumentaria());
         Assert.assertEquals(resultEntity.getTipoBici(), entity.getTipoBici());
-      
+
     }
 
     /**
      * Prueba para actualizar un Recomendacion.
      */
     @Test
-    public void updateRecomendacionTest(){
+    public void updateRecomendacionTest() {
         RecomendacionEntity entity = data.get(0);
         RecomendacionEntity pojoEntity = factory.manufacturePojo(RecomendacionEntity.class);
         pojoEntity.setId(entity.getId());

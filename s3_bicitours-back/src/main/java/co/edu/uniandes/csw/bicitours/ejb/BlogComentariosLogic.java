@@ -20,6 +20,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class BlogComentariosLogic {
+
     @Inject
     private BlogPersistence blogPersistence;
 
@@ -40,8 +41,7 @@ public class BlogComentariosLogic {
     public ComentarioEntity getComentario(Long comentariosId, Long blogsId) throws BusinessLogicException {
         List<ComentarioEntity> comentarios = blogPersistence.find(blogsId).getComentarios();
         ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
-        if(comentarios.contains(comentarioEntity))
-        {
+        if (comentarios.contains(comentarioEntity)) {
             return comentarioEntity;
         }
         throw new BusinessLogicException("El comentario no está asociado a el blog");
@@ -61,6 +61,6 @@ public class BlogComentariosLogic {
     }
 
     public void removeComentario(Long comentariosId, Long blogsId) throws BusinessLogicException {
-        comentarioPersistence.delete(getComentario(comentariosId,blogsId).getId());
+        comentarioPersistence.delete(getComentario(comentariosId, blogsId).getId());
     }
 }

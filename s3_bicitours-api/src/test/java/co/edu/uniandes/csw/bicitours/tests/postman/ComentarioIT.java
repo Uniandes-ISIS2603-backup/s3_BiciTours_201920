@@ -25,15 +25,14 @@ import org.junit.runner.RunWith;
  *
  * @author JuanRueda
  */
-
 @RunWith(Arquillian.class)
 public class ComentarioIT {
-    
+
     private static final String COLLECTION = "Comentario-Tests.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "s3_bicitours-api.war")//War del modulo api
+        return ShrinkWrap.create(WebArchive.class, "s3_bicitours-api-1.0.war")//War del modulo api
                 // Se agrega las dependencias
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
                         .importRuntimeDependencies().resolve()

@@ -9,8 +9,7 @@ import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.bicitours.persistence.SeguroPersistence;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -20,7 +19,6 @@ import javax.inject.Inject;
  */
 @Stateless
 public class SeguroLogic {
-      private static final Logger LOGGER = Logger.getLogger(SeguroLogic.class.getName());
 
     @Inject
     private SeguroPersistence persistence;
@@ -32,16 +30,11 @@ public class SeguroLogic {
      * @return Objeto de SeguroEntity con los datos nuevos y su ID.
      */
     public SeguroEntity createSeguro(SeguroEntity seguroEntity) throws BusinessLogicException {
-        if(seguroEntity.getCaracteristicas()!=null && seguroEntity.getCondiciones()!=null && seguroEntity.getTipo()!=null)
-        {
-        LOGGER.log(Level.INFO, "Inicia proceso de creación del seguro");
-        SeguroEntity newSeguroEntity = persistence.create(seguroEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación del seguro");
-        return newSeguroEntity;
-        }
-        else
-              {
-            throw new BusinessLogicException("Los campos ingresados para la informacion del seguro no son correctos"); 
+        if (seguroEntity.getCaracteristicas() != null && seguroEntity.getCondiciones() != null && seguroEntity.getTipo() != null) {
+
+            return persistence.create(seguroEntity);
+        } else {
+            throw new BusinessLogicException("Los campos ingresados para la informacion del seguro no son correctos");
         }
     }
 
@@ -51,10 +44,8 @@ public class SeguroLogic {
      * @return Colección de objetos de SeguroEntity.
      */
     public List<SeguroEntity> getSeguros() {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los seguros");
-        List<SeguroEntity> lista = persistence.findAll();
-        LOGGER.log(Level.INFO, "Termina proceso de consultar todos los seguros");
-        return lista;
+
+        return persistence.findAll();
     }
 
     /**
@@ -64,13 +55,8 @@ public class SeguroLogic {
      * @return Instancia de SeguroEntity con los datos del Seguro consultado.
      */
     public SeguroEntity getSeguro(Long segurosId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el seguro con id = {0}", segurosId);
-        SeguroEntity seguroEntity = persistence.find(segurosId);
-        if (seguroEntity == null) {
-            LOGGER.log(Level.SEVERE, "La editorial con el id = {0} no existe", segurosId);
-        }
-        LOGGER.log(Level.INFO, "Termina proceso de consultar el seguro con id = {0}", segurosId);
-        return seguroEntity;
+
+        return persistence.find(segurosId);
     }
 
     /**
@@ -80,15 +66,9 @@ public class SeguroLogic {
      * @param seguroEntity Instancia de SeguroEntity con los nuevos datos.
      * @return Instancia de SeguroEntity con los datos actualizados.
      */
-    public SeguroEntity updateSeguro(Long segurosId, SeguroEntity seguroEntity) {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el seguro con id = {0}", segurosId);
-        SeguroEntity newSeguroEntity = persistence.update(seguroEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de actualizar el seguro con id = {0}", segurosId);
-        return newSeguroEntity;
-    }
-     public SeguroEntity updateSeguro(SeguroEntity seguroEntity) {
-        SeguroEntity newEntity = persistence.update(seguroEntity);
-        return newEntity;
+    public SeguroEntity updateSeguro(SeguroEntity seguroEntity) {
+
+        return persistence.update(seguroEntity);
     }
 
     /**

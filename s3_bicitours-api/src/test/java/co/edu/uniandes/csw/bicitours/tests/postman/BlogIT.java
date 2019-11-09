@@ -23,16 +23,16 @@ import org.junit.runner.RunWith;
 
 /**
  *
- * @author user
+ * @author Oscar Julian Castañeda G.
  */
 @RunWith(Arquillian.class)
 public class BlogIT {
-    
+
     private static final String COLLECTION = "BlogResourceTest.postman_collection";
 
     @Deployment(testable = true)
     public static WebArchive createDeployment() {
-        return ShrinkWrap.create(WebArchive.class, "frontstepbystep-api.war")//War del modulo api
+        return ShrinkWrap.create(WebArchive.class, "s3_bicitours-api-1.0.war")//War del modulo api
                 // Se agrega las dependencias
                 .addAsLibraries(Maven.resolver().loadPomFromFile("pom.xml")
                         .importRuntimeDependencies().resolve()
@@ -54,7 +54,7 @@ public class BlogIT {
     @RunAsClient
     public void postman() throws IOException {
         PostmanTestBuilder tp = new PostmanTestBuilder();
-        tp.setTestWithoutLogin(COLLECTION, "Entorno-Colecciones.postman_environment");
+        tp.setTestWithoutLogin(COLLECTION, "Entorno-IT.postman_environment");
         String desiredResult = "0";
         Assert.assertEquals("Error en Iterations de: " + COLLECTION, desiredResult, tp.getIterations_failed());
 

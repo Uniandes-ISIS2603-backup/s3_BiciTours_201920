@@ -27,14 +27,15 @@ import uk.co.jemos.podam.common.PodamStrategyValue;
 @Entity
 public class TourEntity extends BaseEntity implements Serializable {
 
+
     private static final long serialVersionUID = 1L;
-    
-    public enum Dificultad{
-    ALTA,
-    MEDIA,
-    BAJA
-    };
-    
+
+    public enum Dificultad {
+        ALTA,
+        MEDIA,
+        BAJA
+    }
+
     private String nombre;
 
     private String lugar;
@@ -47,40 +48,35 @@ public class TourEntity extends BaseEntity implements Serializable {
     @PodamStrategyValue(DateStrategy.class)
     private Date fecha;
 
-    private int duracion;
+    private Integer duracion;
 
-    private int costo;
-    
-    private boolean terminado;
-    
+    private Integer costo;
+
+    private Boolean terminado;
+
     @PodamExclude
     @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<ComentarioEntity> comentariosTour = new ArrayList<ComentarioEntity>();
-    
+    private List<ComentarioEntity> comentariosTour = new ArrayList<>();
+
     @PodamExclude
     @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
-    private List<EventoEntity> eventosTour = new ArrayList<EventoEntity>();
-    
+    private List<EventoEntity> eventosTour = new ArrayList<>();
+
     @PodamExclude
     @OneToMany(mappedBy = "tour")
-    private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
-    
+    private List<BlogEntity> blogs = new ArrayList<>();
+
     @PodamExclude
-    @OneToMany(mappedBy = "tour",cascade = CascadeType.PERSIST,orphanRemoval = true)
-    private List<FotoEntity> fotos = new ArrayList<FotoEntity>();
+    @OneToMany(mappedBy = "tour")
+    private List<FotoEntity> fotos = new ArrayList<>();
 
     @PodamExclude
     @ManyToMany
     private List<TourEntity> usuarios;
-    
-    public TourEntity()
-    {
-    }
-    
+
     public void setNombre(String nomb) {
         this.nombre = nomb;
     }
-    
 
     public String getNombre() {
         return this.nombre;
@@ -110,46 +106,39 @@ public class TourEntity extends BaseEntity implements Serializable {
         return this.dificultad;
     }
 
-    public void setFecha(Date fech)
-    {
+    public void setFecha(Date fech) {
         this.fecha = fech;
     }
 
-    public Date getFecha()
-    {
+    public Date getFecha() {
         return this.fecha;
     }
 
-    public void setDuracion(int dur)
-    {
+    public void setDuracion(Integer dur) {
         this.duracion = dur;
     }
 
-    public int getDuracion()
-    {
+    public Integer getDuracion() {
         return this.duracion;
     }
 
-    public void setCosto(int cost)
-    {
+    public void setCosto(Integer cost) {
         this.costo = cost;
     }
 
-    public int getCosto()
-    {
+    public Integer getCosto() {
         return this.costo;
     }
-    
+
     /**
      * @return the terminado
      */
-    public boolean getTerminado() {
+    public Boolean getTerminado() {
         return terminado;
     }
-    
-    public void setTerminado(boolean ter)
-    {
-    terminado = ter;
+
+    public void setTerminado(Boolean ter) {
+        terminado = ter;
     }
 
     /**
@@ -179,8 +168,8 @@ public class TourEntity extends BaseEntity implements Serializable {
     public void setBlogs(List<BlogEntity> blogs) {
         this.blogs = blogs;
     }
-    
-        public void setFotos(List<FotoEntity> fotos) {
+
+    public void setFotos(List<FotoEntity> fotos) {
         this.fotos = fotos;
     }
 
@@ -215,7 +204,5 @@ public class TourEntity extends BaseEntity implements Serializable {
     public void setEventosTour(List<EventoEntity> eventosTour) {
         this.eventosTour = eventosTour;
     }
-    
-    
-    
+
 }

@@ -8,22 +8,20 @@ package co.edu.uniandes.csw.bicitours.dtos;
 import co.edu.uniandes.csw.bicitours.entities.SeguroEntity;
 import java.io.Serializable;
 
-
-
-
-
 /**
  *
  * @author Maria Clara Noguera Echeverri
  */
-public class SeguroDTO implements Serializable{
+public class SeguroDTO implements Serializable {
+
     private Long id;
-    private String tipo ; 
+    private String tipo;
     private String caracteristicas;
-     private String condiciones;
+    private String condiciones;
 
     public SeguroDTO() {
     }
+
     /**
      * @return the id
      */
@@ -48,39 +46,37 @@ public class SeguroDTO implements Serializable{
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(String tipo)
-    {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
-
-     /**
+    /**
      * Construye un nuevo SeguroDTO a partir de una entidad Seguro dada
+     *
      * @param seguro, es la entidad seguro que se va a convertir a SeguroDTO
      */
-    public SeguroDTO(SeguroEntity seguro)
-    {
-        if(seguro != null)
-        {
+    public SeguroDTO(SeguroEntity seguro) {
+        if (seguro != null) {
             id = seguro.getId();
-           tipo=  seguro.getTipo();
-           caracteristicas= seguro.getCaracteristicas();
-           condiciones=seguro.getCondiciones();
+            tipo = seguro.getTipo();
+            caracteristicas = seguro.getCaracteristicas();
+            condiciones = seguro.getCondiciones();
         }
-   
-    } 
+
+    }
+
     /**
      * Convierte este objeto SeguroDTO en una entidad con los mismos datos
+     *
      * @return un SeguroEntity con los mismos datos de este seguroDTO
      */
-    public SeguroEntity toEntity()
-    {
+    public SeguroEntity toEntity() {
         SeguroEntity seguro = new SeguroEntity();
         seguro.setId(id);
         seguro.setTipo(tipo);
         seguro.setCaracteristicas(caracteristicas);
         seguro.setCondiciones(condiciones);
-       return seguro;
+        return seguro;
     }
 
     /**

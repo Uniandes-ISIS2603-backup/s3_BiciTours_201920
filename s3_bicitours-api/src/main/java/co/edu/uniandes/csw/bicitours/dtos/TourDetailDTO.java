@@ -11,7 +11,6 @@ import co.edu.uniandes.csw.bicitours.entities.FotoEntity;
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -20,23 +19,34 @@ import java.util.List;
  */
 public class TourDetailDTO extends TourDTO implements Serializable{
     
-    private LinkedList<FotoDTO> fotos;
+    private List<FotoDTO> fotos;
     
     private List<BlogDTO> blogs;
-    
+
     private List<EventoDTO> eventos;
-    
+
     /////////
     ///Aquí solo hay sets y gets
     ////////
-    
-    public void setFotos(LinkedList<FotoDTO> fs)
-    {
+    /**
+     * @return the eventos
+     */
+    public List<EventoDTO> getEventos() {
+        return eventos;
+    }
+
+    /**
+     * @param eventos the eventos to set
+     */
+    public void setEventos(List<EventoDTO> eventos) {
+        this.eventos = eventos;
+    }
+
+    public void setFotos(List<FotoDTO> fs) {
         fotos = fs;
-    } 
-    
-    public LinkedList<FotoDTO> getFotos()
-    {
+    }
+
+    public List<FotoDTO> getFotos() {
         return fotos;
     }
     
@@ -53,31 +63,29 @@ public class TourDetailDTO extends TourDTO implements Serializable{
     public void setBlogs(List<BlogDTO> blogs) {
         this.blogs = blogs;
     }
-    
+
     ////////////
     ///Aquí hay métodos propios de un DetailDTO
     ///////////
-    
     /**
      * Constructor sin parámetros
      */
-    public TourDetailDTO()
-    {
+    public TourDetailDTO() {
         super();
     }
-    
+
     /**
      * Constructor con parámetros
-     * @param tour 
+     *
+     * @param tour
      */
-    public TourDetailDTO(TourEntity tour)
-    {
+    public TourDetailDTO(TourEntity tour) {
         super(tour);
         
         if(tour != null){
         
          //Convierte el conjunto de fotos
-        fotos = new LinkedList<FotoDTO>();
+        fotos = new ArrayList<FotoDTO>();
         for(FotoEntity f : tour.getFotos())
         {
             FotoDTO nueva = new FotoDTO(f);
@@ -98,42 +106,39 @@ public class TourDetailDTO extends TourDTO implements Serializable{
             }
         }
         }
+
+        //Convierte el conjunto de eventos
     }
-    
+
     @Override
-    public TourEntity toEntity()
-    {
+    public TourEntity toEntity() {
         TourEntity tour = super.toEntity();
-        
+
         //Convierte el conjunto de fotos
-        LinkedList<FotoEntity> fotosE = new LinkedList<FotoEntity>();
-        for(FotoDTO f : fotos)
-        {
+        List<FotoEntity> fotosE = new ArrayList<>();
+        for (FotoDTO f : fotos) {
             FotoEntity nueva = f.toEntity();
             fotosE.add(nueva);
         }
         tour.setFotos(fotosE);
 
-        
-        if (eventos != null) {
+        if (getEventos() != null) {
             List<EventoEntity> eventosEntity = new ArrayList<>();
-            for (EventoDTO dtoEvento : eventos) {
+            for (EventoDTO dtoEvento : getEventos()) {
                 eventosEntity.add(dtoEvento.toEntity());
             }
             tour.setEventosTour(eventosEntity);
         }
-        
 
-        List<BlogEntity> blogsE = new ArrayList<BlogEntity>();
-        for(BlogDTO f : blogs)
-        {
+        List<BlogEntity> blogsE = new ArrayList<>();
+        for (BlogDTO f : blogs) {
             BlogEntity nueva = f.toEntity();
             blogsE.add(nueva);
         }
-        tour.setBlogs(blogsE);        
+        tour.setBlogs(blogsE);
 
         return tour;
-        
+
     }
 
 
@@ -141,4 +146,3 @@ public class TourDetailDTO extends TourDTO implements Serializable{
     
     
 }
-    

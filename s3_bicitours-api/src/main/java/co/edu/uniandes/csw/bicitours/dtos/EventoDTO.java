@@ -7,16 +7,13 @@ package co.edu.uniandes.csw.bicitours.dtos;
 
 import co.edu.uniandes.csw.bicitours.entities.EventoEntity;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
  * @author Michel Succar
  */
-public class EventoDTO implements Serializable{
-    
+public class EventoDTO implements Serializable {
+
     private Long id;
     private String nombre;
     private String descripcion;
@@ -24,46 +21,38 @@ public class EventoDTO implements Serializable{
     private Long horaFin;
     private TourDTO tour;
 
-    public EventoDTO()
-    {
-        
+    public EventoDTO() {
+
     }
-    
-    public EventoDTO(EventoEntity evento) 
-    {
-        if (evento != null) 
-        {
+
+    public EventoDTO(EventoEntity evento) {
+        if (evento != null) {
             this.id = evento.getId();
             this.nombre = evento.getNombre();
             this.descripcion = evento.getDescripcion();
             this.horaInicio = evento.getHoraInicio();
             this.horaFin = evento.getHoraFin();
-            if (evento.getTour() != null) 
-            {
+            if (evento.getTour() != null) {
                 this.tour = new TourDTO(evento.getTour());
-            }
-            else 
-            {
+            } else {
                 this.tour = null;
             }
         }
     }
-    
-    public EventoEntity toEntity() 
-    {
+
+    public EventoEntity toEntity() {
         EventoEntity evento = new EventoEntity();
         evento.setId(this.getId());
         evento.setNombre(this.getNombre());
         evento.setDescripcion(this.getDescripcion());
         evento.setHoraInicio(this.getHoraInicio());
         evento.setHoraFin(this.getHoraFin());
-        if (this.tour != null) 
-        {
+        if (this.tour != null) {
             evento.setTour(this.tour.toEntity());
         }
         return evento;
     }
-    
+
     /**
      * @return the id
      */
@@ -147,7 +136,6 @@ public class EventoDTO implements Serializable{
     public void setTour(TourDTO tour) {
         this.tour = tour;
     }
-    
+
     //
-    
 }

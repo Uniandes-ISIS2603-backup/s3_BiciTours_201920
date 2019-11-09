@@ -37,10 +37,10 @@ public class FotoPersistenceTest {
     
     @PersistenceContext
     private EntityManager em;
-    
+
     @Inject
     UserTransaction utx;
-    
+
     private List<FotoEntity> data = new ArrayList<FotoEntity>();
     
     private List<TourEntity> dataTour = new ArrayList<TourEntity>();
@@ -51,8 +51,8 @@ public class FotoPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(FotoEntity.class.getPackage())
                 .addPackage(FotoPersistence.class.getPackage())
-                .addAsManifestResource("META-INF/persistence.xml","persistence.xml")
-                .addAsManifestResource("META-INF/beans.xml","beans.xml");
+                .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
+                .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
     /**
