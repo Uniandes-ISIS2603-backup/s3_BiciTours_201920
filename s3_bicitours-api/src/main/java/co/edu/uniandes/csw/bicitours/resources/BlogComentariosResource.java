@@ -48,7 +48,7 @@ public class BlogComentariosResource {
             throw new WebApplicationException(RECURSO + comentariosId + NOEXISTE, 404);
         }
 
-        return new ComentarioDetailDTO(blogComentariosLogic.addComentario(blogsId, comentariosId));
+        return new ComentarioDetailDTO(blogComentariosLogic.addComentario(comentariosId,blogsId));
     }
 
     @GET
