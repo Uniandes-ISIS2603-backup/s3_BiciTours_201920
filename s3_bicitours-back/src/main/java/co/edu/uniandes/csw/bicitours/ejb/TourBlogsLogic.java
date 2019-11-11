@@ -60,7 +60,7 @@ public class TourBlogsLogic {
         return blogs;
     }
 
-    public void removeBlog(Long ToursId, Long blogsId) throws BusinessLogicException {
-        blogPersistence.delete(getBlog(ToursId, blogsId).getId());
+    public void removeBlog(Long toursId, Long blogsId) throws BusinessLogicException {
+        blogPersistence.delete(getBlog(toursId, blogsId).getId());
     }
 }

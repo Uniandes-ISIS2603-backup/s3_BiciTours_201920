@@ -1,9 +1,10 @@
+delete from ComentarioEntity;
 delete from BlogEntity;
 delete from BlogEntity_UsuarioEntity;
 delete from UsuarioEntity; 
 delete from SeguroEntity;
-delete from ComentarioEntity;
 delete from FotoEntity;
+delete from ComentarioEntity_ComentarioEntity;
 
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaImagen) 
 values (1,

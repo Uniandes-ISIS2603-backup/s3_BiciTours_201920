@@ -30,12 +30,10 @@ public class BlogCreadorLogic {
         return blogPersistence.find(blogsId).getCreador();
     }
 
-    public BlogEntity replaceCreador(Long blogsId, Long usuariosId) {
+    public UsuarioEntity replaceCreador(Long blogsId, Long usuariosId) {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
-        UsuarioEntity usuarioEntity = usuarioPersistence.find(blogEntity.getCreador().getId());
-        usuarioEntity.getMisBlogs().remove(blogEntity);
         blogEntity.setCreador(usuarioPersistence.find(usuariosId));
-        return blogPersistence.find(blogsId);
+        return usuarioPersistence.find(usuariosId);
 
     }
 
