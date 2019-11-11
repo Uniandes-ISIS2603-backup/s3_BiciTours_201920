@@ -52,6 +52,4 @@ insert into FotoEntity (id, ruta, tour_id) values (800, 'ruta6', 1);
 
 insert into ComentarioEntity (id, texto, calificacion) values (0, 'El mejor monólogo de todos', 5);
 insert into ComentarioEntity (id, texto, calificacion) values (1, 'Nada mal', 4);
-
-update ComentarioEntity set blog_id = 1 where id = 0;
-update ComentarioEntity set blog_id = 1 where id = 1;
+insert into ComentarioEntity (id, texto, calificacion) values (2, 'Killer Queen Bites The Dust', 3)
