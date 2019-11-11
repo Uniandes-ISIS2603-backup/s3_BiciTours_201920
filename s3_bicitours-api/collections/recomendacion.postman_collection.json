@@ -1,52 +1,17 @@
 {
 	"info": {
-		"_postman_id": "ab114fd1-32b8-4a83-91ed-b77f48c3e2c6",
-		"name": "SeguroResourceTest",
-		"description": "Seguro Resource Test",
+		"_postman_id": "bb89d5e0-a358-4a54-9f8e-533f78602b7f",
+		"name": "recomendacion",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get Seguros",
+			"name": "Post recomendacion",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "f49661b6-1db1-4d52-889d-eb63d0a0ef6c",
-						"exec": [
-							"",
-							"tests[\"no genera error en el get\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/usuario",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_bicitours-api",
-						"api",
-						"usuario"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear seguros",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8573abc6-4a7d-456a-921c-4f50fb5c1acc",
+						"id": "f84a4964-f095-4481-9218-b079f4fdfb96",
 						"exec": [
 							"tests[\"no genera error en el get\"] = responseCode.code === 200;"
 						],
@@ -66,7 +31,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"id\":4,\n\t\"tipo\": \"Seguro de Prueba\",\n\t\"caracteristicas\":\"Esta es una prueba del post\",\n\t\"condiciones\":\"Probando el post\"\n}",
+					"raw": "{\n\t\"id\":3,\n\t\"tipoBici\": \"Rec de Prueba3\",\n\t\"indumentaria\":\"casco\"\n}\n\t",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,7 +39,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/seguros",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/recomendaciones",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -83,23 +48,31 @@
 					"path": [
 						"s3_bicitours-api",
 						"api",
-						"seguros"
+						"recomendaciones"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Delete",
+			"name": "Get recomendacion",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37cdc76e-d2c8-4a91-a556-5a84add2e698",
+						"exec": [
+							"tests[\"no genera error en el get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
-				"method": "DELETE",
+				"method": "GET",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/seguros/4",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/recomendaciones",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
@@ -108,11 +81,31 @@
 					"path": [
 						"s3_bicitours-api",
 						"api",
-						"seguros",
+						"recomendaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete recomendacion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/recomendaciones/4",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"recomendaciones",
 						"4"
 					]
-				},
-				"description": "Delete seguros"
+				}
 			},
 			"response": []
 		}
