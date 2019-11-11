@@ -11,6 +11,7 @@ import co.edu.uniandes.csw.bicitours.dtos.UsuarioDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.BlogCreadorLogic;
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.UsuarioLogic;
+import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 import co.edu.uniandes.csw.bicitours.entities.UsuarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
 import javax.inject.Inject;
@@ -43,16 +44,21 @@ public class BlogCreadorResource {
 
     @GET
     public UsuarioDetailDTO getCreador(@PathParam("blogsId") Long blogsId) {
-        UsuarioEntity usuarioEntity = blogCreadorLogic.getCreador(blogsId);
+        BlogEntity blogEntity = blogLogic.getBlog(blogsId);
+
+        if (blogEntity == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+        }
+        UsuarioEntity usuarioEntity = blogCreadorLogic.getCreador(blogsId);        
         if (usuarioEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + "/blog no existe.", 404);
+            throw new WebApplicationException("El recurso /blogs/" + blogsId + "/creador no existe.", 404);
         }
 
         return new UsuarioDetailDTO(usuarioEntity);
     }
 
     @PUT
-    public BlogDetailDTO replaceCreador(@PathParam("blogsId") Long blogsId, UsuarioDTO usuario) {
+    public UsuarioDetailDTO replaceCreador(@PathParam("blogsId") Long blogsId, UsuarioDTO usuario) {
         if (blogLogic.getBlog(blogsId) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
@@ -60,7 +66,7 @@ public class BlogCreadorResource {
             throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + " no existe.", 404);
         }
 
-        return new BlogDetailDTO(blogCreadorLogic.replaceCreador(blogsId, usuario.getId()));
+        return new UsuarioDetailDTO(blogCreadorLogic.replaceCreador(blogsId, usuario.getId()));
     }
 
     @DELETE
