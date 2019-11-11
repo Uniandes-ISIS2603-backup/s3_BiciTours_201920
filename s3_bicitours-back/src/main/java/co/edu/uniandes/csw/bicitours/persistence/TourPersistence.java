@@ -20,7 +20,6 @@ import javax.persistence.TypedQuery;
 public class TourPersistence {
 
     @PersistenceContext(unitName = "bicitoursPU")
-
     protected EntityManager em;
 
     /**
@@ -42,7 +41,7 @@ public class TourPersistence {
      * @param tourId: id correspondiente al tour buscado.
      * @return un tour.
      */
-    public TourEntity find(long tourId)
+    public TourEntity find(Long tourId)
     {
         return em.find(TourEntity.class, tourId);
     }

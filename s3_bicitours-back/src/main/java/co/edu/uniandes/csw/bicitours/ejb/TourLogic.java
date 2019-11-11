@@ -74,8 +74,7 @@ public class TourLogic {
         }
 
         tour.setTerminado(false);
-        tour = tp.create(tour);
-        return tour;
+        return tp.create(tour);
 
     }
 

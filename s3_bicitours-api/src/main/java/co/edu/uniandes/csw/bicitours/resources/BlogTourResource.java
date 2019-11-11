@@ -5,13 +5,13 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
-import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
 import co.edu.uniandes.csw.bicitours.dtos.TourDTO;
 import co.edu.uniandes.csw.bicitours.dtos.TourDetailDTO;
 
 import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.BlogTourLogic;
 import co.edu.uniandes.csw.bicitours.ejb.TourLogic;
+import co.edu.uniandes.csw.bicitours.entities.BlogEntity;
 
 import co.edu.uniandes.csw.bicitours.entities.TourEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
@@ -30,7 +30,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Oscar Julian Castañeda G.
  */
-@Path("blogs/{blogsId: \\d+}/tours")
+@Path("blogs/{blogsId: \\d+}/tour")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogTourResource {
@@ -46,16 +46,20 @@ public class BlogTourResource {
 
     @GET
     public TourDetailDTO getTour(@PathParam("blogsId") Long blogsId) {
-        TourEntity usuarioEntity = blogTourLogic.getTour(blogsId);
-        if (usuarioEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + "/blog no existe.", 404);
-        }
+        BlogEntity blogEntity = blogLogic.getBlog(blogsId);
 
-        return new TourDetailDTO(usuarioEntity);
+        if (blogEntity == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+        }
+        TourEntity tourEntity = blogTourLogic.getTour(blogsId);        
+        if (tourEntity == null) {
+            throw new WebApplicationException("El recurso /blogs/" + blogsId + "/tour no existe.", 404);
+        }
+        return new TourDetailDTO(tourEntity);
     }
 
     @PUT
-    public BlogDetailDTO replaceTour(@PathParam("blogsId") Long blogsId, TourDTO tour) {
+    public TourDetailDTO replaceTour(@PathParam("blogsId") Long blogsId, TourDTO tour) {
         if (blogLogic.getBlog(blogsId) == null) {
             throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
         }
@@ -63,7 +67,7 @@ public class BlogTourResource {
             throw new WebApplicationException("El recurso /tours/" + tour.getId() + " no existe.", 404);
         }
 
-        return new BlogDetailDTO(blogTourLogic.replaceTour(blogsId, tour.getId()));
+        return new TourDetailDTO(blogTourLogic.replaceTour(blogsId, tour.getId()));
     }
 
     @DELETE
