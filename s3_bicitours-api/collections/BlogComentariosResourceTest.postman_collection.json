@@ -243,6 +243,88 @@
 			"response": []
 		},
 		{
+			"name": "Obtener un comentario de un blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7e73fe8-8e21-4eae-a1bf-973c5ccfbfbc",
+						"exec": [
+							"console.log(responseBody);",
+							"var data = JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}/comentarios/{{new_id_a}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"{{new_id_c}}",
+						"comentarios",
+						"{{new_id_a}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener comentarios de un blog",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "49c94c15-1d54-43ee-adef-aec230710223",
+						"exec": [
+							"var data= JSON.parse(responseBody);",
+							"tests[\"No genera error en el Get\"] = responseCode.code === 200;",
+							"tests[\"comentarios count - blog\"] = data.length >= 1;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}/comentarios",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s3_bicitours-api",
+						"api",
+						"blogs",
+						"{{new_id_c}}",
+						"comentarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Obtener un comentario que no existe de un blog",
 			"event": [
 				{
@@ -280,44 +362,6 @@
 			"response": []
 		},
 		{
-			"name": "Obtener un comentario no asociado de un blog",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "10a04ef5-aca6-43ae-bd0a-b1006aa19487",
-						"exec": [
-							"tests[\"Mensaje correcto de error\"] = responseBody.has(\"El comentario no está asociado a el blog\");",
-							"tests[\"No se puede obtener un blog que no esta asociado\"] = responseCode.code === 412;",
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}/comentarios/{{new_id_b}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_bicitours-api",
-						"api",
-						"blogs",
-						"{{new_id_c}}",
-						"comentarios",
-						"{{new_id_b}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Asociar comentarios a un blog",
 			"event": [
 				{
@@ -341,7 +385,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[    {\n        \"texto\": \"Pepega\",\n        \"calificacion\": 5,\n        \"id\":{{new_id_b}}\n    }]"
+					"raw": "[    {\n        \"texto\": \"Pepega\",\n        \"calificacion\": 5,\n        \"id\":{{new_id_b}}\n    },\n       {\n        \"texto\": \"Pepega\",\n        \"calificacion\": 5,\n        \"id\":{{new_id_a}}\n    \t}\n    ]"
 				},
 				"url": {
 					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}/comentarios",
@@ -386,19 +430,19 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[    {\n        \"texto\": \"Pepega\",\n        \"calificacion\": 5,\n        \"id\":9999\n    }\n]"
+					"raw": "[    {\n        \"texto\": \"Pepega\",\n        \"calificacion\": 5,\n        \"id\": 9999\n    }\n]"
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitoursc-api/api/authors/{{new_id_c}}/comentarios",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}/comentarios",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{puerto}}",
 					"path": [
-						"s3_bicitoursc-api",
+						"s3_bicitours-api",
 						"api",
-						"authors",
+						"blogs",
 						"{{new_id_c}}",
 						"comentarios"
 					]
@@ -509,14 +553,14 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/frontstepbystep-api/api/blogs/9999/comentarios/{{new_id_a}}",
+					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/9999/comentarios/{{new_id_a}}",
 					"protocol": "http",
 					"host": [
 						"{{ip}}"
 					],
 					"port": "{{puerto}}",
 					"path": [
-						"frontstepbystep-api",
+						"s3_bicitours-api",
 						"api",
 						"blogs",
 						"9999",
@@ -636,81 +680,6 @@
 						"api",
 						"blogs",
 						"{{new_id_c}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener un comentario de un blog",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "e7e73fe8-8e21-4eae-a1bf-973c5ccfbfbc",
-						"exec": [
-							"console.log(responseBody);",
-							"var data = JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}/comentarios/{{new_id_a}}",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_bicitours-api",
-						"api",
-						"blogs",
-						"{{new_id_c}}",
-						"comentarios",
-						"{{new_id_a}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Obtener comentarios de un blog",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "49c94c15-1d54-43ee-adef-aec230710223",
-						"exec": [
-							"var data= JSON.parse(responseBody);",
-							"tests[\"No genera error en el Get\"] = responseCode.code === 200;",
-							"tests[\"comentarios count - blogs\"] = data.length >= 1;"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://{{ip}}:{{puerto}}/s3_bicitours-api/api/blogs/{{new_id_c}}/comentarios",
-					"protocol": "http",
-					"host": [
-						"{{ip}}"
-					],
-					"port": "{{puerto}}",
-					"path": [
-						"s3_bicitours-api",
-						"api",
-						"blogs",
-						"{{new_id_c}}",
-						"comentarios"
 					]
 				}
 			},
