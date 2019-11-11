@@ -8,7 +8,7 @@ delete from FotoEntity;
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaImagen) 
 values (1,
 'My name is Yoshikage Kira',
-10.0,'My name is Yoshikage Kira. I''m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest...',/**
+4,'My name is Yoshikage Kira. I''m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest...',/**
 'My name is Yoshikage Kira. I''m 33 years old. My house is in the northeast section of Morioh, where all the villas are, and I am not married. I work as an employee for the Kame Yu department stores, and I get home every day by 8 PM at the latest. I don''t smoke, but I occasionally drink.I''m in bed by 11 PM, and make sure I get eight hours of sleep, no matter what. After having a glass of warm milk and doing about twenty minutes of stretches before going to bed, I usually have no problems sleeping until morning. Just like a baby, I wake up without any fatigue or stress in the morning. I was told there were no issues at my last check-up.I''m trying to explain that I''m a person who wishes to live a very quiet life. I take care not to trouble myself with any enemies, like winning and losing, that would cause me to lose sleep at night. That is how I deal with society, and I know that is what brings me happiness. Although, if I were to fight I wouldn''t lose to anyone.',
 */'https://i.kym-cdn.com/entries/icons/original/000/029/929/Kira_decides_to_tail_Shigechi.png');
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaVideo ) 
@@ -49,3 +49,8 @@ insert into FotoEntity (id, ruta, tour_id) values (600, 'ruta4', 0);
 insert into FotoEntity (id, ruta, tour_id) values (700, 'ruta5', 1);
 insert into FotoEntity (id, ruta, tour_id) values (800, 'ruta6', 1);
 
+insert into ComentarioEntity (id, texto, calificacion) values (0, 'El mejor monólogo de todos', 5);
+insert into ComentarioEntity (id, texto, calificacion) values (1, 'Nada mal', 4);
+
+update ComentarioEntity set blog_id = 1 where id = 0;
+update ComentarioEntity set blog_id = 1 where id = 1;
