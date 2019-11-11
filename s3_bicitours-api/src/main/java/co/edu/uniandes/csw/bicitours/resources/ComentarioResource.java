@@ -52,8 +52,8 @@ public class ComentarioResource {
 
     @GET
     public List<ComentarioDetailDTO> getComentarios() {
-
-        return listEntity2DetailDTO(logica.getComentarios());
+        List<ComentarioDetailDTO> lista = listEntity2DetailDTO(logica.getComentarios());
+        return lista;
     }
 
     @GET
