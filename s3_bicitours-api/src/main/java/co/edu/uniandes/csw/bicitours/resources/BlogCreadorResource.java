@@ -5,7 +5,6 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
-import co.edu.uniandes.csw.bicitours.dtos.BlogDetailDTO;
 import co.edu.uniandes.csw.bicitours.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.bicitours.dtos.UsuarioDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.BlogCreadorLogic;
@@ -33,7 +32,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogCreadorResource {
-
+    private static final String RECURSO = "El recurso /blogs/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private BlogCreadorLogic blogCreadorLogic;
 
@@ -47,11 +47,11 @@ public class BlogCreadorResource {
         BlogEntity blogEntity = blogLogic.getBlog(blogsId);
 
         if (blogEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
         UsuarioEntity usuarioEntity = blogCreadorLogic.getCreador(blogsId);        
         if (usuarioEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + "/creador no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + "/creador no existe.", 404);
         }
 
         return new UsuarioDetailDTO(usuarioEntity);
@@ -60,10 +60,10 @@ public class BlogCreadorResource {
     @PUT
     public UsuarioDetailDTO replaceCreador(@PathParam("blogsId") Long blogsId, UsuarioDTO usuario) {
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
         if (usuarioLogic.getUsuario(usuario.getId()) == null) {
-            throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + " no existe.", 404);
+            throw new WebApplicationException("El recurso /usuarios/" + usuario.getId() + NOEXISTE, 404);
         }
 
         return new UsuarioDetailDTO(blogCreadorLogic.replaceCreador(blogsId, usuario.getId()));

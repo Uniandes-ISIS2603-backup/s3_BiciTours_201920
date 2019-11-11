@@ -34,7 +34,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class BlogTourResource {
-
+    private static final String RECURSO = "El recurso /blogs/";
+    private static final String NOEXISTE = " no existe.";
     @Inject
     private BlogTourLogic blogTourLogic;
 
@@ -49,11 +50,11 @@ public class BlogTourResource {
         BlogEntity blogEntity = blogLogic.getBlog(blogsId);
 
         if (blogEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
         TourEntity tourEntity = blogTourLogic.getTour(blogsId);        
         if (tourEntity == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + "/tour no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + "/tour no existe.", 404);
         }
         return new TourDetailDTO(tourEntity);
     }
@@ -61,10 +62,10 @@ public class BlogTourResource {
     @PUT
     public TourDetailDTO replaceTour(@PathParam("blogsId") Long blogsId, TourDTO tour) {
         if (blogLogic.getBlog(blogsId) == null) {
-            throw new WebApplicationException("El recurso /blogs/" + blogsId + " no existe.", 404);
+            throw new WebApplicationException(RECURSO + blogsId + NOEXISTE, 404);
         }
         if (tourLogic.getTour(tour.getId()) == null) {
-            throw new WebApplicationException("El recurso /tours/" + tour.getId() + " no existe.", 404);
+            throw new WebApplicationException("El recurso /tours/" + tour.getId() + NOEXISTE, 404);
         }
 
         return new TourDetailDTO(blogTourLogic.replaceTour(blogsId, tour.getId()));
