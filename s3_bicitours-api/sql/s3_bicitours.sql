@@ -15,19 +15,19 @@ values (1,
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaVideo ) 
 values (2,
 'the tragedy of Darth Plagueis The Wise',
-66.0,'Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It''s not a story the Jedi would tell you. It''s a Sith legend...',/**
+4,'Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It''s not a story the Jedi would tell you. It''s a Sith legend...',/**
 'Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It''s not a story the Jedi would tell you. It''s a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful… the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic. He could save others from death, but not himself.',
 */'https://youtu.be/05dT34hGRdg' );
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaVideo) 
 values (3,
 'BiciGo',
-9.5,
+4,
 'Felicidad y salud al alcance de tu bici',
 'https://www.youtube.com/watch?v=dQw4w9WgXcQ');
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaImagen) 
 values (4,
 'Azer isn''t so great?',
-727.0,'Azer isn''t so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet?',/**
+4,'Azer isn''t so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet?',/**
 'Azer isn''t so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet? Alex puts the game in another level, and we will be blessed if we ever see a player with his skill and passion for the game again. Cookiezi breaks records. Rafis breaks records. Azer breaks the rules. You can keep your statistics. I prefer the magic.',
 */'https://upload.wikimedia.org/wikipedia/commons/d/d3/Osu%21Logo_%282015%29.png');
 
