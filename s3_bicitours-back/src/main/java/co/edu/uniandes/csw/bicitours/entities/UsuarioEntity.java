@@ -24,7 +24,7 @@ public class UsuarioEntity extends BaseEntity implements Serializable {
     //Nombre del usuario
     private String nombre;
     //Código/Contrañesa/Password del usuario
-    private String codigo;
+    private String password;
     //Correo del usuario
     private String correo;
     //Estado de paz y salvo del usuario
@@ -81,17 +81,17 @@ public class UsuarioEntity extends BaseEntity implements Serializable {
     }
 
     /**
-     * @return the codigo
+     * @return the password
      */
-    public String getCodigo() {
-        return codigo;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param codigo the codigo to set
+     * @param password the password to set
      */
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**

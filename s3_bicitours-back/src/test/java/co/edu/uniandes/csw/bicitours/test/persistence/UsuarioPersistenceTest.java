@@ -79,7 +79,7 @@ public class UsuarioPersistenceTest {
 
         UsuarioEntity entity = em.find(UsuarioEntity.class, result.getId());//búsqueda en persistencia
         Assert.assertEquals(usuario.getNombre(), entity.getNombre()); //el nombre de la entidad aleatoria debe ser igual al nombre del objeto encontrado
-        Assert.assertEquals(usuario.getCodigo(), entity.getCodigo()); //el código de la entidad aleatoria debe ser igual al código del objeto encontrado
+        Assert.assertEquals(usuario.getPassword(), entity.getPassword()); //el código de la entidad aleatoria debe ser igual al código del objeto encontrado
         Assert.assertEquals(usuario.getDeuda(), entity.getDeuda()); //el deuda de la entidad aleatoria debe ser igual al deuda del objeto encontrado
         Assert.assertEquals(usuario.isEsAdmin(), entity.isEsAdmin()); //la entidad aleatoria debe ser del mismo tipo de usuario que el objeto encontrado
         Assert.assertEquals(usuario.isPago(), entity.isPago()); //el pago entidad aleatoria debe estar en el mismo estado que el del objeto encontrado
@@ -94,7 +94,7 @@ public class UsuarioPersistenceTest {
         UsuarioEntity usuarioMetodo = up.find(usuarioBuscado.getId()); //se busca en la base de datos con el método definido en UsuarioPersistence
 
         Assert.assertEquals(usuarioMetodo.getNombre(), usuarioBuscado.getNombre()); //el nombre de la entidad en data debe ser igual al nombre del obtenido por find
-        Assert.assertEquals(usuarioMetodo.getCodigo(), usuarioBuscado.getCodigo()); //el código de la entidad en data debe ser igual al código del obtenido por find
+        Assert.assertEquals(usuarioMetodo.getPassword(), usuarioBuscado.getPassword()); //el código de la entidad en data debe ser igual al código del obtenido por find
         Assert.assertEquals(usuarioMetodo.getDeuda(), usuarioBuscado.getDeuda()); //el deuda de la entidad aleatoria debe ser igual al deuda del obtenido por find
         Assert.assertEquals(usuarioMetodo.isEsAdmin(), usuarioBuscado.isEsAdmin()); //la entidad en data debe ser del mismo tipo de usuario que el obtenido por find
         Assert.assertEquals(usuarioMetodo.isPago(), usuarioBuscado.isPago()); //el pago entidad en data debe estar en el mismo estado que el del obtenido por find
@@ -136,7 +136,7 @@ public class UsuarioPersistenceTest {
 
         //Verificación de parámetros
         Assert.assertEquals(usuarioModificado.getNombre(), usuarioActualizado.getNombre()); //el nombre de la entidad en la base de datos debe ser igual al nombre del utilizado en el método
-        Assert.assertEquals(usuarioModificado.getCodigo(), usuarioActualizado.getCodigo()); //el código de la entidad en la base de datos debe ser igual al código del utilizado en el método
+        Assert.assertEquals(usuarioModificado.getPassword(), usuarioActualizado.getPassword()); //el código de la entidad en la base de datos debe ser igual al código del utilizado en el método
         Assert.assertEquals(usuarioModificado.getDeuda(), usuarioActualizado.getDeuda()); //el deuda de la entidad en la base de datos debe ser igual al deuda del utilizado en el método
         Assert.assertEquals(usuarioModificado.isEsAdmin(), usuarioActualizado.isEsAdmin()); //la entidad en la base de datos debe ser del mismo tipo de usuario que el utilizado en el método
         Assert.assertEquals(usuarioModificado.isPago(), usuarioActualizado.isPago()); //el pago entidad en la base de datos debe estar en el mismo estado que el del utilizado en el método

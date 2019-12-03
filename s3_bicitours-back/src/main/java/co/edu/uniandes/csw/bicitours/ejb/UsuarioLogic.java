@@ -27,9 +27,9 @@ public class UsuarioLogic {
         if (usuario.getNombre() == (null)) {
             throw new BusinessLogicException("El nombre del usuario es nulo.");
         }
-        //En la creación del usuario el código de su cuenta debe ser diferente de nulo
-        if (usuario.getCodigo() == (null)) {
-            throw new BusinessLogicException("El código del usuario es nulo.");
+        //En la creación del usuario el password de su cuenta debe ser diferente de nulo
+        if (usuario.getPassword() == (null)) {
+            throw new BusinessLogicException("El password del usuario es nulo.");
         }
         //En la creación del usuario el correo de su cuenta debe ser diferente de nulo
         if (usuario.getCorreo() == (null)) {

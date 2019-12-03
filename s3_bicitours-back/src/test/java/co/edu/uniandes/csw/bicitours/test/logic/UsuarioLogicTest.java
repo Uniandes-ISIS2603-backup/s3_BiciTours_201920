@@ -97,9 +97,9 @@ public class UsuarioLogicTest {
      * una exception
      */
     @Test(expected = BusinessLogicException.class)
-    public void createUsuarioCodigoNull() throws BusinessLogicException {
+    public void createUsuarioPasswordNull() throws BusinessLogicException {
         UsuarioEntity usuarioCodigoNull = factory.manufacturePojo(UsuarioEntity.class);
-        usuarioCodigoNull.setCodigo(null);
+        usuarioCodigoNull.setPassword(null);
         UsuarioEntity resultado = usuarioLogic.create(usuarioCodigoNull);//se espera un error
     }
 

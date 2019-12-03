@@ -18,7 +18,7 @@ public class UsuarioDTO implements Serializable {
     private Long id;
     private String nombre;
     private String correo;
-    private String codigo;
+    private String password;
     private Boolean esAdmin;
     private Boolean pago;
     private Integer deuda;
@@ -33,7 +33,7 @@ public class UsuarioDTO implements Serializable {
             this.nombre = usuarioEntity.getNombre();
             this.esAdmin = false;
             this.correo = usuarioEntity.getCorreo();
-            this.codigo = usuarioEntity.getCodigo();
+            this.password = usuarioEntity.getPassword();
             this.pago = false;
             this.deuda = usuarioEntity.getDeuda();
         }
@@ -49,7 +49,7 @@ public class UsuarioDTO implements Serializable {
         usuarioEntity.setId(this.getId());
         usuarioEntity.setNombre(this.getNombre());
         usuarioEntity.setCorreo(this.getCorreo());
-        usuarioEntity.setCodigo(this.getCodigo());
+        usuarioEntity.setPassword(this.getPassword());
         usuarioEntity.setEsAdmin(this.isEsAdmin());
         usuarioEntity.setPago(this.isPago());
         usuarioEntity.setDeuda(this.getDeuda());
@@ -113,17 +113,17 @@ public class UsuarioDTO implements Serializable {
     }
 
     /**
-     * @return the codigo
+     * @return the password
      */
-    public String getCodigo() {
-        return codigo;
+    public String getPassword() {
+        return password;
     }
 
     /**
-     * @param codigo the codigo to set
+     * @param password the password to set
      */
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     /**
