@@ -25,11 +25,7 @@ public class BlogEntity extends BaseEntity implements Serializable {
 
     @PodamExclude
     @OneToMany(
-            mappedBy = "blog",
-            cascade = CascadeType.PERSIST,
-            fetch = FetchType.EAGER,
-            orphanRemoval = true
-    )
+            mappedBy = "blog")
     private List<ComentarioEntity> comentarios;
     @PodamExclude
     @ManyToMany

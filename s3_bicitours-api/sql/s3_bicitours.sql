@@ -4,6 +4,7 @@ delete from BlogEntity_UsuarioEntity;
 delete from UsuarioEntity; 
 delete from SeguroEntity;
 delete from FotoEntity;
+delete from TourEntity;
 delete from ComentarioEntity_ComentarioEntity;
 
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaImagen, rutaVideo) 
@@ -40,8 +41,9 @@ insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) v
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (500, 'Maria Clara', 'code5', 'mc.noguera@uniandes.edu.co', 0,0,10);
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (600, 'Jhuliana Barrios', 'code6', 'jj.barriosm@uniandes.edu.co',0,1,1000);
 
+insert into TourEntity (id) values (1);
 
-insert into ComentarioEntity (id, texto, calificacion) values (0, 'El mejor monólogo de todos', 5);
+insert into ComentarioEntity (id, texto, calificacion, tour_id, usuario_id, blog_id) values (0, 'El mejor monólogo de todos', 1, 1, 300, 1);
 insert into ComentarioEntity (id, texto, calificacion) values (1, 'Nada mal', 4);
 insert into ComentarioEntity (id, texto, calificacion) values (2, 'Killer Queen Bites The Dust', 3);
 

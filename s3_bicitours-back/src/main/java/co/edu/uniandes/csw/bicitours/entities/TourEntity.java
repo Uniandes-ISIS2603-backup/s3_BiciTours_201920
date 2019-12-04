@@ -55,7 +55,7 @@ public class TourEntity extends BaseEntity implements Serializable {
     private Boolean terminado;
 
     @PodamExclude
-    @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, orphanRemoval = true)
+    @OneToMany(mappedBy = "tour")
     private List<ComentarioEntity> comentariosTour = new ArrayList<>();
 
     @PodamExclude
