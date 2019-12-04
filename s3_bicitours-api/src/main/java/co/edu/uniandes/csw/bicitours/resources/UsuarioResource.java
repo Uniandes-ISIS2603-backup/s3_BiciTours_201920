@@ -69,7 +69,7 @@ public class UsuarioResource {
      * Error de lógica que se genera cuando no se encuentra la editorial.
      */
     @GET
-    @Path("{usuarioId ://+d}")
+    @Path("{usuarioId :\\d+}")
     public UsuarioDetailDTO getUsuario(@PathParam("usuarioId") Long usuarioId) {
         UsuarioEntity usuario = usuarioLogic.getUsuario(usuarioId);
         if (usuario == null) {

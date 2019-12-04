@@ -19,12 +19,7 @@ values (2,
 4,'Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It''s not a story the Jedi would tell you. It''s a Sith legend...',/**
 'Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It''s not a story the Jedi would tell you. It''s a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful… the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic. He could save others from death, but not himself.',
 */'https://www.youtube.com/embed/05dT34hGRdg' );
-insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaVideo) 
-values (3,
-'BiciGo',
-4,
-'Felicidad y salud al alcance de tu bici',
-'https://www.youtube.com/watch?v=QzqZiHwLVCY');
+
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaImagen, rutaVideo) 
 values (4,
 'Azer isn''t so great?',
@@ -38,14 +33,21 @@ insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (1,'Seguro
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (2,'Seguro para lesiones','Se cubren todos los gastos medicos que requiera el participante tras sufrir una lesion en el tour', 'Seguro de salud');
 
   
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (100, 'Juan González', 'code1', 'js.gonzalez15@uniandes.edu.co',1,1,10);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (200, 'Diego Rueda', 'code2', 'jd.ruedaa@uniandes.edu.co',1,1,10);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (300, 'Oscar Castañeda', 'code3', 'oj.castaneda@uniandes.edu.co',1,1,10);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (400, 'Michel Succar', 'code4', 'm.succar@uniandes.edu.co', 1,1,10);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (500, 'Maria Clara', 'code5', 'mc.noguera@uniandes.edu.co', 1,1,10);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (600, 'Jhuliana Barrios', 'code6', 'jj.barriosm@uniandes.edu.co',1,1,10);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (100, 'Juan González', 'code1', 'js.gonzalez15@uniandes.edu.co',1,1,0);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (200, 'Diego Rueda', 'code2', 'jd.ruedaa@uniandes.edu.co',1,0,0);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (300, 'Oscar Castañeda', 'code3', 'oj.castaneda@uniandes.edu.co',1,1,0);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (400, 'Michel Succar', 'code4', 'm.succar@uniandes.edu.co', 0,0,100);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (500, 'Maria Clara', 'code5', 'mc.noguera@uniandes.edu.co', 0,0,10);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (600, 'Jhuliana Barrios', 'code6', 'jj.barriosm@uniandes.edu.co',0,1,1000);
 
 
 insert into ComentarioEntity (id, texto, calificacion) values (0, 'El mejor monólogo de todos', 5);
 insert into ComentarioEntity (id, texto, calificacion) values (1, 'Nada mal', 4);
-insert into ComentarioEntity (id, texto, calificacion) values (2, 'Killer Queen Bites The Dust', 3)
+insert into ComentarioEntity (id, texto, calificacion) values (2, 'Killer Queen Bites The Dust', 3);
+
+insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaVideo, creador_id) 
+values (3,
+'BiciGo',
+4,
+'Felicidad y salud al alcance de tu bici',
+'https://www.youtube.com/watch?v=QzqZiHwLVCY', 300);

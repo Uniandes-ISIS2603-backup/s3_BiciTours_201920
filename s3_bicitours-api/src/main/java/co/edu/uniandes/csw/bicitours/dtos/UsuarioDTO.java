@@ -31,10 +31,10 @@ public class UsuarioDTO implements Serializable {
         if (usuarioEntity != null) {
             this.id = usuarioEntity.getId();
             this.nombre = usuarioEntity.getNombre();
-            this.esAdmin = false;
+            this.esAdmin = usuarioEntity.isEsAdmin();
             this.correo = usuarioEntity.getCorreo();
             this.password = usuarioEntity.getPassword();
-            this.pago = false;
+            this.pago = usuarioEntity.isPago();
             this.deuda = usuarioEntity.getDeuda();
         }
     }
