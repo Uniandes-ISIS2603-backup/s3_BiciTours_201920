@@ -135,24 +135,19 @@ public class UsuarioPersistence {
      * existe alguno devuelve el primero encontrado.
      */
     public UsuarioEntity findByCorreoClave(String correo, String clave) {
-        TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.correo = :correo", UsuarioEntity.class);
-        query = query.setParameter("correo", correo);
-        List<UsuarioEntity> sameCorreo = query.getResultList();
-        UsuarioEntity result;
+        UsuarioEntity sameCorreo=findByCorreo(correo);
         if (sameCorreo == null) {
-            result = null;
-        } else if (sameCorreo.isEmpty()) {
-            result = null;
-        } else {
-            if(sameCorreo.get(0).getPassword().equals(clave))
+            return null;
+        }
+        else {
+            if(sameCorreo.getPassword().equals(clave))
             {
-               result = sameCorreo.get(0); 
+               return sameCorreo;
             }
             else
             {
-                result = null;
+                return null;
             }
         }
-        return result;
     }
 }
