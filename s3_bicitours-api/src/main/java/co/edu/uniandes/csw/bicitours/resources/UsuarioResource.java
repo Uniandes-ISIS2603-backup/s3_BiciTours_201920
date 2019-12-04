@@ -43,7 +43,6 @@ public class UsuarioResource {
      * Crea un nuevo usuario con la información que se recibe en el cuerpo de la
      * petición y se regresa un objeto idéntico con un id auto-generado por la
      * base de datos.
-     *
      * @param usuario {@link UsuarioDTO} - La editorial que se desea guardar.
      * @return JSON {@link UsuarioDTO} - La editorial guardada con el atributo
      * id autogenerado.
@@ -61,7 +60,6 @@ public class UsuarioResource {
 
     /**
      * Busca el usuario con el id asociado recibido en la URL y lo devuelve.
-     *
      * @param usuarioId Identificador del usuario que se esta buscando. Este
      * debe ser una cadena de dígitos.
      * @return JSON {@link EditorialDetailDTO} - El usuario buscada
@@ -74,6 +72,23 @@ public class UsuarioResource {
         UsuarioEntity usuario = usuarioLogic.getUsuario(usuarioId);
         if (usuario == null) {
             throw new WebApplicationException(RECURSO + usuarioId + NOEXISTE, 404);
+        }
+        return new UsuarioDetailDTO(usuario);
+    }
+    
+    /**
+     * Busca el usuario en el caso login (por correo y contraseña).
+     * @param usuarioId Identificador del usuario que se esta buscando. Este
+     * debe ser una cadena de dígitos.
+     * @return JSON {@link EditorialDetailDTO} - El usuario buscado
+     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
+     * Error de lógica que se genera cuando no se encuentra el usuario.
+     */
+    @GET
+    public UsuarioDetailDTO getUsuarioByCorreoClave(String correoUsuario, String claveUsuario) {
+        UsuarioEntity usuario = usuarioLogic.getUsuarioByCorreoClave(correoUsuario, claveUsuario);
+        if (usuario == null) {
+            throw new WebApplicationException(RECURSO + correoUsuario + NOEXISTE, 404);
         }
         return new UsuarioDetailDTO(usuario);
     }

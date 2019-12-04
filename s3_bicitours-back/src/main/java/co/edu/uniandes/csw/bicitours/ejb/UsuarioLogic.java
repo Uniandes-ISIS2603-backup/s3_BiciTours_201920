@@ -48,40 +48,43 @@ public class UsuarioLogic {
 
     /**
      * Obtener un Usuario.
-     *
      * @param usuarioId: id del usuario para que sea buscado en la base de datos
      * @return el usuario buscado.
      */
     public UsuarioEntity getUsuario(Long usuariosId) {
-
         return persistencia.find(usuariosId);
     }
 
     /**
+     * Obtener un Usuario.
+     * @param correo: correo del usuario para que sea buscado en la base de datos
+     * @param clave: clave del usuario para que sea buscado en la base de datos
+     * @return el usuario buscado.
+     */
+    public UsuarioEntity getUsuarioByCorreoClave(String correo, String clave) {
+        return persistencia.findByCorreoClave(correo, clave);
+    }
+    
+    /**
      * Obtener Usuarioss.
-     *
      * @return usuarios.
      */
     public List<UsuarioEntity> getUsuarios() {
-
         return persistencia.findAll();
     }
 
     /**
      * Actualizar un Usuario.
-     *
      * @param usuarioId: id del usuario para que sea buscado en la base de datos
      * @param usuarioEntity: información de usuario a actualizar.
      * @return el usuario con los cambios actualizados en la base de datos.
      */
     public UsuarioEntity updateUsuario(UsuarioEntity usuarioEntity) {
-
         return persistencia.update(usuarioEntity);
     }
 
     /**
      * Eliminar un Usuario.
-     *
      * @param usuarioId: id del usuario para que sea buscado en la base de datos
      * @return el usuario con los cambios actualizados en la base de datos.
      */

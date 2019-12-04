@@ -108,7 +108,6 @@ public class UsuarioPersistence {
 
     /**
      * Busca si hay algun usuario con el correo que se recibe como argumento
-     *
      * @param pCorreo: Correo del Usuario buscado
      * @return null si no existe ningun usuario con el correo del argumento. Si
      * existe alguno devuelve el primero encontrado.
@@ -128,4 +127,32 @@ public class UsuarioPersistence {
         return result;
     }
 
+    /**
+     * Busca si hay algun usuario con el correo y contraseña que se recibe como argumento, esto para login
+     * @param correo: Correo del Usuario buscado
+     * @param clave: Clave del Usuario buscado
+     * @return null si no existe ningun usuario con el correo del argumento. Si
+     * existe alguno devuelve el primero encontrado.
+     */
+    public UsuarioEntity findByCorreoClave(String correo, String clave) {
+        TypedQuery query = em.createQuery("Select e From UsuarioEntity e where e.correo = :correo", UsuarioEntity.class);
+        query = query.setParameter("correo", correo);
+        List<UsuarioEntity> sameCorreo = query.getResultList();
+        UsuarioEntity result;
+        if (sameCorreo == null) {
+            result = null;
+        } else if (sameCorreo.isEmpty()) {
+            result = null;
+        } else {
+            if(sameCorreo.get(0).getPassword().equals(clave))
+            {
+               result = sameCorreo.get(0); 
+            }
+            else
+            {
+                result = null;
+            }
+        }
+        return result;
+    }
 }
