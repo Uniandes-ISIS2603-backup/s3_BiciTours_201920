@@ -31,6 +31,7 @@ public class BlogComentariosLogic {
         BlogEntity blogEntity = blogPersistence.find(blogsId);
         ComentarioEntity comentarioEntity = comentarioPersistence.find(comentariosId);
         comentarioEntity.setBlog(blogEntity);
+        comentarioPersistence.update(comentarioEntity);
         return comentarioEntity;
     }
 

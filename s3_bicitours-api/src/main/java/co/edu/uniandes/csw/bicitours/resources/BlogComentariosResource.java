@@ -5,8 +5,10 @@
  */
 package co.edu.uniandes.csw.bicitours.resources;
 
+import co.edu.uniandes.csw.bicitours.dtos.ComentarioDTO;
 import co.edu.uniandes.csw.bicitours.dtos.ComentarioDetailDTO;
 import co.edu.uniandes.csw.bicitours.ejb.BlogComentariosLogic;
+import co.edu.uniandes.csw.bicitours.ejb.BlogLogic;
 import co.edu.uniandes.csw.bicitours.ejb.ComentarioLogic;
 import co.edu.uniandes.csw.bicitours.entities.ComentarioEntity;
 import co.edu.uniandes.csw.bicitours.exceptions.BusinessLogicException;
@@ -41,14 +43,15 @@ public class BlogComentariosResource {
     @Inject
     private ComentarioLogic comentarioLogic;
 
+    @Inject
+    private BlogLogic blogLogic;
+        
     @POST
-    @Path("{comentariosId: \\d+}")
-    public ComentarioDetailDTO addComentario(@PathParam("blogsId") Long blogsId, @PathParam("comentariosId") Long comentariosId) {
-        if (comentarioLogic.getComentario(comentariosId) == null) {
-            throw new WebApplicationException(RECURSO + comentariosId + NOEXISTE, 404);
-        }
-
-        return new ComentarioDetailDTO(blogComentariosLogic.addComentario(comentariosId,blogsId));
+    public ComentarioDetailDTO addComentario(@PathParam("blogsId") Long blogsId, ComentarioDTO comentariosId) throws BusinessLogicException {
+        ComentarioEntity comen=comentarioLogic.createComentario(comentariosId.toEntity());    
+        comen.setBlog(blogLogic.getBlog(blogsId));
+        comentarioLogic.updateComentario(comen);
+        return new ComentarioDetailDTO(comen);
     }
 
     @GET
