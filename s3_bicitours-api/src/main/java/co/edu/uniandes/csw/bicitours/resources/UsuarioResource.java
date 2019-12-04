@@ -52,8 +52,12 @@ public class UsuarioResource {
      */
     @POST
     public UsuarioDTO crearUsuario(UsuarioDTO usuario) throws BusinessLogicException {
+        if(usuarioLogic.getUsuarioByCorreoClave(usuario.getCorreo(), usuario.getPassword())!=null){
+            return new UsuarioDTO(usuarioLogic.getUsuarioByCorreoClave(usuario.getCorreo(), usuario.getPassword()));
+        }
         UsuarioEntity usuarioEntity = usuario.toEntity();
         UsuarioEntity nuevoUsuarioEntity = usuarioLogic.create(usuarioEntity);
+
         // Como debe retornar un DTO (json) se invoca el constructor del DTO con argumento el entity nuevo
         return new UsuarioDTO(nuevoUsuarioEntity);
     }
@@ -75,24 +79,6 @@ public class UsuarioResource {
         }
         return new UsuarioDetailDTO(usuario);
     }
-    
-    /**
-     * Busca el usuario en el caso login (por correo y contraseña).
-     * @param usuarioId Identificador del usuario que se esta buscando. Este
-     * debe ser una cadena de dígitos.
-     * @return JSON {@link EditorialDetailDTO} - El usuario buscado
-     * @throws WebApplicationException {@link WebApplicationExceptionMapper} -
-     * Error de lógica que se genera cuando no se encuentra el usuario.
-     */
-    @GET
-    public UsuarioDetailDTO getUsuarioByCorreoClave(String correoUsuario, String claveUsuario) {
-        UsuarioEntity usuario = usuarioLogic.getUsuarioByCorreoClave(correoUsuario, claveUsuario);
-        if (usuario == null) {
-            throw new WebApplicationException(RECURSO + correoUsuario + NOEXISTE, 404);
-        }
-        return new UsuarioDetailDTO(usuario);
-    }
-
     /**
      * Convierte una lista de entidades a DTO. Este método convierte una lista
      * de objetos UsuarioEntity a una lista de objetos UsuarioDetailDTO (json)
