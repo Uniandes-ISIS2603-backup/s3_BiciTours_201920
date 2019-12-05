@@ -18,7 +18,7 @@ public class BlogDTO implements Serializable {
     private String texto;
     private String rutaImagen;
     private String rutaVideo;
-    private Double calificacionPromedio;
+    protected Double calificacionPromedio;
     private String titulo;
     private TourDTO tour;
     private UsuarioDTO creador;

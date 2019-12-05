@@ -34,10 +34,20 @@ public class BlogDetailDTO extends BlogDTO implements Serializable {
             }
         }
         if (blogEntity.getComentarios() != null) {
+            
             comentarios = new ArrayList<>();
             for (ComentarioEntity entityComentario : blogEntity.getComentarios()) {
                 comentarios.add(new ComentarioDTO(entityComentario));
+                calificacionPromedio+=entityComentario.getCalificacion();
             }
+            if(blogEntity.getComentarios().isEmpty())
+            {
+                calificacionPromedio=5.0;
+            }
+            else{
+             calificacionPromedio=calificacionPromedio/blogEntity.getComentarios().size();               
+            }
+
         }
     }
 
