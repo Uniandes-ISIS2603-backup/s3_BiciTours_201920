@@ -14,7 +14,7 @@ insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (1002,'Seg
 
   
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1000, 'Juan González', 'code1', 'js.gonzalez15@uniandes.edu.co',1,1,0);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1001, 'Diego Rueda', 'code2', 'jd.ruedaa@uniandes.edu.co',1,0,0);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1001, 'Juan Diego Rueda', 'code2', 'jd.ruedaa@uniandes.edu.co',1,0,0);
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1002, 'Oscar Castañeda', 'code3', 'oj.castaneda@uniandes.edu.co',1,1,0);
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1003, 'Michel Succar', 'code4', 'm.succar@uniandes.edu.co', 0,0,100);
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1004, 'Maria Clara', 'code5', 'mc.noguera@uniandes.edu.co', 0,0,10);
