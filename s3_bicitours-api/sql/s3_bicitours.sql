@@ -15,7 +15,7 @@ delete from RecomendacionEntity;
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1000, 'Juan González', 'code1', 'js.gonzalez15@uniandes.edu.co',1,1,0);
 
 /** Caso de usuario con varios comentario que le pertenecen **/
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1001, 'Diego Rueda', 'code2', 'jd.ruedaa@uniandes.edu.co',1,0,0);
+insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1001, 'Juan Diego Rueda', 'code2', 'jd.ruedaa@uniandes.edu.co',1,0,0);
 
 /** Caso de usuario administrador con varios Blogs y comentarios que le pertenecen **/
 insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (1002, 'Oscar Castañeda', 'code3', 'oj.castaneda@uniandes.edu.co',1,1,0);
