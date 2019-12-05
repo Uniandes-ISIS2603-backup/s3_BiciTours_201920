@@ -43,25 +43,14 @@ values (1002,
 4,'Azer isn''t so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet?',/**
 'Azer isn''t so great? Are you kidding me? When was the last time you saw a player with such aim ability and movement with a tablet? Alex puts the game in another level, and we will be blessed if we ever see a player with his skill and passion for the game again. Cookiezi breaks records. Rafis breaks records. Azer breaks the rules. You can keep your statistics. I prefer the magic.',
 */'https://upload.wikimedia.org/wikipedia/commons/d/d3/Osu%21Logo_%282015%29.png',
-'');
+'',1002);
 
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (0,'Seguro contra robo de bicicletas','El robo de debe reportar 24 horas despues de sucedido para hacer valido el seguro', 'Antirobo');
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (1,'Seguro para fallecimiento','Se hace efectivo si es cliente fallece en un accidente durante el tour', 'Seguro de vida');
 insert into SEGUROENTITY (ID,CARACTERISTICAS,CONDICIONES,TIPO) VALUES (2,'Seguro para lesiones','Se cubren todos los gastos medicos que requiera el participante tras sufrir una lesion en el tour', 'Seguro de salud');
 
-  
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (100, 'Juan González', 'code1', 'js.gonzalez15@uniandes.edu.co',1,1,0);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (200, 'Juan Diego Rueda', 'code2', 'jd.ruedaa@uniandes.edu.co',1,0,0);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (300, 'Oscar Castañeda', 'code3', 'oj.castaneda@uniandes.edu.co',1,1,0);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (400, 'Michel Succar', 'code4', 'm.succar@uniandes.edu.co', 0,0,100);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (500, 'Maria Clara', 'code5', 'mc.noguera@uniandes.edu.co', 0,0,10);
-insert into UsuarioEntity (id, nombre, password, correo, pago, esAdmin, deuda) values (600, 'Jhuliana Barrios', 'code6', 'jj.barriosm@uniandes.edu.co',0,1,1000);
-
 insert into TourEntity (id) values (1);
 
-insert into ComentarioEntity (id, texto, calificacion, tour_id, usuario_id, blog_id) values (0, 'El mejor monólogo de todos', 1, 1, 300, 1);
-insert into ComentarioEntity (id, texto, calificacion) values (1, 'Nada mal', 4);
-insert into ComentarioEntity (id, texto, calificacion) values (2, 'Killer Queen Bites The Dust', 3);
 
 insert into BlogEntity (id, titulo, calificacionPromedio, texto, rutaVideo, creador_id) 
 values (1003,
